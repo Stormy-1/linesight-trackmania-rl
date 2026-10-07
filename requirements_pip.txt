@@ -1,7 +1,7 @@
 opencv-python
 readwritememory
 tminterface
-torchrl
+torchrl==0.2.1
 pygbx
 art
 python-libxdo ; sys_platform == 'linux'

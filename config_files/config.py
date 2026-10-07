@@ -28,7 +28,7 @@ from config_files.user_config import *
 W_downsized = 160
 H_downsized = 120
 
-run_name = "run_name_to_be_changed"
+run_name = "hocko_v1"
 running_speed = 80
 
 tm_engine_step_per_action = 5

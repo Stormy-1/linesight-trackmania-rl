@@ -9,14 +9,14 @@ from sys import platform
 
 is_linux = platform in ["linux", "linux2"]
 
-username = "tmnf_account_username"  # Username of the TMNF account
+username = "stormy"  # Username of the TMNF account
 
 # Path where Python_Link.as should be placed so that it can be loaded in TMInterface.
 # Usually Path(os.path.expanduser("~")) / "Documents" / "TMInterface" / "Plugins" / "Python_Link.as"
-target_python_link_path = Path(os.path.expanduser("~")) / "Documents" / "TMInterface" / "Plugins" / "Python_Link.as"
+target_python_link_path = Path(os.path.expanduser("~")) / "OneDrive" / "Documents" / "TMInterface" / "Plugins" / "Python_Link.as"
 
 # Typically path(os.path.expanduser("~")) / "Documents" / "TrackMania"
-trackmania_base_path = Path(os.path.expanduser("~")) / "Documents" / "TrackMania"
+trackmania_base_path = Path(os.path.expanduser("~")) / "OneDrive" / "Documents" / "TrackMania"
 
 # Communication port for the first TMInterface instance that will be launched.
 # If using multiple instances, the ports used will be base_tmi_port + 1, +2, +3, etc...
