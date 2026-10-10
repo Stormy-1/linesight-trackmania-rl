@@ -68,7 +68,7 @@ discard_non_greedy_actions_in_nsteps = True
 buffer_test_ratio = 0.05
 
 engineered_speedslide_reward_schedule = [
-    (0, 0),
+    (0, 0.003),  # ENABLED for WR push — incentivizes perfect speedslides through corners
 ]
 engineered_neoslide_reward_schedule = [
     (0, 0),
@@ -94,7 +94,7 @@ iqn_k = 32  # must be an even number because we sample tau symmetrically around 
 iqn_kappa = 5e-3
 use_ddqn = False
 
-prio_alpha = np.float32(0)  # Rainbow-IQN paper: 0.2, Rainbow paper: 0.5, PER paper 0.6
+prio_alpha = np.float32(0)  # PER DISABLED — torchrl 0.2.1 PrioritizedSampler crashes on 2nd rollout
 prio_epsilon = np.float32(2e-3)  # Defaults to 10^-6 in stable-baselines
 prio_beta = np.float32(1)
 
@@ -108,6 +108,9 @@ memory_size_schedule = [
 lr_schedule = [
     (0, 1e-3),
     (3_000_000 * global_schedule_speed, 5e-5),
+    (8_490_000 * global_schedule_speed, 5e-5),
+    (8_500_000 * global_schedule_speed, 1e-4),
+    (10_000_000 * global_schedule_speed, 5e-5),
     (12_000_000 * global_schedule_speed, 5e-5),
     (15_000_000 * global_schedule_speed, 1e-5),
 ]
