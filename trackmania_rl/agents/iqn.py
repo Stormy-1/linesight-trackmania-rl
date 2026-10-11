@@ -18,6 +18,8 @@ from torchrl.data import ReplayBuffer
 from config_files import config_copy
 from trackmania_rl import utilities
 
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+
 
 class IQN_Network(torch.nn.Module):
     def __init__(
@@ -71,8 +73,9 @@ class IQN_Network(torch.nn.Module):
         self.n_actions = n_actions
 
         # States are not normalized when the method forward() is called. Normalization is done as the first step of the forward() method.
-        self.float_inputs_mean = torch.tensor(float_inputs_mean, dtype=torch.float32).to("cuda")
-        self.float_inputs_std = torch.tensor(float_inputs_std, dtype=torch.float32).to("cuda")
+        device = torch.device(DEVICE)
+        self.register_buffer("float_inputs_mean", torch.tensor(float_inputs_mean, dtype=torch.float32, device=device), persistent=False)
+        self.register_buffer("float_inputs_std", torch.tensor(float_inputs_std, dtype=torch.float32, device=device), persistent=False)
 
     def initialize_weights(self):
         lrelu_neg_slope = 1e-2
@@ -122,12 +125,12 @@ class IQN_Network(torch.nn.Module):
         concat = torch.cat((img_outputs, float_outputs), 1)  # (batch_size, dense_input_dimension)
         if tau is None:
             tau = (
-                torch.arange(num_quantiles // 2, device="cuda", dtype=torch.float32).repeat_interleave(batch_size).unsqueeze(1)
-                + torch.rand(size=(batch_size * num_quantiles // 2, 1), device="cuda", dtype=torch.float32)
+                torch.arange(num_quantiles // 2, device=img.device, dtype=torch.float32).repeat_interleave(batch_size).unsqueeze(1)
+                + torch.rand(size=(batch_size * num_quantiles // 2, 1), device=img.device, dtype=torch.float32)
             ) / num_quantiles  # (batch_size * num_quantiles // 2, 1) (random numbers)
             tau = torch.cat((tau, 1 - tau), dim=0)  # ensure that tau are sampled symmetrically
         quantile_net = torch.cos(
-            torch.arange(1, self.iqn_embedding_dimension + 1, 1, device="cuda") * math.pi * tau
+            torch.arange(1, self.iqn_embedding_dimension + 1, 1, device=img.device) * math.pi * tau
         )  # (batch_size*num_quantiles, 1)
         quantile_net = quantile_net.expand(
             [-1, self.iqn_embedding_dimension]
@@ -231,7 +234,7 @@ class Trainer:
         """
         self.optimizer.zero_grad(set_to_none=True)
 
-        with torch.amp.autocast(device_type="cuda", dtype=torch.float16):
+        with torch.amp.autocast(device_type=DEVICE, dtype=torch.float16, enabled=(DEVICE == "cuda")):
             with torch.no_grad():
                 batch, batch_info = buffer.sample(self.batch_size, return_info=True)
                 (
@@ -244,7 +247,7 @@ class Trainer:
                     gammas_terminal,
                 ) = batch
                 if config_copy.prio_alpha > 0:
-                    IS_weights = torch.from_numpy(batch_info["_weight"]).to("cuda", non_blocking=True)
+                    IS_weights = torch.from_numpy(batch_info["_weight"]).to(DEVICE, non_blocking=(DEVICE == "cuda"))
 
                 rewards = rewards.unsqueeze(-1).repeat(
                     [self.iqn_n, 1]
@@ -381,10 +384,10 @@ class Inferer:
             state_img_tensor = (
                 torch.from_numpy(img_inputs_uint8)
                 .unsqueeze(0)
-                .to("cuda", memory_format=torch.channels_last, non_blocking=True, dtype=torch.float32)
+                .to(DEVICE, memory_format=torch.channels_last if DEVICE == "cuda" else torch.preserve_format, non_blocking=(DEVICE == "cuda"), dtype=torch.float32)
                 - 128
             ) / 128
-            state_float_tensor = torch.from_numpy(np.expand_dims(float_inputs, axis=0)).to("cuda", non_blocking=True)
+            state_float_tensor = torch.from_numpy(np.expand_dims(float_inputs, axis=0)).to(DEVICE, non_blocking=(DEVICE == "cuda"))
             q_values = (
                 self.inference_network(
                     state_img_tensor,
@@ -467,6 +470,6 @@ def make_untrained_iqn_network(jit: bool, is_inference: bool) -> Tuple[IQN_Netwo
     else:
         model = uncompiled_model  # share parameters with the returned uncompiled model (a deepcopy would decouple trained and shared weights)
     return (
-        model.to(device="cuda", memory_format=torch.channels_last).train(),
-        uncompiled_model.to(device="cuda", memory_format=torch.channels_last).train(),
+        model.to(device=DEVICE, memory_format=torch.channels_last if DEVICE == "cuda" else torch.preserve_format).train(),
+        uncompiled_model.to(device=DEVICE, memory_format=torch.channels_last if DEVICE == "cuda" else torch.preserve_format).train(),
     )

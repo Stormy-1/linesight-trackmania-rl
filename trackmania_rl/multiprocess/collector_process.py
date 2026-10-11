@@ -43,8 +43,9 @@ def collector_process_fn(
     )
 
     inference_network, uncompiled_inference_network = iqn.make_untrained_iqn_network(config_copy.use_jit, is_inference=True)
+    device = "cuda" if torch.cuda.is_available() else "cpu"
     try:
-        inference_network.load_state_dict(torch.load(f=save_dir / "weights1.torch", weights_only=False))
+        inference_network.load_state_dict(torch.load(f=save_dir / "weights1.torch", map_location=device, weights_only=False), strict=False)
     except Exception as e:
         print("Worker could not load weights, exception:", e)
 

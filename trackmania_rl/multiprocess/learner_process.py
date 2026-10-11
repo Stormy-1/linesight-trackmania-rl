@@ -132,10 +132,11 @@ def learner_process_fn(
     # ========================================================
     # Load existing stuff
     # ========================================================
+    device = "cuda" if torch.cuda.is_available() else "cpu"
     # noinspection PyBroadException
     try:
-        online_network.load_state_dict(torch.load(f=save_dir / "weights1.torch", weights_only=False))
-        target_network.load_state_dict(torch.load(f=save_dir / "weights2.torch", weights_only=False))
+        online_network.load_state_dict(torch.load(f=save_dir / "weights1.torch", map_location=device, weights_only=False), strict=False)
+        target_network.load_state_dict(torch.load(f=save_dir / "weights2.torch", map_location=device, weights_only=False), strict=False)
         print(" =====================     Learner weights loaded !     ============================")
     except:
         print(" Learner could not load weights")
@@ -168,7 +169,7 @@ def learner_process_fn(
     )
     # optimizer1 = torch_optimizer.Lookahead(optimizer1, k=5, alpha=0.5)
 
-    scaler = torch.amp.GradScaler("cuda")
+    scaler = torch.amp.GradScaler(device, enabled=(device == "cuda"))
     memory_size, memory_size_start_learn = utilities.from_staircase_schedule(
         config_copy.memory_size_schedule, accumulated_stats["cumul_number_frames_played"]
     )
@@ -177,8 +178,8 @@ def learner_process_fn(
 
     # noinspection PyBroadException
     try:
-        optimizer1.load_state_dict(torch.load(f=save_dir / "optimizer1.torch", weights_only=False))
-        scaler.load_state_dict(torch.load(f=save_dir / "scaler.torch", weights_only=False))
+        optimizer1.load_state_dict(torch.load(f=save_dir / "optimizer1.torch", map_location=device, weights_only=False))
+        scaler.load_state_dict(torch.load(f=save_dir / "scaler.torch", map_location=device, weights_only=False))
         print(" =========================     Optimizer loaded !     ================================")
     except:
         print(" Could not load optimizer")
@@ -636,7 +637,7 @@ def learner_process_fn(
 
             if online_network.training:
                 online_network.eval()
-            tau = torch.linspace(0.05, 0.95, config_copy.iqn_k)[:, None].to("cuda")
+            tau = torch.linspace(0.05, 0.95, config_copy.iqn_k)[:, None].to(device)
             per_quantile_output = inferer.infer_network(rollout_results["frames"][0], rollout_results["state_float"][0], tau)
             for i, std in enumerate(list(per_quantile_output.std(axis=0))):
                 step_stats[f"std_within_iqn_quantiles_for_action{i}"] = std
