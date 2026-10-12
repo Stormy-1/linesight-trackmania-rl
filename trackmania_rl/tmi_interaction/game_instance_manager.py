@@ -766,8 +766,24 @@ class GameInstanceManager:
         except socket.timeout as err:
             print("Cutoff rollout due to TMI timeout", err)
             self.iface.close()
+            self.iface = None
             end_race_stats["tmi_protection_cutoff"] = True
             self.last_rollout_crashed = True
-            ensure_not_minimized(self.tm_window_id)
+            # Force-kill the frozen game process so it gets relaunched on next rollout
+            print("Force-killing frozen TmForever process for auto-recovery...")
+            try:
+                if self.is_game_running():
+                    self.close_game()
+            except Exception as kill_err:
+                print(f"Error during force-kill: {kill_err}")
+                # Fallback: brute-force kill by PID
+                try:
+                    os.system(f"taskkill /PID {self.tm_process_id} /f")
+                except Exception:
+                    pass
+            self.tm_process_id = None
+            self.timeout_has_been_set = False
+            self.game_activated = False
+            self.msgtype_response_to_wakeup_TMI = None
 
         return rollout_results, end_race_stats
