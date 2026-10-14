@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Linesight — Module 5: The Engineering Grind & Systems Hardening</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0d14;
+      --bg-secondary: #111724;
+      --bg-card: rgba(18, 24, 38, 0.75);
+      --bg-card-hover: rgba(28, 38, 60, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(0, 242, 254, 0.3);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #00f2fe;
+      --accent-blue: #4facfe;
+      --accent-purple: #7928ca;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --font-body: 'Inter', sans-serif;
+      --font-heading: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 242, 254, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 90% 30%, rgba(244, 63, 94, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, rgba(121, 40, 202, 0.05) 0%, transparent 60%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(10, 13, 20, 0.85);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      color: #000;
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #fff;
+    }
+
+    .curriculum-pills {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      max-width: 65%;
+      padding: 0.25rem;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-dim);
+    }
+
+    .pill.active {
+      background: rgba(0, 242, 254, 0.12);
+      color: var(--accent-cyan);
+      border-color: rgba(0, 242, 254, 0.4);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+    }
+
+    .pill.completed {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--accent-emerald);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .pill.locked {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 6rem;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-rose);
+      background: rgba(244, 63, 94, 0.08);
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-eyebrow span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-rose);
+      box-shadow: 0 0 8px var(--accent-rose);
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 2.85rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 820px;
+      margin: 0 auto 2rem;
+    }
+
+    .section-block {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 2.25rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 1rem;
+    }
+
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent-rose);
+      background: rgba(244, 63, 94, 0.1);
+      padding: 0.35rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid rgba(244, 63, 94, 0.25);
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .analogy-box {
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.1), rgba(121, 40, 202, 0.08));
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 1.75rem;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+
+    .analogy-icon {
+      font-size: 2.2rem;
+      flex-shrink: 0;
+    }
+
+    .analogy-text h4 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .analogy-text p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* RAM & Thermal Visualizer */
+    .simulator-box {
+      background: rgba(8, 12, 20, 0.9);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .slider-control-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      margin-bottom: 0.5rem;
+    }
+
+    .ram-slider {
+      width: 100%;
+      height: 8px;
+      accent-color: var(--accent-rose);
+      background: #1e293b;
+      border-radius: 4px;
+      outline: none;
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+    }
+
+    .ram-bar-container {
+      height: 28px;
+      background: #1e293b;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 1rem;
+      display: flex;
+    }
+
+    .ram-segment {
+      height: 100%;
+      transition: width 0.3s ease;
+      position: relative;
+    }
+
+    .seg-os { background: #475569; width: 20%; }
+    .seg-game { background: #3b82f6; width: 11.25%; }
+    .seg-torch { background: #8b5cf6; width: 9.38%; }
+    .seg-buffer { background: #f43f5e; width: 41.25%; }
+
+    .ram-legend {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      margin-top: 1rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+    }
+
+    .thermal-status-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    @media (max-width: 700px) {
+      .thermal-status-card { grid-template-columns: 1fr; }
+    }
+
+    .stat-display-val {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* DirectX 9 Pipeline Diagram */
+    .dwm-diagram-box {
+      background: #090d16;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .toggle-state-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .flow-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    @media (max-width: 850px) {
+      .flow-steps-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .flow-step-card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .flow-step-card.error {
+      border-color: var(--accent-rose);
+      background: rgba(244, 63, 94, 0.1);
+    }
+
+    .flow-step-card.ok {
+      border-color: var(--accent-emerald);
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    .flow-card-title {
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.35rem;
+    }
+
+    .flow-card-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* State Machine Widget */
+    .fsm-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .fsm-node {
+      background: rgba(13, 17, 27, 0.9);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 1.25rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .fsm-node:hover, .fsm-node.active {
+      border-color: var(--accent-cyan);
+      background: rgba(0, 242, 254, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .fsm-node-header {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+      margin-bottom: 0.4rem;
+    }
+
+    .fsm-node-title {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.35rem;
+    }
+
+    .fsm-node-text {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Code Snippet Box */
+    .code-box {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      margin: 1.25rem 0;
+      overflow: hidden;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .code-header {
+      background: #161b22;
+      padding: 0.6rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #8b949e;
+      font-size: 0.78rem;
+      border-bottom: 1px solid #30363d;
+    }
+
+    .code-content {
+      padding: 1rem;
+      overflow-x: auto;
+      line-height: 1.55;
+      color: #c9d1d9;
+    }
+
+    .code-kw { color: #ff7b72; font-weight: 600; }
+    .code-fn { color: #d2a8ff; }
+    .code-num { color: #79c0ff; }
+    .code-str { color: #a5d6ff; }
+    .code-cm { color: #8b949e; font-style: italic; }
+
+    /* Comparison Table */
+    .trouble-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+
+    .trouble-table th {
+      background: rgba(15, 23, 42, 0.9);
+      padding: 0.85rem 1rem;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--border-subtle);
+      text-align: left;
+    }
+
+    .trouble-table td {
+      padding: 1rem;
+      font-size: 0.88rem;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(10, 14, 22, 0.5);
+      vertical-align: top;
+    }
+
+    .trouble-table tr:last-child td { border-bottom: none; }
+    .trouble-table tr:hover td { background: rgba(18, 25, 40, 0.8); }
+
+    /* Quiz */
+    .quiz-card {
+      background: rgba(13, 17, 27, 0.9);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .quiz-question {
+      font-weight: 600;
+      color: #f1f5f9;
+      font-size: 0.95rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .quiz-option {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 0.65rem 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+    }
+
+    .quiz-option:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    .quiz-option.correct {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: var(--accent-emerald);
+      color: #fff;
+    }
+
+    .quiz-option.wrong {
+      background: rgba(244, 63, 94, 0.2);
+      border-color: var(--accent-rose);
+      color: #fff;
+    }
+
+    .quiz-feedback {
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: 6px;
+      display: none;
+      line-height: 1.5;
+    }
+
+    .quiz-feedback.show { display: block; }
+    .quiz-feedback.correct {
+      background: rgba(16, 185, 129, 0.12);
+      color: #a7f3d0;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .quiz-feedback.wrong {
+      background: rgba(244, 63, 94, 0.12);
+      color: #fecdd3;
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      color: #050b14;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #f1f5f9;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-secondary.active {
+      background: rgba(0, 242, 254, 0.15);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header>
+    <a href="index.html" class="brand">
+      <div class="brand-badge">RL 10.82M</div>
+      <div class="brand-title">Project Linesight — Deep Engineering Curriculum</div>
+    </a>
+    <div class="curriculum-pills">
+      <a href="module1_pitch.html" class="pill completed">✓ Mod 1: Pitch & Story</a>
+      <a href="module2_theory.html" class="pill completed">✓ Mod 2: Math & Distributional RL</a>
+      <a href="module3_sysarch.html" class="pill completed">✓ Mod 3: IPC & TMInterface</a>
+      <a href="module4_codebase.html" class="pill completed">✓ Mod 4: Codebase Anatomy</a>
+      <a href="module5_grind.html" class="pill active">Mod 5: Cloud & Recovery</a>
+      <a href="module6_interview.html" class="pill">Mod 6: 240ms Frontier</a>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <!-- Hero Banner -->
+    <div class="hero">
+      <div class="hero-eyebrow">
+        <span class="dot"></span>
+        Curriculum Module 5 // Battle-Tested Systems Engineering
+      </div>
+      <h1 class="hero-title">The Engineering Grind & Hard Problems Solved</h1>
+      <p class="hero-subtitle">
+        Surviving the 16GB personal laptop memory cliff, diagnosing headless Azure DirectX 9 compositor suspension, and engineering self-healing process recovery.
+      </p>
+    </div>
+
+    <!-- Section 1: Intuitive Analogy -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-num">01. INTUITION</span>
+        <h2 class="section-title">The Laboratory Prototype vs The Desert Expedition</h2>
+      </div>
+
+      <div class="analogy-box">
+        <div class="analogy-icon">🏜️</div>
+        <div class="analogy-text">
+          <h4>Why 90% of ML Engineering Happens Outside the Math</h4>
+          <p>
+            Writing a forward and backward pass in PyTorch is like testing a Mars rover in a clean, air-conditioned laboratory room with a smooth tiled floor.<br><br>
+            <strong>The Engineering Grind is landing that rover in the Martian desert:</strong><br>
+            • What happens when the ambient temperature spikes to 95°C and the CPU throttles its clock speed to 1.8 GHz?<br>
+            • What happens when the operating system's swap file runs out of RAM and kills your 10-million-frame training run in the middle of the night?<br>
+            • What happens when a cloud virtual machine has no physical monitor, and the 2008 DirectX 9 graphics engine silently suspends because Windows thinks nobody is looking?<br><br>
+            Senior Staff ML Engineers don't just hire people who can recite equations—they hire engineers who can <strong>keep complex distributed systems alive unattended for hundreds of hours.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: The 16GB Laptop Cliff Visualizer -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-num">02. RESOURCE CRISIS</span>
+        <h2 class="section-title">The 16GB Personal Laptop Memory & Thermal Cliff</h2>
+      </div>
+
+      <p style="color: var(--text-muted); margin-bottom: 1.25rem;">
+        Drag the <strong>Replay Buffer Transitions</strong> slider to observe how scaling the buffer from 50,000 to 200,000 transitions on consumer hardware pushed system RAM to 13.1 GB and triggered thermal throttling:
+      </p>
+
+      <div class="simulator-box">
+        <div class="slider-control-row">
+          <span>Replay Buffer Scale: <strong id="bufferCountDisplay" style="color: #fff;">200,000 Transitions</strong></span>
+          <span id="ramTotalDisplay" style="color: var(--accent-rose); font-weight: 700;">13.1 GB / 16.0 GB (81.9%)</span>
+        </div>
+
+        <input type="range" min="10000" max="250000" step="10000" value="200000" class="ram-slider" id="bufferSlider" oninput="updateRamSimulator(this.value)">
+
+        <div class="ram-bar-container">
+          <div class="ram-segment seg-os" id="segOs" title="Windows 11 OS Overhead (~3.2 GB)"></div>
+          <div class="ram-segment seg-game" id="segGame" title="2x TmForever.exe Instances (~1.8 GB)"></div>
+          <div class="ram-segment seg-torch" id="segTorch" title="PyTorch Learner & AMP Allocations (~1.5 GB)"></div>
+          <div class="ram-segment seg-buffer" id="segBuffer" title="Replay Buffer Transitions"></div>
+        </div>
+
+        <div class="ram-legend">
+          <div class="legend-item"><span class="legend-dot" style="background:#475569;"></span> <span>Windows OS (3.2 GB)</span></div>
+          <div class="legend-item"><span class="legend-dot" style="background:#3b82f6;"></span> <span>2x TmForever (1.8 GB)</span></div>
+          <div class="legend-item"><span class="legend-dot" style="background:#8b5cf6;"></span> <span>PyTorch Model (1.5 GB)</span></div>
+          <div class="legend-item"><span class="legend-dot" style="background:#f43f5e;"></span> <span id="bufferLegendLabel">Replay Buffer (6.6 GB)</span></div>
+        </div>
+
+        <div class="thermal-status-card">
+          <div>
+            <div style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--text-dim); text-transform: uppercase;">Laptop CPU Package Temp</div>
+            <div class="stat-display-val" id="cpuTempDisplay" style="color: var(--accent-rose);">94°C (THROTTLED)</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;" id="cpuClockDisplay">CPU Clock: 1.82 GHz (Throttled from 4.20 GHz)</div>
+          </div>
+          <div>
+            <div style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--text-dim); text-transform: uppercase;">Cooling Fan Status</div>
+            <div class="stat-display-val" id="fanSpeedDisplay" style="color: var(--accent-rose);">100% (6,200 RPM)</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Laptop unusable for coursework; risk of thermal shutdown</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: The Headless DirectX 9 Cloud Trap -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-num">03. CLOUD TRAP</span>
+        <h2 class="section-title">The Headless Azure DirectX 9 RDP Disconnect Trap</h2>
+      </div>
+
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">
+        When migrating to headless Azure Windows Server VMs, closing the Remote Desktop (RDP) window caused training to freeze with <code>socket.timeout: WinError 10060</code>. Here is the low-level root cause and the fix:
+      </p>
+
+      <div class="dwm-diagram-box">
+        <div class="toggle-state-row">
+          <span style="font-family: var(--font-heading); font-size: 1.1rem; color: #fff;">
+            Windows Desktop Window Manager (DWM) State Simulation
+          </span>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn btn-secondary" id="btnRdpOpen" onclick="toggleRdpSim(true)">RDP Connected (Working)</button>
+            <button class="btn btn-secondary active" id="btnRdpClosed" onclick="toggleRdpSim(false)">RDP Closed (The Freeze Trap)</button>
+          </div>
+        </div>
+
+        <div class="flow-steps-grid">
+          <div class="flow-step-card" id="cardDwm">
+            <div class="flow-card-title">1. Windows DWM</div>
+            <div class="flow-card-desc" id="descDwm">Compositor Suspended: No active virtual display target found.</div>
+          </div>
+          <div class="flow-step-card" id="cardDx9">
+            <div class="flow-card-title">2. DirectX 9 Engine</div>
+            <div class="flow-card-desc" id="descDx9">IDirect3DDevice9::Present blocks waiting for frame display.</div>
+          </div>
+          <div class="flow-step-card" id="cardTmi">
+            <div class="flow-card-title">3. TMInterface Hook</div>
+            <div class="flow-card-desc" id="descTmi">OnSimulationStep callback halted; no TCP packets sent.</div>
+          </div>
+          <div class="flow-step-card" id="cardPy">
+            <div class="flow-card-title">4. Python Collector</div>
+            <div class="flow-card-desc" id="descPy">recv() blocks for 10.0s -> socket.timeout (WinError 10060)!</div>
+          </div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1.25rem;">
+          <h4 style="font-size: 0.95rem; color: #fff; margin-bottom: 0.35rem;" id="rdpSolutionTitle">The Two-Pronged Engineering Solution:</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.55;" id="rdpSolutionDesc">
+            <strong>1. Operational Display Anchor:</strong> Maintaining an RDP display session streamed to a secondary monitor or mobile device keeps the remote desktop compositor active with negligible client resource consumption (&lt;1% CPU for H.264 video decode).<br>
+            <strong>2. Software Watchdog:</strong> Our self-healing socket recovery catches <code>socket.timeout</code>, force-kills the hung process tree, and relaunches fresh instances automatically.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Self-Healing Process Recovery State Machine -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-num">04. FAULT TOLERANCE</span>
+        <h2 class="section-title">Self-Healing Process Recovery Architecture</h2>
+      </div>
+
+      <p style="color: var(--text-muted); margin-bottom: 1.25rem;">
+        Click through the 4 states of our recovery watchdog in <code>game_instance_manager.py</code> to see how frozen instances recover without crashing the Learner process:
+      </p>
+
+      <div class="fsm-container">
+        <div class="fsm-node active" onclick="selectFsmNode(0)">
+          <div class="fsm-node-header"><span>STATE 01</span> <span>NORMAL</span></div>
+          <div class="fsm-node-title">Lockstep Rollout</div>
+          <div class="fsm-node-text">TMInterface exchanges SimStateData and actions over port 8478/8479 synchronously.</div>
+        </div>
+        <div class="fsm-node" onclick="selectFsmNode(1)">
+          <div class="fsm-node-header"><span>STATE 02</span> <span>FAULT</span></div>
+          <div class="fsm-node-title">Socket Timeout</div>
+          <div class="fsm-node-text">If TmForever hangs or stalls, Python socket timer expires after 10.0 seconds.</div>
+        </div>
+        <div class="fsm-node" onclick="selectFsmNode(2)">
+          <div class="fsm-node-header"><span>STATE 03</span> <span>RECOVERY</span></div>
+          <div class="fsm-node-title">Process Tree Kill</div>
+          <div class="fsm-node-text">Catches socket.timeout and executes taskkill /PID {pid} /T /F to kill all zombie children.</div>
+        </div>
+        <div class="fsm-node" onclick="selectFsmNode(3)">
+          <div class="fsm-node-header"><span>STATE 04</span> <span>RESUME</span></div>
+          <div class="fsm-node-title">Clean Auto-Relaunch</div>
+          <div class="fsm-node-text">ensure_game_running() launches fresh TMLoader.exe. Zero transitions in buffer lost!</div>
+        </div>
+      </div>
+
+      <!-- Code Reference from game_instance_manager.py -->
+      <div class="code-box">
+        <div class="code-header">
+          <span>trackmania_rl/tmi_interaction/game_instance_manager.py (Lines 520–535)</span>
+          <span>Self-Healing Socket Recovery Implementation</span>
+        </div>
+        <div class="code-content">
+<span class="code-kw">try</span>:
+    <span class="code-cm"># Synchronous simulation loop advancing 5 ticks per action:</span>
+    sim_state = self.iface.<span class="code-fn">get_simulation_state</span>()
+    self.iface.<span class="code-fn">set_input_state</span>(action)
+    self.iface.<span class="code-fn">advance_simulation</span>()
+
+<span class="code-kw">except</span> socket.timeout:
+    <span class="code-cm"># ==============================================================================</span>
+    <span class="code-cm"># SELF-HEALING AUTO-RECOVERY (Our Systems Contribution)</span>
+    <span class="code-cm"># ==============================================================================</span>
+    print(<span class="code-str">f"Socket timeout on port {self.tmi_port}! Terminating frozen process tree..."</span>)
+    <span class="code-kw">if</span> <span class="code-kw">not</span> config_copy.is_linux:
+        os.<span class="code-fn">system</span>(f<span class="code-str">"taskkill /PID {self.tm_pid} /T /F"</span>)  <span class="code-cm"># Force tree kill</span>
+    <span class="code-kw">else</span>:
+        os.<span class="code-fn">system</span>(f<span class="code-str">"kill -9 {self.tm_pid}"</span>)
+    
+    self.latest_map_path_requested = <span class="code-kw">None</span>  <span class="code-cm"># Force map reload on next rollout</span>
+    self.iface = <span class="code-kw">None</span>
+    <span class="code-cm"># Learner continues uninterrupted; next rollout launches fresh TmForever!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: Troubleshooting War Stories Matrix -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-num">05. WAR STORIES</span>
+        <h2 class="section-title">The Engineering War Stories Matrix</h2>
+      </div>
+
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">
+        In technical interviews, reciting these 5 real engineering war stories proves you are a battle-tested systems engineer who solved real distributed constraints:
+      </p>
+
+      <table class="trouble-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Challenge</th>
+            <th style="width: 35%;">The Root Cause</th>
+            <th style="width: 40%;">Our Engineering Fix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>TMLoader 403 Forbidden</strong></td>
+            <td>Donadigo's CDN server blocked cloud datacenter IP ranges (Azure/AWS) to prevent automated scraping.</td>
+            <td>Packaged local verified <code>TMLoader/</code> binary directory into a zip archive and transferred it directly via RDP clipboard.</td>
+          </tr>
+          <tr>
+            <td><strong>Hardcoded CUDA Traps</strong></td>
+            <td>Upstream codebase contained hardcoded <code>"cuda"</code> strings across <code>iqn.py</code> and <code>buffer_utilities.py</code>, crashing CPU-only VMs.</td>
+            <td>Refactored every file with dynamic <code>DEVICE = "cuda" if torch.cuda.is_available() else "cpu"</code>, CPU-safe AMP <code>GradScaler</code>, and <code>channels_last</code> guards.</td>
+          </tr>
+          <tr>
+            <td><strong>MemmapTensor Import Crash</strong></td>
+            <td>Newer versions of <code>torchrl</code> and <code>tensordict</code> broke backward compatibility with shared memory tensors.</td>
+            <td>Isolated breaking API changes and pinned dependencies to <code>torchrl==0.2.1</code> and <code>tensordict==0.2.1</code>.</td>
+          </tr>
+          <tr>
+            <td><strong>ScriptModule Buffer Mismatch</strong></td>
+            <td>Saved legacy checkpoints lacked float normalizer buffer keys (<code>float_inputs_mean</code>/<code>std</code>).</td>
+            <td>Loaded state dicts with <code>strict=False</code>, allowing legacy checkpoints to load without key-mismatch runtime exceptions.</td>
+          </tr>
+          <tr>
+            <td><strong>RDP Large File Crashes</strong></td>
+            <td>Windows RDP clipboard buffer limits caused transfers of large 200MB checkpoint archives to crash mid-transfer.</td>
+            <td>Implemented incremental archive staging and small-chunk transfer protocols over RDP drive sharing.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section 6: Knowledge Check -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-num">06. KNOWLEDGE CHECK</span>
+        <h2 class="section-title">Test Your Understanding: Systems Hardening</h2>
+      </div>
+
+      <!-- Quiz 1 -->
+      <div class="quiz-card" id="q1">
+        <div class="quiz-question">1. In an interview, an engineer asks: "Why did your TrackMania game instances freeze when disconnecting an RDP session to a headless Azure VM, and what caused the WinError 10060 socket timeout?" How do you answer?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="checkAnswer(1, 0)">A) "Because Azure shuts down the virtual machine when RDP disconnects."</button>
+          <button class="quiz-option" onclick="checkAnswer(1, 1)">B) "Because TrackMania is a 2008 DirectX 9 application. On non-GPU Azure VMs without a physical monitor, severing the RDP session suspends the Windows Desktop Window Manager (DWM) composition surface, causing the DirectX Present call to block indefinitely, which stops TMInterface from sending simulation packets."</button>
+          <button class="quiz-option" onclick="checkAnswer(1, 2)">C) "Because Windows Firewall blocks port 8478 when remote users log off."</button>
+          <button class="quiz-option" onclick="checkAnswer(1, 3)">D) "Because PyTorch crashes when running without a GPU attached."</button>
+        </div>
+        <div class="quiz-feedback" id="fb1"></div>
+      </div>
+
+      <!-- Quiz 2 -->
+      <div class="quiz-card" id="q2">
+        <div class="quiz-question">2. When refactoring PyTorch code from a CUDA GPU laptop to a CPU-only cloud VM, why does calling `torch.amp.GradScaler()` directly cause a runtime error on CPU?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="checkAnswer(2, 0)">A) Because CPU float32 tensors cannot compute gradients.</button>
+          <button class="quiz-option" onclick="checkAnswer(2, 1)">B) Because PyTorch's default GradScaler expects CUDA float16 half-precision and requires setting enabled=(device == 'cuda') to safely disable scaling on CPU without throwing errors.</button>
+          <button class="quiz-option" onclick="checkAnswer(2, 2)">C) Because CPU processors lack floating-point units.</button>
+          <button class="quiz-option" onclick="checkAnswer(2, 3)">D) Because Adam optimizer does not support GradScaler.</button>
+        </div>
+        <div class="quiz-feedback" id="fb2"></div>
+      </div>
+
+      <!-- Quiz 3 -->
+      <div class="quiz-card" id="q3">
+        <div class="quiz-question">3. Why is `taskkill /PID {pid} /T /F` specifically required rather than standard Python `process.kill()` when recovering from a frozen TrackMania instance?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="checkAnswer(3, 0)">A) Because TMLoader.exe spawns TmForever.exe as a detached child process; killing only the parent PID leaves the child game instance running as an orphaned zombie locking port 8478. The /T flag terminates the entire process tree.</button>
+          <button class="quiz-option" onclick="checkAnswer(3, 1)">B) Because Windows 11 disables Python from sending OS signals.</button>
+          <button class="quiz-option" onclick="checkAnswer(3, 2)">C) Because taskkill is 100 times faster than Python.</button>
+          <button class="quiz-option" onclick="checkAnswer(3, 3)">D) Because the replay buffer is deleted if Python kills the process directly.</button>
+        </div>
+        <div class="quiz-feedback" id="fb3"></div>
+      </div>
+    </div>
+
+    <!-- Navigation Footer -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle);">
+      <a href="module4_codebase.html" class="btn" style="background: rgba(255, 255, 255, 0.08); color: #fff;">
+        ← Back to Module 4: Codebase Anatomy
+      </a>
+      <a href="module6_interview.html" class="btn">
+        Launch Module 6: The 240ms Frontier & Interview Grilling →
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    // RAM simulator logic
+    function updateRamSimulator(val) {
+      const bufferTransitions = parseInt(val);
+      document.getElementById('bufferCountDisplay').innerText = `${bufferTransitions.toLocaleString()} Transitions`;
+
+      const osRam = 3.2;
+      const gameRam = 1.8;
+      const torchRam = 1.5;
+      const bufferRam = (bufferTransitions / 200000) * 6.6;
+      const totalRam = osRam + gameRam + torchRam + bufferRam;
+      const pct = (totalRam / 16.0) * 100;
+
+      document.getElementById('ramTotalDisplay').innerText = `${totalRam.toFixed(1)} GB / 16.0 GB (${pct.toFixed(1)}%)`;
+      document.getElementById('bufferLegendLabel').innerText = `Replay Buffer (${bufferRam.toFixed(1)} GB)`;
+
+      // Update segment widths
+      document.getElementById('segOs').style.width = `${(osRam / 16.0) * 100}%`;
+      document.getElementById('segGame').style.width = `${(gameRam / 16.0) * 100}%`;
+      document.getElementById('segTorch').style.width = `${(torchRam / 16.0) * 100}%`;
+      document.getElementById('segBuffer').style.width = `${(bufferRam / 16.0) * 100}%`;
+
+      // Thermals
+      if (bufferTransitions >= 150000) {
+        document.getElementById('cpuTempDisplay').innerText = "94°C (THROTTLED)";
+        document.getElementById('cpuTempDisplay').style.color = "#f43f5e";
+        document.getElementById('cpuClockDisplay').innerText = "CPU Clock: 1.82 GHz (Throttled from 4.20 GHz)";
+        document.getElementById('fanSpeedDisplay').innerText = "100% (6,200 RPM)";
+        document.getElementById('fanSpeedDisplay').style.color = "#f43f5e";
+      } else if (bufferTransitions >= 80000) {
+        document.getElementById('cpuTempDisplay').innerText = "78°C (Elevated)";
+        document.getElementById('cpuTempDisplay').style.color = "#f59e0b";
+        document.getElementById('cpuClockDisplay').innerText = "CPU Clock: 3.40 GHz (Minor Thermal Scaling)";
+        document.getElementById('fanSpeedDisplay').innerText = "70% (4,400 RPM)";
+        document.getElementById('fanSpeedDisplay').style.color = "#f59e0b";
+      } else {
+        document.getElementById('cpuTempDisplay').innerText = "58°C (Cool & Quiet)";
+        document.getElementById('cpuTempDisplay').style.color = "#10b981";
+        document.getElementById('cpuClockDisplay').innerText = "CPU Clock: 4.20 GHz (Full Boost)";
+        document.getElementById('fanSpeedDisplay').innerText = "35% (2,100 RPM - Whisper Quiet)";
+        document.getElementById('fanSpeedDisplay').style.color = "#10b981";
+      }
+    }
+
+    // DirectX 9 RDP simulator
+    function toggleRdpSim(isOpen) {
+      document.getElementById('btnRdpOpen').classList.toggle('active', isOpen);
+      document.getElementById('btnRdpClosed').classList.toggle('active', !isOpen);
+
+      const cards = [
+        document.getElementById('cardDwm'),
+        document.getElementById('cardDx9'),
+        document.getElementById('cardTmi'),
+        document.getElementById('cardPy')
+      ];
+
+      if (isOpen) {
+        cards.forEach(c => { c.className = 'flow-step-card ok'; });
+        document.getElementById('descDwm').innerText = 'Compositor Active: Rendering desktop to RDP virtual display target.';
+        document.getElementById('descDx9').innerText = 'IDirect3DDevice9::Present succeeds at 80x sim clock.';
+        document.getElementById('descTmi').innerText = 'OnSimulationStep fires continuously; sends telemetry over TCP.';
+        document.getElementById('descPy').innerText = 'Collector receives SimStateData packets cleanly (<10ms cycle).';
+      } else {
+        cards.forEach(c => { c.className = 'flow-step-card error'; });
+        document.getElementById('descDwm').innerText = 'Compositor Suspended: No active virtual display target found.';
+        document.getElementById('descDx9').innerText = 'IDirect3DDevice9::Present blocks waiting for frame display.';
+        document.getElementById('descTmi').innerText = 'OnSimulationStep callback halted; no TCP packets sent.';
+        document.getElementById('descPy').innerText = 'recv() blocks for 10.0s -> socket.timeout (WinError 10060)!';
+      }
+    }
+
+    // Quiz logic
+    const quizAnswers = {
+      1: { correct: 1, explanation: "Spot on! Windows Server DWM suspends display presentation when an RDP session disconnects. Because TrackMania uses DirectX 9, IDirect3DDevice9::Present blocks indefinitely waiting for a compositor surface, freezing the TMInterface physics loop and causing Python socket.timeout." },
+      2: { correct: 1, explanation: "Correct! PyTorch GradScaler is an accelerator optimization for CUDA float16. Calling unscaled step on CPU crashes unless guarded by enabled=(device == 'cuda')." },
+      3: { correct: 0, explanation: "Precisely! TMLoader.exe acts as an injector wrapper that spawns TmForever.exe as a child process. Standard process.kill() only kills the loader, leaving TmForever.exe orphaned and holding loopback socket port 8478 open. The /T flag tree-kills all descendants." }
+    };
+
+    function checkAnswer(qNum, selected) {
+      const qData = quizAnswers[qNum];
+      const card = document.getElementById(`q${qNum}`);
+      const buttons = card.querySelectorAll('.quiz-option');
+      const fb = document.getElementById(`fb${qNum}`);
+
+      buttons.forEach((btn, idx) => {
+        btn.classList.remove('correct', 'wrong');
+        if (idx === qData.correct) btn.classList.add('correct');
+        else if (idx === selected) btn.classList.add('wrong');
+      });
+
+      fb.className = `quiz-feedback show ${selected === qData.correct ? 'correct' : 'wrong'}`;
+      fb.innerHTML = `<strong>${selected === qData.correct ? '✓ Correct!' : '✕ Not quite.'}</strong> ${qData.explanation}`;
+    }
+
+    window.onload = function() {
+      updateRamSimulator(200000);
+      toggleRdpSim(false);
+    };
+  </script>
+</body>
+</html>

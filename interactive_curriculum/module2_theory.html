@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Linesight — Module 2: Core RL Theory & Mathematical Foundations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <!-- MathJax for rendering gorgeous LaTeX equations -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --bg-primary: #0a0d14;
+      --bg-secondary: #111724;
+      --bg-card: rgba(18, 24, 38, 0.75);
+      --bg-card-hover: rgba(28, 38, 60, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(0, 242, 254, 0.3);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #00f2fe;
+      --accent-blue: #4facfe;
+      --accent-purple: #7928ca;
+      --accent-pink: #ff0080;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --font-body: 'Inter', sans-serif;
+      --font-heading: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --shadow-glow: 0 0 35px rgba(0, 242, 254, 0.15);
+      --shadow-purple: 0 0 35px rgba(121, 40, 202, 0.2);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 12% 18%, rgba(0, 242, 254, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 88% 32%, rgba(121, 40, 202, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 60%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(10, 13, 20, 0.85);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      color: #000;
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #fff;
+    }
+
+    .curriculum-pills {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      max-width: 65%;
+      padding: 0.25rem;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-dim);
+    }
+
+    .pill.active {
+      background: rgba(0, 242, 254, 0.12);
+      color: var(--accent-cyan);
+      border-color: rgba(0, 242, 254, 0.4);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+    }
+
+    .pill.completed {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--accent-emerald);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .pill.locked {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 6rem;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-cyan);
+      background: rgba(0, 242, 254, 0.08);
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-eyebrow span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 8px var(--accent-cyan);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 2.85rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 780px;
+      margin: 0 auto 2rem;
+    }
+
+    /* Section Card */
+    .section-block {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 2.25rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 1rem;
+    }
+
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      background: rgba(0, 242, 254, 0.1);
+      padding: 0.35rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 242, 254, 0.25);
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* Analogy Box */
+    .analogy-box {
+      background: linear-gradient(135deg, rgba(121, 40, 202, 0.1), rgba(0, 242, 254, 0.05));
+      border: 1px solid rgba(121, 40, 202, 0.3);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 1.75rem;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+
+    .analogy-icon {
+      font-size: 2.2rem;
+      flex-shrink: 0;
+    }
+
+    .analogy-text h4 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .analogy-text p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Equation Card */
+    .math-callout {
+      background: rgba(13, 17, 27, 0.95);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.25rem 0;
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.05);
+    }
+
+    .math-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .math-formula {
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 0.75rem 0;
+      color: #fff;
+      overflow-x: auto;
+    }
+
+    .math-explanation {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 0.75rem;
+      margin-top: 0.75rem;
+      line-height: 1.6;
+    }
+
+    /* Interactive Widget Containers */
+    .widget-box {
+      background: rgba(8, 12, 20, 0.85);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .widget-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .widget-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin: 1.25rem 0;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .control-item label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+      margin-bottom: 0.4rem;
+    }
+
+    .control-item input[type="range"] {
+      width: 100%;
+      height: 6px;
+      accent-color: var(--accent-cyan);
+      background: #1e293b;
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Canvas Graph */
+    .canvas-container {
+      position: relative;
+      background: #090d16;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 1rem;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Code Snippet Reference */
+    .code-ref-box {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      margin: 1.25rem 0;
+      overflow: hidden;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .code-ref-header {
+      background: #161b22;
+      padding: 0.6rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #8b949e;
+      font-size: 0.78rem;
+      border-bottom: 1px solid #30363d;
+    }
+
+    .code-ref-content {
+      padding: 1rem;
+      overflow-x: auto;
+      line-height: 1.5;
+      color: #c9d1d9;
+    }
+
+    .code-kw { color: #ff7b72; }
+    .code-fn { color: #d2a8ff; }
+    .code-num { color: #79c0ff; }
+    .code-cm { color: #8b949e; font-style: italic; }
+
+    /* Interactive Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .interactive-card {
+      background: rgba(13, 17, 27, 0.9);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .interactive-card:hover, .interactive-card.active {
+      border-color: var(--accent-cyan);
+      background: rgba(20, 30, 50, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+    }
+
+    .card-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 0.35rem;
+    }
+
+    .card-summary {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Comparison Table */
+    .compare-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+
+    .compare-table th {
+      background: rgba(15, 23, 42, 0.9);
+      padding: 0.85rem 1rem;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--border-subtle);
+      text-align: left;
+    }
+
+    .compare-table td {
+      padding: 1rem;
+      font-size: 0.88rem;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(10, 14, 22, 0.5);
+      vertical-align: top;
+    }
+
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:hover td { background: rgba(18, 25, 40, 0.8); }
+
+    /* Quiz */
+    .quiz-card {
+      background: rgba(13, 17, 27, 0.9);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .quiz-question {
+      font-weight: 600;
+      color: #f1f5f9;
+      font-size: 0.95rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .quiz-option {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 0.65rem 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+    }
+
+    .quiz-option:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    .quiz-option.correct {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: var(--accent-emerald);
+      color: #fff;
+    }
+
+    .quiz-option.wrong {
+      background: rgba(244, 63, 94, 0.2);
+      border-color: var(--accent-rose);
+      color: #fff;
+    }
+
+    .quiz-feedback {
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: 6px;
+      display: none;
+      line-height: 1.5;
+    }
+
+    .quiz-feedback.show { display: block; }
+    .quiz-feedback.correct {
+      background: rgba(16, 185, 129, 0.12);
+      color: #a7f3d0;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .quiz-feedback.wrong {
+      background: rgba(244, 63, 94, 0.12);
+      color: #fecdd3;
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      color: #050b14;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header>
+    <a href="index.html" class="brand">
+      <div class="brand-badge">RL 10.6M</div>
+      <div class="brand-title">Project Linesight — Deep Engineering Curriculum</div>
+    </a>
+    <div class="curriculum-pills">
+      <a href="module1_pitch.html" class="pill completed">✓ Mod 1: Pitch & Story</a>
+      <a href="module2_theory.html" class="pill active">Mod 2: Math & Distributional RL</a>
+      <a href="module3_sysarch.html" class="pill">Mod 3: IPC & TMInterface</a>
+      <a href="module4_codebase.html" class="pill">Mod 4: Codebase Anatomy</a>
+      <a href="module5_grind.html" class="pill">Mod 5: Cloud & Recovery</a>
+      <a href="module6_interview.html" class="pill">Mod 6: 240ms Frontier</a>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <!-- Hero Banner -->
+    <div class="hero">
+      <div class="hero-eyebrow">
+        <span class="dot"></span>
+        Curriculum Module 2 // Mathematical & Algorithmic Foundations
+      </div>
+      <h1 class="hero-title">Core Reinforcement Learning Theory & Math</h1>
+      <p class="hero-subtitle">
+        First-principles deep dive: Formal MDP mechanics, Why Q-learning beats Policy Gradients here, Implicit Quantile Networks (IQN), Quantile Huber Loss derivation, and the validity of undiscounted \(\gamma = 1.0\).
+      </p>
+    </div>
+
+    <!-- Section 1: The Intuitive Analogy -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-num">01. INTUITION</span>
+        <h2 class="section-title">The GPS Average vs The Distribution of Traffic</h2>
+      </div>
+
+      <div class="analogy-box">
+        <div class="analogy-icon">🗺️</div>
+        <div class="analogy-text">
+          <h4>Why Scalar Expected Values (\(\mathbb{E}[R]\)) Fail in High-Speed Racing</h4>
+          <p>
+            Imagine Google Maps tells you: <em>"Route A takes 20 minutes on average. Route B takes 20 minutes on average."</em><br>
+            Standard Q-learning (DQN) considers both routes identical because \(Q(s, a_A) = Q(s, a_B) = 20\).<br><br>
+            <strong>The reality:</strong> Route A has mild stop-and-go traffic (variance: 19 to 21 mins). Route B is an empty mountain cliff with a 10% chance of a catastrophic boulder landslide that traps you for 10 hours! 
+            In TrackMania at 400 km/h, taking an aggressive drift line has a 90% chance of gaining 100m, but a 10% chance of clipping the curb by 1 pixel, flipping upside down, and ending your run. Standard DQN averages them into a flat number. <strong>Distributional RL maps the entire shape of the outcome.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: MDP Formalization -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-num">02. FORMAL MDP</span>
+        <h2 class="section-title">The Markov Decision Process \((S, A, P, R, \gamma)\)</h2>
+      </div>
+
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">
+        Every RL problem is formally specified as a 5-tuple \((S, A, P, R, \gamma)\). Here is how Project Linesight instantiates every element mathematically:
+      </p>
+
+      <div class="cards-grid">
+        <div class="interactive-card">
+          <div class="card-icon">👁️</div>
+          <div class="card-title">State Space \(S\)</div>
+          <div class="card-summary">
+            <strong>Multi-Modal State:</strong><br>
+            • Grayscale visual frame: \(160 \times 120 \times 1\)<br>
+            • Car Telemetry: Speed scalar, engine RPM, steer angle, 4-wheel surface contact flags (Ice, Grass, Road, Air).<br>
+            • Centerline Preview: 40 upcoming 3D coordinates spaced 10m apart (400m horizon) transformed to car local frame.
+          </div>
+        </div>
+
+        <div class="interactive-card">
+          <div class="card-icon">🎮</div>
+          <div class="card-title">Action Space \(A\)</div>
+          <div class="card-summary">
+            <strong>12 Discrete Actions:</strong><br>
+            Cartesian combinations of keys: Steer \(\in \{\text{Left, Right, None}\}\) \(\times\) Throttle \(\in \{\text{Gas, Brake, Coast}\}\).<br>
+            Held for 5 physics engine ticks (\(5 \times 10\text{ms} = 50\text{ms}\) per action).
+          </div>
+        </div>
+
+        <div class="interactive-card">
+          <div class="card-icon">⚡</div>
+          <div class="card-title">Transition Probability \(P\)</div>
+          <div class="card-summary">
+            <strong>Deterministic Physics:</strong><br>
+            \(P(s_{t+1} \mid s_t, a_t) = 1.0\).<br>
+            TrackMania's custom C++ engine is 100% deterministic down to the IEEE 754 floating-point calculation. The environment introduces no stochastic environmental noise.
+          </div>
+        </div>
+
+        <div class="interactive-card">
+          <div class="card-icon">🎯</div>
+          <div class="card-title">Reward Function \(R\)</div>
+          <div class="card-summary">
+            <strong>Centerline Progress - Time:</strong><br>
+            \(r_t = \Delta \text{distance}_{\text{centerline}} - c \cdot \Delta t\).<br>
+            Plus speedslide bonus multiplier when lateral drift angle matches optimal tire slip friction curves.
+          </div>
+        </div>
+      </div>
+
+      <!-- Undiscounted Gamma Deep Dive -->
+      <div class="math-callout">
+        <div class="math-header">
+          <span>THE MATHEMATICAL JUSTIFICATION FOR \(\gamma = 1.0\)</span>
+          <span>EPISODIC INTEGRITY</span>
+        </div>
+        <div class="math-formula">
+          \[R_t = \sum_{k=0}^{T - t} \gamma^k r_{t+k} \quad \xrightarrow{\gamma = 1.0} \quad R_t = \sum_{k=0}^{T - t} r_{t+k}\]
+        </div>
+        <div class="math-explanation">
+          <strong>Why isn't \(\gamma=1.0\) blowing up to infinity?</strong><br>
+          In textbook RL (Sutton & Barto), \(\gamma < 1.0\) is required for <em>continuing (infinite-horizon)</em> tasks to guarantee the geometric series \(\sum_{k=0}^{\infty} \gamma^k r_{t+k}\) converges to a finite bound. 
+          However, TrackMania is strictly an <strong>episodic, finite-horizon task</strong>: every run terminates either when crossing the finish line (\(T \approx 54\text{s}\)) or reaching a timeout cutoff (\(T \le 300\text{s}\)). 
+          Setting \(\gamma = 1.0\) ensures that <strong>progress earned 30 seconds into the lap is valued equally to progress earned in Turn 1</strong>, directly aligning cumulative return with minimizing total lap time without artificial temporal decay!
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: DQN vs Policy Gradients -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-num">03. ARCHITECTURE CHOICE</span>
+        <h2 class="section-title">Why Q-Learning over Policy Gradients (PPO / SAC)?</h2>
+      </div>
+
+      <p style="color: var(--text-muted); margin-bottom: 1.25rem;">
+        Senior interviewers will ask: <em>"PPO is the modern default for continuous robotics; why did you use an off-policy Q-learning method?"</em>
+      </p>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>On-Policy Policy Gradients (PPO)</th>
+            <th>Off-Policy Distributional Q-Learning (Linesight IQN)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Sample Efficiency</strong></td>
+            <td>
+              <span style="color: var(--accent-rose);">❌ Very Low:</span> Rollouts collected by policy \(\pi_\theta\) must be discarded after a few gradient updates. In a 10M-frame run, 99% of data is incinerated.
+            </td>
+            <td>
+              <span style="color: var(--accent-emerald);">✓ Extremely High:</span> Experiences \((s, a, r, s', done)\) enter a 200,000-transition replay buffer and are sampled hundreds of times for gradient updates.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Action Space Compatibility</strong></td>
+            <td>
+              Designed primarily for continuous Gaussians (\(\mu, \sigma\)). Discrete softmax policies can struggle with exploration collapse in tight timing windows.
+            </td>
+            <td>
+              <span style="color: var(--accent-emerald);">✓ Natural Fit:</span> Evaluates discrete actions via \(a^* = \arg\max_a Q(s, a)\). Directly matches discrete keyboard keystrokes.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Simulation Coupling</strong></td>
+            <td>
+              Requires lockstep synchronous actor-critic updates. Fast sim speeds cause learners to bottleneck collectors.
+            </td>
+            <td>
+              <span style="color: var(--accent-emerald);">✓ Asynchronous Decoupling:</span> Collectors run at 80× speed writing to shared memory buffer while the Learner executes uninterrupted GPU/CPU batches.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section 4: IQN & Distributional RL -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-num">04. DISTRIBUTIONAL RL</span>
+        <h2 class="section-title">Implicit Quantile Networks (IQN): Dabney et al. (2018)</h2>
+      </div>
+
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">
+        Instead of learning the scalar expectation \(Q(s, a) = \mathbb{E}[Z(s, a)]\), IQN models the return distribution \(Z(s, a)\) directly using continuous quantile regression.
+      </p>
+
+      <!-- Distribution Comparison Simulator -->
+      <div class="widget-box">
+        <div class="widget-title">
+          <span>📊 Interactive Simulation: Scalar DQN vs Distributional IQN</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Adjust the <strong>Risk / Wall Clip Probability</strong> slider to see how standard DQN is blinded by the mean, while IQN quantiles reveal the multimodal return distribution.
+        </p>
+
+        <div class="widget-controls">
+          <div class="control-item">
+            <label>Wall Clip Crash Probability: <span id="crashProbLabel" style="color:#fff;">10%</span></label>
+            <input type="range" min="0" max="40" value="10" id="crashSlider" oninput="updateDistributionSim()">
+          </div>
+          <div class="control-item">
+            <label>Clean Drift Reward: <span id="cleanRewardLabel" style="color:#fff;">+100</span></label>
+            <input type="range" min="50" max="150" value="100" id="cleanSlider" oninput="updateDistributionSim()">
+          </div>
+        </div>
+
+        <div class="canvas-container">
+          <canvas id="distCanvas"></canvas>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-family: var(--font-mono); margin-top: 0.75rem;">
+          <div>Scalar DQN Expectation: <strong id="scalarMeanDisplay" style="color: var(--accent-cyan);">+40.0</strong></div>
+          <div>IQN 10th Quantile (Worst Case): <strong id="worstQuantileDisplay" style="color: var(--accent-rose);">-500.0</strong></div>
+          <div>IQN 90th Quantile (Best Case): <strong id="bestQuantileDisplay" style="color: var(--accent-emerald);">+100.0</strong></div>
+        </div>
+      </div>
+
+      <!-- Cosine Embedding -->
+      <div class="math-callout">
+        <div class="math-header">
+          <span>COSINE QUANTILE EMBEDDING EQUATION</span>
+          <span>FOURIER BASIS EXPANSION</span>
+        </div>
+        <div class="math-formula">
+          \[\phi_j(\tau) = \text{ReLU}\left( \sum_{i=0}^{d-1} w_{ji} \cos(\pi \cdot i \cdot \tau) + b_j \right) \quad \text{for } \tau \sim U(0, 1)\]
+        </div>
+        <div class="math-explanation">
+          <strong>Why Cosine Basis Functions?</strong><br>
+          A scalar quantile fraction \(\tau \in [0, 1]\) cannot be easily multiplied with a high-dimensional state vector without causing vanishing representation. 
+          By projecting \(\tau\) through frequencies \(\cos(\pi i \tau)\) for \(i \in \{1, \dots, 32\}\), IQN creates a <strong>rich frequency embedding</strong> that the dense layers can combine with visual/telemetry features via Hadamard (elementwise) multiplication:
+          \[\text{feature} = \text{concat}(x_{\text{conv}}, x_{\text{telemetry}}) \odot \text{embedding}(\tau)\]
+        </div>
+      </div>
+
+      <!-- Code Reference from iqn.py -->
+      <div class="code-ref-box">
+        <div class="code-ref-header">
+          <span>trackmania_rl/agents/iqn.py (Lines 132–144)</span>
+          <span>Cosine Embedding & Hadamard Fusion in Code</span>
+        </div>
+        <div class="code-ref-content">
+<span class="code-cm"># Project random tau samples to cosine frequency basis:</span>
+quantile_net = torch.<span class="code-fn">cos</span>(
+    torch.<span class="code-fn">arange</span>(<span class="code-num">1</span>, self.iqn_embedding_dimension + <span class="code-num">1</span>, <span class="code-num">1</span>, device=img.device) * math.pi * tau
+)
+quantile_net = self.<span class="code-fn">iqn_fc</span>(quantile_net)  <span class="code-cm"># Linear + LeakyReLU</span>
+
+<span class="code-cm"># Fuse state features with quantile embedding via Hadamard elementwise product:</span>
+concat = concat.<span class="code-fn">repeat</span>(num_quantiles, <span class="code-num">1</span>)
+concat = concat * quantile_net  <span class="code-cm"># State features conditioned on quantile tau!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: Quantile Huber Loss & Math Derivation -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-num">05. LOSS FUNCTION</span>
+        <h2 class="section-title">The Quantile Huber Loss: Derivation & Pinball Geometry</h2>
+      </div>
+
+      <div class="analogy-box">
+        <div class="analogy-icon">⚖️</div>
+        <div class="analogy-text">
+          <h4>The Pinball Asymmetric Penalty Intuition</h4>
+          <p>
+            Standard Mean Squared Error (MSE) penalizes overestimating and underestimating identically: \((y - \hat{y})^2\). This mathematically forces the prediction to the <strong>Mean (50th percentile)</strong>.<br>
+            If you want the network to predict the <strong>90th percentile (\(\tau = 0.9\))</strong>, you must punish underestimating 9 times harder than overestimating! 
+            That asymmetric penalty is the <strong>Pinball Loss</strong>:
+            \(|\tau - \mathbb{I}(\delta < 0)|\).
+          </p>
+        </div>
+      </div>
+
+      <div class="math-callout">
+        <div class="math-header">
+          <span>THE COMPLETE QUANTILE HUBER LOSS</span>
+          <span>DABNEY ET AL., 2018</span>
+        </div>
+        <div class="math-formula">
+          \[\rho_\tau^\kappa(\delta) = |\tau - \mathbb{I}(\delta < 0)| \cdot \frac{\mathcal{L}_\kappa(\delta)}{\kappa}\]
+        </div>
+        <div class="math-formula" style="font-size: 1rem; color: var(--text-muted);">
+          Where the Huber Loss \(\mathcal{L}_\kappa(\delta)\) is defined as:
+          \[\mathcal{L}_\kappa(\delta) = \begin{cases} 
+          \frac{1}{2} \delta^2 & \text{if } |\delta| \le \kappa \\
+          \kappa \left( |\delta| - \frac{1}{2} \kappa \right) & \text{if } |\delta| > \kappa
+          \end{cases}\]
+        </div>
+        <div class="math-explanation">
+          <strong>Why smooth with Huber Loss?</strong><br>
+          The standard Pinball loss has a non-differentiable kink at \(\delta = 0\), causing gradient oscillation when predictions get close to targets. The threshold \(\kappa\) (set to \(1.0\)) makes the loss quadratic for small errors and linear for large errors, preventing gradient explosion from extreme racing crashes!
+        </div>
+      </div>
+
+      <!-- Live Interactive Pinball Loss Plot -->
+      <div class="widget-box">
+        <div class="widget-title">
+          <span>📈 Interactive Pinball Loss Geometry Visualizer</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Drag the \(\tau\) slider to see how the penalty slope tilts asymmetrically. Notice how at \(\tau=0.9\), underestimation (\(\delta > 0\)) has a steep 0.9 slope, forcing predictions up!
+        </p>
+
+        <div class="widget-controls">
+          <div class="control-item">
+            <label>Quantile Target \(\tau\): <span id="tauValLabel" style="color:#fff;">0.75</span></label>
+            <input type="range" min="5" max="95" value="75" id="tauSlider" oninput="updatePinballPlot()">
+          </div>
+          <div class="control-item">
+            <label>Huber Threshold \(\kappa\): <span id="kappaValLabel" style="color:#fff;">1.0</span></label>
+            <input type="range" min="5" max="20" value="10" id="kappaSlider" oninput="updatePinballPlot()">
+          </div>
+        </div>
+
+        <div class="canvas-container">
+          <canvas id="pinballCanvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Code Reference from iqn.py -->
+      <div class="code-ref-box">
+        <div class="code-ref-header">
+          <span>trackmania_rl/agents/iqn.py (Lines 173–183)</span>
+          <span>Direct Implementation in PyTorch</span>
+        </div>
+        <div class="code-ref-content">
+TD_error = targets[:, :, <span class="code-kw">None</span>, :] - outputs[:, <span class="code-kw">None</span>, :, :]  <span class="code-cm"># delta</span>
+
+<span class="code-cm"># Huber loss computation:</span>
+loss = torch.<span class="code-fn">where</span>(
+    torch.<span class="code-fn">lt</span>(torch.<span class="code-fn">abs</span>(TD_error), config_copy.iqn_kappa),
+    (<span class="code-num">0.5</span> / config_copy.iqn_kappa) * TD_error**<span class="code-num">2</span>,
+    (torch.<span class="code-fn">abs</span>(TD_error) - <span class="code-num">0.5</span> * config_copy.iqn_kappa),
+)
+
+<span class="code-cm"># Asymmetric Pinball weighting: |tau - I(delta < 0)|</span>
+loss = (torch.<span class="code-fn">where</span>(torch.<span class="code-fn">lt</span>(TD_error, <span class="code-num">0</span>), <span class="code-num">1</span> - tau, tau) * loss).<span class="code-fn">sum</span>(dim=<span class="code-num">2</span>).<span class="code-fn">mean</span>(dim=<span class="code-num">1</span>)[:, <span class="code-num">0</span>]
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 6: Knowledge Check -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-num">06. KNOWLEDGE CHECK</span>
+        <h2 class="section-title">Test Your Understanding: Module 2 Math Mastery</h2>
+      </div>
+
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+        Validate your mastery of the mathematical equations before moving to Module 3 (System Architecture & TMInterface IPC).
+      </p>
+
+      <!-- Quiz 1 -->
+      <div class="quiz-card" id="q1">
+        <div class="quiz-question">1. In an interview, a senior engineer challenges: "Your discount factor is \(\gamma = 1.0\). Doesn't that cause the Bellman return to diverge to infinity?" How do you answer?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="checkAnswer(1, 0)">A) "Yes, but our Adam optimizer learning rate is small enough to compensate for the divergence."</button>
+          <button class="quiz-option" onclick="checkAnswer(1, 1)">B) "No. TrackMania is strictly a finite-horizon episodic task that terminates at the finish line or at a 300s timeout cutoff. With guaranteed finite termination, \(\gamma=1.0\) is mathematically valid and prevents artificially discounting future track progress."</button>
+          <button class="quiz-option" onclick="checkAnswer(1, 2)">C) "No, because the Quantile Huber Loss clips returns to \([-1, 1]\)."</button>
+          <button class="quiz-option" onclick="checkAnswer(1, 3)">D) "In modern Deep RL, discount factors are deprecated in favor of LayerNorm."</button>
+        </div>
+        <div class="quiz-feedback" id="fb1"></div>
+      </div>
+
+      <!-- Quiz 2 -->
+      <div class="quiz-card" id="q2">
+        <div class="quiz-question">2. Why does IQN use a Cosine Basis embedding for the quantile fraction \(\tau\) instead of simply feeding the scalar \(\tau \in [0, 1]\) into the dense layer?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="checkAnswer(2, 0)">A) Because PyTorch Conv2D layers only accept trigonometric inputs.</button>
+          <button class="quiz-option" onclick="checkAnswer(2, 1)">B) Because cosine functions have zero derivative at integer multiples of \(\pi\).</button>
+          <button class="quiz-option" onclick="checkAnswer(2, 2)">C) Because high-frequency Fourier basis projections allow deep neural networks to learn high-frequency functions over \(\tau\) without spectral bias, producing a rich vector representation for Hadamard mixing with state features.</button>
+          <button class="quiz-option" onclick="checkAnswer(2, 3)">D) Because cosine eliminates the need for activation functions in the network.</button>
+        </div>
+        <div class="quiz-feedback" id="fb2"></div>
+      </div>
+
+      <!-- Quiz 3 -->
+      <div class="quiz-card" id="q3">
+        <div class="quiz-question">3. When \(\tau = 0.9\) (90th percentile) and the temporal difference error \(\delta = \text{target} - \text{output} > 0\) (underestimation), what is the weight applied by the Pinball Loss?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="checkAnswer(3, 0)">A) 0.1, because underestimation is favored.</button>
+          <button class="quiz-option" onclick="checkAnswer(3, 1)">B) 0.9, heavily penalizing the underestimation and driving the prediction higher until 90% of returns fall below it.</button>
+          <button class="quiz-option" onclick="checkAnswer(3, 2)">C) 0.0, because positive errors are ignored in Q-learning.</button>
+          <button class="quiz-option" onclick="checkAnswer(3, 3)">D) Exactly \(\kappa = 1.0\).</button>
+        </div>
+        <div class="quiz-feedback" id="fb3"></div>
+      </div>
+
+      <!-- Quiz 4 -->
+      <div class="quiz-card" id="q4">
+        <div class="quiz-question">4. Why was off-policy Q-learning (IQN) selected over on-policy policy gradients (like PPO) for this 10.6M-frame autonomous racing system?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="checkAnswer(4, 0)">A) Because PPO does not support convolutional neural networks.</button>
+          <button class="quiz-option" onclick="checkAnswer(4, 1)">B) Because Q-learning allows saving transitions to a 200k replay buffer and reusing experiences hundreds of times, whereas PPO discards rollouts after a few updates, wasting 99% of simulation data in a 10M+ frame training run.</button>
+          <button class="quiz-option" onclick="checkAnswer(4, 2)">C) Because TrackMania's physics are non-deterministic, making policy gradients unstable.</button>
+          <button class="quiz-option" onclick="checkAnswer(4, 3)">D) Because discrete actions cannot be represented by actor-critic networks.</button>
+        </div>
+        <div class="quiz-feedback" id="fb4"></div>
+      </div>
+    </div>
+
+    <!-- Navigation Footer -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle);">
+      <a href="module1_pitch.html" class="btn" style="background: rgba(255, 255, 255, 0.08); color: #fff;">
+        ← Back to Module 1: Pitch & Story
+      </a>
+      <a href="module3_sysarch.html" class="btn" style="background: linear-gradient(135deg, #10b981, #00f2fe);">
+        Launch Module 3: System Architecture & IPC →
+      </a>
+      <a href="index.html" class="btn" style="background: rgba(255, 255, 255, 0.08); color: #fff;">
+        Portal Hub →
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    // Distribution Simulator Canvas
+    function updateDistributionSim() {
+      const crashProb = parseInt(document.getElementById('crashSlider').value) / 100;
+      const cleanReward = parseInt(document.getElementById('cleanSlider').value);
+      const crashReward = -500;
+
+      document.getElementById('crashProbLabel').innerText = `${Math.round(crashProb * 100)}%`;
+      document.getElementById('cleanRewardLabel').innerText = `+${cleanReward}`;
+
+      const meanReturn = (1 - crashProb) * cleanReward + crashProb * crashReward;
+      document.getElementById('scalarMeanDisplay').innerText = (meanReturn >= 0 ? '+' : '') + meanReturn.toFixed(1);
+      document.getElementById('worstQuantileDisplay').innerText = crashReward.toFixed(1);
+      document.getElementById('bestQuantileDisplay').innerText = `+${cleanReward.toFixed(1)}`;
+
+      drawDistributionCanvas(crashProb, cleanReward, crashReward, meanReturn);
+    }
+
+    function drawDistributionCanvas(crashProb, cleanReward, crashReward, meanReturn) {
+      const canvas = document.getElementById('distCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const w = canvas.width;
+      const h = canvas.height;
+      const padX = 60;
+      const padY = 40;
+
+      // X-range: -600 to +200
+      const minX = -600;
+      const maxX = 200;
+      const toScreenX = (val) => padX + ((val - minX) / (maxX - minX)) * (w - 2 * padX);
+      const zeroY = h - padY;
+
+      // Axis lines
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(padX, zeroY);
+      ctx.lineTo(w - padX, zeroY);
+      ctx.stroke();
+
+      // Zero tick
+      const zeroX = toScreenX(0);
+      ctx.strokeStyle = '#64748b';
+      ctx.beginPath();
+      ctx.moveTo(zeroX, zeroY);
+      ctx.lineTo(zeroX, zeroY - 8);
+      ctx.stroke();
+      ctx.fillStyle = '#64748b';
+      ctx.font = '11px JetBrains Mono';
+      ctx.fillText('0', zeroX - 4, zeroY + 16);
+
+      // Crash Spike (-500)
+      const crashX = toScreenX(crashReward);
+      const crashH = Math.min(180, crashProb * 400 + 10);
+      ctx.fillStyle = 'rgba(244, 63, 94, 0.7)';
+      ctx.fillRect(crashX - 12, zeroY - crashH, 24, crashH);
+      ctx.fillStyle = '#f43f5e';
+      ctx.fillText(`Crash (-500)`, crashX - 35, zeroY - crashH - 10);
+      ctx.fillText(`${Math.round(crashProb * 100)}%`, crashX - 12, zeroY - crashH - 24);
+
+      // Clean Spike (+100)
+      const cleanX = toScreenX(cleanReward);
+      const cleanH = Math.min(180, (1 - crashProb) * 200 + 20);
+      ctx.fillStyle = 'rgba(16, 185, 129, 0.7)';
+      ctx.fillRect(cleanX - 12, zeroY - cleanH, 24, cleanH);
+      ctx.fillStyle = '#10b981';
+      ctx.fillText(`Clean (+${cleanReward})`, cleanX - 35, zeroY - cleanH - 10);
+      ctx.fillText(`${Math.round((1 - crashProb) * 100)}%`, cleanX - 12, zeroY - cleanH - 24);
+
+      // Scalar Mean Line (DQN)
+      const meanX = toScreenX(meanReturn);
+      ctx.strokeStyle = '#00f2fe';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([5, 5]);
+      ctx.beginPath();
+      ctx.moveTo(meanX, padY);
+      ctx.lineTo(meanX, zeroY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = '#00f2fe';
+      ctx.font = 'bold 12px Inter';
+      ctx.fillText(`Scalar DQN Mean: ${meanReturn.toFixed(1)}`, meanX - 60, padY - 8);
+    }
+
+    // Pinball Plot Canvas
+    function updatePinballPlot() {
+      const tau = parseInt(document.getElementById('tauSlider').value) / 100;
+      const kappa = parseInt(document.getElementById('kappaSlider').value) / 10;
+      document.getElementById('tauValLabel').innerText = tau.toFixed(2);
+      document.getElementById('kappaValLabel').innerText = kappa.toFixed(1);
+
+      drawPinballCanvas(tau, kappa);
+    }
+
+    function drawPinballCanvas(tau, kappa) {
+      const canvas = document.getElementById('pinballCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const w = canvas.width;
+      const h = canvas.height;
+      const originX = w / 2;
+      const originY = h - 40;
+      const scaleX = 40;
+      const scaleY = 35;
+
+      // Axes
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(30, originY);
+      ctx.lineTo(w - 30, originY);
+      ctx.moveTo(originX, 20);
+      ctx.lineTo(originX, originY + 10);
+      ctx.stroke();
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '11px JetBrains Mono';
+      ctx.fillText('TD Error δ (Target - Output)', w - 180, originY - 8);
+      ctx.fillText('Loss ρ(δ)', originX + 8, 30);
+
+      // Draw Quantile Huber curve
+      ctx.strokeStyle = '#00f2fe';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+
+      for (let px = 30; px <= w - 30; px += 2) {
+        const delta = (px - originX) / scaleX;
+        let huber;
+        const absD = Math.abs(delta);
+        if (absD <= kappa) {
+          huber = 0.5 * (delta * delta) / kappa;
+        } else {
+          huber = absD - 0.5 * kappa;
+        }
+        const weight = delta < 0 ? (1 - tau) : tau;
+        const loss = weight * huber;
+        const py = originY - loss * scaleY;
+
+        if (px === 30) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+
+      // Annotations
+      ctx.fillStyle = '#f43f5e';
+      ctx.font = '11px Inter';
+      ctx.fillText(`Overestimation slope: 1 - τ = ${(1 - tau).toFixed(2)}`, originX - 220, originY - 90);
+
+      ctx.fillStyle = '#10b981';
+      ctx.fillText(`Underestimation slope: τ = ${tau.toFixed(2)}`, originX + 50, originY - 90);
+    }
+
+    // Quiz logic
+    const quizAnswers = {
+      1: { correct: 1, explanation: "Spot on! Sutton & Barto's discount factor condition is strictly for infinite-horizon continuing tasks. In TrackMania, every episode terminates within 300s or at the finish line, so γ=1.0 is mathematically sound and avoids artificially discounting late-track progress." },
+      2: { correct: 2, explanation: "Precisely! Neural networks suffer from spectral bias when learning high-frequency functions from low-dimensional inputs (Rahaman et al., 2019). The Fourier cosine expansion projects scalar tau into high-dimensional space so the network can condition representations across any quantile fraction smoothly." },
+      3: { correct: 1, explanation: "Correct! When delta > 0, the prediction was too low. Under τ=0.9, the Pinball penalty applies weight 0.9 to underestimations and only 0.1 to overestimations, driving the network's prediction upward to match the 90th percentile!" },
+      4: { correct: 1, explanation: "Exactly right! Sample efficiency is the decisive factor. In a 10.6M-frame environment, discarding 99% of data as in on-policy PPO would require immense compute. Storing transitions in a 200k replay buffer and performing gradient updates on sampled mini-batches is orders of magnitude more efficient." }
+    };
+
+    function checkAnswer(qNum, selected) {
+      const qData = quizAnswers[qNum];
+      const card = document.getElementById(`q${qNum}`);
+      const buttons = card.querySelectorAll('.quiz-option');
+      const fb = document.getElementById(`fb${qNum}`);
+
+      buttons.forEach((btn, idx) => {
+        btn.classList.remove('correct', 'wrong');
+        if (idx === qData.correct) btn.classList.add('correct');
+        else if (idx === selected) btn.classList.add('wrong');
+      });
+
+      fb.className = `quiz-feedback show ${selected === qData.correct ? 'correct' : 'wrong'}`;
+      fb.innerHTML = `<strong>${selected === qData.correct ? '✓ Correct!' : '✕ Not quite.'}</strong> ${qData.explanation}`;
+    }
+
+    window.onload = function() {
+      updateDistributionSim();
+      updatePinballPlot();
+    };
+
+    window.onresize = function() {
+      updateDistributionSim();
+      updatePinballPlot();
+    };
+  </script>
+</body>
+</html>
