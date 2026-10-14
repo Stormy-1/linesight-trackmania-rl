@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Linesight — Master Engineering Curriculum Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0d14;
+      --bg-secondary: #111724;
+      --bg-card: rgba(18, 24, 38, 0.75);
+      --bg-card-hover: rgba(28, 38, 60, 0.95);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(0, 242, 254, 0.3);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #00f2fe;
+      --accent-blue: #4facfe;
+      --accent-purple: #7928ca;
+      --accent-emerald: #10b981;
+      --accent-rose: #f43f5e;
+      --font-body: 'Inter', sans-serif;
+      --font-heading: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 242, 254, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 90% 40%, rgba(121, 40, 202, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% 90%, rgba(16, 185, 129, 0.05) 0%, transparent 60%);
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(10, 13, 20, 0.85);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      color: #000;
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-cyan);
+      background: rgba(0, 242, 254, 0.08);
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 780px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .module-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .module-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-accent);
+      background: var(--bg-card-hover);
+      box-shadow: 0 0 30px rgba(0, 242, 254, 0.15);
+    }
+
+    .module-card.active {
+      border-color: rgba(0, 242, 254, 0.5);
+      background: linear-gradient(180deg, rgba(18, 24, 38, 0.9) 0%, rgba(14, 21, 35, 0.95) 100%);
+    }
+
+    .module-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      align-self: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .status-ready {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .status-upcoming {
+      background: rgba(148, 163, 184, 0.1);
+      color: var(--text-dim);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .module-title {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .module-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+      line-height: 1.55;
+    }
+
+    .module-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 1rem;
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+    }
+
+    .btn-launch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="#" class="brand">
+      <div class="brand-badge">RL 10.6M</div>
+      <div class="brand-title">Project Linesight — First-Principles Mastery Portal</div>
+    </a>
+  </header>
+
+  <div class="container">
+    <div class="hero">
+      <div class="hero-eyebrow">Interactive 6-Module Curriculum</div>
+      <h1 class="hero-title">From Vibe-Coder to Systems & RL Mastery</h1>
+      <p class="hero-subtitle">
+        Explore every concept, equation, system architecture component, and interview defense for Project Linesight. Built for aspiring ML, RL, and AI systems engineers.
+      </p>
+    </div>
+
+    <div class="modules-grid">
+      <!-- Module 1 -->
+      <a href="module1_pitch.html" class="module-card active">
+        <div class="module-status status-ready">● Ready & Interactive</div>
+        <div class="module-title">Module 1: The High-Level Story & 30s Pitch</div>
+        <div class="module-desc">
+          Master the art of authentic self-presentation. Differentiate vibe-coding from first-principles engineering, explore the F1 Chief Engineer analogy, rehearse with the interactive teleprompter, and verify attribution boundaries.
+        </div>
+        <div class="module-footer">
+          <span>Interactive App + Pitch Grader</span>
+          <span class="btn-launch">Launch Module 1 →</span>
+        </div>
+      </a>
+
+      <!-- Module 2 -->
+      <a href="module2_theory.html" class="module-card active">
+        <div class="module-status status-ready">● Ready & Interactive</div>
+        <div class="module-title">Module 2: Core RL Theory & Math</div>
+        <div class="module-desc">
+          Mathematical deep-dive: MDP formalization, Q-learning vs Policy Gradients, Distributional RL via Implicit Quantile Networks (IQN), Quantile Huber Loss derivation, and the validity of undiscounted $\gamma=1.0$ in episodic racing.
+        </div>
+        <div class="module-footer">
+          <span>Theory & Equation Visualizer</span>
+          <span class="btn-launch">Launch Module 2 →</span>
+        </div>
+      </a>
+
+      <!-- Module 3 -->
+      <a href="module3_sysarch.html" class="module-card active">
+        <div class="module-status status-ready">● Ready & Interactive</div>
+        <div class="module-title">Module 3: System Architecture & Data Flow</div>
+        <div class="module-desc">
+          Low-level systems: TMInterface C++ memory hooks, loopback socket IPC, multiprocessing learner/collector separation, 200k shared replay buffer, and 80x sim clock vs actual measured rendering FPS.
+        </div>
+        <div class="module-footer">
+          <span>IPC Architecture Simulator</span>
+          <span class="btn-launch">Launch Module 3 →</span>
+        </div>
+      </a>
+
+      <!-- Module 4 -->
+      <a href="module4_codebase.html" class="module-card active">
+        <div class="module-status status-ready">● Ready & Interactive</div>
+        <div class="module-title">Module 4: Codebase Anatomy (Line-by-Line)</div>
+        <div class="module-desc">
+          Walking through <code>train.py</code>, <code>iqn.py</code>, <code>learner_process.py</code>, <code>collector_process.py</code>, and <code>game_instance_manager.py</code> with full code inspections and tensor dimensionality tracking.
+        </div>
+        <div class="module-footer">
+          <span>Code Inspection Explorer</span>
+          <span class="btn-launch">Launch Module 4 →</span>
+        </div>
+      </a>
+
+      <!-- Module 5 -->
+      <a href="module5_grind.html" class="module-card active">
+        <div class="module-status status-ready">● Ready & Interactive</div>
+        <div class="module-title">Module 5: The Engineering Grind</div>
+        <div class="module-desc">
+          Real-world war stories: Surviving 13.1 GB memory usage on a 16GB personal laptop, diagnosing headless Azure DirectX 9 compositor suspension, and engineering self-healing PID tree-kill process recovery.
+        </div>
+        <div class="module-footer">
+          <span>Incident Playbook Visualizer</span>
+          <span class="btn-launch">Launch Module 5 →</span>
+        </div>
+      </a>
+
+      <!-- Module 6 -->
+      <a href="module6_interview.html" class="module-card active">
+        <div class="module-status status-ready">● Ready & Interactive</div>
+        <div class="module-title">Module 6: The 240ms Frontier & Mock Grilling</div>
+        <div class="module-desc">
+          The physics barrier: 50ms action quantization (~4.8 actions in the remaining 240ms gap), loss of plasticity, multi-map curriculum strategy, and a live, interactive 20-question mock technical interview grilling simulator.
+        </div>
+        <div class="module-footer">
+          <span>Mock Interview Arena</span>
+          <span class="btn-launch">Launch Module 6 →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
