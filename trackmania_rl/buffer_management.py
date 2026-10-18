@@ -16,6 +16,28 @@ from trackmania_rl.experience_replay.experience_replay_interface import Experien
 from trackmania_rl.reward_shaping import speedslide_quality_tarmac
 
 
+def select_test_transitions(n_transitions: int, test_ratio: float, random_values=None) -> list[bool]:
+    """Choose the test-buffer destination independently for each transition.
+
+    The old implementation selected one destination for a rollout and only
+    reconsidered it occasionally.  With a 10% reconsideration probability,
+    that produced an effective test share near one third even when
+    ``buffer_test_ratio`` was 0.05.  Per-transition assignment makes the
+    configured ratio mean what it says and prevents long sticky runs in the
+    test buffer.
+    """
+
+    if n_transitions < 0:
+        raise ValueError("n_transitions must be non-negative")
+    if not 0 <= test_ratio <= 1:
+        raise ValueError("test_ratio must be between 0 and 1")
+    values = iter(random_values) if random_values is not None else None
+    return [
+        (next(values) if values is not None else random.random()) < test_ratio
+        for _ in range(n_transitions)
+    ]
+
+
 @jit(nopython=True)
 def get_potential(state_float):
     # https://people.eecs.berkeley.edu/~pabbeel/cs287-fa09/readings/NgHaradaRussell-shaping-ICML1999.pdf
@@ -50,7 +72,7 @@ def fill_buffer_from_rollout_with_n_steps_rule(
     number_memories_added_test = 0
     Experiences_For_Buffer = []
     Experiences_For_Buffer_Test = []
-    list_to_fill = Experiences_For_Buffer_Test if random.random() < config_copy.buffer_test_ratio else Experiences_For_Buffer
+    test_transition_flags = select_test_transitions(n_frames - 1, config_copy.buffer_test_ratio)
 
     gammas = (gamma ** np.linspace(1, n_steps_max, n_steps_max)).astype(
         np.float32
@@ -96,9 +118,7 @@ def fill_buffer_from_rollout_with_n_steps_rule(
                     min(config_copy.engineered_reward_max_dist_to_cur_vcp, np.linalg.norm(rollout_results["state_float"][i][62:65])),
                 )
     for i in range(n_frames - 1):  # Loop over all frames that were generated
-        # Switch memory buffer sometimes
-        if random.random() < 0.1:
-            list_to_fill = Experiences_For_Buffer_Test if random.random() < config_copy.buffer_test_ratio else Experiences_For_Buffer
+        list_to_fill = Experiences_For_Buffer_Test if test_transition_flags[i] else Experiences_For_Buffer
 
         n_steps = min(n_steps_max, n_frames - 1 - i)
         if discard_non_greedy_actions_in_nsteps:

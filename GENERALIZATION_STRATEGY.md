@@ -35,8 +35,14 @@ To build a truly generalized TrackMania AI, we must use this `hocko_v1_foundatio
 By interleaving Map A, Map B, and Map C in the training environment's `map_cycle`, the neural network is forced to find shared, generalized weights that work across all distinct geometries, rather than forgetting one to learn the other.
 
 ---
-**Next Steps for Generalization:**
-1.  **Wait for Purist WR:** The current `hocko_v1` run will be left alone to continue training until it hits or beats the purist World Record (`~53.76s`).
-2.  **Branch Training:** Once the WR is conquered, we will load the saved 95% foundational model (`save/hocko_v1_foundational_checkpoint`).
-3.  **Update Curriculum:** We will update `config.py` to include 3-5 diverse tracks in the map cycle.
-4.  **Resume:** We will resume training on this multi-map curriculum to build a truly generalized driving agent.
+**Status Update (Post-10.82M Frames):**
+1. **Single-Track Phase Concluded:** Training concluded at **10,826,633 frames** with a Personal Best of **54.000s** (240ms from human WR). Between 10.64M and 10.82M frames, the PB remained strictly invariant while the rolling mean drifted (54.9s → 55.6s), empirically confirming complete feature saturation under 50ms action quantization.
+2. **Branch Initialized:** We are branching from `save/hocko_v1_foundational_checkpoint` (54.45s state) under the working hypothesis that it preserves higher behavioral plasticity and adaptability than the saturated 10.64M/10.82M model. This hypothesis will be verified empirically through comparative fine-tuning and zero-shot baselines against the late checkpoint.
+3. **High-Speed Generalization Profile:**
+   - **Collectors:** `gpu_collectors_count = 2` (both instances running parallel rollouts).
+   - **Simulation Speed:** `running_speed = 80` (yielding ~197 aggregate FPS on local GPU workstation; headless CPU instances without GPU render at ~15 FPS).
+   - **Replay Buffer:** `50,000` to `100,000` transitions (fast cycling to prioritize new track data).
+   - **Step 1: Controlled Zero-Shot Baseline:** Run official maps in `map_cycle` with `(False, False)` across both checkpoints ($N \ge 10$ runs per track) measuring distance fraction completed and termination causes before updating weights.
+   - **Step 2: Interleaved Curriculum:** Cycle between new official maps (A01, A03, etc.) and `ESL-Hockolicious` to evaluate adaptation rate and prevent catastrophic forgetting.
+
+**Branch Recovery Note:** The first `gen_v1` training attempt was intentionally stopped after its fresh replay buffer caused rapid loss and gradient growth while current evaluations timed out across all maps. The foundational checkpoint remains untouched. A clean `gen_v2` branch was bootstrapped with model weights only, reset learner counters, no inherited optimizer/scaler state, a lower fine-tuning learning rate, higher initial exploration, and equal Hockolicious curriculum weighting.
