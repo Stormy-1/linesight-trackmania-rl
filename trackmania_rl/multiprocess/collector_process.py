@@ -3,7 +3,9 @@ This file implements a single multithreaded worker that handles a Trackmania gam
 """
 
 import importlib
+import queue
 import time
+from copy import deepcopy
 from itertools import chain, count, cycle
 from pathlib import Path
 
@@ -14,6 +16,7 @@ from torch import multiprocessing as mp
 from config_files import config_copy
 from trackmania_rl import utilities
 from trackmania_rl.agents import iqn as iqn
+from trackmania_rl.gen_v3_stage import derive_episode_metrics, map_cycle_signature
 from trackmania_rl.utilities import set_random_seed
 
 
@@ -27,6 +30,7 @@ def collector_process_fn(
     save_dir: Path,
     tmi_port: int,
     process_number: int,
+    stop_event: mp.Event,
 ):
     from trackmania_rl.map_loader import analyze_map_cycle, load_next_map_zone_centers
     from trackmania_rl.tmi_interaction import game_instance_manager
@@ -44,10 +48,13 @@ def collector_process_fn(
 
     inference_network, uncompiled_inference_network = iqn.make_untrained_iqn_network(config_copy.use_jit, is_inference=True)
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    try:
-        inference_network.load_state_dict(torch.load(f=save_dir / "weights1.torch", map_location=device, weights_only=False), strict=False)
-    except Exception as e:
-        print("Worker could not load weights, exception:", e)
+    utilities.load_model_checkpoint(
+        inference_network,
+        save_dir / "weights1.torch",
+        map_location=device,
+        allowed_missing_keys=utilities.NON_PERSISTENT_NORMALIZATION_KEYS,
+        allowed_unexpected_keys=utilities.NON_PERSISTENT_NORMALIZATION_KEYS,
+    )
 
     inferer = iqn.Inferer(inference_network, config_copy.iqn_k, config_copy.tau_epsilon_boltzmann)
 
@@ -61,7 +68,7 @@ def collector_process_fn(
     # ========================================================
     inference_network.train()
 
-    map_cycle_str = str(config_copy.map_cycle)
+    map_cycle_signature_value = map_cycle_signature(deepcopy(config_copy.map_cycle))
     set_maps_trained, set_maps_blind = analyze_map_cycle(config_copy.map_cycle)
     map_cycle_iter = cycle(chain(*config_copy.map_cycle))
 
@@ -79,6 +86,8 @@ def collector_process_fn(
 
     time_since_last_queue_push = time.perf_counter()
     for loop_number in count(1):
+        if stop_event.is_set():
+            break
         importlib.reload(config_copy)
 
         tmi.max_minirace_duration_ms = config_copy.cutoff_rollout_if_no_vcp_passed_within_duration_ms
@@ -86,8 +95,9 @@ def collector_process_fn(
         # ===============================================
         #   DID THE CYCLE CHANGE ?
         # ===============================================
-        if str(config_copy.map_cycle) != map_cycle_str:
-            map_cycle_str = str(config_copy.map_cycle)
+        new_map_cycle_signature = map_cycle_signature(deepcopy(config_copy.map_cycle))
+        if new_map_cycle_signature != map_cycle_signature_value:
+            map_cycle_signature_value = new_map_cycle_signature
             set_maps_trained, set_maps_blind = analyze_map_cycle(config_copy.map_cycle)
             map_cycle_iter = cycle(chain(*config_copy.map_cycle))
 
@@ -128,19 +138,34 @@ def collector_process_fn(
         rollout_end_time = time.perf_counter()
         rollout_duration = rollout_end_time - rollout_start_time
         rollout_results["worker_time_in_rollout_percentage"] = rollout_duration / (time.perf_counter() - time_since_last_queue_push)
+        # Treat either the explicit crash flag or the persisted TMI protection
+        # marker as an infrastructure failure.  The two are normally set
+        # together by GameInstanceManager, but the packet must remain safe if a
+        # failure is reported through only one side of that interface.
+        rollout_failed = tmi.last_rollout_crashed or bool(end_race_stats.get("tmi_protection_cutoff", False))
+        end_race_stats["episode_metrics"] = derive_episode_metrics(
+            zone_centers,
+            rollout_results,
+            end_race_stats,
+            rollout_crashed=rollout_failed,
+        )
         time_since_last_queue_push = time.perf_counter()
         print("", flush=True)
 
-        if not tmi.last_rollout_crashed:
-            rollout_queue.put(
-                (
-                    rollout_results,
-                    end_race_stats,
-                    fill_buffer,
-                    is_explo,
-                    map_name,
-                    map_status,
-                    rollout_duration,
-                    loop_number,
-                )
-            )
+        packet = (
+            rollout_results,
+            end_race_stats,
+            fill_buffer and not rollout_failed,
+            is_explo,
+            map_name,
+            map_status,
+            rollout_duration,
+            loop_number,
+            not rollout_failed,
+        )
+        while not stop_event.is_set():
+            try:
+                rollout_queue.put(packet, timeout=0.5)
+                break
+            except queue.Full:
+                continue

@@ -2,10 +2,14 @@
 Various neural network & scheduling utilities.
 """
 
+import json
 import math
+import os
 import shutil
+import tempfile
+from collections.abc import Mapping
 from pathlib import Path
-from typing import List, Tuple
+from typing import Collection, List, Tuple
 
 import random
 import joblib
@@ -14,6 +18,20 @@ import torch
 from prettytable import PrettyTable
 
 from trackmania_rl import run_to_video
+
+
+# These buffers are intentionally registered with persistent=False in
+# IQN_Network, so older checkpoints correctly omit them.  They are rebuilt
+# from the active configuration when the model is constructed.  No other
+# checkpoint mismatch is implicitly compatible.
+NON_PERSISTENT_NORMALIZATION_KEYS = frozenset({"float_inputs_mean", "float_inputs_std"})
+STAGE_BASELINE_FILENAMES = (
+    "weights1.torch",
+    "weights2.torch",
+    "optimizer1.torch",
+    "scaler.torch",
+    "accumulated_stats.joblib",
+)
 
 
 def init_kaiming(layer, neg_slope=0, nonlinearity="leaky_relu"):
@@ -192,6 +210,124 @@ def save_checkpoint(
     torch.save(target_network.state_dict(), checkpoint_dir / "weights2.torch")
     torch.save(optimizer.state_dict(), checkpoint_dir / "optimizer1.torch")
     torch.save(scaler.state_dict(), checkpoint_dir / "scaler.torch")
+
+
+def create_stage_baseline(
+    baseline_dir: Path,
+    online_network: torch.nn.Module,
+    target_network: torch.nn.Module,
+    optimizer: torch.optim.Optimizer,
+    scaler: torch.cuda.amp.GradScaler,
+    accumulated_stats: Mapping,
+) -> Path:
+    """Create an immutable-on-restart stage baseline if one does not exist."""
+
+    baseline_dir = Path(baseline_dir)
+    required = [baseline_dir / name for name in STAGE_BASELINE_FILENAMES]
+    if baseline_dir.exists():
+        missing = [path.name for path in required if not path.is_file()]
+        if missing:
+            raise RuntimeError(f"Incomplete stage baseline at {baseline_dir}: missing {missing}")
+        return baseline_dir
+
+    baseline_dir.parent.mkdir(parents=True, exist_ok=True)
+    staging_dir = Path(tempfile.mkdtemp(prefix=f".{baseline_dir.name}.", dir=str(baseline_dir.parent)))
+    committed = False
+    try:
+        save_checkpoint(staging_dir, online_network, target_network, optimizer, scaler)
+        joblib.dump(accumulated_stats, staging_dir / "accumulated_stats.joblib")
+        (staging_dir / "stage_baseline_manifest.json").write_text(
+            json.dumps({"schema_version": 1, "files": list(STAGE_BASELINE_FILENAMES)}, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        os.replace(staging_dir, baseline_dir)
+        committed = True
+    finally:
+        if not committed and staging_dir.exists():
+            shutil.rmtree(staging_dir, ignore_errors=True)
+    return baseline_dir
+
+
+def restore_stage_baseline(baseline_dir: Path, destination_dir: Path) -> None:
+    """Restore the model/learner files from an existing stage baseline."""
+
+    baseline_dir = Path(baseline_dir)
+    destination_dir = Path(destination_dir)
+    missing = [name for name in STAGE_BASELINE_FILENAMES if not (baseline_dir / name).is_file()]
+    if missing:
+        raise FileNotFoundError(f"Stage baseline is incomplete: missing {missing}")
+    destination_dir.mkdir(parents=True, exist_ok=True)
+    for name in STAGE_BASELINE_FILENAMES:
+        shutil.copy2(baseline_dir / name, destination_dir / name)
+
+
+def load_stage_baseline_start_frames(baseline_dir: Path) -> int:
+    """Read and validate the immutable frame counter at stage creation."""
+
+    stats_path = Path(baseline_dir) / "accumulated_stats.joblib"
+    if not stats_path.is_file():
+        raise FileNotFoundError(f"Stage baseline stats not found: {stats_path}")
+    stats = joblib.load(stats_path)
+    try:
+        stage_start_frames = int(stats["cumul_number_frames_played"])
+    except (KeyError, TypeError, ValueError) as error:
+        raise RuntimeError(f"Stage baseline has no valid cumul_number_frames_played: {stats_path}") from error
+    if stage_start_frames < 0:
+        raise RuntimeError(f"Stage baseline frame counter cannot be negative: {stage_start_frames}")
+    return stage_start_frames
+
+
+def load_model_checkpoint(
+    model: torch.nn.Module,
+    checkpoint_path: Path,
+    map_location,
+    *,
+    allowed_missing_keys: Collection[str] = (),
+    allowed_unexpected_keys: Collection[str] = (),
+) -> None:
+    """Load and validate a model state dict.
+
+    Model checkpoints must match the current model unless a caller explicitly
+    allows an exact missing or unexpected key for a known compatibility case.
+    ``strict=False`` is used only to collect both categories of incompatibility;
+    every disallowed key is then reported in the raised error.
+
+    ``weights_only=False`` preserves loading of checkpoints written by older
+    versions of this project.  The fallback is limited to PyTorch versions
+    whose ``torch.load`` does not yet accept that keyword.
+    """
+    checkpoint_path = Path(checkpoint_path)
+    if not checkpoint_path.is_file():
+        raise FileNotFoundError(f"Model checkpoint not found: {checkpoint_path}")
+
+    try:
+        state_dict = torch.load(f=checkpoint_path, map_location=map_location, weights_only=False)
+    except TypeError as error:
+        if "weights_only" not in str(error):
+            raise
+        state_dict = torch.load(f=checkpoint_path, map_location=map_location)
+
+    if not isinstance(state_dict, Mapping):
+        raise TypeError(
+            f"Model checkpoint {checkpoint_path} must contain a state dict, "
+            f"but loaded {type(state_dict).__name__}."
+        )
+
+    allowed_missing_keys = set(allowed_missing_keys)
+    allowed_unexpected_keys = set(allowed_unexpected_keys)
+    try:
+        incompatible_keys = model.load_state_dict(state_dict, strict=False)
+    except RuntimeError as error:
+        raise RuntimeError(f"Model checkpoint mismatch for {checkpoint_path}: {error}") from error
+    missing_keys = sorted(set(incompatible_keys.missing_keys) - allowed_missing_keys)
+    unexpected_keys = sorted(set(incompatible_keys.unexpected_keys) - allowed_unexpected_keys)
+
+    if missing_keys or unexpected_keys:
+        raise RuntimeError(
+            f"Model checkpoint mismatch for {checkpoint_path}: "
+            f"missing_keys={missing_keys}, unexpected_keys={unexpected_keys}."
+        )
+
 
 def set_random_seed(seed: int):
     random.seed(seed)
