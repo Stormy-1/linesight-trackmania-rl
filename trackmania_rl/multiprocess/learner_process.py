@@ -3,7 +3,9 @@ This file implements the main training loop, tensorboard statistics tracking, et
 """
 
 import copy
+from contextlib import contextmanager
 import importlib
+import json
 import math
 import random
 import sys
@@ -33,7 +35,88 @@ from trackmania_rl.analysis_metrics import (
     tau_curves,
 )
 from trackmania_rl.buffer_utilities import make_buffers, resize_buffers
+from trackmania_rl.gen_v3_stage import StageController
 from trackmania_rl.map_reference_times import reference_times
+
+
+def _is_finite_scalar(value: typing.Any) -> bool:
+    """Return whether a scalar-like value is finite, failing closed on errors."""
+
+    try:
+        return math.isfinite(float(value))
+    except (TypeError, ValueError, RuntimeError):
+        return False
+
+
+@contextmanager
+def _guard_non_finite_optimizer_step(optimizer, scaler):
+    """Block the underlying optimizer step unless this batch is fully finite.
+
+    ``Trainer.train_on_batch`` owns the backward/clip/step sequence, so the
+    learner cannot validate the returned values after the fact.  This scoped
+    guard observes the loss passed to ``GradScaler.scale`` and the exact value
+    returned by ``clip_grad_norm_`` before allowing the optimizer's real
+    ``step`` method to run.
+    """
+
+    state = {
+        "loss_finite": None,
+        "grad_norm": None,
+        "blocked": False,
+        "reasons": [],
+    }
+    original_optimizer_step = optimizer.step
+    original_scaler_scale = scaler.scale
+    original_clip_grad_norm = torch.nn.utils.clip_grad_norm_
+
+    def guarded_scale(outputs):
+        state["loss_finite"] = _is_finite_scalar(outputs)
+        return original_scaler_scale(outputs)
+
+    def guarded_clip_grad_norm(*args, **kwargs):
+        grad_norm = original_clip_grad_norm(*args, **kwargs)
+        state["grad_norm"] = float(grad_norm.detach().cpu().item()) if torch.is_tensor(grad_norm) else float(grad_norm)
+        return grad_norm
+
+    def guarded_optimizer_step(*args, **kwargs):
+        reasons = []
+        if state["loss_finite"] is not True:
+            reasons.append("loss_non_finite")
+        if state["grad_norm"] is None or not _is_finite_scalar(state["grad_norm"]):
+            reasons.append("gradient_norm_non_finite")
+        gradients_finite = all(
+            parameter.grad is None or bool(torch.isfinite(parameter.grad).all().item())
+            for parameter_group in optimizer.param_groups
+            for parameter in parameter_group["params"]
+        )
+        if not gradients_finite:
+            reasons.append("gradient_values_non_finite")
+        if reasons:
+            state["blocked"] = True
+            state["reasons"] = reasons
+            return None
+        return original_optimizer_step(*args, **kwargs)
+
+    optimizer.step = guarded_optimizer_step
+    scaler.scale = guarded_scale
+    torch.nn.utils.clip_grad_norm_ = guarded_clip_grad_norm
+    try:
+        yield state
+    finally:
+        optimizer.step = original_optimizer_step
+        scaler.scale = original_scaler_scale
+        torch.nn.utils.clip_grad_norm_ = original_clip_grad_norm
+
+
+def _non_finite_batch_reason(loss, grad_norm, guard_state) -> str | None:
+    """Return a stable terminal reason for a rejected learner batch."""
+
+    reasons = list(guard_state.get("reasons", [])) if guard_state.get("blocked") else []
+    if not _is_finite_scalar(loss):
+        reasons.append("loss_non_finite")
+    if not _is_finite_scalar(grad_norm):
+        reasons.append("gradient_norm_non_finite")
+    return ", ".join(dict.fromkeys(reasons)) or None
 
 
 def learner_process_fn(
@@ -44,6 +127,7 @@ def learner_process_fn(
     base_dir: Path,
     save_dir: Path,
     tensorboard_base_dir: Path,
+    stop_event: mp.Event,
 ):
     layout_version = "lay_mono"
     SummaryWriter(log_dir=str(tensorboard_base_dir / layout_version)).add_custom_scalars(
@@ -133,13 +217,21 @@ def learner_process_fn(
     # Load existing stuff
     # ========================================================
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    # noinspection PyBroadException
-    try:
-        online_network.load_state_dict(torch.load(f=save_dir / "weights1.torch", map_location=device, weights_only=False), strict=False)
-        target_network.load_state_dict(torch.load(f=save_dir / "weights2.torch", map_location=device, weights_only=False), strict=False)
-        print(" =====================     Learner weights loaded !     ============================")
-    except:
-        print(" Learner could not load weights")
+    utilities.load_model_checkpoint(
+        online_network,
+        save_dir / "weights1.torch",
+        map_location=device,
+        allowed_missing_keys=utilities.NON_PERSISTENT_NORMALIZATION_KEYS,
+        allowed_unexpected_keys=utilities.NON_PERSISTENT_NORMALIZATION_KEYS,
+    )
+    utilities.load_model_checkpoint(
+        target_network,
+        save_dir / "weights2.torch",
+        map_location=device,
+        allowed_missing_keys=utilities.NON_PERSISTENT_NORMALIZATION_KEYS,
+        allowed_unexpected_keys=utilities.NON_PERSISTENT_NORMALIZATION_KEYS,
+    )
+    print(" =====================     Learner weights loaded !     ============================")
 
     with shared_network_lock:
         uncompiled_shared_network.load_state_dict(uncompiled_online_network.state_dict())
@@ -155,6 +247,28 @@ def learner_process_fn(
     if "rolling_mean_ms" not in accumulated_stats.keys():
         # Temporary to preserve compatibility with old runs that doesn't have this feature. To be removed later.
         accumulated_stats["rolling_mean_ms"] = {}
+
+    stage_baseline_dir = save_dir / "stage_baseline" if str(config_copy.run_name).startswith("gen_v3") else None
+    if stage_baseline_dir is not None and stage_baseline_dir.exists():
+        stage_start_frames = utilities.load_stage_baseline_start_frames(stage_baseline_dir)
+    else:
+        stage_start_frames = shared_steps.value
+    stage_controller = StageController(stage_start_frames) if stage_baseline_dir is not None else None
+
+    def save_stage_report(decision: str, reason: str | None) -> None:
+        assert stage_controller is not None
+        if decision == "rollback" and stage_baseline_dir is not None:
+            utilities.restore_stage_baseline(stage_baseline_dir, save_dir)
+        report = {
+            "stage": getattr(config_copy, "gen_v3_stage_name", "unknown"),
+            "decision": decision,
+            "reason": reason,
+            "stage_start_frames": stage_controller.stage_start_frames,
+            "stage_frames": stage_controller.stage_frames(accumulated_stats["cumul_number_frames_played"]),
+            "baseline_new_map_finish_rate": stage_controller.baseline_new_map_finish_rate,
+            "metrics": stage_controller.last_metrics,
+        }
+        (save_dir / "gen_v3_stage_report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
     accumulated_stats["cumul_number_single_memories_should_have_been_used"] = accumulated_stats["cumul_number_single_memories_used"]
     transitions_learned_last_save = accumulated_stats["cumul_number_single_memories_used"]
@@ -183,6 +297,17 @@ def learner_process_fn(
         print(" =========================     Optimizer loaded !     ================================")
     except:
         print(" Could not load optimizer")
+
+    if stage_controller is not None:
+        stage_baseline_dir = utilities.create_stage_baseline(
+            stage_baseline_dir,
+            online_network,
+            target_network,
+            optimizer1,
+            scaler,
+            accumulated_stats,
+        )
+        print(f"Stage baseline ready at {stage_baseline_dir}")
 
     tensorboard_suffix = utilities.from_staircase_schedule(
         config_copy.tensorboard_suffix_schedule,
@@ -232,11 +357,42 @@ def learner_process_fn(
                     map_status,
                     rollout_duration,
                     loop_number,
+                    rollout_valid,
                 ) = rollout_queues[idx].get()
                 queue_check_order.append(queue_check_order.pop(queue_check_order.index(idx)))
                 break
 
         importlib.reload(config_copy)
+
+        episode_metrics = end_race_stats.get("episode_metrics", {})
+        if stage_controller is not None and episode_metrics:
+            episode_record = {
+                "map": map_name,
+                "is_evaluation": not is_explo,
+                "cumulative_frames": accumulated_stats["cumul_number_frames_played"],
+                "metrics": episode_metrics,
+            }
+            with (save_dir / "gen_v3_episode_metrics.jsonl").open("a", encoding="utf-8") as metrics_file:
+                metrics_file.write(json.dumps(episode_record, sort_keys=True) + "\n")
+            stage_decision = stage_controller.record_episode(
+                map_name,
+                episode_metrics,
+                accumulated_stats["cumul_number_frames_played"],
+                is_evaluation=not is_explo,
+            )
+            if stage_decision is not None:
+                if stage_decision == "accepted":
+                    utilities.save_checkpoint(save_dir, online_network, target_network, optimizer1, scaler)
+                    joblib.dump(accumulated_stats, save_dir / "accumulated_stats.joblib")
+                save_stage_report(stage_decision, stage_controller.reason)
+                stop_event.set()
+
+        if stop_event.is_set():
+            break
+
+        if not rollout_valid:
+            print(f"Skipping crashed rollout for {map_name}; infrastructure failure recorded")
+            continue
 
         new_tensorboard_suffix = utilities.from_staircase_schedule(
             config_copy.tensorboard_suffix_schedule,
@@ -305,6 +461,11 @@ def learner_process_fn(
             # patrick_curves(rollout_results, trainer, save_dir, map_name)
 
         accumulated_stats["cumul_number_frames_played"] += len(rollout_results["frames"])
+
+        if stage_controller is not None and stage_controller.budget_exhausted(accumulated_stats["cumul_number_frames_played"]):
+            save_stage_report(stage_controller.decision or "budget_exhausted", stage_controller.reason)
+            stop_event.set()
+            break
 
         # ===============================================
         #   WRITE SINGLE RACE RESULTS TO TENSORBOARD
@@ -426,6 +587,7 @@ def learner_process_fn(
         # ===============================================
         #   FILL BUFFER WITH (S, A, R, S') transitions
         # ===============================================
+        terminal_non_finite_batch = False
         if fill_buffer:
             (
                 buffer,
@@ -494,10 +656,12 @@ def learner_process_fn(
             if not online_network.training:
                 online_network.train()
 
+            training_batches_this_rollout = 0
             while (
                 len(buffer) >= memory_size_start_learn
                 and accumulated_stats["cumul_number_single_memories_used"] + offset_cumul_number_single_memories_used
                 <= accumulated_stats["cumul_number_single_memories_should_have_been_used"]
+                and training_batches_this_rollout < config_copy.max_training_batches_per_rollout
             ):
                 if (random.random() < config_copy.buffer_test_ratio and len(buffer_test) > 0) or len(buffer) == 0:
                     test_start_time = time.perf_counter()
@@ -507,7 +671,17 @@ def learner_process_fn(
                     print(f"BT   {loss=:<8.2e}")
                 else:
                     train_start_time = time.perf_counter()
-                    loss, grad_norm = trainer.train_on_batch(buffer, do_learn=True)
+                    with _guard_non_finite_optimizer_step(optimizer1, scaler) as batch_guard:
+                        loss, grad_norm = trainer.train_on_batch(buffer, do_learn=True)
+                    non_finite_reason = _non_finite_batch_reason(loss, grad_norm, batch_guard)
+                    if non_finite_reason is not None:
+                        terminal_reason = f"non_finite_learner_batch: {non_finite_reason}"
+                        print(f"Terminal learner guard: {terminal_reason}")
+                        if stage_controller is not None:
+                            save_stage_report("non_finite_batch", terminal_reason)
+                        stop_event.set()
+                        terminal_non_finite_batch = True
+                        break
                     train_on_batch_duration_history.append(time.perf_counter() - train_start_time)
                     time_training_since_last_tensorboard_write += train_on_batch_duration_history[-1]
                     accumulated_stats["cumul_number_single_memories_used"] += (
@@ -521,6 +695,7 @@ def learner_process_fn(
                         # utilities.log_gradient_norms(online_network, layer_grad_norm_history) #~1ms overhead per batch
 
                     accumulated_stats["cumul_number_batches_done"] += 1
+                    training_batches_this_rollout += 1
                     print(f"B    {loss=:<8.2e} {grad_norm=:<8.2e} {train_on_batch_duration_history[-1]*1000:<8.1f}")
 
                     utilities.custom_weight_decay(online_network, 1 - weight_decay)
@@ -541,7 +716,12 @@ def learner_process_fn(
                         )
                         # print("UPDATE")
                         utilities.soft_copy_param(target_network, online_network, config_copy.soft_update_tau)
+            if terminal_non_finite_batch:
+                break
             sys.stdout.flush()
+
+        if stop_event.is_set():
+            break
 
         # ===============================================
         #   WRITE AGGREGATED STATISTICS TO TENSORBOARD EVERY 5 MINUTES

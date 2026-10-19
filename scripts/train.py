@@ -37,6 +37,7 @@ if __name__ == "__main__":
 # =======================================================================================================================
 
 import ctypes
+import joblib
 import os
 import random
 import signal
@@ -53,6 +54,7 @@ from config_files import config_copy
 from trackmania_rl.agents.iqn import make_untrained_iqn_network
 from trackmania_rl.multiprocess.collector_process import collector_process_fn
 from trackmania_rl.multiprocess.learner_process import learner_process_fn
+from trackmania_rl.reproducibility import record_run_metadata
 from trackmania_rl.utilities import set_random_seed
 
 # noinspection PyUnresolvedReferences
@@ -83,12 +85,25 @@ def clear_tm_instances():
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal_handler)
 
-    clear_tm_instances()
-
     base_dir = Path(__file__).resolve().parents[1]
     save_dir = base_dir / "save" / config_copy.run_name
     save_dir.mkdir(parents=True, exist_ok=True)
     tensorboard_base_dir = base_dir / "tensorboard"
+
+    # The isolated generalization run must branch from its saved weights.  Do
+    # this before starting collectors so a missing checkpoint cannot result in
+    # an apparently healthy run using random weights.
+    is_generalization_run = config_copy.run_name in {"gen_v1", "gen_v2"} or config_copy.run_name.startswith("gen_v3")
+    metadata_path = record_run_metadata(
+        base_dir,
+        save_dir,
+        config_copy,
+        require_checkpoint=is_generalization_run,
+        checkpoint_origin=("save/hocko_v1_foundational_checkpoint" if is_generalization_run else None),
+    )
+    print(f"Run metadata recorded at {metadata_path}")
+
+    clear_tm_instances()
 
     # Copy Angelscript plugin to TMInterface dir
     shutil.copyfile(
@@ -112,8 +127,24 @@ if __name__ == "__main__":
     rollout_queues = [mp.Queue(config_copy.max_rollout_queue_size) for _ in range(config_copy.gpu_collectors_count)]
     shared_network_lock = Lock()
     game_spawning_lock = Lock()
+    stop_event = mp.Event()
     _, uncompiled_shared_network = make_untrained_iqn_network(jit=config_copy.use_jit, is_inference=False)
     uncompiled_shared_network.share_memory()
+
+    # Seed the collector-visible network and schedule counter before workers
+    # start.  Otherwise a collector can copy the still-random shared network
+    # during its first rollout, before the learner has loaded the checkpoint.
+    if is_generalization_run:
+        from trackmania_rl import utilities
+
+        utilities.load_model_checkpoint(
+            uncompiled_shared_network,
+            save_dir / "weights1.torch",
+            map_location="cpu",
+            allowed_missing_keys=utilities.NON_PERSISTENT_NORMALIZATION_KEYS,
+            allowed_unexpected_keys=utilities.NON_PERSISTENT_NORMALIZATION_KEYS,
+        )
+        shared_steps.value = joblib.load(save_dir / "accumulated_stats.joblib")["cumul_number_frames_played"]
 
     # Start worker process
     collector_processes = [
@@ -129,6 +160,7 @@ if __name__ == "__main__":
                 save_dir,
                 config_copy.base_tmi_port + process_number,
                 process_number,
+                stop_event,
             ),
         )
         for rollout_queue, process_number in zip(rollout_queues, range(config_copy.gpu_collectors_count))
@@ -138,7 +170,14 @@ if __name__ == "__main__":
 
     # Start learner process
     learner_process_fn(
-        rollout_queues, uncompiled_shared_network, shared_network_lock, shared_steps, base_dir, save_dir, tensorboard_base_dir
+        rollout_queues,
+        uncompiled_shared_network,
+        shared_network_lock,
+        shared_steps,
+        base_dir,
+        save_dir,
+        tensorboard_base_dir,
+        stop_event,
     )  # Turn main process into learner process instead of starting a new one, this saves 1 CUDA context
 
     for collector_process in collector_processes:
