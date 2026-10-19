@@ -1,0 +1,285 @@
+{
+  "schema_version": 1,
+  "scope": "offline_centerline_geometry_and_aggregate_evidence",
+  "trackmania_launched": false,
+  "training_started": false,
+  "checkpoints_loaded": false,
+  "centerlines": [
+    {
+      "file": "A01-Race_0.5m_cl2.npy",
+      "points": 4406,
+      "segments": 4405,
+      "length_m": 2202.679683034634,
+      "curvature": {
+        "min": 0.0,
+        "median": 0.0003999524756832125,
+        "max": 0.9571857780660791,
+        "mean": 0.00428815105613281
+      },
+      "target_speed_mps": {
+        "min": 12.0,
+        "median": 69.22477464011408,
+        "max": 70.0,
+        "mean": 66.58753946546852
+      },
+      "lookahead_shape": [
+        3,
+        3
+      ],
+      "finite_geometry": true
+    },
+    {
+      "file": "A03-Race_0.5m_cl2.npy",
+      "points": 2839,
+      "segments": 2838,
+      "length_m": 1418.8851225611822,
+      "curvature": {
+        "min": 0.0,
+        "median": 0.00040017395181345464,
+        "max": 0.9613562618531544,
+        "mean": 0.004547995074242974
+      },
+      "target_speed_mps": {
+        "min": 12.0,
+        "median": 69.2243501111208,
+        "max": 70.0,
+        "mean": 66.29189089462943
+      },
+      "lookahead_shape": [
+        3,
+        3
+      ],
+      "finite_geometry": true
+    },
+    {
+      "file": "A05-Race_0.5m_cl2.npy",
+      "points": 1465,
+      "segments": 1464,
+      "length_m": 732.1031881785362,
+      "curvature": {
+        "min": 0.0,
+        "median": 0.0004008531557840188,
+        "max": 0.9579901446427946,
+        "mean": 0.013014277700473776
+      },
+      "target_speed_mps": {
+        "min": 12.0,
+        "median": 69.22304823454145,
+        "max": 70.0,
+        "mean": 61.977239163751825
+      },
+      "lookahead_shape": [
+        3,
+        3
+      ],
+      "finite_geometry": true
+    },
+    {
+      "file": "A07-Race_0.5m_cl2.npy",
+      "points": 3373,
+      "segments": 3372,
+      "length_m": 1685.8018037728727,
+      "curvature": {
+        "min": 0.0,
+        "median": 0.000400099278950905,
+        "max": 0.961357359928143,
+        "mean": 0.009972448416817277
+      },
+      "target_speed_mps": {
+        "min": 12.0,
+        "median": 69.22449324467776,
+        "max": 70.0,
+        "mean": 64.40737528672621
+      },
+      "lookahead_shape": [
+        3,
+        3
+      ],
+      "finite_geometry": true
+    },
+    {
+      "file": "A11-Race_0.5m_cl2.npy",
+      "points": 2319,
+      "segments": 2318,
+      "length_m": 1159.1018691213842,
+      "curvature": {
+        "min": 0.0,
+        "median": 0.0004000248738874826,
+        "max": 0.9644777679365553,
+        "mean": 0.00998337447606572
+      },
+      "target_speed_mps": {
+        "min": 12.0,
+        "median": 69.22463586550386,
+        "max": 70.0,
+        "mean": 63.77091293550001
+      },
+      "lookahead_shape": [
+        3,
+        3
+      ],
+      "finite_geometry": true
+    },
+    {
+      "file": "ESL-Hockolicious_0.5m_cl2.npy",
+      "points": 8062,
+      "segments": 8061,
+      "length_m": 4048.6637528901692,
+      "curvature": {
+        "min": 0.0,
+        "median": 0.30188892811258705,
+        "max": 1.3665658009014845,
+        "mean": 0.2568728059768666
+      },
+      "target_speed_mps": {
+        "min": 12.0,
+        "median": 12.0,
+        "max": 70.0,
+        "mean": 28.982792413198382
+      },
+      "lookahead_shape": [
+        3,
+        3
+      ],
+      "finite_geometry": true
+    },
+    {
+      "file": "map5_0.5m_cl.npy",
+      "points": 19503,
+      "segments": 19502,
+      "length_m": 9872.725903042481,
+      "curvature": {
+        "min": 0.0,
+        "median": 0.14902695655691803,
+        "max": 2.006528644598272,
+        "mean": 0.1824625903787572
+      },
+      "target_speed_mps": {
+        "min": 12.0,
+        "median": 13.532441209472605,
+        "max": 70.0,
+        "mean": 37.65467800024136
+      },
+      "lookahead_shape": [
+        3,
+        3
+      ],
+      "finite_geometry": true
+    }
+  ],
+  "evaluations": [
+    {
+      "file": "benchmark_20261014_190540.csv",
+      "episodes": 120,
+      "tracks": {
+        "A01-Race": {
+          "episodes": 20,
+          "finished": 0,
+          "finish_rate": 0.0,
+          "distance_pct": {
+            "min": 4.570586067084408,
+            "median": 63.13122005160339,
+            "max": 74.12458532989311,
+            "mean": 45.26907482491707
+          }
+        },
+        "A03-Race": {
+          "episodes": 20,
+          "finished": 8,
+          "finish_rate": 0.4,
+          "distance_pct": {
+            "min": 31.096138896087066,
+            "median": 31.49779735682819,
+            "max": 74.06063747084737,
+            "mean": 50.317439751230886
+          }
+        },
+        "A05-Race": {
+          "episodes": 20,
+          "finished": 0,
+          "finish_rate": 0.0,
+          "distance_pct": {
+            "min": 6.841046277665996,
+            "median": 8.772635814889336,
+            "max": 9.939637826961771,
+            "mean": 8.299798792756539
+          }
+        },
+        "A07-Race": {
+          "episodes": 20,
+          "finished": 0,
+          "finish_rate": 0.0,
+          "distance_pct": {
+            "min": 19.804234008650127,
+            "median": 24.823582972911453,
+            "max": 52.40154791714091,
+            "mean": 28.367857955838833
+          }
+        },
+        "A11-Race": {
+          "episodes": 20,
+          "finished": 0,
+          "finish_rate": 0.0,
+          "distance_pct": {
+            "min": 4.492362982929021,
+            "median": 10.976340221623241,
+            "max": 13.447139862234202,
+            "mean": 8.986223420185684
+          }
+        },
+        "ESL-Hockolicious": {
+          "episodes": 20,
+          "finished": 9,
+          "finish_rate": 0.45,
+          "distance_pct": {
+            "min": 0.20920502092050208,
+            "median": 86.01629597005065,
+            "max": 88.93415547236292,
+            "mean": 65.48062100858841
+          }
+        }
+      },
+      "trajectory_data_available": false,
+      "note": "Aggregate evaluation CSV; insufficient for state-trajectory validation."
+    },
+    {
+      "file": "benchmark_20261014_192001.csv",
+      "episodes": 40,
+      "tracks": {
+        "A01-Race": {
+          "episodes": 20,
+          "finished": 0,
+          "finish_rate": 0.0,
+          "distance_pct": {
+            "min": 0.3870254330998894,
+            "median": 0.7095466273497973,
+            "max": 43.54957611500184,
+            "mean": 13.46940656100258
+          }
+        },
+        "A03-Race": {
+          "episodes": 20,
+          "finished": 10,
+          "finish_rate": 0.5,
+          "distance_pct": {
+            "min": 66.18294895050532,
+            "median": 74.06063747084737,
+            "max": 74.06063747084737,
+            "mean": 73.66675304483024
+          }
+        }
+      },
+      "trajectory_data_available": false,
+      "note": "Aggregate evaluation CSV; insufficient for state-trajectory validation."
+    }
+  ],
+  "state_trajectory_validation": {
+    "status": "blocked_by_missing_recorded_pose_telemetry",
+    "required_fields": [
+      "timestamp_s",
+      "position_xyz",
+      "heading_xyz",
+      "speed_mps"
+    ]
+  }
+}

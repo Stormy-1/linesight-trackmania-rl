@@ -1,0 +1,48 @@
+{
+  "scope": "deterministic_software_in_the_loop_controller_validation",
+  "trackmania_launched": false,
+  "training_started": false,
+  "checkpoints_loaded": false,
+  "real_physics_validated": false,
+  "centerline": {
+    "length_m": 128.4234192322127,
+    "points": 61
+  },
+  "scenarios": [
+    {
+      "name": "nominal_centerline_start",
+      "finished": true,
+      "termination_reason": "finished",
+      "elapsed_s": 4.1000000000000005,
+      "steps": 41,
+      "progress_gain_m": 128.4234192322127,
+      "recovery_samples": 0,
+      "max_abs_lateral_error_m": 4.601770798983572,
+      "max_abs_heading_error_rad": 0.4468052682405621,
+      "final_progress_m": 128.4234192322127,
+      "final_lateral_error_m": -2.7470824495329107,
+      "final_heading_error_rad": -0.20031298633951877,
+      "final_speed_mps": 40.857947554529126
+    },
+    {
+      "name": "off_center_recovery_start",
+      "finished": true,
+      "termination_reason": "finished",
+      "elapsed_s": 4.6000000000000005,
+      "steps": 46,
+      "progress_gain_m": 123.18785277533475,
+      "recovery_samples": 4,
+      "max_abs_lateral_error_m": 10.64599047550104,
+      "max_abs_heading_error_rad": 0.7141034562968653,
+      "final_progress_m": 128.4234192322127,
+      "final_lateral_error_m": -2.813406519957326,
+      "final_heading_error_rad": -0.21100292255812558,
+      "final_speed_mps": 40.28970885427224
+    }
+  ],
+  "limitations": [
+    "The vehicle model is a bounded kinematic stub.",
+    "This does not validate TrackMania physics, jumps, collisions, wheel contact, or TMInterface.",
+    "A recorded telemetry rollout is still required for real map-matching validation."
+  ]
+}
