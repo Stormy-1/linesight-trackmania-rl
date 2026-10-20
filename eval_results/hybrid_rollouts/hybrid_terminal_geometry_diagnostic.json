@@ -1,0 +1,238 @@
+{
+  "scope": "offline_hybrid_terminal_geometry_diagnostic",
+  "offline_only": true,
+  "safety": {
+    "offline_only": true,
+    "no_trackmania": true,
+    "no_training": true,
+    "no_checkpoints": true,
+    "no_live_control": true,
+    "no_external_services": true,
+    "unchanged_defaults": true,
+    "trackmania_launched": false,
+    "training_started": false,
+    "checkpoints_loaded": false,
+    "live_control_used": false
+  },
+  "default_closed_loop_config": {
+    "dt_s": 0.1,
+    "max_speed_mps": 80.0,
+    "max_acceleration_mps2": 10.0,
+    "max_braking_mps2": 18.0,
+    "linear_drag_mps2_per_mps": 0.05,
+    "max_yaw_rate_rad_s": 1.8,
+    "max_steps": 3000,
+    "search_radius": null,
+    "map_match_horizontal_only": true,
+    "finish_progress_tolerance_m": 1.0,
+    "finish_distance_limit_m": 4.0,
+    "finish_elevation_tolerance_m": 8.0,
+    "section_bins": 10
+  },
+  "effective_simulator_config": {
+    "dt_s": 0.1,
+    "max_speed_mps": 80.0,
+    "max_acceleration_mps2": 10.0,
+    "max_braking_mps2": 18.0,
+    "linear_drag_mps2_per_mps": 0.05,
+    "max_yaw_rate_rad_s": 1.8,
+    "max_steps": 3000,
+    "search_radius": 64,
+    "map_match_horizontal_only": true,
+    "finish_progress_tolerance_m": 1.0,
+    "finish_distance_limit_m": 4.0,
+    "finish_elevation_tolerance_m": 8.0,
+    "section_bins": 10
+  },
+  "strict_gate_defaults_unchanged": {
+    "finish_distance_limit_m": 4.0,
+    "finish_elevation_tolerance_m": 8.0,
+    "finish_progress_tolerance_m": 1.0
+  },
+  "maps": [
+    {
+      "map": "A01",
+      "telemetry_file": "eval_results\\hybrid_rollouts_crossmap\\A01-Race.repaired.csv",
+      "centerline_file": "maps\\A01-Race_0.5m_cl2.npy",
+      "telemetry_samples": 1072,
+      "telemetry_start_projected_progress_m": 0.0,
+      "telemetry_end_projected_progress_m": 1763.8507731069624,
+      "start_projected_progress_m": 0.0,
+      "end_projected_progress_m": 1763.8507731069624,
+      "track_length_m": 2202.679683034634,
+      "final_recorded_pose_errors": {
+        "horizontal_m": 0.13762776798788218,
+        "distance_3d_m": 5.531372034852778,
+        "elevation_m": -5.529659590375346,
+        "absolute_elevation_m": 5.529659590375346
+      },
+      "centerline_elevation": {
+        "start_m": 90.21,
+        "end_m": 113.5569,
+        "minimum_m": 24.0118,
+        "maximum_m": 151.3958,
+        "span_m": 127.38400000000001
+      },
+      "default_finish_gate": {
+        "projected_progress_completion": false,
+        "progress_complete": false,
+        "progress_m": 1763.8507731069624,
+        "progress_gate_m": 2201.679683034634,
+        "strict_finish": false,
+        "strict_3d_finish": false,
+        "elevation_tolerant_finish": false,
+        "errors": {
+          "horizontal_m": 0.13762776798788218,
+          "distance_3d_m": 5.531372034852778,
+          "elevation_m": -5.529659590375346,
+          "absolute_elevation_m": 5.529659590375346
+        },
+        "gate_limits": {
+          "finish_progress_tolerance_m": 1.0,
+          "finish_distance_limit_m": 4.0,
+          "finish_elevation_tolerance_m": 8.0
+        }
+      },
+      "simulator": {
+        "initial_position_y_m": 90.21,
+        "final_position_y_m": 90.21,
+        "vertical_displacement_m": 0.0,
+        "projected_progress_completion": true,
+        "progress_complete": true,
+        "strict_finish": false,
+        "strict_3d_finish": false,
+        "elevation_tolerant_finish": false,
+        "termination_reason": "progress_complete_finish_gate_failed",
+        "steps": 377,
+        "final_progress_m": 2202.3505301888263,
+        "track_length_m": 2202.679683034634,
+        "zero_vertical_motion": true,
+        "zero_vertical_motion_tolerance_m": 1e-12,
+        "final_errors": {
+          "horizontal_m": 0.12389311897261983,
+          "distance_3d_m": 23.390730081433645,
+          "elevation_m": -23.390401968276564,
+          "absolute_elevation_m": 23.390401968276564
+        },
+        "terminal_3d_error_decomposition": {
+          "horizontal_component_m": 0.12389311897261983,
+          "elevation_component_m": 23.390401968276564,
+          "reported_3d_error_m": 23.390730081433645,
+          "reconstructed_3d_error_m": 23.390730081433645,
+          "pythagorean_residual_m": 0.0
+        },
+        "strict_failure_analysis": {
+          "strict_failure": true,
+          "projected_progress_complete": true,
+          "horizontal_within_strict_distance_limit": true,
+          "elevation_component_greater_than_horizontal": true,
+          "elevation_dominated": true,
+          "comparison": "elevation component > horizontal component, progress complete, and horizontal component is within the strict distance limit"
+        },
+        "final_horizontal_error_m": 0.12389311897261983,
+        "final_3d_error_m": 23.390730081433645,
+        "final_elevation_error_m": -23.390401968276564,
+        "terminal_strict_failure_elevation_dominated": true
+      },
+      "final_recorded_horizontal_error_m": 0.13762776798788218,
+      "final_recorded_3d_error_m": 5.531372034852778,
+      "final_recorded_elevation_error_m": -5.529659590375346,
+      "diagnosis": "Recorded telemetry ends at 1763.851 m projected progress with default strict=False and elevation-tolerant=False; the simulator's strict terminal failure is elevation-dominated by the numeric comparison of its terminal components. The recorded endpoint is telemetry evidence, while the simulator comparison describes a limitation or behavior of the bounded kinematic model."
+    },
+    {
+      "map": "A07",
+      "telemetry_file": "eval_results\\hybrid_rollouts_crossmap\\A07-Race.repaired.csv",
+      "centerline_file": "maps\\A07-Race_0.5m_cl2.npy",
+      "telemetry_samples": 308,
+      "telemetry_start_projected_progress_m": 1.3611541487862958e-05,
+      "telemetry_end_projected_progress_m": 424.9686973031829,
+      "start_projected_progress_m": 1.3611541487862958e-05,
+      "end_projected_progress_m": 424.9686973031829,
+      "track_length_m": 1685.8018037728727,
+      "final_recorded_pose_errors": {
+        "horizontal_m": 4.759851274039996,
+        "distance_3d_m": 4.759862325680818,
+        "elevation_m": -0.01025711730602552,
+        "absolute_elevation_m": 0.01025711730602552
+      },
+      "centerline_elevation": {
+        "start_m": 42.21,
+        "end_m": 73.9238,
+        "minimum_m": 40.0135,
+        "maximum_m": 109.4379,
+        "span_m": 69.42439999999999
+      },
+      "default_finish_gate": {
+        "projected_progress_completion": false,
+        "progress_complete": false,
+        "progress_m": 424.9686973031829,
+        "progress_gate_m": 1684.8018037728727,
+        "strict_finish": false,
+        "strict_3d_finish": false,
+        "elevation_tolerant_finish": false,
+        "errors": {
+          "horizontal_m": 4.759851274039996,
+          "distance_3d_m": 4.759862325680818,
+          "elevation_m": -0.01025711730602552,
+          "absolute_elevation_m": 0.01025711730602552
+        },
+        "gate_limits": {
+          "finish_progress_tolerance_m": 1.0,
+          "finish_distance_limit_m": 4.0,
+          "finish_elevation_tolerance_m": 8.0
+        }
+      },
+      "simulator": {
+        "initial_position_y_m": 42.21,
+        "final_position_y_m": 42.21,
+        "vertical_displacement_m": 0.0,
+        "projected_progress_completion": true,
+        "progress_complete": true,
+        "strict_finish": false,
+        "strict_3d_finish": false,
+        "elevation_tolerant_finish": false,
+        "termination_reason": "progress_complete_finish_gate_failed",
+        "steps": 310,
+        "final_progress_m": 1685.8018037728727,
+        "track_length_m": 1685.8018037728727,
+        "zero_vertical_motion": true,
+        "zero_vertical_motion_tolerance_m": 1e-12,
+        "final_errors": {
+          "horizontal_m": 3.5620925731865714,
+          "distance_3d_m": 31.913220049690235,
+          "elevation_m": -31.7138,
+          "absolute_elevation_m": 31.7138
+        },
+        "terminal_3d_error_decomposition": {
+          "horizontal_component_m": 3.5620925731865714,
+          "elevation_component_m": 31.7138,
+          "reported_3d_error_m": 31.913220049690235,
+          "reconstructed_3d_error_m": 31.913220049690235,
+          "pythagorean_residual_m": 0.0
+        },
+        "strict_failure_analysis": {
+          "strict_failure": true,
+          "projected_progress_complete": true,
+          "horizontal_within_strict_distance_limit": true,
+          "elevation_component_greater_than_horizontal": true,
+          "elevation_dominated": true,
+          "comparison": "elevation component > horizontal component, progress complete, and horizontal component is within the strict distance limit"
+        },
+        "final_horizontal_error_m": 3.5620925731865714,
+        "final_3d_error_m": 31.913220049690235,
+        "final_elevation_error_m": -31.7138,
+        "terminal_strict_failure_elevation_dominated": true
+      },
+      "final_recorded_horizontal_error_m": 4.759851274039996,
+      "final_recorded_3d_error_m": 4.759862325680818,
+      "final_recorded_elevation_error_m": -0.01025711730602552,
+      "diagnosis": "Recorded telemetry ends at 424.969 m projected progress with default strict=False and elevation-tolerant=False; the simulator's strict terminal failure is elevation-dominated by the numeric comparison of its terminal components. The recorded endpoint is telemetry evidence, while the simulator comparison describes a limitation or behavior of the bounded kinematic model."
+    }
+  ],
+  "conclusion": "Recorded telemetry provides the endpoint progress and pose-error evidence for A01/A07. The default simulator reports elevation-dominated strict failures for 2 of 2 map(s) under the explicit component comparisons; that result identifies a bounded flat-vertical-motion simulator-model limitation, not a claim that the recorded telemetry itself is simulated.",
+  "limitations": [
+    "The deterministic simulator is a bounded kinematic model, not TrackMania physics.",
+    "Projected progress is map matching and does not by itself prove a finish.",
+    "Recorded endpoint measurements and simulator terminal measurements are separate evidence sources."
+  ]
+}
