@@ -1,0 +1,872 @@
+{
+  "scope": "offline_hybrid_finish_gate_calibration_diagnostic",
+  "offline_only": true,
+  "safety": {
+    "offline_only": true,
+    "trackmania_launched": false,
+    "training_started": false,
+    "checkpoints_loaded": false,
+    "live_control_used": false,
+    "no_trackmania": true,
+    "no_training": true,
+    "no_checkpoint": true,
+    "no_live_control": true
+  },
+  "trackmania_launched": false,
+  "training_started": false,
+  "checkpoints_loaded": false,
+  "live_control_used": false,
+  "controller_defaults_modified": false,
+  "simulator": {
+    "dt_s": 0.1,
+    "max_steps": 3000,
+    "search_radius_segments": 64,
+    "map_match_horizontal_only": true,
+    "initial_speed_mps": 0.0
+  },
+  "default_closed_loop_config": {
+    "dt_s": 0.1,
+    "max_speed_mps": 80.0,
+    "max_acceleration_mps2": 10.0,
+    "max_braking_mps2": 18.0,
+    "linear_drag_mps2_per_mps": 0.05,
+    "max_yaw_rate_rad_s": 1.8,
+    "max_steps": 3000,
+    "search_radius": null,
+    "map_match_horizontal_only": true,
+    "finish_progress_tolerance_m": 1.0,
+    "finish_distance_limit_m": 4.0,
+    "finish_elevation_tolerance_m": 8.0,
+    "section_bins": 10
+  },
+  "profiles": {
+    "default_conservative_controller": {
+      "name": "default_conservative_controller",
+      "controller": "ConservativeCenterlineController",
+      "config": {
+        "lookahead_m": 18.0,
+        "lookahead_speed_gain_m_per_mps": 0.25,
+        "heading_gain": 1.1,
+        "lateral_gain": 0.08,
+        "max_speed_mps": 70.0,
+        "min_speed_mps": 12.0,
+        "curvature_gain": 28.0,
+        "throttle_speed_gain": 0.08,
+        "recovery_lateral_limit_m": 8.0,
+        "recovery_heading_limit_rad": 0.9599310885968813
+      }
+    }
+  },
+  "gate_matrix": [
+    {
+      "name": "default_strict_gate",
+      "finish_distance_limit_m": 4.0,
+      "finish_elevation_tolerance_m": 8.0,
+      "is_default": true
+    },
+    {
+      "name": "tight_distance_gate",
+      "finish_distance_limit_m": 2.0,
+      "finish_elevation_tolerance_m": 8.0,
+      "is_default": false
+    },
+    {
+      "name": "zero_elevation_tolerance_gate",
+      "finish_distance_limit_m": 4.0,
+      "finish_elevation_tolerance_m": 0.0,
+      "is_default": false
+    },
+    {
+      "name": "wide_elevation_tolerance_gate",
+      "finish_distance_limit_m": 4.0,
+      "finish_elevation_tolerance_m": 12.0,
+      "is_default": false
+    }
+  ],
+  "maps": [
+    {
+      "map": "synthetic_straight",
+      "source": "synthetic_straight_fixture()",
+      "length_m": 80.0,
+      "initial_elevation_offset_m": 6.0,
+      "runs": [
+        {
+          "gate": {
+            "name": "default_strict_gate",
+            "finish_distance_limit_m": 4.0,
+            "finish_elevation_tolerance_m": 8.0,
+            "is_default": true
+          },
+          "projected_progress_completion": true,
+          "progress_complete": true,
+          "strict_finish": false,
+          "strict_3d_finish": false,
+          "elevation_tolerant_finish": true,
+          "termination_reason": "elevation_tolerant_finish_only",
+          "steps": 1,
+          "final_errors": {
+            "horizontal_m": 0.0,
+            "distance_3d_m": 6.0,
+            "elevation_m": 6.0,
+            "absolute_elevation_m": 6.0
+          },
+          "final_horizontal_error_m": 0.0,
+          "final_3d_error_m": 6.0,
+          "final_elevation_error_m": 6.0,
+          "final_abs_elevation_error_m": 6.0,
+          "final_progress_m": 79.6,
+          "track_length_m": 80.0
+        },
+        {
+          "gate": {
+            "name": "tight_distance_gate",
+            "finish_distance_limit_m": 2.0,
+            "finish_elevation_tolerance_m": 8.0,
+            "is_default": false
+          },
+          "projected_progress_completion": true,
+          "progress_complete": true,
+          "strict_finish": false,
+          "strict_3d_finish": false,
+          "elevation_tolerant_finish": true,
+          "termination_reason": "elevation_tolerant_finish_only",
+          "steps": 1,
+          "final_errors": {
+            "horizontal_m": 0.0,
+            "distance_3d_m": 6.0,
+            "elevation_m": 6.0,
+            "absolute_elevation_m": 6.0
+          },
+          "final_horizontal_error_m": 0.0,
+          "final_3d_error_m": 6.0,
+          "final_elevation_error_m": 6.0,
+          "final_abs_elevation_error_m": 6.0,
+          "final_progress_m": 79.6,
+          "track_length_m": 80.0
+        },
+        {
+          "gate": {
+            "name": "zero_elevation_tolerance_gate",
+            "finish_distance_limit_m": 4.0,
+            "finish_elevation_tolerance_m": 0.0,
+            "is_default": false
+          },
+          "projected_progress_completion": true,
+          "progress_complete": true,
+          "strict_finish": false,
+          "strict_3d_finish": false,
+          "elevation_tolerant_finish": false,
+          "termination_reason": "progress_complete_finish_gate_failed",
+          "steps": 1,
+          "final_errors": {
+            "horizontal_m": 0.0,
+            "distance_3d_m": 6.0,
+            "elevation_m": 6.0,
+            "absolute_elevation_m": 6.0
+          },
+          "final_horizontal_error_m": 0.0,
+          "final_3d_error_m": 6.0,
+          "final_elevation_error_m": 6.0,
+          "final_abs_elevation_error_m": 6.0,
+          "final_progress_m": 79.6,
+          "track_length_m": 80.0
+        },
+        {
+          "gate": {
+            "name": "wide_elevation_tolerance_gate",
+            "finish_distance_limit_m": 4.0,
+            "finish_elevation_tolerance_m": 12.0,
+            "is_default": false
+          },
+          "projected_progress_completion": true,
+          "progress_complete": true,
+          "strict_finish": false,
+          "strict_3d_finish": false,
+          "elevation_tolerant_finish": true,
+          "termination_reason": "elevation_tolerant_finish_only",
+          "steps": 1,
+          "final_errors": {
+            "horizontal_m": 0.0,
+            "distance_3d_m": 6.0,
+            "elevation_m": 6.0,
+            "absolute_elevation_m": 6.0
+          },
+          "final_horizontal_error_m": 0.0,
+          "final_3d_error_m": 6.0,
+          "final_elevation_error_m": 6.0,
+          "final_abs_elevation_error_m": 6.0,
+          "final_progress_m": 79.6,
+          "track_length_m": 80.0
+        }
+      ]
+    },
+    {
+      "map": "A01",
+      "source": "A01-Race_0.5m_cl2.npy",
+      "length_m": 2202.679683034634,
+      "runs": [
+        {
+          "gate": {
+            "name": "default_strict_gate",
+            "finish_distance_limit_m": 4.0,
+            "finish_elevation_tolerance_m": 8.0,
+            "is_default": true
+          },
+          "projected_progress_completion": true,
+          "progress_complete": true,
+          "strict_finish": false,
+          "strict_3d_finish": false,
+          "elevation_tolerant_finish": false,
+          "termination_reason": "progress_complete_finish_gate_failed",
+          "steps": 377,
+          "final_errors": {
+            "horizontal_m": 0.12389311897261983,
+            "distance_3d_m": 23.390730081433645,
+            "elevation_m": -23.390401968276564,
+            "absolute_elevation_m": 23.390401968276564
+          },
+          "final_horizontal_error_m": 0.12389311897261983,
+          "final_3d_error_m": 23.390730081433645,
+          "final_elevation_error_m": -23.390401968276564,
+          "final_abs_elevation_error_m": 23.390401968276564,
+          "final_progress_m": 2202.3505301888263,
+          "track_length_m": 2202.679683034634
+        },
+        {
+          "gate": {
+            "name": "tight_distance_gate",
+            "finish_distance_limit_m": 2.0,
+            "finish_elevation_tolerance_m": 8.0,
+            "is_default": false
+          },
+          "projected_progress_completion": true,
+          "progress_complete": true,
+          "strict_finish": false,
+          "strict_3d_finish": false,
+          "elevation_tolerant_finish": false,
+          "termination_reason": "progress_complete_finish_gate_failed",
+          "steps": 377,
+          "final_errors": {
+            "horizontal_m": 0.12389311897261983,
+            "distance_3d_m": 23.390730081433645,
+            "elevation_m": -23.390401968276564,
+            "absolute_elevation_m": 23.390401968276564
+          },
+          "final_horizontal_error_m": 0.12389311897261983,
+          "final_3d_error_m": 23.390730081433645,
+          "final_elevation_error_m": -23.390401968276564,
+          "final_abs_elevation_error_m": 23.390401968276564,
+          "final_progress_m": 2202.3505301888263,
+          "track_length_m": 2202.679683034634
+        },
+        {
+          "gate": {
+            "name": "zero_elevation_tolerance_gate",
+            "finish_distance_limit_m": 4.0,
+            "finish_elevation_tolerance_m": 0.0,
+            "is_default": false
+          },
+          "projected_progress_completion": true,
+          "progress_complete": true,
+          "strict_finish": false,
+          "strict_3d_finish": false,
+          "elevation_tolerant_finish": false,
+          "termination_reason": "progress_complete_finish_gate_failed",
+          "steps": 377,
+          "final_errors": {
+            "horizontal_m": 0.12389311897261983,
+            "distance_3d_m": 23.390730081433645,
+            "elevation_m": -23.390401968276564,
+            "absolute_elevation_m": 23.390401968276564
+          },
+          "final_horizontal_error_m": 0.12389311897261983,
+          "final_3d_error_m": 23.390730081433645,
+          "final_elevation_error_m": -23.390401968276564,
+          "final_abs_elevation_error_m": 23.390401968276564,
+          "final_progress_m": 2202.3505301888263,
+          "track_length_m": 2202.679683034634
+        },
+        {
+          "gate": {
+            "name": "wide_elevation_tolerance_gate",
+            "finish_distance_limit_m": 4.0,
+            "finish_elevation_tolerance_m": 12.0,
+            "is_default": false
+          },
+          "projected_progress_completion": true,
+          "progress_complete": true,
+          "strict_finish": false,
+          "strict_3d_finish": false,
+          "elevation_tolerant_finish": false,
+          "termination_reason": "progress_complete_finish_gate_failed",
+          "steps": 377,
+          "final_errors": {
+            "horizontal_m": 0.12389311897261983,
+            "distance_3d_m": 23.390730081433645,
+            "elevation_m": -23.390401968276564,
+            "absolute_elevation_m": 23.390401968276564
+          },
+          "final_horizontal_error_m": 0.12389311897261983,
+          "final_3d_error_m": 23.390730081433645,
+          "final_elevation_error_m": -23.390401968276564,
+          "final_abs_elevation_error_m": 23.390401968276564,
+          "final_progress_m": 2202.3505301888263,
+          "track_length_m": 2202.679683034634
+        }
+      ]
+    },
+    {
+      "map": "A07",
+      "source": "A07-Race_0.5m_cl2.npy",
+      "length_m": 1685.8018037728727,
+      "runs": [
+        {
+          "gate": {
+            "name": "default_strict_gate",
+            "finish_distance_limit_m": 4.0,
+            "finish_elevation_tolerance_m": 8.0,
+            "is_default": true
+          },
+          "projected_progress_completion": true,
+          "progress_complete": true,
+          "strict_finish": false,
+          "strict_3d_finish": false,
+          "elevation_tolerant_finish": false,
+          "termination_reason": "progress_complete_finish_gate_failed",
+          "steps": 310,
+          "final_errors": {
+            "horizontal_m": 3.5620925731865714,
+            "distance_3d_m": 31.913220049690235,
+            "elevation_m": -31.7138,
+            "absolute_elevation_m": 31.7138
+          },
+          "final_horizontal_error_m": 3.5620925731865714,
+          "final_3d_error_m": 31.913220049690235,
+          "final_elevation_error_m": -31.7138,
+          "final_abs_elevation_error_m": 31.7138,
+          "final_progress_m": 1685.8018037728727,
+          "track_length_m": 1685.8018037728727
+        },
+        {
+          "gate": {
+            "name": "tight_distance_gate",
+            "finish_distance_limit_m": 2.0,
+            "finish_elevation_tolerance_m": 8.0,
+            "is_default": false
+          },
+          "projected_progress_completion": true,
+          "progress_complete": true,
+          "strict_finish": false,
+          "strict_3d_finish": false,
+          "elevation_tolerant_finish": false,
+          "termination_reason": "progress_complete_finish_gate_failed",
+          "steps": 310,
+          "final_errors": {
+            "horizontal_m": 3.5620925731865714,
+            "distance_3d_m": 31.913220049690235,
+            "elevation_m": -31.7138,
+            "absolute_elevation_m": 31.7138
+          },
+          "final_horizontal_error_m": 3.5620925731865714,
+          "final_3d_error_m": 31.913220049690235,
+          "final_elevation_error_m": -31.7138,
+          "final_abs_elevation_error_m": 31.7138,
+          "final_progress_m": 1685.8018037728727,
+          "track_length_m": 1685.8018037728727
+        },
+        {
+          "gate": {
+            "name": "zero_elevation_tolerance_gate",
+            "finish_distance_limit_m": 4.0,
+            "finish_elevation_tolerance_m": 0.0,
+            "is_default": false
+          },
+          "projected_progress_completion": true,
+          "progress_complete": true,
+          "strict_finish": false,
+          "strict_3d_finish": false,
+          "elevation_tolerant_finish": false,
+          "termination_reason": "progress_complete_finish_gate_failed",
+          "steps": 310,
+          "final_errors": {
+            "horizontal_m": 3.5620925731865714,
+            "distance_3d_m": 31.913220049690235,
+            "elevation_m": -31.7138,
+            "absolute_elevation_m": 31.7138
+          },
+          "final_horizontal_error_m": 3.5620925731865714,
+          "final_3d_error_m": 31.913220049690235,
+          "final_elevation_error_m": -31.7138,
+          "final_abs_elevation_error_m": 31.7138,
+          "final_progress_m": 1685.8018037728727,
+          "track_length_m": 1685.8018037728727
+        },
+        {
+          "gate": {
+            "name": "wide_elevation_tolerance_gate",
+            "finish_distance_limit_m": 4.0,
+            "finish_elevation_tolerance_m": 12.0,
+            "is_default": false
+          },
+          "projected_progress_completion": true,
+          "progress_complete": true,
+          "strict_finish": false,
+          "strict_3d_finish": false,
+          "elevation_tolerant_finish": false,
+          "termination_reason": "progress_complete_finish_gate_failed",
+          "steps": 310,
+          "final_errors": {
+            "horizontal_m": 3.5620925731865714,
+            "distance_3d_m": 31.913220049690235,
+            "elevation_m": -31.7138,
+            "absolute_elevation_m": 31.7138
+          },
+          "final_horizontal_error_m": 3.5620925731865714,
+          "final_3d_error_m": 31.913220049690235,
+          "final_elevation_error_m": -31.7138,
+          "final_abs_elevation_error_m": 31.7138,
+          "final_progress_m": 1685.8018037728727,
+          "track_length_m": 1685.8018037728727
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "map": "synthetic_straight",
+      "profile": "default_conservative_controller",
+      "gate": {
+        "name": "default_strict_gate",
+        "finish_distance_limit_m": 4.0,
+        "finish_elevation_tolerance_m": 8.0,
+        "is_default": true
+      },
+      "projected_progress_completion": true,
+      "progress_complete": true,
+      "strict_finish": false,
+      "strict_3d_finish": false,
+      "elevation_tolerant_finish": true,
+      "termination_reason": "elevation_tolerant_finish_only",
+      "steps": 1,
+      "final_errors": {
+        "horizontal_m": 0.0,
+        "distance_3d_m": 6.0,
+        "elevation_m": 6.0,
+        "absolute_elevation_m": 6.0
+      },
+      "final_horizontal_error_m": 0.0,
+      "final_3d_error_m": 6.0,
+      "final_elevation_error_m": 6.0,
+      "final_abs_elevation_error_m": 6.0,
+      "final_progress_m": 79.6,
+      "track_length_m": 80.0
+    },
+    {
+      "map": "synthetic_straight",
+      "profile": "default_conservative_controller",
+      "gate": {
+        "name": "tight_distance_gate",
+        "finish_distance_limit_m": 2.0,
+        "finish_elevation_tolerance_m": 8.0,
+        "is_default": false
+      },
+      "projected_progress_completion": true,
+      "progress_complete": true,
+      "strict_finish": false,
+      "strict_3d_finish": false,
+      "elevation_tolerant_finish": true,
+      "termination_reason": "elevation_tolerant_finish_only",
+      "steps": 1,
+      "final_errors": {
+        "horizontal_m": 0.0,
+        "distance_3d_m": 6.0,
+        "elevation_m": 6.0,
+        "absolute_elevation_m": 6.0
+      },
+      "final_horizontal_error_m": 0.0,
+      "final_3d_error_m": 6.0,
+      "final_elevation_error_m": 6.0,
+      "final_abs_elevation_error_m": 6.0,
+      "final_progress_m": 79.6,
+      "track_length_m": 80.0
+    },
+    {
+      "map": "synthetic_straight",
+      "profile": "default_conservative_controller",
+      "gate": {
+        "name": "zero_elevation_tolerance_gate",
+        "finish_distance_limit_m": 4.0,
+        "finish_elevation_tolerance_m": 0.0,
+        "is_default": false
+      },
+      "projected_progress_completion": true,
+      "progress_complete": true,
+      "strict_finish": false,
+      "strict_3d_finish": false,
+      "elevation_tolerant_finish": false,
+      "termination_reason": "progress_complete_finish_gate_failed",
+      "steps": 1,
+      "final_errors": {
+        "horizontal_m": 0.0,
+        "distance_3d_m": 6.0,
+        "elevation_m": 6.0,
+        "absolute_elevation_m": 6.0
+      },
+      "final_horizontal_error_m": 0.0,
+      "final_3d_error_m": 6.0,
+      "final_elevation_error_m": 6.0,
+      "final_abs_elevation_error_m": 6.0,
+      "final_progress_m": 79.6,
+      "track_length_m": 80.0
+    },
+    {
+      "map": "synthetic_straight",
+      "profile": "default_conservative_controller",
+      "gate": {
+        "name": "wide_elevation_tolerance_gate",
+        "finish_distance_limit_m": 4.0,
+        "finish_elevation_tolerance_m": 12.0,
+        "is_default": false
+      },
+      "projected_progress_completion": true,
+      "progress_complete": true,
+      "strict_finish": false,
+      "strict_3d_finish": false,
+      "elevation_tolerant_finish": true,
+      "termination_reason": "elevation_tolerant_finish_only",
+      "steps": 1,
+      "final_errors": {
+        "horizontal_m": 0.0,
+        "distance_3d_m": 6.0,
+        "elevation_m": 6.0,
+        "absolute_elevation_m": 6.0
+      },
+      "final_horizontal_error_m": 0.0,
+      "final_3d_error_m": 6.0,
+      "final_elevation_error_m": 6.0,
+      "final_abs_elevation_error_m": 6.0,
+      "final_progress_m": 79.6,
+      "track_length_m": 80.0
+    },
+    {
+      "map": "A01",
+      "profile": "default_conservative_controller",
+      "source": "A01-Race_0.5m_cl2.npy",
+      "gate": {
+        "name": "default_strict_gate",
+        "finish_distance_limit_m": 4.0,
+        "finish_elevation_tolerance_m": 8.0,
+        "is_default": true
+      },
+      "projected_progress_completion": true,
+      "progress_complete": true,
+      "strict_finish": false,
+      "strict_3d_finish": false,
+      "elevation_tolerant_finish": false,
+      "termination_reason": "progress_complete_finish_gate_failed",
+      "steps": 377,
+      "final_errors": {
+        "horizontal_m": 0.12389311897261983,
+        "distance_3d_m": 23.390730081433645,
+        "elevation_m": -23.390401968276564,
+        "absolute_elevation_m": 23.390401968276564
+      },
+      "final_horizontal_error_m": 0.12389311897261983,
+      "final_3d_error_m": 23.390730081433645,
+      "final_elevation_error_m": -23.390401968276564,
+      "final_abs_elevation_error_m": 23.390401968276564,
+      "final_progress_m": 2202.3505301888263,
+      "track_length_m": 2202.679683034634
+    },
+    {
+      "map": "A01",
+      "profile": "default_conservative_controller",
+      "source": "A01-Race_0.5m_cl2.npy",
+      "gate": {
+        "name": "tight_distance_gate",
+        "finish_distance_limit_m": 2.0,
+        "finish_elevation_tolerance_m": 8.0,
+        "is_default": false
+      },
+      "projected_progress_completion": true,
+      "progress_complete": true,
+      "strict_finish": false,
+      "strict_3d_finish": false,
+      "elevation_tolerant_finish": false,
+      "termination_reason": "progress_complete_finish_gate_failed",
+      "steps": 377,
+      "final_errors": {
+        "horizontal_m": 0.12389311897261983,
+        "distance_3d_m": 23.390730081433645,
+        "elevation_m": -23.390401968276564,
+        "absolute_elevation_m": 23.390401968276564
+      },
+      "final_horizontal_error_m": 0.12389311897261983,
+      "final_3d_error_m": 23.390730081433645,
+      "final_elevation_error_m": -23.390401968276564,
+      "final_abs_elevation_error_m": 23.390401968276564,
+      "final_progress_m": 2202.3505301888263,
+      "track_length_m": 2202.679683034634
+    },
+    {
+      "map": "A01",
+      "profile": "default_conservative_controller",
+      "source": "A01-Race_0.5m_cl2.npy",
+      "gate": {
+        "name": "zero_elevation_tolerance_gate",
+        "finish_distance_limit_m": 4.0,
+        "finish_elevation_tolerance_m": 0.0,
+        "is_default": false
+      },
+      "projected_progress_completion": true,
+      "progress_complete": true,
+      "strict_finish": false,
+      "strict_3d_finish": false,
+      "elevation_tolerant_finish": false,
+      "termination_reason": "progress_complete_finish_gate_failed",
+      "steps": 377,
+      "final_errors": {
+        "horizontal_m": 0.12389311897261983,
+        "distance_3d_m": 23.390730081433645,
+        "elevation_m": -23.390401968276564,
+        "absolute_elevation_m": 23.390401968276564
+      },
+      "final_horizontal_error_m": 0.12389311897261983,
+      "final_3d_error_m": 23.390730081433645,
+      "final_elevation_error_m": -23.390401968276564,
+      "final_abs_elevation_error_m": 23.390401968276564,
+      "final_progress_m": 2202.3505301888263,
+      "track_length_m": 2202.679683034634
+    },
+    {
+      "map": "A01",
+      "profile": "default_conservative_controller",
+      "source": "A01-Race_0.5m_cl2.npy",
+      "gate": {
+        "name": "wide_elevation_tolerance_gate",
+        "finish_distance_limit_m": 4.0,
+        "finish_elevation_tolerance_m": 12.0,
+        "is_default": false
+      },
+      "projected_progress_completion": true,
+      "progress_complete": true,
+      "strict_finish": false,
+      "strict_3d_finish": false,
+      "elevation_tolerant_finish": false,
+      "termination_reason": "progress_complete_finish_gate_failed",
+      "steps": 377,
+      "final_errors": {
+        "horizontal_m": 0.12389311897261983,
+        "distance_3d_m": 23.390730081433645,
+        "elevation_m": -23.390401968276564,
+        "absolute_elevation_m": 23.390401968276564
+      },
+      "final_horizontal_error_m": 0.12389311897261983,
+      "final_3d_error_m": 23.390730081433645,
+      "final_elevation_error_m": -23.390401968276564,
+      "final_abs_elevation_error_m": 23.390401968276564,
+      "final_progress_m": 2202.3505301888263,
+      "track_length_m": 2202.679683034634
+    },
+    {
+      "map": "A07",
+      "profile": "default_conservative_controller",
+      "source": "A07-Race_0.5m_cl2.npy",
+      "gate": {
+        "name": "default_strict_gate",
+        "finish_distance_limit_m": 4.0,
+        "finish_elevation_tolerance_m": 8.0,
+        "is_default": true
+      },
+      "projected_progress_completion": true,
+      "progress_complete": true,
+      "strict_finish": false,
+      "strict_3d_finish": false,
+      "elevation_tolerant_finish": false,
+      "termination_reason": "progress_complete_finish_gate_failed",
+      "steps": 310,
+      "final_errors": {
+        "horizontal_m": 3.5620925731865714,
+        "distance_3d_m": 31.913220049690235,
+        "elevation_m": -31.7138,
+        "absolute_elevation_m": 31.7138
+      },
+      "final_horizontal_error_m": 3.5620925731865714,
+      "final_3d_error_m": 31.913220049690235,
+      "final_elevation_error_m": -31.7138,
+      "final_abs_elevation_error_m": 31.7138,
+      "final_progress_m": 1685.8018037728727,
+      "track_length_m": 1685.8018037728727
+    },
+    {
+      "map": "A07",
+      "profile": "default_conservative_controller",
+      "source": "A07-Race_0.5m_cl2.npy",
+      "gate": {
+        "name": "tight_distance_gate",
+        "finish_distance_limit_m": 2.0,
+        "finish_elevation_tolerance_m": 8.0,
+        "is_default": false
+      },
+      "projected_progress_completion": true,
+      "progress_complete": true,
+      "strict_finish": false,
+      "strict_3d_finish": false,
+      "elevation_tolerant_finish": false,
+      "termination_reason": "progress_complete_finish_gate_failed",
+      "steps": 310,
+      "final_errors": {
+        "horizontal_m": 3.5620925731865714,
+        "distance_3d_m": 31.913220049690235,
+        "elevation_m": -31.7138,
+        "absolute_elevation_m": 31.7138
+      },
+      "final_horizontal_error_m": 3.5620925731865714,
+      "final_3d_error_m": 31.913220049690235,
+      "final_elevation_error_m": -31.7138,
+      "final_abs_elevation_error_m": 31.7138,
+      "final_progress_m": 1685.8018037728727,
+      "track_length_m": 1685.8018037728727
+    },
+    {
+      "map": "A07",
+      "profile": "default_conservative_controller",
+      "source": "A07-Race_0.5m_cl2.npy",
+      "gate": {
+        "name": "zero_elevation_tolerance_gate",
+        "finish_distance_limit_m": 4.0,
+        "finish_elevation_tolerance_m": 0.0,
+        "is_default": false
+      },
+      "projected_progress_completion": true,
+      "progress_complete": true,
+      "strict_finish": false,
+      "strict_3d_finish": false,
+      "elevation_tolerant_finish": false,
+      "termination_reason": "progress_complete_finish_gate_failed",
+      "steps": 310,
+      "final_errors": {
+        "horizontal_m": 3.5620925731865714,
+        "distance_3d_m": 31.913220049690235,
+        "elevation_m": -31.7138,
+        "absolute_elevation_m": 31.7138
+      },
+      "final_horizontal_error_m": 3.5620925731865714,
+      "final_3d_error_m": 31.913220049690235,
+      "final_elevation_error_m": -31.7138,
+      "final_abs_elevation_error_m": 31.7138,
+      "final_progress_m": 1685.8018037728727,
+      "track_length_m": 1685.8018037728727
+    },
+    {
+      "map": "A07",
+      "profile": "default_conservative_controller",
+      "source": "A07-Race_0.5m_cl2.npy",
+      "gate": {
+        "name": "wide_elevation_tolerance_gate",
+        "finish_distance_limit_m": 4.0,
+        "finish_elevation_tolerance_m": 12.0,
+        "is_default": false
+      },
+      "projected_progress_completion": true,
+      "progress_complete": true,
+      "strict_finish": false,
+      "strict_3d_finish": false,
+      "elevation_tolerant_finish": false,
+      "termination_reason": "progress_complete_finish_gate_failed",
+      "steps": 310,
+      "final_errors": {
+        "horizontal_m": 3.5620925731865714,
+        "distance_3d_m": 31.913220049690235,
+        "elevation_m": -31.7138,
+        "absolute_elevation_m": 31.7138
+      },
+      "final_horizontal_error_m": 3.5620925731865714,
+      "final_3d_error_m": 31.913220049690235,
+      "final_elevation_error_m": -31.7138,
+      "final_abs_elevation_error_m": 31.7138,
+      "final_progress_m": 1685.8018037728727,
+      "track_length_m": 1685.8018037728727
+    }
+  ],
+  "finish_gate_pass_rates": [
+    {
+      "profile": "default_conservative_controller",
+      "gate": "default_strict_gate",
+      "evaluations": 3,
+      "projected_progress_completion_rate": 1.0,
+      "strict_finish_rate": 0.0,
+      "elevation_tolerant_finish_rate": 0.3333333333333333
+    },
+    {
+      "profile": "default_conservative_controller",
+      "gate": "tight_distance_gate",
+      "evaluations": 3,
+      "projected_progress_completion_rate": 1.0,
+      "strict_finish_rate": 0.0,
+      "elevation_tolerant_finish_rate": 0.3333333333333333
+    },
+    {
+      "profile": "default_conservative_controller",
+      "gate": "wide_elevation_tolerance_gate",
+      "evaluations": 3,
+      "projected_progress_completion_rate": 1.0,
+      "strict_finish_rate": 0.0,
+      "elevation_tolerant_finish_rate": 0.3333333333333333
+    },
+    {
+      "profile": "default_conservative_controller",
+      "gate": "zero_elevation_tolerance_gate",
+      "evaluations": 3,
+      "projected_progress_completion_rate": 1.0,
+      "strict_finish_rate": 0.0,
+      "elevation_tolerant_finish_rate": 0.0
+    }
+  ],
+  "summary": {
+    "map_count": 3,
+    "evaluations": 12,
+    "projected_progress_completion_count": 12,
+    "strict_finish_count": 0,
+    "elevation_tolerant_finish_count": 3,
+    "finish_gate_pass_rates": [
+      {
+        "profile": "default_conservative_controller",
+        "gate": "default_strict_gate",
+        "evaluations": 3,
+        "projected_progress_completion_rate": 1.0,
+        "strict_finish_rate": 0.0,
+        "elevation_tolerant_finish_rate": 0.3333333333333333
+      },
+      {
+        "profile": "default_conservative_controller",
+        "gate": "tight_distance_gate",
+        "evaluations": 3,
+        "projected_progress_completion_rate": 1.0,
+        "strict_finish_rate": 0.0,
+        "elevation_tolerant_finish_rate": 0.3333333333333333
+      },
+      {
+        "profile": "default_conservative_controller",
+        "gate": "wide_elevation_tolerance_gate",
+        "evaluations": 3,
+        "projected_progress_completion_rate": 1.0,
+        "strict_finish_rate": 0.0,
+        "elevation_tolerant_finish_rate": 0.3333333333333333
+      },
+      {
+        "profile": "default_conservative_controller",
+        "gate": "zero_elevation_tolerance_gate",
+        "evaluations": 3,
+        "projected_progress_completion_rate": 1.0,
+        "strict_finish_rate": 0.0,
+        "elevation_tolerant_finish_rate": 0.0
+      }
+    ]
+  },
+  "limitations": [
+    "The deterministic simulator is a bounded kinematic model, not TrackMania physics.",
+    "Projected progress is a map-matching result and does not by itself prove a finish.",
+    "The synthetic straight case is a near-finish elevation-offset probe, not a live run."
+  ]
+}
