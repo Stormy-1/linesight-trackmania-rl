@@ -1,0 +1,269 @@
+{
+  "scope": "offline_hybrid_recovery_boundary_schedule",
+  "evidence_class": "diagnostic_development_validation",
+  "offline_only": true,
+  "real_physics_validated": false,
+  "promotion_allowed": false,
+  "independent_confirmation": false,
+  "safety_flags": {
+    "trackmania_launched": false,
+    "training_started": false,
+    "live_control_used": false,
+    "azure_started": false,
+    "checkpoints_loaded": false,
+    "external_services_used": false,
+    "controller_defaults_modified": false
+  },
+  "boundary_family": {
+    "family_id": "fixed_lateral_speed_deficit_heading_opposition_boundary",
+    "fixed_lateral_offset_m": 8.0,
+    "fixed_speed_delta_mps": -4.0,
+    "heading_magnitudes_deg": [
+      70.0,
+      90.0,
+      105.0,
+      120.0
+    ],
+    "members": [
+      {
+        "name": "boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+        "lateral_offset_m": 8.0,
+        "heading_offset_rad": -1.2217304763960306,
+        "speed_delta_mps": -4.0
+      },
+      {
+        "name": "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+        "lateral_offset_m": 8.0,
+        "heading_offset_rad": -1.5707963267948966,
+        "speed_delta_mps": -4.0
+      },
+      {
+        "name": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+        "lateral_offset_m": 8.0,
+        "heading_offset_rad": -1.8325957145940461,
+        "speed_delta_mps": -4.0
+      },
+      {
+        "name": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+        "lateral_offset_m": 8.0,
+        "heading_offset_rad": -2.0943951023931953,
+        "speed_delta_mps": -4.0
+      }
+    ]
+  },
+  "timing_schedule": {
+    "injection_steps": [
+      25,
+      70
+    ],
+    "injection_times_s": [
+      2.5,
+      7.0
+    ],
+    "prior_schedule_steps": [
+      5,
+      10,
+      15,
+      20,
+      30,
+      35,
+      50,
+      60,
+      80
+    ],
+    "disjoint_from_prior_schedules": true,
+    "report_paths": [
+      "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "issues": [],
+    "family_matches_all_reports": true,
+    "expected_steps_match": true,
+    "disjoint_from_prior_schedules": true
+  },
+  "schedule": {
+    "stable_eligible_candidates": [],
+    "diagnostic_recommendation": null,
+    "same_case_assignments_across_reports": true
+  },
+  "interpretation": {
+    "boundary_study_is_not_independent_physics_confirmation": true,
+    "selection_is_not_promotion": true,
+    "next_action": "use the angle boundary only to scope a future recovery-action experiment"
+  },
+  "schedule_diagnostic": {
+    "scope": "offline_fixed_midrollout_injection_schedule_stability",
+    "evidence_class": "diagnostic_development_validation",
+    "offline_only": true,
+    "promotion_allowed": false,
+    "independent_confirmation": false,
+    "schedule": {
+      "injection_steps": [
+        25,
+        70
+      ],
+      "injection_times_s": [
+        2.5,
+        7.0
+      ],
+      "report_count": 2,
+      "same_case_assignments_across_reports": true,
+      "candidate_eligibility_rule": "candidate must be eligible under the existing selection rule at every injection step",
+      "diagnostic_recommendation": null,
+      "stable_eligible_candidates": []
+    },
+    "reports": [
+      {
+        "path": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+        "injection_step": 25,
+        "injection_time_s": 2.5,
+        "eligible_candidates": [],
+        "candidate_ranks": {
+          "recovery_h_2p2_l_0p24_brake_0p25": 1,
+          "recovery_h_1p4_l_0p12_brake_0p25": 2,
+          "recovery_h_1p4_l_0p12_brake_0p45": 3,
+          "recovery_h_1p4_l_0p24_brake_0p25": 4,
+          "recovery_h_2p2_l_0p12_brake_0p25": 5,
+          "recovery_h_2p2_l_0p24_brake_0p45": 6,
+          "recovery_h_2p2_l_0p12_brake_0p45": 7,
+          "recovery_h_1p4_l_0p24_brake_0p45": 8
+        },
+        "baseline_held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7857142857142857,
+          "recovery_failure_count": 3,
+          "progress_continuity_rate": 0.7857142857142857,
+          "projected_progress_completion_rate": 1.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.6071428571428577,
+          "total_redivergence_count": 0,
+          "finished_rate": 0.0
+        }
+      },
+      {
+        "path": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+        "injection_step": 70,
+        "injection_time_s": 7.0,
+        "eligible_candidates": [],
+        "candidate_ranks": {
+          "recovery_h_2p2_l_0p12_brake_0p25": 1,
+          "recovery_h_1p4_l_0p12_brake_0p25": 2,
+          "recovery_h_1p4_l_0p12_brake_0p45": 3,
+          "recovery_h_2p2_l_0p12_brake_0p45": 4,
+          "recovery_h_1p4_l_0p24_brake_0p45": 5,
+          "recovery_h_2p2_l_0p24_brake_0p45": 6,
+          "recovery_h_1p4_l_0p24_brake_0p25": 7,
+          "recovery_h_2p2_l_0p24_brake_0p25": 8
+        },
+        "baseline_held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "projected_progress_completion_rate": 1.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.3500000000000003,
+          "total_redivergence_count": 0,
+          "finished_rate": 0.0
+        }
+      }
+    ],
+    "candidate_schedule_ranking": [
+      {
+        "configuration_id": "recovery_h_1p4_l_0p12_brake_0p25",
+        "train_rank_by_step": {
+          "25": 2,
+          "70": 2
+        },
+        "mean_train_rank": 2.0,
+        "worst_train_rank": 2,
+        "eligible_at_steps": []
+      },
+      {
+        "configuration_id": "recovery_h_1p4_l_0p12_brake_0p45",
+        "train_rank_by_step": {
+          "25": 3,
+          "70": 3
+        },
+        "mean_train_rank": 3.0,
+        "worst_train_rank": 3,
+        "eligible_at_steps": []
+      },
+      {
+        "configuration_id": "recovery_h_2p2_l_0p12_brake_0p25",
+        "train_rank_by_step": {
+          "25": 5,
+          "70": 1
+        },
+        "mean_train_rank": 3.0,
+        "worst_train_rank": 5,
+        "eligible_at_steps": []
+      },
+      {
+        "configuration_id": "recovery_h_2p2_l_0p24_brake_0p25",
+        "train_rank_by_step": {
+          "25": 1,
+          "70": 8
+        },
+        "mean_train_rank": 4.5,
+        "worst_train_rank": 8,
+        "eligible_at_steps": []
+      },
+      {
+        "configuration_id": "recovery_h_1p4_l_0p24_brake_0p25",
+        "train_rank_by_step": {
+          "25": 4,
+          "70": 7
+        },
+        "mean_train_rank": 5.5,
+        "worst_train_rank": 7,
+        "eligible_at_steps": []
+      },
+      {
+        "configuration_id": "recovery_h_2p2_l_0p12_brake_0p45",
+        "train_rank_by_step": {
+          "25": 7,
+          "70": 4
+        },
+        "mean_train_rank": 5.5,
+        "worst_train_rank": 7,
+        "eligible_at_steps": []
+      },
+      {
+        "configuration_id": "recovery_h_2p2_l_0p24_brake_0p45",
+        "train_rank_by_step": {
+          "25": 6,
+          "70": 6
+        },
+        "mean_train_rank": 6.0,
+        "worst_train_rank": 6,
+        "eligible_at_steps": []
+      },
+      {
+        "configuration_id": "recovery_h_1p4_l_0p24_brake_0p45",
+        "train_rank_by_step": {
+          "25": 8,
+          "70": 5
+        },
+        "mean_train_rank": 6.5,
+        "worst_train_rank": 8,
+        "eligible_at_steps": []
+      }
+    ],
+    "validation": {
+      "valid": true,
+      "issues": []
+    },
+    "interpretation": {
+      "selection_is_not_promotion": true,
+      "schedule_stability_is_not_independent_confirmation": true,
+      "timing_sensitivity_is_expected": true,
+      "next_action": "do not promote; add a separately held-out injection schedule or new disturbance family"
+    }
+  }
+}

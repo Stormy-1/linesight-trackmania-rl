@@ -1,0 +1,296 @@
+{
+  "scope": "offline_new_held_out_disturbance_family_and_timing_schedule",
+  "evidence_class": "diagnostic_development_validation",
+  "offline_only": true,
+  "real_physics_validated": false,
+  "promotion_allowed": false,
+  "independent_confirmation": false,
+  "safety_flags": {
+    "trackmania_launched": false,
+    "training_started": false,
+    "live_control_used": false,
+    "azure_started": false,
+    "checkpoints_loaded": false,
+    "external_services_used": false,
+    "controller_defaults_modified": false
+  },
+  "disturbance_family": {
+    "family_id": "new_lateral_heading_opposition_with_speed_deficit",
+    "held_out_only": true,
+    "members": [
+      {
+        "name": "newfamily_lateral_plus_14m_heading_minus_70deg_speed_minus_8mps",
+        "lateral_offset_m": 14.0,
+        "heading_offset_rad": -1.2217304763960306,
+        "speed_delta_mps": -8.0
+      },
+      {
+        "name": "newfamily_lateral_minus_14m_heading_plus_70deg_speed_minus_8mps",
+        "lateral_offset_m": -14.0,
+        "heading_offset_rad": 1.2217304763960306,
+        "speed_delta_mps": -8.0
+      },
+      {
+        "name": "newfamily_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+        "lateral_offset_m": 8.0,
+        "heading_offset_rad": -2.0943951023931953,
+        "speed_delta_mps": -4.0
+      }
+    ],
+    "design_intent": "exercise lateral/heading opposition and underspeed recovery, unlike the earlier +12 m/s same-sign held-out family"
+  },
+  "timing_schedule": {
+    "injection_steps": [
+      15,
+      30,
+      60
+    ],
+    "injection_times_s": [
+      1.5,
+      3.0,
+      6.0
+    ],
+    "report_paths": [
+      "eval_results\\hybrid_rollouts\\hybrid_new_disturbance_recovery_comparison_step15.json",
+      "eval_results\\hybrid_rollouts\\hybrid_new_disturbance_recovery_comparison_step30.json",
+      "eval_results\\hybrid_rollouts\\hybrid_new_disturbance_recovery_comparison_step60.json"
+    ],
+    "prior_schedule_steps": [
+      5,
+      10,
+      20,
+      35,
+      50,
+      80
+    ],
+    "disjoint_from_prior_schedules": true
+  },
+  "schedule": {
+    "stable_eligible_candidates": [],
+    "diagnostic_recommendation": null,
+    "candidate_eligibility_rule": "candidate must be eligible under the existing selection rule at every injection step",
+    "same_case_assignments_across_reports": true
+  },
+  "validation": {
+    "valid": true,
+    "issues": [],
+    "expected_steps_match": true,
+    "family_matches_all_reports": true,
+    "disjoint_from_prior_schedules": true
+  },
+  "interpretation": {
+    "new_family_is_not_independent_physics_confirmation": true,
+    "selection_is_not_promotion": true,
+    "next_action": "retain no-promotion and inspect family-specific trajectory failures"
+  },
+  "schedule_diagnostic": {
+    "scope": "offline_fixed_midrollout_injection_schedule_stability",
+    "evidence_class": "diagnostic_development_validation",
+    "offline_only": true,
+    "promotion_allowed": false,
+    "independent_confirmation": false,
+    "schedule": {
+      "injection_steps": [
+        15,
+        30,
+        60
+      ],
+      "injection_times_s": [
+        1.5,
+        3.0,
+        6.0
+      ],
+      "report_count": 3,
+      "same_case_assignments_across_reports": true,
+      "candidate_eligibility_rule": "candidate must be eligible under the existing selection rule at every injection step",
+      "diagnostic_recommendation": null,
+      "stable_eligible_candidates": []
+    },
+    "reports": [
+      {
+        "path": "eval_results\\hybrid_rollouts\\hybrid_new_disturbance_recovery_comparison_step15.json",
+        "injection_step": 15,
+        "injection_time_s": 1.5,
+        "eligible_candidates": [],
+        "candidate_ranks": {
+          "recovery_h_2p2_l_0p12_brake_0p45": 1,
+          "recovery_h_2p2_l_0p24_brake_0p25": 2,
+          "recovery_h_2p2_l_0p24_brake_0p45": 3,
+          "recovery_h_1p4_l_0p12_brake_0p45": 4,
+          "recovery_h_1p4_l_0p24_brake_0p25": 5,
+          "recovery_h_1p4_l_0p24_brake_0p45": 6,
+          "recovery_h_2p2_l_0p12_brake_0p25": 7,
+          "recovery_h_1p4_l_0p12_brake_0p25": 8
+        },
+        "baseline_held_out": {
+          "case_count": 12,
+          "recovery_activated_count": 12,
+          "recovery_success_rate": 0.8333333333333334,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.8333333333333334,
+          "projected_progress_completion_rate": 1.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.425,
+          "total_redivergence_count": 0,
+          "finished_rate": 0.0
+        }
+      },
+      {
+        "path": "eval_results\\hybrid_rollouts\\hybrid_new_disturbance_recovery_comparison_step30.json",
+        "injection_step": 30,
+        "injection_time_s": 3.0,
+        "eligible_candidates": [],
+        "candidate_ranks": {
+          "recovery_h_2p2_l_0p12_brake_0p45": 1,
+          "recovery_h_1p4_l_0p12_brake_0p25": 2,
+          "recovery_h_2p2_l_0p12_brake_0p25": 3,
+          "recovery_h_1p4_l_0p12_brake_0p45": 4,
+          "recovery_h_2p2_l_0p24_brake_0p25": 5,
+          "recovery_h_2p2_l_0p24_brake_0p45": 6,
+          "recovery_h_1p4_l_0p24_brake_0p25": 7,
+          "recovery_h_1p4_l_0p24_brake_0p45": 8
+        },
+        "baseline_held_out": {
+          "case_count": 12,
+          "recovery_activated_count": 11,
+          "recovery_success_rate": 0.8181818181818182,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.8333333333333334,
+          "projected_progress_completion_rate": 1.0,
+          "stable_rejoin_rate": 0.9166666666666666,
+          "mean_recovery_latency_s": 1.4636363636363638,
+          "total_redivergence_count": 0,
+          "finished_rate": 0.0
+        }
+      },
+      {
+        "path": "eval_results\\hybrid_rollouts\\hybrid_new_disturbance_recovery_comparison_step60.json",
+        "injection_step": 60,
+        "injection_time_s": 6.0,
+        "eligible_candidates": [],
+        "candidate_ranks": {
+          "recovery_h_2p2_l_0p12_brake_0p45": 1,
+          "recovery_h_2p2_l_0p12_brake_0p25": 2,
+          "recovery_h_1p4_l_0p12_brake_0p45": 3,
+          "recovery_h_2p2_l_0p24_brake_0p45": 4,
+          "recovery_h_1p4_l_0p24_brake_0p45": 5,
+          "recovery_h_1p4_l_0p12_brake_0p25": 6,
+          "recovery_h_1p4_l_0p24_brake_0p25": 7,
+          "recovery_h_2p2_l_0p24_brake_0p25": 8
+        },
+        "baseline_held_out": {
+          "case_count": 12,
+          "recovery_activated_count": 12,
+          "recovery_success_rate": 0.8333333333333334,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.8333333333333334,
+          "projected_progress_completion_rate": 1.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.3166666666666667,
+          "total_redivergence_count": 1,
+          "finished_rate": 0.0
+        }
+      }
+    ],
+    "candidate_schedule_ranking": [
+      {
+        "configuration_id": "recovery_h_2p2_l_0p12_brake_0p45",
+        "train_rank_by_step": {
+          "15": 1,
+          "30": 1,
+          "60": 1
+        },
+        "mean_train_rank": 1.0,
+        "worst_train_rank": 1,
+        "eligible_at_steps": []
+      },
+      {
+        "configuration_id": "recovery_h_1p4_l_0p12_brake_0p45",
+        "train_rank_by_step": {
+          "15": 4,
+          "30": 4,
+          "60": 3
+        },
+        "mean_train_rank": 3.6666666666666665,
+        "worst_train_rank": 4,
+        "eligible_at_steps": []
+      },
+      {
+        "configuration_id": "recovery_h_2p2_l_0p12_brake_0p25",
+        "train_rank_by_step": {
+          "15": 7,
+          "30": 3,
+          "60": 2
+        },
+        "mean_train_rank": 4.0,
+        "worst_train_rank": 7,
+        "eligible_at_steps": []
+      },
+      {
+        "configuration_id": "recovery_h_2p2_l_0p24_brake_0p45",
+        "train_rank_by_step": {
+          "15": 3,
+          "30": 6,
+          "60": 4
+        },
+        "mean_train_rank": 4.333333333333333,
+        "worst_train_rank": 6,
+        "eligible_at_steps": []
+      },
+      {
+        "configuration_id": "recovery_h_2p2_l_0p24_brake_0p25",
+        "train_rank_by_step": {
+          "15": 2,
+          "30": 5,
+          "60": 8
+        },
+        "mean_train_rank": 5.0,
+        "worst_train_rank": 8,
+        "eligible_at_steps": []
+      },
+      {
+        "configuration_id": "recovery_h_1p4_l_0p12_brake_0p25",
+        "train_rank_by_step": {
+          "15": 8,
+          "30": 2,
+          "60": 6
+        },
+        "mean_train_rank": 5.333333333333333,
+        "worst_train_rank": 8,
+        "eligible_at_steps": []
+      },
+      {
+        "configuration_id": "recovery_h_1p4_l_0p24_brake_0p25",
+        "train_rank_by_step": {
+          "15": 5,
+          "30": 7,
+          "60": 7
+        },
+        "mean_train_rank": 6.333333333333333,
+        "worst_train_rank": 7,
+        "eligible_at_steps": []
+      },
+      {
+        "configuration_id": "recovery_h_1p4_l_0p24_brake_0p45",
+        "train_rank_by_step": {
+          "15": 6,
+          "30": 8,
+          "60": 5
+        },
+        "mean_train_rank": 6.333333333333333,
+        "worst_train_rank": 8,
+        "eligible_at_steps": []
+      }
+    ],
+    "validation": {
+      "valid": true,
+      "issues": []
+    },
+    "interpretation": {
+      "selection_is_not_promotion": true,
+      "schedule_stability_is_not_independent_confirmation": true,
+      "timing_sensitivity_is_expected": true,
+      "next_action": "do not promote; add a separately held-out injection schedule or new disturbance family"
+    }
+  }
+}
