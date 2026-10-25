@@ -1,0 +1,1219 @@
+{
+  "scope": "offline_hybrid_recovery_action_sensitivity",
+  "evidence_class": "diagnostic_development_validation",
+  "offline_only": true,
+  "real_physics_validated": false,
+  "promotion_allowed": false,
+  "independent_confirmation": false,
+  "safety_flags": {
+    "trackmania_launched": false,
+    "training_started": false,
+    "live_control_used": false,
+    "azure_started": false,
+    "checkpoints_loaded": false,
+    "external_services_used": false,
+    "controller_defaults_modified": false
+  },
+  "experiment": {
+    "injection_steps": [
+      25,
+      70
+    ],
+    "boundary_family": [
+      "boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps"
+    ],
+    "heading_grid": [
+      0.8,
+      1.4,
+      2.2,
+      3.0
+    ],
+    "lateral_grid": [
+      0.06,
+      0.12,
+      0.18,
+      0.24
+    ],
+    "brake_grid": [
+      0.25
+    ],
+    "brake_slice": [
+      0.0,
+      0.25,
+      0.5,
+      0.75
+    ],
+    "selection_rule_unchanged": true
+  },
+  "heading_lateral_records": [
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_3_l_0p18_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_3_l_0p18_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7857142857142857,
+          "recovery_failure_count": 3,
+          "progress_continuity_rate": 0.7857142857142857,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.578571428571429,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 3.0000000000000004,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_3_l_0p12_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_3_l_0p12_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7857142857142857,
+          "recovery_failure_count": 3,
+          "progress_continuity_rate": 0.7857142857142857,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.7428571428571433,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 3.4000000000000004,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_2p2_l_0p18_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_2p2_l_0p18_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7857142857142857,
+          "recovery_failure_count": 3,
+          "progress_continuity_rate": 0.7857142857142857,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.5785714285714287,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 3.0000000000000004,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_2p2_l_0p24_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_2p2_l_0p24_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7857142857142857,
+          "recovery_failure_count": 3,
+          "progress_continuity_rate": 0.7857142857142857,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.6500000000000004,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 3.2000000000000006,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_3_l_0p24_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_3_l_0p24_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7857142857142857,
+          "recovery_failure_count": 3,
+          "progress_continuity_rate": 0.7857142857142857,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.5571428571428576,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 3.0000000000000004,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_0p8_l_0p12_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_0p8_l_0p12_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.042857142857143,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 4.050000000000001,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_1p4_l_0p12_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_1p4_l_0p12_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7857142857142857,
+          "recovery_failure_count": 3,
+          "progress_continuity_rate": 0.7857142857142857,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.6071428571428577,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 3.1000000000000005,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_0p8_l_0p18_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_0p8_l_0p18_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.6428571428571429,
+          "recovery_failure_count": 5,
+          "progress_continuity_rate": 0.6428571428571429,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.4071428571428575,
+          "total_redivergence_count": 1,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 5.0,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_0p8_l_0p24_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_0p8_l_0p24_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.5,
+          "recovery_failure_count": 7,
+          "progress_continuity_rate": 0.5,
+          "stable_rejoin_rate": 0.9285714285714286,
+          "mean_recovery_latency_s": 2.276923076923077,
+          "total_redivergence_count": 2,
+          "projected_progress_completion_rate": 0.9285714285714286
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 0.5,
+          "mean_recovery_latency_s": 3.8000000000000007,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_1p4_l_0p24_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_1p4_l_0p24_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.6428571428571429,
+          "recovery_failure_count": 5,
+          "progress_continuity_rate": 0.6428571428571429,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.128571428571429,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 4.300000000000001,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_1p4_l_0p18_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_1p4_l_0p18_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.8285714285714287,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 3.7,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_2p2_l_0p12_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7857142857142857,
+          "recovery_failure_count": 3,
+          "progress_continuity_rate": 0.7857142857142857,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.6,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 3.0000000000000004,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_1p4_l_0p06_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_1p4_l_0p06_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.7000000000000004,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 3.2000000000000006,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_2p2_l_0p06_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_2p2_l_0p06_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.1000000000000005,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 4.2,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_0p8_l_0p06_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_0p8_l_0p06_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.6500000000000006,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 3.1500000000000004,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_3_l_0p06_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_3_l_0p06_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 0.8571428571428571,
+          "mean_recovery_latency_s": 2.1333333333333333,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 0.8571428571428571
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 0.5,
+          "mean_recovery_latency_s": 4.9,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_3_l_0p12_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_3_l_0p12_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.3500000000000003,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.6500000000000004,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_3_l_0p18_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_3_l_0p18_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.2857142857142863,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.500000000000001,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_2p2_l_0p12_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.2857142857142863,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.500000000000001,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_2p2_l_0p06_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_2p2_l_0p06_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.5000000000000004,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.9000000000000012,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_1p4_l_0p12_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_1p4_l_0p12_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.3785714285714292,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.950000000000001,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_3_l_0p06_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_3_l_0p06_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.7928571428571434,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 3.6500000000000012,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_2p2_l_0p18_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_2p2_l_0p18_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.3142857142857147,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.6000000000000005,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_3_l_0p24_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_3_l_0p24_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.3071428571428574,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.6000000000000005,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_1p4_l_0p06_brake_0p25",
+      "selection_eligible": true,
+      "selection_selected": true,
+      "summary": {
+        "profile": "recovery_h_1p4_l_0p06_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7857142857142857,
+          "recovery_failure_count": 3,
+          "progress_continuity_rate": 0.7857142857142857,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.3571428571428577,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.6000000000000005,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_0p8_l_0p12_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_0p8_l_0p12_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.9000000000000006,
+          "total_redivergence_count": 2,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 4.300000000000001,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_1p4_l_0p18_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_1p4_l_0p18_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.657142857142858,
+          "total_redivergence_count": 4,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 3.750000000000001,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_0p8_l_0p18_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_0p8_l_0p18_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.3142857142857145,
+          "total_redivergence_count": 2,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 5.350000000000001,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_0p8_l_0p24_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_0p8_l_0p24_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.6428571428571429,
+          "recovery_failure_count": 5,
+          "progress_continuity_rate": 0.6428571428571429,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.7428571428571438,
+          "total_redivergence_count": 3,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 6.500000000000001,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_1p4_l_0p24_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_1p4_l_0p24_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.9428571428571435,
+          "total_redivergence_count": 3,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 4.400000000000001,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_2p2_l_0p24_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_2p2_l_0p24_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.5357142857142863,
+          "total_redivergence_count": 2,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 3.500000000000001,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_0p8_l_0p06_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_0p8_l_0p06_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.3571428571428577,
+          "total_redivergence_count": 2,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.750000000000001,
+          "total_redivergence_count": 2
+        }
+      }
+    }
+  ],
+  "brake_records": [
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_2p2_l_0p12_brake_0",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_2p2_l_0p12_brake_0",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7857142857142857,
+          "recovery_failure_count": 3,
+          "progress_continuity_rate": 0.7857142857142857,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.4714285714285718,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.7,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_2p2_l_0p12_brake_0p5",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_2p2_l_0p12_brake_0p5",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 0.8571428571428571,
+          "mean_recovery_latency_s": 1.6500000000000004,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 0.8571428571428571
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 0.5,
+          "mean_recovery_latency_s": 4.300000000000001,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_2p2_l_0p12_brake_0p75",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_2p2_l_0p12_brake_0p75",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.5,
+          "recovery_failure_count": 7,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 0.5,
+          "mean_recovery_latency_s": 0.7285714285714288,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 0.5
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 0.0,
+          "mean_recovery_latency_s": null,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 25,
+      "configuration_id": "recovery_h_2p2_l_0p12_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7857142857142857,
+          "recovery_failure_count": 3,
+          "progress_continuity_rate": 0.7857142857142857,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.6,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 3.0000000000000004,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_2p2_l_0p12_brake_0",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_2p2_l_0p12_brake_0",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.264285714285715,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.450000000000001,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_2p2_l_0p12_brake_0p5",
+      "selection_eligible": true,
+      "selection_selected": true,
+      "summary": {
+        "profile": "recovery_h_2p2_l_0p12_brake_0p5",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7857142857142857,
+          "recovery_failure_count": 3,
+          "progress_continuity_rate": 0.7857142857142857,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.364285714285715,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.750000000000001,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_2p2_l_0p12_brake_0p75",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_2p2_l_0p12_brake_0p75",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 0.9285714285714286,
+          "mean_recovery_latency_s": 1.3846153846153852,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 0.9285714285714286
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 0.5,
+          "mean_recovery_latency_s": 3.1000000000000014,
+          "total_redivergence_count": 0
+        }
+      }
+    },
+    {
+      "injection_step": 70,
+      "configuration_id": "recovery_h_2p2_l_0p12_brake_0p25",
+      "selection_eligible": false,
+      "selection_selected": false,
+      "summary": {
+        "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+        "held_out": {
+          "case_count": 14,
+          "recovery_activated_count": 14,
+          "recovery_success_rate": 0.7142857142857143,
+          "recovery_failure_count": 4,
+          "progress_continuity_rate": 0.7142857142857143,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 1.2857142857142863,
+          "total_redivergence_count": 0,
+          "projected_progress_completion_rate": 1.0
+        },
+        "severe_minus_120_heading": {
+          "case_count": 2,
+          "recovery_success_rate": 0.0,
+          "recovery_failure_count": 2,
+          "progress_continuity_rate": 0.0,
+          "stable_rejoin_rate": 1.0,
+          "mean_recovery_latency_s": 2.500000000000001,
+          "total_redivergence_count": 0
+        }
+      }
+    }
+  ],
+  "interpretation": {
+    "diagnostic_only": true,
+    "next_action": "inspect gain trade-offs; do not promote any sensitivity winner"
+  }
+}
