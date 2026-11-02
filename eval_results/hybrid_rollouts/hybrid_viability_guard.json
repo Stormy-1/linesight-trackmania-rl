@@ -1,0 +1,1035 @@
+{
+  "scope": "offline_hybrid_one_step_viability_guard",
+  "evidence_class": "diagnostic_development_validation",
+  "offline_only": true,
+  "real_physics_validated": false,
+  "promotion_allowed": false,
+  "independent_confirmation": false,
+  "controller_defaults_modified": false,
+  "experiment": {
+    "source_reports": [
+      "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json"
+    ],
+    "base_profiles": [
+      "live_defaults_reference",
+      "captured_p25_guardrail",
+      "recovery_h_2p2_l_0p12_brake_0p25"
+    ],
+    "scope": "held-out boundary disturbances only",
+    "trigger": "predicted maximum-authority next-step displacement < 0",
+    "action": "steering opposite signed heading error, zero throttle, full brake",
+    "future_disturbance_information_used": false,
+    "historical_metrics_unchanged": true
+  },
+  "records": [
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 1.5,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 1.787374528020849
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 1.9000000000000004,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 0.8537246305114474
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 2.3000000000000007,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 0.07914669103324828
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 2.7,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 1.6401720650984544,
+        "progress_complete": true
+      },
+      "guard_command_count": 2,
+      "minimum_predicted_displacement_m": -0.7008249646427729
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 2.2,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 1.7855457690651915
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 2.7,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 0.18246023302311884
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 3.1000000000000005,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 0.19430846433317583,
+        "progress_complete": true
+      },
+      "guard_command_count": 1,
+      "minimum_predicted_displacement_m": -1.045196803986865
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 3.4000000000000004,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 2.5640662279506046,
+        "progress_complete": true
+      },
+      "guard_command_count": 3,
+      "minimum_predicted_displacement_m": -2.2016254060745264
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 1.6000000000000005,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 1.372543992813868
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 2.0,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 0.6007863776087738
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 2.5,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 0.031119867155979364,
+        "progress_complete": true
+      },
+      "guard_command_count": 1,
+      "minimum_predicted_displacement_m": -0.03111985159908398
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 3.1000000000000005,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 0.8729299049523149,
+        "progress_complete": true
+      },
+      "guard_command_count": 2,
+      "minimum_predicted_displacement_m": -0.6609053143484486
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 2.0,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 1.8815766984604956
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 2.7,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 0.5075544579860223
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 3.0,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 0.46714181221074114,
+        "progress_complete": true
+      },
+      "guard_command_count": 1,
+      "minimum_predicted_displacement_m": -0.5726756477336685
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 3.4000000000000004,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 2.0737788368902557,
+        "progress_complete": true
+      },
+      "guard_command_count": 3,
+      "minimum_predicted_displacement_m": -1.6138788544515639
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 1.5,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 1.7622095248223077
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 2.0,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 0.8451167127409474
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 2.4000000000000004,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 0.08375426555596352
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 3.0,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 1.603375833366556,
+        "progress_complete": true
+      },
+      "guard_command_count": 2,
+      "minimum_predicted_displacement_m": -0.6833158964161901
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 2.2,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 1.797937444443244
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 2.7,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 0.1958424104588513
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 2.9000000000000004,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 0.18120334873941601,
+        "progress_complete": true
+      },
+      "guard_command_count": 1,
+      "minimum_predicted_displacement_m": -1.0321317838620594
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 3.4000000000000004,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 1.9740446882518086,
+        "progress_complete": true
+      },
+      "guard_command_count": 3,
+      "minimum_predicted_displacement_m": -2.1897679027911905
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 1.5,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 1.8088138880004803
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 1.9000000000000004,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 1.2859581284340573
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 2.4000000000000004,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 0.03658842854525801,
+        "progress_complete": true
+      },
+      "guard_command_count": 1,
+      "minimum_predicted_displacement_m": -0.036450353542891216
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 2.8000000000000007,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 1.8026136763172076,
+        "progress_complete": true
+      },
+      "guard_command_count": 2,
+      "minimum_predicted_displacement_m": -1.3563748041629478
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 1.3000000000000007,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 2.7691328004908984
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 1.8000000000000007,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 1.051225287273994
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 2.200000000000001,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 0.32995878565975545,
+        "progress_complete": true
+      },
+      "guard_command_count": 1,
+      "minimum_predicted_displacement_m": -0.3325717953404086
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 2.700000000000001,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 2.4287151154170488,
+        "progress_complete": true
+      },
+      "guard_command_count": 2,
+      "minimum_predicted_displacement_m": -1.6937046597032368
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 1.5,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 1.8088138880004803
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 2.0,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 0.7909138351330914
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 2.4000000000000004,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 0.31493799235266806,
+        "progress_complete": true
+      },
+      "guard_command_count": 1,
+      "minimum_predicted_displacement_m": -0.3113272674881476
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 2.9000000000000004,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 2.0167235205283305,
+        "progress_complete": true
+      },
+      "guard_command_count": 2,
+      "minimum_predicted_displacement_m": -1.3923519313227033
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 1.700000000000001,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 2.0628791252783105
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 2.200000000000001,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 0.649699612666002
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 2.6000000000000014,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 0.47167595634743975,
+        "progress_complete": true
+      },
+      "guard_command_count": 1,
+      "minimum_predicted_displacement_m": -0.4714927467920654
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 3.1000000000000014,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 2.3868144660226562,
+        "progress_complete": true
+      },
+      "guard_command_count": 3,
+      "minimum_predicted_displacement_m": -1.5605536547348566
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 1.5,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 1.8067859720801935
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 2.0,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 1.3148082541301647
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 2.3000000000000007,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 0.06954467123966879,
+        "progress_complete": true
+      },
+      "guard_command_count": 1,
+      "minimum_predicted_displacement_m": -0.07243231104614967
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 2.6000000000000014,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 1.9517601641583155,
+        "progress_complete": true
+      },
+      "guard_command_count": 2,
+      "minimum_predicted_displacement_m": -1.4547367339247188
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_70deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 1.3000000000000007,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 2.973470304418129
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": true,
+        "recovery_latency_s": 1.700000000000001,
+        "stable_rejoin": true,
+        "progress_continuity": true,
+        "backward_progress_distance_m": 0.0,
+        "progress_complete": true
+      },
+      "guard_command_count": 0,
+      "minimum_predicted_displacement_m": 1.118660748348656
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 2.0999999999999996,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 0.3715090540932806,
+        "progress_complete": true
+      },
+      "guard_command_count": 1,
+      "minimum_predicted_displacement_m": -0.3741104195279804
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "metrics": {
+        "recovery_activated": true,
+        "recovery_success": false,
+        "recovery_latency_s": 2.4000000000000004,
+        "stable_rejoin": true,
+        "progress_continuity": false,
+        "backward_progress_distance_m": 2.6471692743490394,
+        "progress_complete": true
+      },
+      "guard_command_count": 2,
+      "minimum_predicted_displacement_m": -1.8413865805604812
+    }
+  ],
+  "aggregates": {
+    "captured_p25_guardrail:step25": {
+      "profile": "captured_p25_guardrail",
+      "injection_step": 25,
+      "metrics": {
+        "case_count": 8,
+        "recovery_success_rate": 0.5,
+        "progress_continuity_rate": 0.5,
+        "stable_rejoin_rate": 1.0,
+        "projected_progress_completion_rate": 1.0,
+        "mean_backward_progress_distance_m": 0.4306213026511614,
+        "max_backward_progress_distance_m": 2.0737788368902557,
+        "mean_guard_command_count": 0.875,
+        "total_guard_command_count": 7
+      }
+    },
+    "captured_p25_guardrail:step70": {
+      "profile": "captured_p25_guardrail",
+      "injection_step": 70,
+      "metrics": {
+        "case_count": 8,
+        "recovery_success_rate": 0.5,
+        "progress_continuity_rate": 0.5,
+        "stable_rejoin_rate": 1.0,
+        "projected_progress_completion_rate": 1.0,
+        "mean_backward_progress_distance_m": 0.6487689919063868,
+        "max_backward_progress_distance_m": 2.3868144660226562,
+        "mean_guard_command_count": 0.875,
+        "total_guard_command_count": 7
+      }
+    },
+    "live_defaults_reference:step25": {
+      "profile": "live_defaults_reference",
+      "injection_step": 25,
+      "metrics": {
+        "case_count": 8,
+        "recovery_success_rate": 0.625,
+        "progress_continuity_rate": 0.625,
+        "stable_rejoin_rate": 1.0,
+        "projected_progress_completion_rate": 1.0,
+        "mean_backward_progress_distance_m": 0.5498183446727793,
+        "max_backward_progress_distance_m": 2.5640662279506046,
+        "mean_guard_command_count": 0.75,
+        "total_guard_command_count": 6
+      }
+    },
+    "live_defaults_reference:step70": {
+      "profile": "live_defaults_reference",
+      "injection_step": 70,
+      "metrics": {
+        "case_count": 8,
+        "recovery_success_rate": 0.5,
+        "progress_continuity_rate": 0.5,
+        "stable_rejoin_rate": 1.0,
+        "projected_progress_completion_rate": 1.0,
+        "mean_backward_progress_distance_m": 0.5747345007424087,
+        "max_backward_progress_distance_m": 2.4287151154170488,
+        "mean_guard_command_count": 0.75,
+        "total_guard_command_count": 6
+      }
+    },
+    "recovery_h_2p2_l_0p12_brake_0p25:step25": {
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "injection_step": 25,
+      "metrics": {
+        "case_count": 8,
+        "recovery_success_rate": 0.625,
+        "progress_continuity_rate": 0.625,
+        "stable_rejoin_rate": 1.0,
+        "projected_progress_completion_rate": 1.0,
+        "mean_backward_progress_distance_m": 0.46982798379472257,
+        "max_backward_progress_distance_m": 1.9740446882518086,
+        "mean_guard_command_count": 0.75,
+        "total_guard_command_count": 6
+      }
+    },
+    "recovery_h_2p2_l_0p12_brake_0p25:step70": {
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "injection_step": 70,
+      "metrics": {
+        "case_count": 8,
+        "recovery_success_rate": 0.5,
+        "progress_continuity_rate": 0.5,
+        "stable_rejoin_rate": 1.0,
+        "projected_progress_completion_rate": 1.0,
+        "mean_backward_progress_distance_m": 0.629997895480038,
+        "max_backward_progress_distance_m": 2.6471692743490394,
+        "mean_guard_command_count": 0.75,
+        "total_guard_command_count": 6
+      }
+    }
+  },
+  "interpretation": {
+    "diagnostic_only": true,
+    "next_action": "compare against authority-gap envelope; do not promote a reactive guard"
+  }
+}
