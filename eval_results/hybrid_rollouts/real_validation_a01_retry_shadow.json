@@ -1,0 +1,255 @@
+{
+  "scope": "hybrid_real_shadow_observer_capture",
+  "offline_only": false,
+  "real_capture_verified": true,
+  "real_physics_evidence": true,
+  "real_physics_validated": false,
+  "promotion_allowed": false,
+  "actions_modified": false,
+  "controller_defaults_modified": false,
+  "case": {
+    "name": "A01-Race-real-retry",
+    "centerline": "maps\\A01-Race_0.5m_cl2.npy",
+    "rollout": "eval_results\\hybrid_rollouts\\A01-Race.Challenge_1793657875306_45728.csv",
+    "telemetry": {
+      "sample_count": 548,
+      "duration_s": 27.35,
+      "first_divergence_index": 0,
+      "first_divergence_timestamp_s": 0.0,
+      "first_divergence_progress_m": 0.0
+    },
+    "observers": [
+      {
+        "sample_count": 548,
+        "active_sample_count": 9,
+        "events": [
+          {
+            "start_index": 255,
+            "end_index": 257,
+            "start_timestamp_s": 12.75,
+            "end_timestamp_s": 12.85,
+            "duration_s": 0.09999999999999964,
+            "peak_signal_count": 2,
+            "signals": [
+              "lateral_acceleration_margin",
+              "speed_margin"
+            ]
+          },
+          {
+            "start_index": 312,
+            "end_index": 317,
+            "start_timestamp_s": 15.6,
+            "end_timestamp_s": 15.85,
+            "duration_s": 0.25,
+            "peak_signal_count": 2,
+            "signals": [
+              "lateral_acceleration_margin",
+              "speed_margin"
+            ]
+          }
+        ],
+        "observer_name": "speed_and_lateral_margin",
+        "event_metrics": {
+          "divergence_observed": true,
+          "divergence_index": 0,
+          "divergence_timestamp_s": 0.0,
+          "event_count": 2,
+          "event_before_divergence": false,
+          "first_event_start_index": 255,
+          "first_event_lead_time_s": null,
+          "active_sample_count_from_events": 9,
+          "active_sample_count_before_divergence": 0,
+          "active_precision_before_divergence": 0.0
+        },
+        "signals_observed": [
+          "lateral_acceleration_margin",
+          "speed_margin"
+        ]
+      },
+      {
+        "sample_count": 548,
+        "active_sample_count": 111,
+        "events": [
+          {
+            "start_index": 0,
+            "end_index": 44,
+            "start_timestamp_s": 0.0,
+            "end_timestamp_s": 2.2,
+            "duration_s": 2.2,
+            "peak_signal_count": 1,
+            "signals": [
+              "tangent_change"
+            ]
+          },
+          {
+            "start_index": 245,
+            "end_index": 265,
+            "start_timestamp_s": 12.25,
+            "end_timestamp_s": 13.25,
+            "duration_s": 1.0,
+            "peak_signal_count": 1,
+            "signals": [
+              "tangent_change"
+            ]
+          },
+          {
+            "start_index": 294,
+            "end_index": 312,
+            "start_timestamp_s": 14.7,
+            "end_timestamp_s": 15.6,
+            "duration_s": 0.9000000000000004,
+            "peak_signal_count": 1,
+            "signals": [
+              "tangent_change"
+            ]
+          },
+          {
+            "start_index": 346,
+            "end_index": 359,
+            "start_timestamp_s": 17.3,
+            "end_timestamp_s": 17.95,
+            "duration_s": 0.6499999999999986,
+            "peak_signal_count": 1,
+            "signals": [
+              "tangent_change"
+            ]
+          },
+          {
+            "start_index": 372,
+            "end_index": 383,
+            "start_timestamp_s": 18.6,
+            "end_timestamp_s": 19.15,
+            "duration_s": 0.5499999999999972,
+            "peak_signal_count": 1,
+            "signals": [
+              "tangent_change"
+            ]
+          }
+        ],
+        "observer_name": "tangent_change_only",
+        "event_metrics": {
+          "divergence_observed": true,
+          "divergence_index": 0,
+          "divergence_timestamp_s": 0.0,
+          "event_count": 5,
+          "event_before_divergence": false,
+          "first_event_start_index": 0,
+          "first_event_lead_time_s": null,
+          "active_sample_count_from_events": 111,
+          "active_sample_count_before_divergence": 0,
+          "active_precision_before_divergence": 0.0
+        },
+        "signals_observed": [
+          "tangent_change"
+        ]
+      },
+      {
+        "sample_count": 548,
+        "active_sample_count": 0,
+        "events": [],
+        "observer_name": "forward_alignment_only",
+        "event_metrics": {
+          "divergence_observed": true,
+          "divergence_index": 0,
+          "divergence_timestamp_s": 0.0,
+          "event_count": 0,
+          "event_before_divergence": false,
+          "first_event_start_index": null,
+          "first_event_lead_time_s": null,
+          "active_sample_count_from_events": 0,
+          "active_sample_count_before_divergence": 0,
+          "active_precision_before_divergence": null
+        },
+        "signals_observed": []
+      },
+      {
+        "sample_count": 548,
+        "active_sample_count": 130,
+        "events": [
+          {
+            "start_index": 0,
+            "end_index": 44,
+            "start_timestamp_s": 0.0,
+            "end_timestamp_s": 2.2,
+            "duration_s": 2.2,
+            "peak_signal_count": 1,
+            "signals": [
+              "tangent_change"
+            ]
+          },
+          {
+            "start_index": 245,
+            "end_index": 266,
+            "start_timestamp_s": 12.25,
+            "end_timestamp_s": 13.3,
+            "duration_s": 1.0500000000000007,
+            "peak_signal_count": 3,
+            "signals": [
+              "lateral_acceleration_margin",
+              "speed_margin",
+              "tangent_change"
+            ]
+          },
+          {
+            "start_index": 294,
+            "end_index": 317,
+            "start_timestamp_s": 14.7,
+            "end_timestamp_s": 15.85,
+            "duration_s": 1.1500000000000004,
+            "peak_signal_count": 3,
+            "signals": [
+              "lateral_acceleration_margin",
+              "speed_margin",
+              "tangent_change"
+            ]
+          },
+          {
+            "start_index": 345,
+            "end_index": 367,
+            "start_timestamp_s": 17.25,
+            "end_timestamp_s": 18.35,
+            "duration_s": 1.1000000000000014,
+            "peak_signal_count": 3,
+            "signals": [
+              "lateral_acceleration_margin",
+              "speed_margin",
+              "tangent_change"
+            ]
+          },
+          {
+            "start_index": 371,
+            "end_index": 386,
+            "start_timestamp_s": 18.55,
+            "end_timestamp_s": 19.3,
+            "duration_s": 0.75,
+            "peak_signal_count": 3,
+            "signals": [
+              "lateral_acceleration_margin",
+              "speed_margin",
+              "tangent_change"
+            ]
+          }
+        ],
+        "observer_name": "all_observable_signals",
+        "event_metrics": {
+          "divergence_observed": true,
+          "divergence_index": 0,
+          "divergence_timestamp_s": 0.0,
+          "event_count": 5,
+          "event_before_divergence": false,
+          "first_event_start_index": 0,
+          "first_event_lead_time_s": null,
+          "active_sample_count_from_events": 130,
+          "active_sample_count_before_divergence": 0,
+          "active_precision_before_divergence": 0.0
+        },
+        "signals_observed": [
+          "lateral_acceleration_margin",
+          "speed_margin",
+          "tangent_change"
+        ]
+      }
+    ]
+  },
+  "interpretation": "Real telemetry was captured and replayed through the non-intervening observer. This single incomplete run is diagnostic and cannot validate or promote a controller."
+}

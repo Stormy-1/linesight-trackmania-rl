@@ -1,0 +1,114 @@
+{
+  "scope": "offline_local_trajectory_and_speed_planning_comparison",
+  "trackmania_launched": false,
+  "training_started": false,
+  "checkpoints_loaded": false,
+  "real_physics_validated": false,
+  "controller_defaults_modified": false,
+  "candidate_status": "diagnostic_only",
+  "centerline": {
+    "length_m": 128.4234192322127,
+    "points": 61
+  },
+  "planner_config": {
+    "horizon_distances_m": [
+      0.0,
+      5.0,
+      10.0,
+      20.0,
+      35.0,
+      50.0,
+      70.0
+    ],
+    "max_speed_mps": 70.0,
+    "min_speed_mps": 12.0,
+    "curvature_gain": 28.0,
+    "max_acceleration_mps2": 10.0,
+    "max_braking_mps2": 18.0,
+    "fallback_speed_scale": 0.75
+  },
+  "profiles": {
+    "nominal_reference": [
+      {
+        "name": "nominal_centerline_start",
+        "finished": true,
+        "termination_reason": "finished",
+        "elapsed_s": 4.1000000000000005,
+        "steps": 41,
+        "progress_gain_m": 128.4234192322127,
+        "progress_fraction": 1.0,
+        "recovery_samples": 0,
+        "mean_abs_lateral_error_m": 2.011245139247509,
+        "max_abs_lateral_error_m": 4.601770798983572,
+        "mean_abs_heading_error_rad": 0.1969029947012078,
+        "max_abs_heading_error_rad": 0.4468052682405621,
+        "mean_actual_minus_target_speed_mps": -17.736404736263,
+        "fraction_actual_above_target": 0.0975609756097561
+      },
+      {
+        "name": "off_center_recovery_start",
+        "finished": true,
+        "termination_reason": "finished",
+        "elapsed_s": 4.6000000000000005,
+        "steps": 46,
+        "progress_gain_m": 123.18785277533475,
+        "progress_fraction": 1.0,
+        "recovery_samples": 4,
+        "mean_abs_lateral_error_m": 2.937586394271285,
+        "max_abs_lateral_error_m": 10.64599047550104,
+        "mean_abs_heading_error_rad": 0.2949114530203807,
+        "max_abs_heading_error_rad": 0.7141034562968653,
+        "mean_actual_minus_target_speed_mps": -21.95143671662043,
+        "fraction_actual_above_target": 0.08695652173913043
+      }
+    ],
+    "planned_candidate": [
+      {
+        "name": "nominal_centerline_start",
+        "finished": true,
+        "termination_reason": "finished",
+        "elapsed_s": 4.2,
+        "steps": 42,
+        "progress_gain_m": 128.4234192322127,
+        "progress_fraction": 1.0,
+        "recovery_samples": 0,
+        "mean_abs_lateral_error_m": 2.7266570529090624,
+        "max_abs_lateral_error_m": 6.054465460676004,
+        "mean_abs_heading_error_rad": 0.26664787710923327,
+        "max_abs_heading_error_rad": 0.4952835580953674,
+        "mean_actual_minus_target_speed_mps": -8.169873143061746,
+        "fraction_actual_above_target": 0.023809523809523808
+      },
+      {
+        "name": "off_center_recovery_start",
+        "finished": true,
+        "termination_reason": "finished",
+        "elapsed_s": 4.7,
+        "steps": 47,
+        "progress_gain_m": 123.18785277533475,
+        "progress_fraction": 1.0,
+        "recovery_samples": 4,
+        "mean_abs_lateral_error_m": 3.447785693283402,
+        "max_abs_lateral_error_m": 10.64599047550104,
+        "mean_abs_heading_error_rad": 0.35859770919703654,
+        "max_abs_heading_error_rad": 0.8073629246024829,
+        "mean_actual_minus_target_speed_mps": -10.30247518979993,
+        "fraction_actual_above_target": 0.0
+      }
+    ]
+  },
+  "determinism": {
+    "candidate_repeat_matches": true
+  },
+  "planning_constraints": {
+    "plans_checked": 89,
+    "normal_constraint_violations": 0,
+    "fallback_constraint_violations": 0
+  },
+  "limitations": [
+    "The vehicle model is a bounded kinematic stub.",
+    "The centerline is synthetic and does not validate TrackMania map physics.",
+    "Jumps, collisions, wheel contact, sliding, and TMInterface behavior are not modeled.",
+    "This result does not authorize a live controller change or residual-RL training."
+  ]
+}
