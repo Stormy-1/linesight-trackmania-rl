@@ -1,0 +1,36 @@
+{
+  "scope": "hybrid_real_validation_attempt",
+  "date": "2026-11-03",
+  "attempted": true,
+  "offline_only": false,
+  "trackmania_launched": true,
+  "tminterface_connected": true,
+  "training_started": false,
+  "checkpoint_loaded": true,
+  "checkpoint": "save/hocko_v1_foundational_checkpoint/weights1.torch",
+  "checkpoint_modified": false,
+  "controller_defaults_modified": false,
+  "track": "A01-Race",
+  "measured_runs_requested": 1,
+  "warmup_rollout_attempted": true,
+  "warmup_rollout_tmi_protection_cutoff": true,
+  "measured_rollout_attempted": true,
+  "measured_rollout_tmi_protection_cutoff": true,
+  "measured_result": {
+    "completion_pct": 0.0,
+    "finished": false,
+    "term_cause": "Crash_Disrupt",
+    "total_actions": 1,
+    "telemetry_samples": 0
+  },
+  "tmi_error": "WinError 10060: connected party did not properly respond",
+  "telemetry_files": [
+    "eval_results/hybrid_rollouts/A01-Race.Challenge_1793657415835_42360.csv",
+    "eval_results/hybrid_rollouts/A01-Race.Challenge_1793657482429_42360.csv"
+  ],
+  "runner_output_issue_fixed": "Windows cp1252 could not encode the evaluator's checkmark summary; evaluator now uses ASCII [OK] markers",
+  "real_physics_validated": false,
+  "promotion_allowed": false,
+  "interpretation": "TrackMania and TMInterface were reached, but the game did not advance to a telemetry-producing rollout before the protection timeout. This is infrastructure/display or game-state evidence, not a driving score.",
+  "next_action": "Keep the visible desktop session active, confirm the TrackMania profile/menu is ready, then retry the same one-run capture."
+}

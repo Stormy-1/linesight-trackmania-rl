@@ -1,0 +1,219 @@
+{
+  "scope": "offline_bounded_short_horizon_mpc_comparison",
+  "trackmania_launched": false,
+  "training_started": false,
+  "checkpoints_loaded": false,
+  "real_physics_validated": false,
+  "controller_defaults_modified": false,
+  "candidate_status": "diagnostic_only",
+  "centerline": {
+    "length_m": 128.4234192322127,
+    "points": 61
+  },
+  "mpc_config": {
+    "horizon_steps": 8,
+    "dt_s": 0.1,
+    "max_speed_mps": 80.0,
+    "max_acceleration_mps2": 10.0,
+    "max_braking_mps2": 18.0,
+    "linear_drag_mps2_per_mps": 0.05,
+    "max_yaw_rate_rad_s": 1.8,
+    "steering_candidates": [
+      -1.0,
+      -0.5,
+      0.0,
+      0.5,
+      1.0
+    ],
+    "longitudinal_candidates": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.5,
+        0.0
+      ],
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.5
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "lateral_error_weight": 3.0,
+    "heading_error_weight": 2.0,
+    "speed_error_weight": 0.1,
+    "action_effort_weight": 0.05,
+    "planner_config": {
+      "horizon_distances_m": [
+        0.0,
+        5.0,
+        10.0,
+        20.0,
+        35.0,
+        50.0,
+        70.0
+      ],
+      "max_speed_mps": 70.0,
+      "min_speed_mps": 12.0,
+      "curvature_gain": 28.0,
+      "max_acceleration_mps2": 10.0,
+      "max_braking_mps2": 18.0,
+      "fallback_speed_scale": 0.75
+    }
+  },
+  "profiles": {
+    "nominal_reference": [
+      {
+        "name": "nominal_centerline_start",
+        "finished": true,
+        "termination_reason": "finished",
+        "elapsed_s": 4.1000000000000005,
+        "steps": 41,
+        "progress_gain_m": 128.4234192322127,
+        "progress_fraction": 1.0,
+        "recovery_samples": 0,
+        "mean_abs_lateral_error_m": 2.011245139247509,
+        "max_abs_lateral_error_m": 4.601770798983572,
+        "mean_abs_heading_error_rad": 0.1969029947012078,
+        "max_abs_heading_error_rad": 0.4468052682405621,
+        "mean_actual_minus_target_speed_mps": -17.736404736263,
+        "fraction_actual_above_target": 0.0975609756097561
+      },
+      {
+        "name": "off_center_recovery_start",
+        "finished": true,
+        "termination_reason": "finished",
+        "elapsed_s": 4.6000000000000005,
+        "steps": 46,
+        "progress_gain_m": 123.18785277533475,
+        "progress_fraction": 1.0,
+        "recovery_samples": 4,
+        "mean_abs_lateral_error_m": 2.937586394271285,
+        "max_abs_lateral_error_m": 10.64599047550104,
+        "mean_abs_heading_error_rad": 0.2949114530203807,
+        "max_abs_heading_error_rad": 0.7141034562968653,
+        "mean_actual_minus_target_speed_mps": -21.95143671662043,
+        "fraction_actual_above_target": 0.08695652173913043
+      }
+    ],
+    "local_plan_reference": [
+      {
+        "name": "nominal_centerline_start",
+        "finished": true,
+        "termination_reason": "finished",
+        "elapsed_s": 4.2,
+        "steps": 42,
+        "progress_gain_m": 128.4234192322127,
+        "progress_fraction": 1.0,
+        "recovery_samples": 0,
+        "mean_abs_lateral_error_m": 2.7266570529090624,
+        "max_abs_lateral_error_m": 6.054465460676004,
+        "mean_abs_heading_error_rad": 0.26664787710923327,
+        "max_abs_heading_error_rad": 0.4952835580953674,
+        "mean_actual_minus_target_speed_mps": -8.169873143061746,
+        "fraction_actual_above_target": 0.023809523809523808
+      },
+      {
+        "name": "off_center_recovery_start",
+        "finished": true,
+        "termination_reason": "finished",
+        "elapsed_s": 4.7,
+        "steps": 47,
+        "progress_gain_m": 123.18785277533475,
+        "progress_fraction": 1.0,
+        "recovery_samples": 4,
+        "mean_abs_lateral_error_m": 3.447785693283402,
+        "max_abs_lateral_error_m": 10.64599047550104,
+        "mean_abs_heading_error_rad": 0.35859770919703654,
+        "max_abs_heading_error_rad": 0.8073629246024829,
+        "mean_actual_minus_target_speed_mps": -10.30247518979993,
+        "fraction_actual_above_target": 0.0
+      }
+    ],
+    "short_horizon_mpc_candidate": [
+      {
+        "name": "nominal_centerline_start",
+        "finished": true,
+        "termination_reason": "finished",
+        "elapsed_s": 4.2,
+        "steps": 42,
+        "progress_gain_m": 128.4234192322127,
+        "progress_fraction": 1.0,
+        "recovery_samples": 0,
+        "mean_abs_lateral_error_m": 1.0523268025767807,
+        "max_abs_lateral_error_m": 2.2262804487806633,
+        "mean_abs_heading_error_rad": 0.10798582351372063,
+        "max_abs_heading_error_rad": 0.24660934460948747,
+        "mean_actual_minus_target_speed_mps": -6.81799276559118,
+        "fraction_actual_above_target": 0.14285714285714285,
+        "mpc": {
+          "candidate_count": 25,
+          "mean_cost": 76.5765307811668,
+          "max_cost": 228.19699079945465,
+          "all_costs_finite": true
+        }
+      },
+      {
+        "name": "off_center_recovery_start",
+        "finished": true,
+        "termination_reason": "finished",
+        "elapsed_s": 4.3,
+        "steps": 43,
+        "progress_gain_m": 123.18785277533475,
+        "progress_fraction": 1.0,
+        "recovery_samples": 4,
+        "mean_abs_lateral_error_m": 2.469296567018802,
+        "max_abs_lateral_error_m": 10.64599047550104,
+        "mean_abs_heading_error_rad": 0.2118439338699768,
+        "max_abs_heading_error_rad": 0.6858552927003903,
+        "mean_actual_minus_target_speed_mps": -6.432987021855165,
+        "fraction_actual_above_target": 0.13953488372093023,
+        "mpc": {
+          "candidate_count": 25,
+          "mean_cost": 175.72147091248368,
+          "max_cost": 1463.2327822304915,
+          "all_costs_finite": true
+        }
+      }
+    ]
+  },
+  "comparison": {
+    "nominal_reference": {
+      "completion_rate": 1.0,
+      "mean_abs_lateral_error_m": 2.474415766759397,
+      "mean_abs_heading_error_rad": 0.24590722386079425,
+      "mean_elapsed_s": 4.3500000000000005
+    },
+    "local_plan_reference": {
+      "completion_rate": 1.0,
+      "mean_abs_lateral_error_m": 3.087221373096232,
+      "mean_abs_heading_error_rad": 0.3126227931531349,
+      "mean_elapsed_s": 4.45
+    },
+    "short_horizon_mpc_candidate": {
+      "completion_rate": 1.0,
+      "mean_abs_lateral_error_m": 1.7608116847977913,
+      "mean_abs_heading_error_rad": 0.15991487869184873,
+      "mean_elapsed_s": 4.25
+    },
+    "mpc_minus_nominal_mean_abs_lateral_error_m": -0.7136040819616056,
+    "mpc_better_than_nominal_tracking": true
+  },
+  "determinism": {
+    "candidate_repeat_matches": true
+  },
+  "limitations": [
+    "The prediction model is a bounded kinematic approximation.",
+    "The action family holds steering and longitudinal action constant across each horizon.",
+    "The centerline is synthetic and does not validate TrackMania physics, jumps, collisions, or TMInterface.",
+    "This result does not authorize live controller changes or residual-RL training."
+  ]
+}

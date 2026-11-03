@@ -1,0 +1,1656 @@
+{
+  "scope": "offline_real_heading_projection_calibration",
+  "evidence_class": "diagnostic_development_validation",
+  "offline_only": true,
+  "real_capture_inputs": true,
+  "real_physics_validated": false,
+  "promotion_allowed": false,
+  "actions_modified": false,
+  "controller_defaults_modified": false,
+  "future_disturbance_information_used": false,
+  "current_convention": {
+    "projection": "3D nearest-segment projection",
+    "heading_plane": "X/Z",
+    "stationary_heading_fallback": "rotation matrix first row"
+  },
+  "cases": [
+    {
+      "name": "real_retry",
+      "centerline": "C:\\Code_Stuff\\TRACK\\maps\\A01-Race_0.5m_cl2.npy",
+      "rollout": "C:\\Code_Stuff\\TRACK\\eval_results\\hybrid_rollouts\\A01-Race.Challenge_1793657875306_45728.csv",
+      "samples": 548,
+      "duration_s": 27.35,
+      "heading_source_agreement": {
+        "samples_compared": 547,
+        "mean_abs_xz_angle_rad": 0.08024420024465369,
+        "median_abs_xz_angle_rad": 0.00716268506180473,
+        "p95_abs_xz_angle_rad": 0.056910071037740546
+      },
+      "evaluations": [
+        {
+          "source": "recorded",
+          "projection": "current_3d",
+          "sample_count": 548,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 1.5722551149649682,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.0014588737249487949,
+          "heading_error_all_rad": {
+            "mean": 0.2544156517502233,
+            "median": 0.14251274629381627,
+            "p95": 0.5200129961208652,
+            "max": 3.034139083191066
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.2520064388375821,
+            "median": 0.14210155812521208,
+            "p95": 0.5150619735207305,
+            "max": 3.034139083191066
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 547,
+          "metric_distance_m": {
+            "mean": 8.080286899278471,
+            "median": 5.364883026172368,
+            "p95": 21.444555211842232,
+            "max": 21.75611115923293
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 7.794118840389395,
+            "median": 5.3648046524118875,
+            "p95": 19.97812034150747,
+            "max": 20.2065030049616
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 416.59079425764656,
+          "progress_gain_m": 416.59079425764656,
+          "backward_progress_steps": 27,
+          "max_backward_progress_m": 0.04000577741817324,
+          "integrated_speed_distance_m": 437.86534423921256,
+          "progress_to_integrated_speed_ratio": 0.9514130308290775
+        },
+        {
+          "source": "recorded",
+          "projection": "xz_horizontal",
+          "sample_count": 548,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 1.5722551149649682,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.0014588737249487949,
+          "heading_error_all_rad": {
+            "mean": 0.25441429742820554,
+            "median": 0.14251274629381627,
+            "p95": 0.5200129961208652,
+            "max": 3.033879606765402
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.25200508203965566,
+            "median": 0.14210155812521208,
+            "p95": 0.5150619735207305,
+            "max": 3.033879606765402
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 547,
+          "metric_distance_m": {
+            "mean": 7.773729418795672,
+            "median": 5.364804512054098,
+            "p95": 19.868190161818063,
+            "max": 20.078805430179948
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 7.773729418795672,
+            "median": 5.364804512054098,
+            "p95": 19.868190161818063,
+            "max": 20.078805430179944
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 414.5587806317012,
+          "progress_gain_m": 414.5587806317012,
+          "backward_progress_steps": 27,
+          "max_backward_progress_m": 0.04713367730022355,
+          "integrated_speed_distance_m": 437.86534423921256,
+          "progress_to_integrated_speed_ratio": 0.9467723035993947
+        },
+        {
+          "source": "recorded",
+          "projection": "xy",
+          "sample_count": 548,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": null,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.689651670311533,
+          "heading_error_all_rad": {
+            "mean": 0.15106885777324083,
+            "median": 0.010618020002153727,
+            "p95": 0.34160162924211773,
+            "max": 2.8539377848467264
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.15106885777324083,
+            "median": 0.010618020002153727,
+            "p95": 0.34160162924211773,
+            "max": 2.8539377848467264
+          },
+          "invalid_heading_sample_count": 1,
+          "moving_heading_sample_count": 547,
+          "metric_distance_m": {
+            "mean": 1.2877176146591103,
+            "median": 0.013341428276543688,
+            "p95": 6.905296715204824,
+            "max": 8.218741127943622
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 8.205097059823284,
+            "median": 5.64128154414775,
+            "p95": 21.40705510156574,
+            "max": 21.644955097829737
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 422.5493251271214,
+          "progress_gain_m": 422.5493251271214,
+          "backward_progress_steps": 27,
+          "max_backward_progress_m": 0.03797102860767154,
+          "integrated_speed_distance_m": 437.86534423921256,
+          "progress_to_integrated_speed_ratio": 0.9650211661790621
+        },
+        {
+          "source": "recorded",
+          "projection": "yz",
+          "sample_count": 548,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 1.5737622103375015,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.002965922163788548,
+          "heading_error_all_rad": {
+            "mean": 1.1476440084153015,
+            "median": 0.49750764822795324,
+            "p95": 3.1331615301092417,
+            "max": 3.1415203920370462
+          },
+          "heading_error_moving_rad": {
+            "mean": 1.1468649989053885,
+            "median": 0.4934725213440725,
+            "p95": 3.133194019549887,
+            "max": 3.1415203920370462
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 547,
+          "metric_distance_m": {
+            "mean": 4.435658441434062,
+            "median": 0.4314248101169187,
+            "p95": 16.01625339641557,
+            "max": 16.022799606752017
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 121.56546079463068,
+            "median": 24.123030567163468,
+            "p95": 341.0316041042741,
+            "max": 341.6630130880723
+          },
+          "progress_start_m": 2.0743295609844584e-06,
+          "progress_end_m": 66.67088521443982,
+          "progress_gain_m": 66.67088314011026,
+          "backward_progress_steps": 152,
+          "max_backward_progress_m": 16.20084983459583,
+          "integrated_speed_distance_m": 437.86534423921256,
+          "progress_to_integrated_speed_ratio": 0.15226343901673783
+        },
+        {
+          "source": "finite_difference",
+          "projection": "current_3d",
+          "sample_count": 548,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 0.00145878817007139,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.00145878817007139,
+          "heading_error_all_rad": {
+            "mean": 0.303180802911696,
+            "median": 0.1457334503328489,
+            "p95": 0.6546993168843743,
+            "max": 3.1346289197790127
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.3037323970885546,
+            "median": 0.14583321627008283,
+            "p95": 0.6548151794058766,
+            "max": 3.1346289197790127
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 547,
+          "metric_distance_m": {
+            "mean": 8.080286899278471,
+            "median": 5.364883026172368,
+            "p95": 21.444555211842232,
+            "max": 21.75611115923293
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 7.794118840389395,
+            "median": 5.3648046524118875,
+            "p95": 19.97812034150747,
+            "max": 20.2065030049616
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 416.59079425764656,
+          "progress_gain_m": 416.59079425764656,
+          "backward_progress_steps": 27,
+          "max_backward_progress_m": 0.04000577741817324,
+          "integrated_speed_distance_m": 437.86534423921256,
+          "progress_to_integrated_speed_ratio": 0.9514130308290775
+        },
+        {
+          "source": "finite_difference",
+          "projection": "xz_horizontal",
+          "sample_count": 548,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 0.00145878817007139,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.00145878817007139,
+          "heading_error_all_rad": {
+            "mean": 0.3031727343628111,
+            "median": 0.1457334503328489,
+            "p95": 0.6546993168843743,
+            "max": 3.1348883962046767
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.30372431378912323,
+            "median": 0.14583321627008283,
+            "p95": 0.6548151794058766,
+            "max": 3.1348883962046767
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 547,
+          "metric_distance_m": {
+            "mean": 7.773729418795672,
+            "median": 5.364804512054098,
+            "p95": 19.868190161818063,
+            "max": 20.078805430179948
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 7.773729418795672,
+            "median": 5.364804512054098,
+            "p95": 19.868190161818063,
+            "max": 20.078805430179944
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 414.5587806317012,
+          "progress_gain_m": 414.5587806317012,
+          "backward_progress_steps": 27,
+          "max_backward_progress_m": 0.04713367730022355,
+          "integrated_speed_distance_m": 437.86534423921256,
+          "progress_to_integrated_speed_ratio": 0.9467723035993947
+        },
+        {
+          "source": "finite_difference",
+          "projection": "xy",
+          "sample_count": 548,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 0.8145656897764519,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.6273792280386683,
+          "heading_error_all_rad": {
+            "mean": 0.19765399885968357,
+            "median": 0.0081401759640376,
+            "p95": 1.0179732102388468,
+            "max": 3.1108981818736274
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.19652618955270598,
+            "median": 0.008114741522697866,
+            "p95": 0.9774640040607463,
+            "max": 3.1108981818736274
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 547,
+          "metric_distance_m": {
+            "mean": 1.2877176146591103,
+            "median": 0.013341428276543688,
+            "p95": 6.905296715204824,
+            "max": 8.218741127943622
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 8.205097059823284,
+            "median": 5.64128154414775,
+            "p95": 21.40705510156574,
+            "max": 21.644955097829737
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 422.5493251271214,
+          "progress_gain_m": 422.5493251271214,
+          "backward_progress_steps": 27,
+          "max_backward_progress_m": 0.03797102860767154,
+          "integrated_speed_distance_m": 437.86534423921256,
+          "progress_to_integrated_speed_ratio": 0.9650211661790621
+        },
+        {
+          "source": "finite_difference",
+          "projection": "yz",
+          "sample_count": 548,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 0.0029658835426049635,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.0029658835426049635,
+          "heading_error_all_rad": {
+            "mean": 1.1536534539898453,
+            "median": 0.49709790357968586,
+            "p95": 3.1358297329654827,
+            "max": 3.141511843950825
+          },
+          "heading_error_moving_rad": {
+            "mean": 1.1557570875738439,
+            "median": 0.497124988739015,
+            "p95": 3.135873228029326,
+            "max": 3.141511843950825
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 547,
+          "metric_distance_m": {
+            "mean": 4.435658441434062,
+            "median": 0.4314248101169187,
+            "p95": 16.01625339641557,
+            "max": 16.022799606752017
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 121.56546079463068,
+            "median": 24.123030567163468,
+            "p95": 341.0316041042741,
+            "max": 341.6630130880723
+          },
+          "progress_start_m": 2.0743295609844584e-06,
+          "progress_end_m": 66.67088521443982,
+          "progress_gain_m": 66.67088314011026,
+          "backward_progress_steps": 152,
+          "max_backward_progress_m": 16.20084983459583,
+          "integrated_speed_distance_m": 437.86534423921256,
+          "progress_to_integrated_speed_ratio": 0.15226343901673783
+        }
+      ]
+    },
+    {
+      "name": "real_repeat_1",
+      "centerline": "C:\\Code_Stuff\\TRACK\\maps\\A01-Race_0.5m_cl2.npy",
+      "rollout": "C:\\Code_Stuff\\TRACK\\eval_results\\hybrid_rollouts\\A01-Race.Challenge_1793658034903_19052.csv",
+      "samples": 903,
+      "duration_s": 45.1,
+      "heading_source_agreement": {
+        "samples_compared": 902,
+        "mean_abs_xz_angle_rad": 0.012343286515102645,
+        "median_abs_xz_angle_rad": 0.006178913043456635,
+        "p95_abs_xz_angle_rad": 0.03530913438039525
+      },
+      "evaluations": [
+        {
+          "source": "recorded",
+          "projection": "current_3d",
+          "sample_count": 903,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 1.5722551149649682,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.0014588534285469024,
+          "heading_error_all_rad": {
+            "mean": 0.21666190337714814,
+            "median": 0.12152047993479442,
+            "p95": 0.5229258400646025,
+            "max": 1.920557467915259
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.21515902841973367,
+            "median": 0.1214134462370382,
+            "p95": 0.5184299478496798,
+            "max": 1.920557467915259
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 902,
+          "metric_distance_m": {
+            "mean": 6.781968707751434,
+            "median": 5.142392485576887,
+            "p95": 16.285921033031507,
+            "max": 58.824887256615675
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 6.0537858246620555,
+            "median": 5.09198697716465,
+            "p95": 14.457605639085113,
+            "max": 28.683728134752556
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1707.6735378575672,
+          "progress_gain_m": 1707.6735378575672,
+          "backward_progress_steps": 38,
+          "max_backward_progress_m": 1.680963855566688,
+          "integrated_speed_distance_m": 1820.4930371806026,
+          "progress_to_integrated_speed_ratio": 0.9380280522809585
+        },
+        {
+          "source": "recorded",
+          "projection": "xz_horizontal",
+          "sample_count": 903,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 1.5722551149649682,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.0014588534285469024,
+          "heading_error_all_rad": {
+            "mean": 0.21667166393933635,
+            "median": 0.12152047993479442,
+            "p95": 0.5229258400646025,
+            "max": 1.9204145406399888
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.21516879980294423,
+            "median": 0.1214134462370382,
+            "p95": 0.5184299478496798,
+            "max": 1.9204145406399888
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 902,
+          "metric_distance_m": {
+            "mean": 5.764944233094391,
+            "median": 5.043694236139685,
+            "p95": 13.683699223918927,
+            "max": 17.042253365401365
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 5.764944233094392,
+            "median": 5.043694236139685,
+            "p95": 13.683699223918925,
+            "max": 17.042253365401365
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1735.6664771782484,
+          "progress_gain_m": 1735.6664771782484,
+          "backward_progress_steps": 38,
+          "max_backward_progress_m": 0.19735148879112785,
+          "integrated_speed_distance_m": 1820.4930371806026,
+          "progress_to_integrated_speed_ratio": 0.9534046226654483
+        },
+        {
+          "source": "recorded",
+          "projection": "xy",
+          "sample_count": 903,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": null,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.7175113955903027,
+          "heading_error_all_rad": {
+            "mean": 0.2044418491633821,
+            "median": 0.0055043265289165255,
+            "p95": 2.070117121987827,
+            "max": 3.1368523211291235
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.2044418491633821,
+            "median": 0.0055043265289165255,
+            "p95": 2.070117121987827,
+            "max": 3.1368523211291235
+          },
+          "invalid_heading_sample_count": 1,
+          "moving_heading_sample_count": 902,
+          "metric_distance_m": {
+            "mean": 1.6702227419418836,
+            "median": 0.018121457074944926,
+            "p95": 8.052875444378724,
+            "max": 57.18898179564296
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 9.4160990776294,
+            "median": 6.99378370694993,
+            "p95": 31.897970998660664,
+            "max": 72.60446737626499
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1707.5310244246393,
+          "progress_gain_m": 1707.5310244246393,
+          "backward_progress_steps": 39,
+          "max_backward_progress_m": 4.776999388513332,
+          "integrated_speed_distance_m": 1820.4930371806026,
+          "progress_to_integrated_speed_ratio": 0.9379497694037283
+        },
+        {
+          "source": "recorded",
+          "projection": "yz",
+          "sample_count": 903,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 1.5737622103375015,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.002965910839644259,
+          "heading_error_all_rad": {
+            "mean": 1.1452386887913062,
+            "median": 1.1614445458576386,
+            "p95": 3.119913956603008,
+            "max": 3.141551529589069
+          },
+          "heading_error_moving_rad": {
+            "mean": 1.1447636072818315,
+            "median": 1.161366405101674,
+            "p95": 3.1199844034079636,
+            "max": 3.141551529589069
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 902,
+          "metric_distance_m": {
+            "mean": 145.84624817099424,
+            "median": 8.727520364016975,
+            "p95": 497.31423063961313,
+            "max": 503.2594569223394
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 192.22877558788292,
+            "median": 43.77976823014172,
+            "p95": 525.0926788294147,
+            "max": 534.3719164249852
+          },
+          "progress_start_m": 2.0743295609844584e-06,
+          "progress_end_m": 500.009467099425,
+          "progress_gain_m": 500.00946502509544,
+          "backward_progress_steps": 234,
+          "max_backward_progress_m": 9.072519692185779,
+          "integrated_speed_distance_m": 1820.4930371806026,
+          "progress_to_integrated_speed_ratio": 0.27465607108251294
+        },
+        {
+          "source": "finite_difference",
+          "projection": "current_3d",
+          "sample_count": 903,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 0.00145878817007139,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.00145878817007139,
+          "heading_error_all_rad": {
+            "mean": 0.2175166511531129,
+            "median": 0.11931889114905703,
+            "p95": 0.5176148641392404,
+            "max": 2.042869532323965
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.21775618315198544,
+            "median": 0.11937707298704958,
+            "p95": 0.5186107957783058,
+            "max": 2.042869532323965
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 902,
+          "metric_distance_m": {
+            "mean": 6.781968707751434,
+            "median": 5.142392485576887,
+            "p95": 16.285921033031507,
+            "max": 58.824887256615675
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 6.0537858246620555,
+            "median": 5.09198697716465,
+            "p95": 14.457605639085113,
+            "max": 28.683728134752556
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1707.6735378575672,
+          "progress_gain_m": 1707.6735378575672,
+          "backward_progress_steps": 38,
+          "max_backward_progress_m": 1.680963855566688,
+          "integrated_speed_distance_m": 1820.4930371806026,
+          "progress_to_integrated_speed_ratio": 0.9380280522809585
+        },
+        {
+          "source": "finite_difference",
+          "projection": "xz_horizontal",
+          "sample_count": 903,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 0.00145878817007139,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.00145878817007139,
+          "heading_error_all_rad": {
+            "mean": 0.21750308662557005,
+            "median": 0.11931889114905703,
+            "p95": 0.5176148641392404,
+            "max": 2.0428717958677325
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.21774260358616376,
+            "median": 0.11937707298704958,
+            "p95": 0.5186107957783058,
+            "max": 2.0428717958677325
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 902,
+          "metric_distance_m": {
+            "mean": 5.764944233094391,
+            "median": 5.043694236139685,
+            "p95": 13.683699223918927,
+            "max": 17.042253365401365
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 5.764944233094392,
+            "median": 5.043694236139685,
+            "p95": 13.683699223918925,
+            "max": 17.042253365401365
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1735.6664771782484,
+          "progress_gain_m": 1735.6664771782484,
+          "backward_progress_steps": 38,
+          "max_backward_progress_m": 0.19735148879112785,
+          "integrated_speed_distance_m": 1820.4930371806026,
+          "progress_to_integrated_speed_ratio": 0.9534046226654483
+        },
+        {
+          "source": "finite_difference",
+          "projection": "xy",
+          "sample_count": 903,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 0.8375974330885891,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.7547129244495112,
+          "heading_error_all_rad": {
+            "mean": 0.2083688063952214,
+            "median": 0.004534769529207505,
+            "p95": 2.07123922101384,
+            "max": 3.137221388839902
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.20767121368270106,
+            "median": 0.004519298967984309,
+            "p95": 2.071248448237475,
+            "max": 3.137221388839902
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 902,
+          "metric_distance_m": {
+            "mean": 1.6702227419418836,
+            "median": 0.018121457074944926,
+            "p95": 8.052875444378724,
+            "max": 57.18898179564296
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 9.4160990776294,
+            "median": 6.99378370694993,
+            "p95": 31.897970998660664,
+            "max": 72.60446737626499
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1707.5310244246393,
+          "progress_gain_m": 1707.5310244246393,
+          "backward_progress_steps": 39,
+          "max_backward_progress_m": 4.776999388513332,
+          "integrated_speed_distance_m": 1820.4930371806026,
+          "progress_to_integrated_speed_ratio": 0.9379497694037283
+        },
+        {
+          "source": "finite_difference",
+          "projection": "yz",
+          "sample_count": 903,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 0.0029658835426049635,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.0029658835426049635,
+          "heading_error_all_rad": {
+            "mean": 1.1790591869682507,
+            "median": 1.1624283088568017,
+            "p95": 3.1257620555413617,
+            "max": 3.1409148495209003
+          },
+          "heading_error_moving_rad": {
+            "mean": 1.180363059810186,
+            "median": 1.1629536996136636,
+            "p95": 3.125780869773898,
+            "max": 3.1409148495209003
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 902,
+          "metric_distance_m": {
+            "mean": 145.84624817099424,
+            "median": 8.727520364016975,
+            "p95": 497.31423063961313,
+            "max": 503.2594569223394
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 192.22877558788292,
+            "median": 43.77976823014172,
+            "p95": 525.0926788294147,
+            "max": 534.3719164249852
+          },
+          "progress_start_m": 2.0743295609844584e-06,
+          "progress_end_m": 500.009467099425,
+          "progress_gain_m": 500.00946502509544,
+          "backward_progress_steps": 234,
+          "max_backward_progress_m": 9.072519692185779,
+          "integrated_speed_distance_m": 1820.4930371806026,
+          "progress_to_integrated_speed_ratio": 0.27465607108251294
+        }
+      ]
+    },
+    {
+      "name": "real_repeat_2",
+      "centerline": "C:\\Code_Stuff\\TRACK\\maps\\A01-Race_0.5m_cl2.npy",
+      "rollout": "C:\\Code_Stuff\\TRACK\\eval_results\\hybrid_rollouts\\A01-Race.Challenge_1793658041712_19052.csv",
+      "samples": 896,
+      "duration_s": 44.75,
+      "heading_source_agreement": {
+        "samples_compared": 895,
+        "mean_abs_xz_angle_rad": 0.010409318723034697,
+        "median_abs_xz_angle_rad": 0.006051906651905803,
+        "p95_abs_xz_angle_rad": 0.027007381047406517
+      },
+      "evaluations": [
+        {
+          "source": "recorded",
+          "projection": "current_3d",
+          "sample_count": 896,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 1.5722551149649682,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.10793639963015966,
+          "heading_error_all_rad": {
+            "mean": 0.207487978342777,
+            "median": 0.1251680544945455,
+            "p95": 0.5490329375388531,
+            "max": 1.5722551149649682
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.20596309886051758,
+            "median": 0.12516805398217157,
+            "p95": 0.5396288840633172,
+            "max": 1.553458923534559
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 895,
+          "metric_distance_m": {
+            "mean": 6.095442886752845,
+            "median": 4.619189052319343,
+            "p95": 15.758738763206786,
+            "max": 47.956080831793706
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 5.519638212177796,
+            "median": 4.59913321302664,
+            "p95": 13.84165685603653,
+            "max": 24.28457504325236
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1718.2541845860474,
+          "progress_gain_m": 1718.2541845860474,
+          "backward_progress_steps": 39,
+          "max_backward_progress_m": 0.7446145768537917,
+          "integrated_speed_distance_m": 1810.0762233436108,
+          "progress_to_integrated_speed_ratio": 0.9492717281331127
+        },
+        {
+          "source": "recorded",
+          "projection": "xz_horizontal",
+          "sample_count": 896,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 1.5722551149649682,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.10793639963015966,
+          "heading_error_all_rad": {
+            "mean": 0.2075357626344519,
+            "median": 0.12516805305329015,
+            "p95": 0.5490329375388531,
+            "max": 1.5722551149649682
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.2060109365424625,
+            "median": 0.1251680521244074,
+            "p95": 0.5396288840633172,
+            "max": 1.5533137256294482
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 895,
+          "metric_distance_m": {
+            "mean": 5.335505185884563,
+            "median": 4.596896635001462,
+            "p95": 12.879394905937474,
+            "max": 17.803858935457615
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 5.335505185884563,
+            "median": 4.596896635001462,
+            "p95": 12.879394905937474,
+            "max": 17.803858935457615
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1739.7709527731204,
+          "progress_gain_m": 1739.7709527731204,
+          "backward_progress_steps": 0,
+          "max_backward_progress_m": 0.0,
+          "integrated_speed_distance_m": 1810.0762233436108,
+          "progress_to_integrated_speed_ratio": 0.9611589447649773
+        },
+        {
+          "source": "recorded",
+          "projection": "xy",
+          "sample_count": 896,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": null,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.706227471040084,
+          "heading_error_all_rad": {
+            "mean": 0.3343130749481547,
+            "median": 0.027230528453700664,
+            "p95": 1.106226278691651,
+            "max": 3.1398149523750623
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.3343130749481547,
+            "median": 0.027230528453700664,
+            "p95": 1.106226278691651,
+            "max": 3.1398149523750623
+          },
+          "invalid_heading_sample_count": 1,
+          "moving_heading_sample_count": 895,
+          "metric_distance_m": {
+            "mean": 81.75062081328431,
+            "median": 0.02952014061192349,
+            "p95": 507.9414705083741,
+            "max": 514.627247947437
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 120.81619915144354,
+            "median": 9.881336028387016,
+            "p95": 572.3849536214105,
+            "max": 584.7779587867946
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1023.5601822490485,
+          "progress_gain_m": 1023.5601822490485,
+          "backward_progress_steps": 5,
+          "max_backward_progress_m": 16.289207583273765,
+          "integrated_speed_distance_m": 1810.0762233436108,
+          "progress_to_integrated_speed_ratio": 0.5654790494724617
+        },
+        {
+          "source": "recorded",
+          "projection": "yz",
+          "sample_count": 896,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 1.5737622103375015,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.044404271490916525,
+          "heading_error_all_rad": {
+            "mean": 0.718366638412542,
+            "median": 0.1917768321002018,
+            "p95": 3.0923922906007917,
+            "max": 3.139789216218633
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.7174108891701678,
+            "median": 0.19130781727539725,
+            "p95": 3.092426960652091,
+            "max": 3.139789216218633
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 895,
+          "metric_distance_m": {
+            "mean": 6.872547052687215,
+            "median": 0.04639261374147759,
+            "p95": 49.290537887573244,
+            "max": 63.318660791015624
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 56.70390050299289,
+            "median": 15.236527813666061,
+            "p95": 321.55503387639567,
+            "max": 351.08906387473485
+          },
+          "progress_start_m": 2.0743295609844584e-06,
+          "progress_end_m": 1423.7434380098348,
+          "progress_gain_m": 1423.7434359355052,
+          "backward_progress_steps": 97,
+          "max_backward_progress_m": 2.328318124492398,
+          "integrated_speed_distance_m": 1810.0762233436108,
+          "progress_to_integrated_speed_ratio": 0.7865654592741605
+        },
+        {
+          "source": "finite_difference",
+          "projection": "current_3d",
+          "sample_count": 896,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 0.049498880475078444,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.10669516013037583,
+          "heading_error_all_rad": {
+            "mean": 0.20451933530299554,
+            "median": 0.12148306809203291,
+            "p95": 0.5544829009343136,
+            "max": 1.5540184374138217
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.20469254251509375,
+            "median": 0.12151073014843483,
+            "p95": 0.5556749874766354,
+            "max": 1.5540184374138217
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 895,
+          "metric_distance_m": {
+            "mean": 6.095442886752845,
+            "median": 4.619189052319343,
+            "p95": 15.758738763206786,
+            "max": 47.956080831793706
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 5.519638212177796,
+            "median": 4.59913321302664,
+            "p95": 13.84165685603653,
+            "max": 24.28457504325236
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1718.2541845860474,
+          "progress_gain_m": 1718.2541845860474,
+          "backward_progress_steps": 39,
+          "max_backward_progress_m": 0.7446145768537917,
+          "integrated_speed_distance_m": 1810.0762233436108,
+          "progress_to_integrated_speed_ratio": 0.9492717281331127
+        },
+        {
+          "source": "finite_difference",
+          "projection": "xz_horizontal",
+          "sample_count": 896,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 0.049498880475078444,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.10669516013037583,
+          "heading_error_all_rad": {
+            "mean": 0.2045460146352265,
+            "median": 0.12148306809203291,
+            "p95": 0.5544829009343136,
+            "max": 1.5536582215677122
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.20471925165663452,
+            "median": 0.12151073014843483,
+            "p95": 0.5556749874766354,
+            "max": 1.5536582215677122
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 895,
+          "metric_distance_m": {
+            "mean": 5.335505185884563,
+            "median": 4.596896635001462,
+            "p95": 12.879394905937474,
+            "max": 17.803858935457615
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 5.335505185884563,
+            "median": 4.596896635001462,
+            "p95": 12.879394905937474,
+            "max": 17.803858935457615
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1739.7709527731204,
+          "progress_gain_m": 1739.7709527731204,
+          "backward_progress_steps": 0,
+          "max_backward_progress_m": 0.0,
+          "integrated_speed_distance_m": 1810.0762233436108,
+          "progress_to_integrated_speed_ratio": 0.9611589447649773
+        },
+        {
+          "source": "finite_difference",
+          "projection": "xy",
+          "sample_count": 896,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 0.8190370897154078,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.654059183613712,
+          "heading_error_all_rad": {
+            "mean": 0.3394774830326312,
+            "median": 0.02278321900854574,
+            "p95": 1.1063403376753358,
+            "max": 3.138462108551522
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.3389416622430414,
+            "median": 0.02277040066806002,
+            "p95": 1.1063412665666468,
+            "max": 3.138462108551522
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 895,
+          "metric_distance_m": {
+            "mean": 81.75062081328431,
+            "median": 0.02952014061192349,
+            "p95": 507.9414705083741,
+            "max": 514.627247947437
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 120.81619915144354,
+            "median": 9.881336028387016,
+            "p95": 572.3849536214105,
+            "max": 584.7779587867946
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1023.5601822490485,
+          "progress_gain_m": 1023.5601822490485,
+          "backward_progress_steps": 5,
+          "max_backward_progress_m": 16.289207583273765,
+          "integrated_speed_distance_m": 1810.0762233436108,
+          "progress_to_integrated_speed_ratio": 0.5654790494724617
+        },
+        {
+          "source": "finite_difference",
+          "projection": "yz",
+          "sample_count": 896,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 0.01251104531380598,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.05072663811445022,
+          "heading_error_all_rad": {
+            "mean": 0.7128036433487276,
+            "median": 0.16540076264167736,
+            "p95": 3.0911113120196223,
+            "max": 3.1411433257239443
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.7135860931789342,
+            "median": 0.1670377682192581,
+            "p95": 3.091187754641433,
+            "max": 3.1411433257239443
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 895,
+          "metric_distance_m": {
+            "mean": 6.872547052687215,
+            "median": 0.04639261374147759,
+            "p95": 49.290537887573244,
+            "max": 63.318660791015624
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 56.70390050299289,
+            "median": 15.236527813666061,
+            "p95": 321.55503387639567,
+            "max": 351.08906387473485
+          },
+          "progress_start_m": 2.0743295609844584e-06,
+          "progress_end_m": 1423.7434380098348,
+          "progress_gain_m": 1423.7434359355052,
+          "backward_progress_steps": 97,
+          "max_backward_progress_m": 2.328318124492398,
+          "integrated_speed_distance_m": 1810.0762233436108,
+          "progress_to_integrated_speed_ratio": 0.7865654592741605
+        }
+      ]
+    },
+    {
+      "name": "real_repeat_3",
+      "centerline": "C:\\Code_Stuff\\TRACK\\maps\\A01-Race_0.5m_cl2.npy",
+      "rollout": "C:\\Code_Stuff\\TRACK\\eval_results\\hybrid_rollouts\\A01-Race.Challenge_1793658048487_19052.csv",
+      "samples": 905,
+      "duration_s": 45.2,
+      "heading_source_agreement": {
+        "samples_compared": 904,
+        "mean_abs_xz_angle_rad": 0.013394762446550553,
+        "median_abs_xz_angle_rad": 0.006024976241892022,
+        "p95_abs_xz_angle_rad": 0.04070060149561667
+      },
+      "evaluations": [
+        {
+          "source": "recorded",
+          "projection": "current_3d",
+          "sample_count": 905,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 1.5722551149649682,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.0014588737249487949,
+          "heading_error_all_rad": {
+            "mean": 0.2513042503520299,
+            "median": 0.11313475089069058,
+            "p95": 1.087201630539549,
+            "max": 3.095266484424209
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.2498430215194934,
+            "median": 0.11295508494124729,
+            "p95": 1.0716991139171816,
+            "max": 3.095266484424209
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 904,
+          "metric_distance_m": {
+            "mean": 5.310076741000451,
+            "median": 4.8995918161493694,
+            "p95": 12.439951691700863,
+            "max": 16.182409190754623
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 5.077153054735266,
+            "median": 4.6527777422334315,
+            "p95": 11.835612483542414,
+            "max": 16.182408382740714
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1744.1693011173777,
+          "progress_gain_m": 1744.1693011173777,
+          "backward_progress_steps": 35,
+          "max_backward_progress_m": 1.193901825153489,
+          "integrated_speed_distance_m": 1833.7965618595483,
+          "progress_to_integrated_speed_ratio": 0.9511247525454597
+        },
+        {
+          "source": "recorded",
+          "projection": "xz_horizontal",
+          "sample_count": 905,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 1.5722551149649682,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.0014588737249487949,
+          "heading_error_all_rad": {
+            "mean": 0.25131521449157396,
+            "median": 0.11313475089069058,
+            "p95": 1.087086921947474,
+            "max": 3.095123312892847
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.2498539977875104,
+            "median": 0.11295508494124729,
+            "p95": 1.0716987774300797,
+            "max": 3.095123312892847
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 904,
+          "metric_distance_m": {
+            "mean": 5.018082744831826,
+            "median": 4.6223405446824835,
+            "p95": 11.826591084856428,
+            "max": 16.182408382740405
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 5.018082744831826,
+            "median": 4.6223405446824835,
+            "p95": 11.826591084856428,
+            "max": 16.182408382740405
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1746.8505058054582,
+          "progress_gain_m": 1746.8505058054582,
+          "backward_progress_steps": 35,
+          "max_backward_progress_m": 1.1459910894413952,
+          "integrated_speed_distance_m": 1833.7965618595483,
+          "progress_to_integrated_speed_ratio": 0.9525868583994272
+        },
+        {
+          "source": "recorded",
+          "projection": "xy",
+          "sample_count": 905,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": null,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.689651670311533,
+          "heading_error_all_rad": {
+            "mean": 0.4013350682193781,
+            "median": 0.030019065985313453,
+            "p95": 2.2214994096459764,
+            "max": 3.141372475441772
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.4013350682193781,
+            "median": 0.030019065985313453,
+            "p95": 2.2214994096459764,
+            "max": 3.141372475441772
+          },
+          "invalid_heading_sample_count": 1,
+          "moving_heading_sample_count": 904,
+          "metric_distance_m": {
+            "mean": 93.4256278609747,
+            "median": 0.036329929059342896,
+            "p95": 534.0770273454046,
+            "max": 544.3656796393983
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 133.02375385256065,
+            "median": 9.949879529842832,
+            "p95": 594.780907232488,
+            "max": 607.9129696471185
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1023.5601822490485,
+          "progress_gain_m": 1023.5601822490485,
+          "backward_progress_steps": 5,
+          "max_backward_progress_m": 16.141135782659944,
+          "integrated_speed_distance_m": 1833.7965618595483,
+          "progress_to_integrated_speed_ratio": 0.5581645224654116
+        },
+        {
+          "source": "recorded",
+          "projection": "yz",
+          "sample_count": 905,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 1.5737622103375015,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.002965922163788548,
+          "heading_error_all_rad": {
+            "mean": 1.3224667083026376,
+            "median": 1.567636391269291,
+            "p95": 3.0501061242257803,
+            "max": 3.1415765564953895
+          },
+          "heading_error_moving_rad": {
+            "mean": 1.3221887265525991,
+            "median": 1.567519677270755,
+            "p95": 3.050520612507985,
+            "max": 3.1415765564953895
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 904,
+          "metric_distance_m": {
+            "mean": 180.85710241699184,
+            "median": 64.4696868221462,
+            "p95": 519.0419534406441,
+            "max": 521.0935102937069
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 431.0454112522869,
+            "median": 513.6780262337671,
+            "p95": 882.539590492708,
+            "max": 893.4544446029894
+          },
+          "progress_start_m": 2.0743295609844584e-06,
+          "progress_end_m": 0.0,
+          "progress_gain_m": -2.0743295609844584e-06,
+          "backward_progress_steps": 100,
+          "max_backward_progress_m": 16.501713312114983,
+          "integrated_speed_distance_m": 1833.7965618595483,
+          "progress_to_integrated_speed_ratio": -1.1311666758067204e-09
+        },
+        {
+          "source": "finite_difference",
+          "projection": "current_3d",
+          "sample_count": 905,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 0.00145878817007139,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.00145878817007139,
+          "heading_error_all_rad": {
+            "mean": 0.2510721404150977,
+            "median": 0.11274423563716596,
+            "p95": 1.0738804528548593,
+            "max": 3.126564803578029
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.2513482613799705,
+            "median": 0.1128325620527566,
+            "p95": 1.0751911053260232,
+            "max": 3.126564803578029
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 904,
+          "metric_distance_m": {
+            "mean": 5.310076741000451,
+            "median": 4.8995918161493694,
+            "p95": 12.439951691700863,
+            "max": 16.182409190754623
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 5.077153054735266,
+            "median": 4.6527777422334315,
+            "p95": 11.835612483542414,
+            "max": 16.182408382740714
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1744.1693011173777,
+          "progress_gain_m": 1744.1693011173777,
+          "backward_progress_steps": 35,
+          "max_backward_progress_m": 1.193901825153489,
+          "integrated_speed_distance_m": 1833.7965618595483,
+          "progress_to_integrated_speed_ratio": 0.9511247525454597
+        },
+        {
+          "source": "finite_difference",
+          "projection": "xz_horizontal",
+          "sample_count": 905,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 0.00145878817007139,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.00145878817007139,
+          "heading_error_all_rad": {
+            "mean": 0.25108227233005814,
+            "median": 0.11274423563716596,
+            "p95": 1.0737652956133983,
+            "max": 3.1266076103224174
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.2513584045028015,
+            "median": 0.1128325620527566,
+            "p95": 1.0750688909599082,
+            "max": 3.1266076103224174
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 904,
+          "metric_distance_m": {
+            "mean": 5.018082744831826,
+            "median": 4.6223405446824835,
+            "p95": 11.826591084856428,
+            "max": 16.182408382740405
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 5.018082744831826,
+            "median": 4.6223405446824835,
+            "p95": 11.826591084856428,
+            "max": 16.182408382740405
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1746.8505058054582,
+          "progress_gain_m": 1746.8505058054582,
+          "backward_progress_steps": 35,
+          "max_backward_progress_m": 1.1459910894413952,
+          "integrated_speed_distance_m": 1833.7965618595483,
+          "progress_to_integrated_speed_ratio": 0.9525868583994272
+        },
+        {
+          "source": "finite_difference",
+          "projection": "xy",
+          "sample_count": 905,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 0.8145656897764519,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.6273792280386683,
+          "heading_error_all_rad": {
+            "mean": 0.4049299027245317,
+            "median": 0.02289540022511094,
+            "p95": 2.221435848940965,
+            "max": 3.139714410156893
+          },
+          "heading_error_moving_rad": {
+            "mean": 0.4044767657919522,
+            "median": 0.022634957264954236,
+            "p95": 2.221455282748972,
+            "max": 3.139714410156893
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 904,
+          "metric_distance_m": {
+            "mean": 93.4256278609747,
+            "median": 0.036329929059342896,
+            "p95": 534.0770273454046,
+            "max": 544.3656796393983
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 133.02375385256065,
+            "median": 9.949879529842832,
+            "p95": 594.780907232488,
+            "max": 607.9129696471185
+          },
+          "progress_start_m": 0.0,
+          "progress_end_m": 1023.5601822490485,
+          "progress_gain_m": 1023.5601822490485,
+          "backward_progress_steps": 5,
+          "max_backward_progress_m": 16.141135782659944,
+          "integrated_speed_distance_m": 1833.7965618595483,
+          "progress_to_integrated_speed_ratio": 0.5581645224654116
+        },
+        {
+          "source": "finite_difference",
+          "projection": "yz",
+          "sample_count": 905,
+          "stationary_sample_count": 1,
+          "stationary_sample_indices": [
+            0
+          ],
+          "first_sample_abs_heading_error_rad": 0.0029658835426049635,
+          "first_moving_sample_index": 1,
+          "first_moving_abs_heading_error_rad": 0.0029658835426049635,
+          "heading_error_all_rad": {
+            "mean": 1.3633072137731934,
+            "median": 1.570291192150278,
+            "p95": 3.0772595957831275,
+            "max": 3.1412740367498078
+          },
+          "heading_error_moving_rad": {
+            "mean": 1.364812016129643,
+            "median": 1.570382785698187,
+            "p95": 3.077267288830717,
+            "max": 3.1412740367498078
+          },
+          "invalid_heading_sample_count": 0,
+          "moving_heading_sample_count": 904,
+          "metric_distance_m": {
+            "mean": 180.85710241699184,
+            "median": 64.4696868221462,
+            "p95": 519.0419534406441,
+            "max": 521.0935102937069
+          },
+          "horizontal_xz_distance_m": {
+            "mean": 431.0454112522869,
+            "median": 513.6780262337671,
+            "p95": 882.539590492708,
+            "max": 893.4544446029894
+          },
+          "progress_start_m": 2.0743295609844584e-06,
+          "progress_end_m": 0.0,
+          "progress_gain_m": -2.0743295609844584e-06,
+          "backward_progress_steps": 100,
+          "max_backward_progress_m": 16.501713312114983,
+          "integrated_speed_distance_m": 1833.7965618595483,
+          "progress_to_integrated_speed_ratio": -1.1311666758067204e-09
+        }
+      ]
+    }
+  ],
+  "aggregate_summaries": [
+    {
+      "source": "recorded",
+      "projection": "current_3d",
+      "cases": 4,
+      "samples": 3252,
+      "stationary_samples": 4,
+      "stationary_sample_rate": 0.0012300123001230013,
+      "invalid_heading_samples": 0,
+      "mean_abs_heading_error_all_rad": 0.23013685457330946,
+      "mean_abs_heading_error_moving_rad": 0.2284839995728271,
+      "mean_horizontal_xz_distance_m": 5.928095042081779,
+      "total_backward_progress_steps": 139,
+      "mean_progress_gain_m": 1396.6719544546597
+    },
+    {
+      "source": "recorded",
+      "projection": "xz_horizontal",
+      "cases": 4,
+      "samples": 3252,
+      "stationary_samples": 4,
+      "stationary_sample_rate": 0.0012300123001230013,
+      "invalid_heading_samples": 0,
+      "mean_abs_heading_error_all_rad": 0.2301555534942253,
+      "mean_abs_heading_error_moving_rad": 0.22850272152197065,
+      "mean_horizontal_xz_distance_m": 5.777283485427318,
+      "total_backward_progress_steps": 100,
+      "mean_progress_gain_m": 1409.211679097132
+    },
+    {
+      "source": "recorded",
+      "projection": "xy",
+      "cases": 4,
+      "samples": 3252,
+      "stationary_samples": 4,
+      "stationary_sample_rate": 0.0012300123001230013,
+      "invalid_heading_samples": 4,
+      "mean_abs_heading_error_all_rad": 0.28604012219712116,
+      "mean_abs_heading_error_moving_rad": 0.28604012219712116,
+      "mean_horizontal_xz_distance_m": 74.30410280816216,
+      "total_backward_progress_steps": 76,
+      "mean_progress_gain_m": 1044.3001785124643
+    },
+    {
+      "source": "recorded",
+      "projection": "yz",
+      "cases": 4,
+      "samples": 3252,
+      "stationary_samples": 4,
+      "stationary_sample_rate": 0.0012300123001230013,
+      "invalid_heading_samples": 0,
+      "mean_abs_heading_error_all_rad": 1.077351885492515,
+      "mean_abs_heading_error_moving_rad": 1.0767405427279277,
+      "mean_horizontal_xz_distance_m": 209.44134345181953,
+      "total_backward_progress_steps": 583,
+      "mean_progress_gain_m": 497.60594550659533
+    },
+    {
+      "source": "finite_difference",
+      "projection": "current_3d",
+      "cases": 4,
+      "samples": 3252,
+      "stationary_samples": 4,
+      "stationary_sample_rate": 0.0012300123001230013,
+      "invalid_heading_samples": 0,
+      "mean_abs_heading_error_all_rad": 0.2377091720461309,
+      "mean_abs_heading_error_moving_rad": 0.23798533012593365,
+      "mean_horizontal_xz_distance_m": 5.928095042081779,
+      "total_backward_progress_steps": 139,
+      "mean_progress_gain_m": 1396.6719544546597
+    },
+    {
+      "source": "finite_difference",
+      "projection": "xz_horizontal",
+      "cases": 4,
+      "samples": 3252,
+      "stationary_samples": 4,
+      "stationary_sample_rate": 0.0012300123001230013,
+      "invalid_heading_samples": 0,
+      "mean_abs_heading_error_all_rad": 0.23771421624402703,
+      "mean_abs_heading_error_moving_rad": 0.2379903805358961,
+      "mean_horizontal_xz_distance_m": 5.777283485427318,
+      "total_backward_progress_steps": 100,
+      "mean_progress_gain_m": 1409.211679097132
+    },
+    {
+      "source": "finite_difference",
+      "projection": "xy",
+      "cases": 4,
+      "samples": 3252,
+      "stationary_samples": 4,
+      "stationary_sample_rate": 0.0012300123001230013,
+      "invalid_heading_samples": 0,
+      "mean_abs_heading_error_all_rad": 0.2973877030482565,
+      "mean_abs_heading_error_moving_rad": 0.2967423166288711,
+      "mean_horizontal_xz_distance_m": 74.30410280816216,
+      "total_backward_progress_steps": 76,
+      "mean_progress_gain_m": 1044.3001785124643
+    },
+    {
+      "source": "finite_difference",
+      "projection": "yz",
+      "cases": 4,
+      "samples": 3252,
+      "stationary_samples": 4,
+      "stationary_sample_rate": 0.0012300123001230013,
+      "invalid_heading_samples": 0,
+      "mean_abs_heading_error_all_rad": 1.0975884475780953,
+      "mean_abs_heading_error_moving_rad": 1.098933566141633,
+      "mean_horizontal_xz_distance_m": 209.44134345181953,
+      "total_backward_progress_steps": 583,
+      "mean_progress_gain_m": 497.60594550659533
+    }
+  ],
+  "interpretation": {
+    "stationary_heading_artifact": {
+      "observed": true,
+      "meaning": "The zero-speed fallback heading should not be treated as a driving divergence.",
+      "recommended_analysis_policy": "Exclude stationary samples from heading-event calibration or initialize from the first moving heading."
+    },
+    "moving_heading_source": {
+      "observation": "The captured moving heading is a close X/Z match to finite-difference motion.",
+      "recommended_source": "Keep the captured world-velocity heading for moving samples; use a separate stationary policy."
+    },
+    "projection": {
+      "observation": "XZ horizontal matching reduced mean X/Z distance and did not increase aggregate backward-step count on these captures.",
+      "current_mean_horizontal_xz_distance_m": 5.928095042081779,
+      "xz_mean_horizontal_xz_distance_m": 5.777283485427318,
+      "current_backward_steps": 139,
+      "xz_backward_steps": 100,
+      "recommended_next_calibration": "Treat X/Z horizontal projection as the leading diagnostic convention, but do not change live analysis or control defaults from this evidence alone."
+    },
+    "limitations": [
+      "The captures contain position, velocity-heading proxy, and speed but not the raw rotation matrix or action transitions.",
+      "The finite-difference heading is a motion-direction comparison, not an independent vehicle-forward ground truth.",
+      "The four traces are repeated runs on one map and are not held-out real-physics validation."
+    ]
+  }
+}

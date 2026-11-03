@@ -1,0 +1,1441 @@
+{
+  "scope": "hybrid_real_validation_repeated_capture",
+  "offline_only": false,
+  "real_capture_verified": true,
+  "real_physics_evidence": true,
+  "real_physics_validated": false,
+  "promotion_allowed": false,
+  "actions_modified": false,
+  "controller_defaults_modified": false,
+  "checkpoint": "save/hocko_v1_foundational_checkpoint/weights1.torch",
+  "track": "A01-Race",
+  "repetition_count": 3,
+  "finish_count": 0,
+  "cutoff_rate": 1.0,
+  "results": [
+    {
+      "run_idx": 1,
+      "completion_pct": 78.87483054676909,
+      "distance_m": 1745.5,
+      "duration_s": 45.15,
+      "finished": false,
+      "term_cause": "Stuck_Cutoff_2s",
+      "telemetry_samples": 905
+    },
+    {
+      "run_idx": 2,
+      "completion_pct": 78.87483054676909,
+      "distance_m": 1745.5,
+      "duration_s": 44.8,
+      "finished": false,
+      "term_cause": "Stuck_Cutoff_2s",
+      "telemetry_samples": 903
+    },
+    {
+      "run_idx": 3,
+      "completion_pct": 80.32083145051966,
+      "distance_m": 1777.5,
+      "duration_s": 45.25,
+      "finished": false,
+      "term_cause": "Stuck_Cutoff_2s",
+      "telemetry_samples": 896
+    }
+  ],
+  "mean_completion_pct": 79.35683084801929,
+  "shadow_observer_cases": [
+    {
+      "name": "A01-Race-real-repeat-1",
+      "centerline": "maps\\A01-Race_0.5m_cl2.npy",
+      "rollout": "eval_results\\hybrid_rollouts\\A01-Race.Challenge_1793658034903_19052.csv",
+      "telemetry": {
+        "sample_count": 903,
+        "duration_s": 45.1,
+        "first_divergence_index": 0,
+        "first_divergence_timestamp_s": 0.0,
+        "first_divergence_progress_m": 0.0
+      },
+      "observers": [
+        {
+          "sample_count": 903,
+          "active_sample_count": 223,
+          "events": [
+            {
+              "start_index": 241,
+              "end_index": 247,
+              "start_timestamp_s": 12.05,
+              "end_timestamp_s": 12.35,
+              "duration_s": 0.29999999999999893,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 253,
+              "end_index": 264,
+              "start_timestamp_s": 12.65,
+              "end_timestamp_s": 13.2,
+              "duration_s": 0.5499999999999989,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 294,
+              "end_index": 296,
+              "start_timestamp_s": 14.7,
+              "end_timestamp_s": 14.8,
+              "duration_s": 0.10000000000000142,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 340,
+              "end_index": 358,
+              "start_timestamp_s": 17.0,
+              "end_timestamp_s": 17.9,
+              "duration_s": 0.8999999999999986,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 462,
+              "end_index": 467,
+              "start_timestamp_s": 23.1,
+              "end_timestamp_s": 23.35,
+              "duration_s": 0.25,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 474,
+              "end_index": 478,
+              "start_timestamp_s": 23.7,
+              "end_timestamp_s": 23.9,
+              "duration_s": 0.1999999999999993,
+              "peak_signal_count": 1,
+              "signals": [
+                "lateral_acceleration_margin"
+              ]
+            },
+            {
+              "start_index": 510,
+              "end_index": 601,
+              "start_timestamp_s": 25.5,
+              "end_timestamp_s": 30.05,
+              "duration_s": 4.550000000000001,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 648,
+              "end_index": 687,
+              "start_timestamp_s": 32.4,
+              "end_timestamp_s": 34.35,
+              "duration_s": 1.9500000000000028,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 752,
+              "end_index": 790,
+              "start_timestamp_s": 37.6,
+              "end_timestamp_s": 39.5,
+              "duration_s": 1.8999999999999986,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            }
+          ],
+          "observer_name": "speed_and_lateral_margin",
+          "event_metrics": {
+            "divergence_observed": true,
+            "divergence_index": 0,
+            "divergence_timestamp_s": 0.0,
+            "event_count": 9,
+            "event_before_divergence": false,
+            "first_event_start_index": 241,
+            "first_event_lead_time_s": null,
+            "active_sample_count_from_events": 223,
+            "active_sample_count_before_divergence": 0,
+            "active_precision_before_divergence": 0.0
+          },
+          "signals_observed": [
+            "lateral_acceleration_margin",
+            "speed_margin"
+          ]
+        },
+        {
+          "sample_count": 903,
+          "active_sample_count": 198,
+          "events": [
+            {
+              "start_index": 0,
+              "end_index": 55,
+              "start_timestamp_s": 0.0,
+              "end_timestamp_s": 2.75,
+              "duration_s": 2.75,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 235,
+              "end_index": 256,
+              "start_timestamp_s": 11.75,
+              "end_timestamp_s": 12.8,
+              "duration_s": 1.0500000000000007,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 282,
+              "end_index": 297,
+              "start_timestamp_s": 14.1,
+              "end_timestamp_s": 14.85,
+              "duration_s": 0.75,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 329,
+              "end_index": 338,
+              "start_timestamp_s": 16.45,
+              "end_timestamp_s": 16.9,
+              "duration_s": 0.4499999999999993,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 347,
+              "end_index": 356,
+              "start_timestamp_s": 17.35,
+              "end_timestamp_s": 17.8,
+              "duration_s": 0.4499999999999993,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 448,
+              "end_index": 468,
+              "start_timestamp_s": 22.4,
+              "end_timestamp_s": 23.4,
+              "duration_s": 1.0,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 538,
+              "end_index": 600,
+              "start_timestamp_s": 26.9,
+              "end_timestamp_s": 30.0,
+              "duration_s": 3.1000000000000014,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            }
+          ],
+          "observer_name": "tangent_change_only",
+          "event_metrics": {
+            "divergence_observed": true,
+            "divergence_index": 0,
+            "divergence_timestamp_s": 0.0,
+            "event_count": 7,
+            "event_before_divergence": false,
+            "first_event_start_index": 0,
+            "first_event_lead_time_s": null,
+            "active_sample_count_from_events": 198,
+            "active_sample_count_before_divergence": 0,
+            "active_precision_before_divergence": 0.0
+          },
+          "signals_observed": [
+            "tangent_change"
+          ]
+        },
+        {
+          "sample_count": 903,
+          "active_sample_count": 34,
+          "events": [
+            {
+              "start_index": 867,
+              "end_index": 902,
+              "start_timestamp_s": 43.35,
+              "end_timestamp_s": 45.1,
+              "duration_s": 1.75,
+              "peak_signal_count": 1,
+              "signals": [
+                "forward_alignment_margin"
+              ]
+            }
+          ],
+          "observer_name": "forward_alignment_only",
+          "event_metrics": {
+            "divergence_observed": true,
+            "divergence_index": 0,
+            "divergence_timestamp_s": 0.0,
+            "event_count": 1,
+            "event_before_divergence": false,
+            "first_event_start_index": 867,
+            "first_event_lead_time_s": null,
+            "active_sample_count_from_events": 36,
+            "active_sample_count_before_divergence": 0,
+            "active_precision_before_divergence": 0.0
+          },
+          "signals_observed": [
+            "forward_alignment_margin"
+          ]
+        },
+        {
+          "sample_count": 903,
+          "active_sample_count": 396,
+          "events": [
+            {
+              "start_index": 0,
+              "end_index": 55,
+              "start_timestamp_s": 0.0,
+              "end_timestamp_s": 2.75,
+              "duration_s": 2.75,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 234,
+              "end_index": 264,
+              "start_timestamp_s": 11.7,
+              "end_timestamp_s": 13.2,
+              "duration_s": 1.5,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 282,
+              "end_index": 297,
+              "start_timestamp_s": 14.1,
+              "end_timestamp_s": 14.85,
+              "duration_s": 0.75,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 329,
+              "end_index": 358,
+              "start_timestamp_s": 16.45,
+              "end_timestamp_s": 17.9,
+              "duration_s": 1.4499999999999993,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 448,
+              "end_index": 468,
+              "start_timestamp_s": 22.4,
+              "end_timestamp_s": 23.4,
+              "duration_s": 1.0,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 474,
+              "end_index": 478,
+              "start_timestamp_s": 23.7,
+              "end_timestamp_s": 23.9,
+              "duration_s": 0.1999999999999993,
+              "peak_signal_count": 1,
+              "signals": [
+                "lateral_acceleration_margin"
+              ]
+            },
+            {
+              "start_index": 510,
+              "end_index": 601,
+              "start_timestamp_s": 25.5,
+              "end_timestamp_s": 30.05,
+              "duration_s": 4.550000000000001,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 648,
+              "end_index": 688,
+              "start_timestamp_s": 32.4,
+              "end_timestamp_s": 34.4,
+              "duration_s": 2.0,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 721,
+              "end_index": 790,
+              "start_timestamp_s": 36.05,
+              "end_timestamp_s": 39.5,
+              "duration_s": 3.450000000000003,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 867,
+              "end_index": 902,
+              "start_timestamp_s": 43.35,
+              "end_timestamp_s": 45.1,
+              "duration_s": 1.75,
+              "peak_signal_count": 3,
+              "signals": [
+                "forward_alignment_margin",
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            }
+          ],
+          "observer_name": "all_observable_signals",
+          "event_metrics": {
+            "divergence_observed": true,
+            "divergence_index": 0,
+            "divergence_timestamp_s": 0.0,
+            "event_count": 10,
+            "event_before_divergence": false,
+            "first_event_start_index": 0,
+            "first_event_lead_time_s": null,
+            "active_sample_count_from_events": 398,
+            "active_sample_count_before_divergence": 0,
+            "active_precision_before_divergence": 0.0
+          },
+          "signals_observed": [
+            "forward_alignment_margin",
+            "lateral_acceleration_margin",
+            "speed_margin",
+            "tangent_change"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "A01-Race-real-repeat-2",
+      "centerline": "maps\\A01-Race_0.5m_cl2.npy",
+      "rollout": "eval_results\\hybrid_rollouts\\A01-Race.Challenge_1793658041712_19052.csv",
+      "telemetry": {
+        "sample_count": 896,
+        "duration_s": 44.75,
+        "first_divergence_index": 0,
+        "first_divergence_timestamp_s": 0.0,
+        "first_divergence_progress_m": 0.0
+      },
+      "observers": [
+        {
+          "sample_count": 896,
+          "active_sample_count": 180,
+          "events": [
+            {
+              "start_index": 222,
+              "end_index": 228,
+              "start_timestamp_s": 11.1,
+              "end_timestamp_s": 11.4,
+              "duration_s": 0.3000000000000007,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 239,
+              "end_index": 250,
+              "start_timestamp_s": 11.95,
+              "end_timestamp_s": 12.5,
+              "duration_s": 0.5500000000000007,
+              "peak_signal_count": 1,
+              "signals": [
+                "lateral_acceleration_margin"
+              ]
+            },
+            {
+              "start_index": 275,
+              "end_index": 281,
+              "start_timestamp_s": 13.75,
+              "end_timestamp_s": 14.05,
+              "duration_s": 0.3000000000000007,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 321,
+              "end_index": 329,
+              "start_timestamp_s": 16.05,
+              "end_timestamp_s": 16.45,
+              "duration_s": 0.3999999999999986,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 383,
+              "end_index": 385,
+              "start_timestamp_s": 19.15,
+              "end_timestamp_s": 19.25,
+              "duration_s": 0.10000000000000142,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 437,
+              "end_index": 450,
+              "start_timestamp_s": 21.85,
+              "end_timestamp_s": 22.5,
+              "duration_s": 0.6499999999999986,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 484,
+              "end_index": 572,
+              "start_timestamp_s": 24.2,
+              "end_timestamp_s": 28.6,
+              "duration_s": 4.400000000000002,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 629,
+              "end_index": 631,
+              "start_timestamp_s": 31.45,
+              "end_timestamp_s": 31.55,
+              "duration_s": 0.10000000000000142,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 638,
+              "end_index": 640,
+              "start_timestamp_s": 31.9,
+              "end_timestamp_s": 32.0,
+              "duration_s": 0.10000000000000142,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 675,
+              "end_index": 677,
+              "start_timestamp_s": 33.75,
+              "end_timestamp_s": 33.85,
+              "duration_s": 0.10000000000000142,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 747,
+              "end_index": 776,
+              "start_timestamp_s": 37.35,
+              "end_timestamp_s": 38.8,
+              "duration_s": 1.4499999999999957,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            }
+          ],
+          "observer_name": "speed_and_lateral_margin",
+          "event_metrics": {
+            "divergence_observed": true,
+            "divergence_index": 0,
+            "divergence_timestamp_s": 0.0,
+            "event_count": 11,
+            "event_before_divergence": false,
+            "first_event_start_index": 222,
+            "first_event_lead_time_s": null,
+            "active_sample_count_from_events": 180,
+            "active_sample_count_before_divergence": 0,
+            "active_precision_before_divergence": 0.0
+          },
+          "signals_observed": [
+            "lateral_acceleration_margin",
+            "speed_margin"
+          ]
+        },
+        {
+          "sample_count": 896,
+          "active_sample_count": 188,
+          "events": [
+            {
+              "start_index": 0,
+              "end_index": 43,
+              "start_timestamp_s": 0.0,
+              "end_timestamp_s": 2.15,
+              "duration_s": 2.15,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 212,
+              "end_index": 232,
+              "start_timestamp_s": 10.6,
+              "end_timestamp_s": 11.6,
+              "duration_s": 1.0,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 259,
+              "end_index": 279,
+              "start_timestamp_s": 12.95,
+              "end_timestamp_s": 13.95,
+              "duration_s": 1.0,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 313,
+              "end_index": 323,
+              "start_timestamp_s": 15.65,
+              "end_timestamp_s": 16.15,
+              "duration_s": 0.4999999999999982,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 332,
+              "end_index": 340,
+              "start_timestamp_s": 16.6,
+              "end_timestamp_s": 17.0,
+              "duration_s": 0.3999999999999986,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 424,
+              "end_index": 443,
+              "start_timestamp_s": 21.2,
+              "end_timestamp_s": 22.15,
+              "duration_s": 0.9499999999999993,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 510,
+              "end_index": 571,
+              "start_timestamp_s": 25.5,
+              "end_timestamp_s": 28.55,
+              "duration_s": 3.0500000000000007,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            }
+          ],
+          "observer_name": "tangent_change_only",
+          "event_metrics": {
+            "divergence_observed": true,
+            "divergence_index": 0,
+            "divergence_timestamp_s": 0.0,
+            "event_count": 7,
+            "event_before_divergence": false,
+            "first_event_start_index": 0,
+            "first_event_lead_time_s": null,
+            "active_sample_count_from_events": 188,
+            "active_sample_count_before_divergence": 0,
+            "active_precision_before_divergence": 0.0
+          },
+          "signals_observed": [
+            "tangent_change"
+          ]
+        },
+        {
+          "sample_count": 896,
+          "active_sample_count": 0,
+          "events": [],
+          "observer_name": "forward_alignment_only",
+          "event_metrics": {
+            "divergence_observed": true,
+            "divergence_index": 0,
+            "divergence_timestamp_s": 0.0,
+            "event_count": 0,
+            "event_before_divergence": false,
+            "first_event_start_index": null,
+            "first_event_lead_time_s": null,
+            "active_sample_count_from_events": 0,
+            "active_sample_count_before_divergence": 0,
+            "active_precision_before_divergence": null
+          },
+          "signals_observed": []
+        },
+        {
+          "sample_count": 896,
+          "active_sample_count": 340,
+          "events": [
+            {
+              "start_index": 0,
+              "end_index": 43,
+              "start_timestamp_s": 0.0,
+              "end_timestamp_s": 2.15,
+              "duration_s": 2.15,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 211,
+              "end_index": 233,
+              "start_timestamp_s": 10.55,
+              "end_timestamp_s": 11.65,
+              "duration_s": 1.0999999999999996,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 239,
+              "end_index": 250,
+              "start_timestamp_s": 11.95,
+              "end_timestamp_s": 12.5,
+              "duration_s": 0.5500000000000007,
+              "peak_signal_count": 1,
+              "signals": [
+                "lateral_acceleration_margin"
+              ]
+            },
+            {
+              "start_index": 259,
+              "end_index": 281,
+              "start_timestamp_s": 12.95,
+              "end_timestamp_s": 14.05,
+              "duration_s": 1.1000000000000014,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 313,
+              "end_index": 340,
+              "start_timestamp_s": 15.65,
+              "end_timestamp_s": 17.0,
+              "duration_s": 1.3499999999999996,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 383,
+              "end_index": 385,
+              "start_timestamp_s": 19.15,
+              "end_timestamp_s": 19.25,
+              "duration_s": 0.10000000000000142,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 424,
+              "end_index": 450,
+              "start_timestamp_s": 21.2,
+              "end_timestamp_s": 22.5,
+              "duration_s": 1.3000000000000007,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 484,
+              "end_index": 572,
+              "start_timestamp_s": 24.2,
+              "end_timestamp_s": 28.6,
+              "duration_s": 4.400000000000002,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 629,
+              "end_index": 632,
+              "start_timestamp_s": 31.45,
+              "end_timestamp_s": 31.6,
+              "duration_s": 0.15000000000000213,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 636,
+              "end_index": 645,
+              "start_timestamp_s": 31.8,
+              "end_timestamp_s": 32.25,
+              "duration_s": 0.4499999999999993,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 657,
+              "end_index": 678,
+              "start_timestamp_s": 32.85,
+              "end_timestamp_s": 33.9,
+              "duration_s": 1.0499999999999972,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 692,
+              "end_index": 694,
+              "start_timestamp_s": 34.6,
+              "end_timestamp_s": 34.7,
+              "duration_s": 0.10000000000000142,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 716,
+              "end_index": 737,
+              "start_timestamp_s": 35.8,
+              "end_timestamp_s": 36.85,
+              "duration_s": 1.0500000000000043,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 747,
+              "end_index": 776,
+              "start_timestamp_s": 37.35,
+              "end_timestamp_s": 38.8,
+              "duration_s": 1.4499999999999957,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            }
+          ],
+          "observer_name": "all_observable_signals",
+          "event_metrics": {
+            "divergence_observed": true,
+            "divergence_index": 0,
+            "divergence_timestamp_s": 0.0,
+            "event_count": 14,
+            "event_before_divergence": false,
+            "first_event_start_index": 0,
+            "first_event_lead_time_s": null,
+            "active_sample_count_from_events": 340,
+            "active_sample_count_before_divergence": 0,
+            "active_precision_before_divergence": 0.0
+          },
+          "signals_observed": [
+            "lateral_acceleration_margin",
+            "speed_margin",
+            "tangent_change"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "A01-Race-real-repeat-3",
+      "centerline": "maps\\A01-Race_0.5m_cl2.npy",
+      "rollout": "eval_results\\hybrid_rollouts\\A01-Race.Challenge_1793658048487_19052.csv",
+      "telemetry": {
+        "sample_count": 905,
+        "duration_s": 45.2,
+        "first_divergence_index": 0,
+        "first_divergence_timestamp_s": 0.0,
+        "first_divergence_progress_m": 0.0
+      },
+      "observers": [
+        {
+          "sample_count": 905,
+          "active_sample_count": 163,
+          "events": [
+            {
+              "start_index": 230,
+              "end_index": 237,
+              "start_timestamp_s": 11.5,
+              "end_timestamp_s": 11.85,
+              "duration_s": 0.34999999999999964,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 241,
+              "end_index": 244,
+              "start_timestamp_s": 12.05,
+              "end_timestamp_s": 12.2,
+              "duration_s": 0.14999999999999858,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 250,
+              "end_index": 258,
+              "start_timestamp_s": 12.5,
+              "end_timestamp_s": 12.9,
+              "duration_s": 0.40000000000000036,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 280,
+              "end_index": 288,
+              "start_timestamp_s": 14.0,
+              "end_timestamp_s": 14.4,
+              "duration_s": 0.40000000000000036,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 390,
+              "end_index": 401,
+              "start_timestamp_s": 19.5,
+              "end_timestamp_s": 20.05,
+              "duration_s": 0.5500000000000007,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 448,
+              "end_index": 522,
+              "start_timestamp_s": 22.4,
+              "end_timestamp_s": 26.1,
+              "duration_s": 3.700000000000003,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 526,
+              "end_index": 528,
+              "start_timestamp_s": 26.3,
+              "end_timestamp_s": 26.4,
+              "duration_s": 0.09999999999999787,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 622,
+              "end_index": 624,
+              "start_timestamp_s": 31.1,
+              "end_timestamp_s": 31.2,
+              "duration_s": 0.09999999999999787,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 635,
+              "end_index": 637,
+              "start_timestamp_s": 31.75,
+              "end_timestamp_s": 31.85,
+              "duration_s": 0.10000000000000142,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 738,
+              "end_index": 774,
+              "start_timestamp_s": 36.9,
+              "end_timestamp_s": 38.7,
+              "duration_s": 1.8000000000000043,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            }
+          ],
+          "observer_name": "speed_and_lateral_margin",
+          "event_metrics": {
+            "divergence_observed": true,
+            "divergence_index": 0,
+            "divergence_timestamp_s": 0.0,
+            "event_count": 10,
+            "event_before_divergence": false,
+            "first_event_start_index": 230,
+            "first_event_lead_time_s": null,
+            "active_sample_count_from_events": 163,
+            "active_sample_count_before_divergence": 0,
+            "active_precision_before_divergence": 0.0
+          },
+          "signals_observed": [
+            "lateral_acceleration_margin",
+            "speed_margin"
+          ]
+        },
+        {
+          "sample_count": 905,
+          "active_sample_count": 191,
+          "events": [
+            {
+              "start_index": 0,
+              "end_index": 43,
+              "start_timestamp_s": 0.0,
+              "end_timestamp_s": 2.15,
+              "duration_s": 2.15,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 225,
+              "end_index": 244,
+              "start_timestamp_s": 11.25,
+              "end_timestamp_s": 12.2,
+              "duration_s": 0.9499999999999993,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 267,
+              "end_index": 280,
+              "start_timestamp_s": 13.35,
+              "end_timestamp_s": 14.0,
+              "duration_s": 0.6500000000000004,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 309,
+              "end_index": 320,
+              "start_timestamp_s": 15.45,
+              "end_timestamp_s": 16.0,
+              "duration_s": 0.5500000000000007,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 330,
+              "end_index": 341,
+              "start_timestamp_s": 16.5,
+              "end_timestamp_s": 17.05,
+              "duration_s": 0.5500000000000007,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 409,
+              "end_index": 423,
+              "start_timestamp_s": 20.45,
+              "end_timestamp_s": 21.15,
+              "duration_s": 0.6999999999999993,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 488,
+              "end_index": 561,
+              "start_timestamp_s": 24.4,
+              "end_timestamp_s": 28.05,
+              "duration_s": 3.650000000000002,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            }
+          ],
+          "observer_name": "tangent_change_only",
+          "event_metrics": {
+            "divergence_observed": true,
+            "divergence_index": 0,
+            "divergence_timestamp_s": 0.0,
+            "event_count": 7,
+            "event_before_divergence": false,
+            "first_event_start_index": 0,
+            "first_event_lead_time_s": null,
+            "active_sample_count_from_events": 191,
+            "active_sample_count_before_divergence": 0,
+            "active_precision_before_divergence": 0.0
+          },
+          "signals_observed": [
+            "tangent_change"
+          ]
+        },
+        {
+          "sample_count": 905,
+          "active_sample_count": 33,
+          "events": [
+            {
+              "start_index": 870,
+              "end_index": 904,
+              "start_timestamp_s": 43.5,
+              "end_timestamp_s": 45.2,
+              "duration_s": 1.7000000000000028,
+              "peak_signal_count": 1,
+              "signals": [
+                "forward_alignment_margin"
+              ]
+            }
+          ],
+          "observer_name": "forward_alignment_only",
+          "event_metrics": {
+            "divergence_observed": true,
+            "divergence_index": 0,
+            "divergence_timestamp_s": 0.0,
+            "event_count": 1,
+            "event_before_divergence": false,
+            "first_event_start_index": 870,
+            "first_event_lead_time_s": null,
+            "active_sample_count_from_events": 35,
+            "active_sample_count_before_divergence": 0,
+            "active_precision_before_divergence": 0.0
+          },
+          "signals_observed": [
+            "forward_alignment_margin"
+          ]
+        },
+        {
+          "sample_count": 905,
+          "active_sample_count": 388,
+          "events": [
+            {
+              "start_index": 0,
+              "end_index": 43,
+              "start_timestamp_s": 0.0,
+              "end_timestamp_s": 2.15,
+              "duration_s": 2.15,
+              "peak_signal_count": 1,
+              "signals": [
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 224,
+              "end_index": 244,
+              "start_timestamp_s": 11.2,
+              "end_timestamp_s": 12.2,
+              "duration_s": 1.0,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 250,
+              "end_index": 258,
+              "start_timestamp_s": 12.5,
+              "end_timestamp_s": 12.9,
+              "duration_s": 0.40000000000000036,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 266,
+              "end_index": 288,
+              "start_timestamp_s": 13.3,
+              "end_timestamp_s": 14.4,
+              "duration_s": 1.0999999999999996,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 308,
+              "end_index": 345,
+              "start_timestamp_s": 15.4,
+              "end_timestamp_s": 17.25,
+              "duration_s": 1.8499999999999996,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 390,
+              "end_index": 401,
+              "start_timestamp_s": 19.5,
+              "end_timestamp_s": 20.05,
+              "duration_s": 0.5500000000000007,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin"
+              ]
+            },
+            {
+              "start_index": 409,
+              "end_index": 426,
+              "start_timestamp_s": 20.45,
+              "end_timestamp_s": 21.3,
+              "duration_s": 0.8500000000000014,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 448,
+              "end_index": 563,
+              "start_timestamp_s": 22.4,
+              "end_timestamp_s": 28.15,
+              "duration_s": 5.75,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 622,
+              "end_index": 625,
+              "start_timestamp_s": 31.1,
+              "end_timestamp_s": 31.25,
+              "duration_s": 0.14999999999999858,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 633,
+              "end_index": 662,
+              "start_timestamp_s": 31.65,
+              "end_timestamp_s": 33.1,
+              "duration_s": 1.4500000000000028,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 678,
+              "end_index": 680,
+              "start_timestamp_s": 33.9,
+              "end_timestamp_s": 34.0,
+              "duration_s": 0.10000000000000142,
+              "peak_signal_count": 2,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 738,
+              "end_index": 774,
+              "start_timestamp_s": 36.9,
+              "end_timestamp_s": 38.7,
+              "duration_s": 1.8000000000000043,
+              "peak_signal_count": 3,
+              "signals": [
+                "lateral_acceleration_margin",
+                "speed_margin",
+                "tangent_change"
+              ]
+            },
+            {
+              "start_index": 870,
+              "end_index": 904,
+              "start_timestamp_s": 43.5,
+              "end_timestamp_s": 45.2,
+              "duration_s": 1.7000000000000028,
+              "peak_signal_count": 2,
+              "signals": [
+                "forward_alignment_margin",
+                "lateral_acceleration_margin"
+              ]
+            }
+          ],
+          "observer_name": "all_observable_signals",
+          "event_metrics": {
+            "divergence_observed": true,
+            "divergence_index": 0,
+            "divergence_timestamp_s": 0.0,
+            "event_count": 13,
+            "event_before_divergence": false,
+            "first_event_start_index": 0,
+            "first_event_lead_time_s": null,
+            "active_sample_count_from_events": 390,
+            "active_sample_count_before_divergence": 0,
+            "active_precision_before_divergence": 0.0
+          },
+          "signals_observed": [
+            "forward_alignment_margin",
+            "lateral_acceleration_margin",
+            "speed_margin",
+            "tangent_change"
+          ]
+        }
+      ]
+    }
+  ],
+  "interpretation": "Three real greedy A01 runs completed with live telemetry, reached roughly 79-80 percent, and all stopped at the no-progress cutoff. This confirms repeatable live execution and a repeatable early-track failure, not reliable completion or a promotion candidate. Observer results remain diagnostic because the current real heading convention marks an initial heading divergence at sample zero.",
+  "next_action": "Keep defaults unchanged; calibrate the real heading/projection convention and run further authorized completion tests before any intervention or promotion."
+}
