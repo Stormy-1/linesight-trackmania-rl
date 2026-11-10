@@ -1,0 +1,83 @@
+{
+  "track": "C01-Race",
+  "controller": "purepursuit",
+  "centerline": "C01-Race_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 323.4322680467401,
+      "end_m": 349.9316161213655,
+      "reference_horizontal_speed_mps": 63.44,
+      "required_speed_mps": 63.44
+    },
+    {
+      "start_m": 417.92947766027237,
+      "end_m": 469.92631882290164,
+      "reference_horizontal_speed_mps": 77.06,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 542.4200772951639,
+      "end_m": 599.4141286901237,
+      "reference_horizontal_speed_mps": 64.29,
+      "required_speed_mps": 64.29
+    },
+    {
+      "start_m": 725.9074797848394,
+      "end_m": 753.9051816578943,
+      "reference_horizontal_speed_mps": 64.71,
+      "required_speed_mps": 64.71
+    },
+    {
+      "start_m": 805.401607107335,
+      "end_m": 831.8996716286962,
+      "reference_horizontal_speed_mps": 84.62,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 1022.8928793969765,
+      "end_m": 1074.389755647806,
+      "reference_horizontal_speed_mps": 80.85,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 1129.8881466285407,
+      "end_m": 1172.3853170394566,
+      "reference_horizontal_speed_mps": 77.84,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 1405.3659226056843,
+      "end_m": 1473.3638685394183,
+      "reference_horizontal_speed_mps": 64.17,
+      "required_speed_mps": 64.17
+    },
+    {
+      "start_m": 1764.3499559149268,
+      "end_m": 1832.8471886091538,
+      "reference_horizontal_speed_mps": 61.42,
+      "required_speed_mps": 61.42
+    }
+  ],
+  "runs": [
+    {
+      "finished": true,
+      "termination": "Finished",
+      "race_time_s": 44.12,
+      "completion_pct": 100.0,
+      "actions": 884,
+      "steps": 883,
+      "impact_suspects": 4,
+      "recovery_steps": 60,
+      "reversals": 0,
+      "slip_steps": 7,
+      "max_progress_m": 1929.34,
+      "centerline_length_m": 1929.34,
+      "run": 1
+    }
+  ],
+  "finishes": "1/1"
+}

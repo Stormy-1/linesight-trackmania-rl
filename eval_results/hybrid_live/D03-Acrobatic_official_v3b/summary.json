@@ -1,0 +1,35 @@
+{
+  "track": "D03-Acrobatic",
+  "controller": "purepursuit",
+  "centerline": "D03-Acrobatic_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 84.95029261274169,
+      "end_m": 151.94409219750796,
+      "reference_horizontal_speed_mps": 62.27,
+      "required_speed_mps": 62.27
+    }
+  ],
+  "runs": [
+    {
+      "finished": false,
+      "termination": "Stuck_Cutoff_2s",
+      "race_time_s": null,
+      "completion_pct": 39.34,
+      "actions": 360,
+      "steps": 360,
+      "impact_suspects": 1,
+      "recovery_steps": 127,
+      "reversals": 1,
+      "slip_steps": 0,
+      "max_progress_m": 620.89,
+      "centerline_length_m": 1495.26,
+      "run": 1
+    }
+  ],
+  "finishes": "0/1"
+}

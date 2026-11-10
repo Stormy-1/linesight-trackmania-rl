@@ -1,0 +1,71 @@
+{
+  "track": "C13-Race",
+  "controller": "purepursuit",
+  "centerline": "C13-Race_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 231.4539908606267,
+      "end_m": 440.9425508335253,
+      "reference_horizontal_speed_mps": 65.87,
+      "required_speed_mps": 65.87
+    },
+    {
+      "start_m": 594.4385358488544,
+      "end_m": 703.936915050109,
+      "reference_horizontal_speed_mps": 69.73,
+      "required_speed_mps": 69.73
+    },
+    {
+      "start_m": 2279.3882631611905,
+      "end_m": 2334.3840741260256,
+      "reference_horizontal_speed_mps": 68.3,
+      "required_speed_mps": 68.3
+    },
+    {
+      "start_m": 3057.863987982966,
+      "end_m": 3135.359146649414,
+      "reference_horizontal_speed_mps": 80.97,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 3213.3575876414584,
+      "end_m": 3266.8555563710142,
+      "reference_horizontal_speed_mps": 87.51,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 3306.855071407657,
+      "end_m": 3392.8491268819653,
+      "reference_horizontal_speed_mps": 77.01,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 3811.8360684864865,
+      "end_m": 3868.335234150765,
+      "reference_horizontal_speed_mps": 73.06,
+      "required_speed_mps": 70.0
+    }
+  ],
+  "runs": [
+    {
+      "finished": false,
+      "termination": "Stuck_Cutoff_2s",
+      "race_time_s": null,
+      "completion_pct": 7.92,
+      "actions": 254,
+      "steps": 254,
+      "impact_suspects": 3,
+      "recovery_steps": 30,
+      "reversals": 0,
+      "slip_steps": 41,
+      "max_progress_m": 331.77,
+      "centerline_length_m": 4084.33,
+      "run": 1
+    }
+  ],
+  "finishes": "0/1"
+}

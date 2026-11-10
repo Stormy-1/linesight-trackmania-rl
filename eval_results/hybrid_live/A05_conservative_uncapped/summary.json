@@ -1,0 +1,35 @@
+{
+  "track": "A05",
+  "controller": "conservative",
+  "max_speed_override_mps": null,
+  "game_speed": 10.0,
+  "runs": [
+    {
+      "finished": false,
+      "termination": "Stuck_Cutoff_2s",
+      "race_time_s": null,
+      "completion_pct": 85.39,
+      "actions": 434,
+      "steps": 434,
+      "impact_suspects": 3,
+      "recovery_steps": 41,
+      "max_progress_m": 623.89,
+      "centerline_length_m": 732.1,
+      "run": 1
+    },
+    {
+      "finished": false,
+      "termination": "Stuck_Cutoff_2s",
+      "race_time_s": null,
+      "completion_pct": 85.39,
+      "actions": 434,
+      "steps": 434,
+      "impact_suspects": 3,
+      "recovery_steps": 41,
+      "max_progress_m": 623.89,
+      "centerline_length_m": 732.1,
+      "run": 2
+    }
+  ],
+  "finishes": "0/2"
+}
