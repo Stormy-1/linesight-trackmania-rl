@@ -1,0 +1,12 @@
+# codebase-memory-mcp index exclusions (gitignore syntax)
+.opencode/
+.git_upstream_backup/
+docs/build/
+linesight.egg-info/
+eval_results/**/*.csv
+interactive_curriculum/
+.pytest_cache/
+.ruff_cache/
+save/
+tensorboard/
+maps/
