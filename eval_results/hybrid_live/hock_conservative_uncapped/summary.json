@@ -1,0 +1,35 @@
+{
+  "track": "hock",
+  "controller": "conservative",
+  "max_speed_override_mps": null,
+  "game_speed": 10.0,
+  "runs": [
+    {
+      "finished": false,
+      "termination": "Stuck_Cutoff_2s",
+      "race_time_s": null,
+      "completion_pct": 24.19,
+      "actions": 1479,
+      "steps": 1479,
+      "impact_suspects": 4,
+      "recovery_steps": 58,
+      "max_progress_m": 971.86,
+      "centerline_length_m": 4048.66,
+      "run": 1
+    },
+    {
+      "finished": false,
+      "termination": "Stuck_Cutoff_2s",
+      "race_time_s": null,
+      "completion_pct": 24.19,
+      "actions": 1479,
+      "steps": 1479,
+      "impact_suspects": 4,
+      "recovery_steps": 58,
+      "max_progress_m": 971.86,
+      "centerline_length_m": 4048.66,
+      "run": 2
+    }
+  ],
+  "finishes": "0/2"
+}

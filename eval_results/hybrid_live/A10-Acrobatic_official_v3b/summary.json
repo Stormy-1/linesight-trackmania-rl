@@ -1,0 +1,28 @@
+{
+  "track": "A10-Acrobatic",
+  "controller": "purepursuit",
+  "centerline": "A10-Acrobatic_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [],
+  "runs": [
+    {
+      "finished": false,
+      "termination": "Stuck_Cutoff_2s",
+      "race_time_s": null,
+      "completion_pct": 99.9,
+      "actions": 342,
+      "steps": 342,
+      "impact_suspects": 3,
+      "recovery_steps": 141,
+      "reversals": 3,
+      "slip_steps": 29,
+      "max_progress_m": 469.0,
+      "centerline_length_m": 469.0,
+      "run": 1
+    }
+  ],
+  "finishes": "0/1"
+}
