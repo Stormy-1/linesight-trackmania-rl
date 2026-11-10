@@ -1,0 +1,647 @@
+{
+ "A01-Race": {
+  "author_time_s": 24.54,
+  "centerline": "A01-Race_official_0.5m_cl.npy",
+  "group": "White",
+  "length_m": 2194.7,
+  "max_sample_gap_m": 13.92,
+  "points": 4391,
+  "respawns": 0,
+  "suspect": false
+ },
+ "A02-Race": {
+  "author_time_s": 16.25,
+  "centerline": "A02-Race_official_0.5m_cl.npy",
+  "group": "White",
+  "length_m": 838.6,
+  "max_sample_gap_m": 7.58,
+  "points": 1678,
+  "respawns": 0,
+  "suspect": false
+ },
+ "A03-Race": {
+  "author_time_s": 18.75,
+  "centerline": "A03-Race_official_0.5m_cl.npy",
+  "group": "White",
+  "length_m": 1438.6,
+  "max_sample_gap_m": 11.39,
+  "points": 2878,
+  "respawns": 0,
+  "suspect": false
+ },
+ "A04-Acrobatic": {
+  "author_time_s": 5.95,
+  "centerline": "A04-Acrobatic_official_0.5m_cl.npy",
+  "group": "White",
+  "length_m": 324.9,
+  "max_sample_gap_m": 7.98,
+  "points": 651,
+  "respawns": 0,
+  "suspect": false
+ },
+ "A05-Race": {
+  "author_time_s": 16.91,
+  "centerline": "A05-Race_official_0.5m_cl.npy",
+  "group": "White",
+  "length_m": 751.0,
+  "max_sample_gap_m": 6.33,
+  "points": 1503,
+  "respawns": 0,
+  "suspect": false
+ },
+ "A06-Obstacle": {
+  "author_time_s": 28.58,
+  "centerline": "A06-Obstacle_official_0.5m_cl.npy",
+  "group": "White",
+  "length_m": 1535.0,
+  "max_sample_gap_m": 7.62,
+  "points": 3071,
+  "respawns": 0,
+  "suspect": false
+ },
+ "A07-Race": {
+  "author_time_s": 29.14,
+  "centerline": "A07-Race_official_0.5m_cl.npy",
+  "group": "White",
+  "length_m": 1698.5,
+  "max_sample_gap_m": 8.56,
+  "points": 3398,
+  "respawns": 0,
+  "suspect": false
+ },
+ "A08-Endurance": {
+  "author_time_s": 64.48,
+  "centerline": "A08-Endurance_official_0.5m_cl.npy",
+  "group": "White",
+  "length_m": 6643.1,
+  "max_sample_gap_m": 15.78,
+  "points": 13288,
+  "respawns": 0,
+  "suspect": false
+ },
+ "A09-Race": {
+  "author_time_s": 25.98,
+  "centerline": "A09-Race_official_0.5m_cl.npy",
+  "group": "White",
+  "length_m": 2001.1,
+  "max_sample_gap_m": 10.5,
+  "points": 4003,
+  "respawns": 0,
+  "suspect": false
+ },
+ "A10-Acrobatic": {
+  "author_time_s": 9.64,
+  "centerline": "A10-Acrobatic_official_0.5m_cl.npy",
+  "group": "White",
+  "length_m": 469.0,
+  "max_sample_gap_m": 10.1,
+  "points": 939,
+  "respawns": 0,
+  "suspect": false
+ },
+ "A11-Race": {
+  "author_time_s": 19.32,
+  "centerline": "A11-Race_official_0.5m_cl.npy",
+  "group": "White",
+  "length_m": 1141.5,
+  "max_sample_gap_m": 10.95,
+  "points": 2284,
+  "respawns": 0,
+  "suspect": false
+ },
+ "A12-Speed": {
+  "author_time_s": 19.09,
+  "centerline": "A12-Speed_official_0.5m_cl.npy",
+  "group": "White",
+  "length_m": 2208.4,
+  "max_sample_gap_m": 17.73,
+  "points": 4418,
+  "respawns": 0,
+  "suspect": false
+ },
+ "A13-Race": {
+  "author_time_s": 31.7,
+  "centerline": "A13-Race_official_0.5m_cl.npy",
+  "group": "White",
+  "length_m": 2870.0,
+  "max_sample_gap_m": 14.14,
+  "points": 5741,
+  "respawns": 0,
+  "suspect": false
+ },
+ "A14-Race": {
+  "author_time_s": 22.17,
+  "centerline": "A14-Race_official_0.5m_cl.npy",
+  "group": "White",
+  "length_m": 1341.1,
+  "max_sample_gap_m": 9.42,
+  "points": 2683,
+  "respawns": 0,
+  "suspect": false
+ },
+ "A15-Speed": {
+  "author_time_s": 25.33,
+  "centerline": "A15-Speed_official_0.5m_cl.npy",
+  "group": "White",
+  "length_m": 2275.3,
+  "max_sample_gap_m": 14.27,
+  "points": 4552,
+  "respawns": 0,
+  "suspect": false
+ },
+ "B01-Race": {
+  "author_time_s": 26.2,
+  "centerline": "B01-Race_official_0.5m_cl.npy",
+  "group": "Green",
+  "length_m": 2060.1,
+  "max_sample_gap_m": 12.15,
+  "points": 4121,
+  "respawns": 0,
+  "suspect": false
+ },
+ "B02-Race": {
+  "author_time_s": 27.41,
+  "centerline": "B02-Race_official_0.5m_cl.npy",
+  "group": "Green",
+  "length_m": 1704.9,
+  "max_sample_gap_m": 9.91,
+  "points": 3411,
+  "respawns": 0,
+  "suspect": false
+ },
+ "B03-Race": {
+  "author_time_s": 27.11,
+  "centerline": "B03-Race_official_0.5m_cl.npy",
+  "group": "Green",
+  "length_m": 1638.9,
+  "max_sample_gap_m": 9.29,
+  "points": 3279,
+  "respawns": 0,
+  "suspect": false
+ },
+ "B04-Acrobatic": {
+  "author_time_s": 13.02,
+  "centerline": "B04-Acrobatic_official_0.5m_cl.npy",
+  "group": "Green",
+  "length_m": 1377.1,
+  "max_sample_gap_m": 14.66,
+  "points": 2755,
+  "respawns": 0,
+  "suspect": false
+ },
+ "B05-Race": {
+  "author_time_s": 26.28,
+  "centerline": "B05-Race_official_0.5m_cl.npy",
+  "group": "Green",
+  "length_m": 1861.4,
+  "max_sample_gap_m": 10.98,
+  "points": 3724,
+  "respawns": 0,
+  "suspect": false
+ },
+ "B06-Obstacle": {
+  "author_time_s": 27.46,
+  "centerline": "B06-Obstacle_official_0.5m_cl.npy",
+  "group": "Green",
+  "length_m": 2138.5,
+  "max_sample_gap_m": 13.11,
+  "points": 4278,
+  "respawns": 0,
+  "suspect": false
+ },
+ "B07-Race": {
+  "author_time_s": 30.36,
+  "centerline": "B07-Race_official_0.5m_cl.npy",
+  "group": "Green",
+  "length_m": 2305.5,
+  "max_sample_gap_m": 14.05,
+  "points": 4612,
+  "respawns": 0,
+  "suspect": false
+ },
+ "B08-Endurance": {
+  "author_time_s": 102.5,
+  "centerline": "B08-Endurance_official_0.5m_cl.npy",
+  "group": "Green",
+  "length_m": 11179.4,
+  "max_sample_gap_m": 13.41,
+  "points": 22360,
+  "respawns": 0,
+  "suspect": false
+ },
+ "B09-Acrobatic": {
+  "author_time_s": 13.99,
+  "centerline": "B09-Acrobatic_official_0.5m_cl.npy",
+  "group": "Green",
+  "length_m": 796.0,
+  "max_sample_gap_m": 10.45,
+  "points": 1593,
+  "respawns": 0,
+  "suspect": false
+ },
+ "B10-Speed": {
+  "author_time_s": 37.82,
+  "centerline": "B10-Speed_official_0.5m_cl.npy",
+  "group": "Green",
+  "length_m": 4159.9,
+  "max_sample_gap_m": 14.14,
+  "points": 8321,
+  "respawns": 0,
+  "suspect": false
+ },
+ "B11-Race": {
+  "author_time_s": 31.44,
+  "centerline": "B11-Race_official_0.5m_cl.npy",
+  "group": "Green",
+  "length_m": 2565.2,
+  "max_sample_gap_m": 10.5,
+  "points": 5132,
+  "respawns": 0,
+  "suspect": false
+ },
+ "B12-Race": {
+  "author_time_s": 45.5,
+  "centerline": "B12-Race_official_0.5m_cl.npy",
+  "group": "Green",
+  "length_m": 3614.1,
+  "max_sample_gap_m": 12.18,
+  "points": 7229,
+  "respawns": 0,
+  "suspect": false
+ },
+ "B13-Obstacle": {
+  "author_time_s": 25.65,
+  "centerline": "B13-Obstacle_official_0.5m_cl.npy",
+  "group": "Green",
+  "length_m": 2414.4,
+  "max_sample_gap_m": 14.87,
+  "points": 4830,
+  "respawns": 0,
+  "suspect": false
+ },
+ "B14-Speed": {
+  "author_time_s": 32.98,
+  "centerline": "B14-Speed_official_0.5m_cl.npy",
+  "group": "Green",
+  "length_m": 3530.6,
+  "max_sample_gap_m": 14.32,
+  "points": 7062,
+  "respawns": 0,
+  "suspect": false
+ },
+ "B15-Race": {
+  "author_time_s": 41.19,
+  "centerline": "B15-Race_official_0.5m_cl.npy",
+  "group": "Green",
+  "length_m": 3501.9,
+  "max_sample_gap_m": 14.82,
+  "points": 7005,
+  "respawns": 0,
+  "suspect": false
+ },
+ "C01-Race": {
+  "author_time_s": 29.58,
+  "centerline": "C01-Race_official_0.5m_cl.npy",
+  "group": "Blue",
+  "length_m": 1929.3,
+  "max_sample_gap_m": 9.64,
+  "points": 3860,
+  "respawns": 0,
+  "suspect": false
+ },
+ "C02-Race": {
+  "author_time_s": 42.47,
+  "centerline": "C02-Race_official_0.5m_cl.npy",
+  "group": "Blue",
+  "length_m": 2849.0,
+  "max_sample_gap_m": 10.35,
+  "points": 5699,
+  "respawns": 0,
+  "suspect": false
+ },
+ "C03-Acrobatic": {
+  "author_time_s": 13.9,
+  "centerline": "C03-Acrobatic_official_0.5m_cl.npy",
+  "group": "Blue",
+  "length_m": 783.4,
+  "max_sample_gap_m": 9.29,
+  "points": 1568,
+  "respawns": 0,
+  "suspect": false
+ },
+ "C04-Race": {
+  "author_time_s": 39.8,
+  "centerline": "C04-Race_official_0.5m_cl.npy",
+  "group": "Blue",
+  "length_m": 3308.9,
+  "max_sample_gap_m": 11.89,
+  "points": 6619,
+  "respawns": 0,
+  "suspect": false
+ },
+ "C05-Endurance": {
+  "author_time_s": 116.39,
+  "centerline": "C05-Endurance_official_0.5m_cl.npy",
+  "group": "Blue",
+  "length_m": 9073.1,
+  "max_sample_gap_m": 11.94,
+  "points": 18148,
+  "respawns": 0,
+  "suspect": false
+ },
+ "C06-Speed": {
+  "author_time_s": 55.59,
+  "centerline": "C06-Speed_official_0.5m_cl.npy",
+  "group": "Blue",
+  "length_m": 5311.4,
+  "max_sample_gap_m": 13.41,
+  "points": 10624,
+  "respawns": 0,
+  "suspect": false
+ },
+ "C07-Race": {
+  "author_time_s": 40.34,
+  "centerline": "C07-Race_official_0.5m_cl.npy",
+  "group": "Blue",
+  "length_m": 2681.5,
+  "max_sample_gap_m": 9.49,
+  "points": 5364,
+  "respawns": 0,
+  "suspect": false
+ },
+ "C08-Obstacle": {
+  "author_time_s": 27.72,
+  "centerline": "C08-Obstacle_official_0.5m_cl.npy",
+  "group": "Blue",
+  "length_m": 2268.8,
+  "max_sample_gap_m": 13.35,
+  "points": 4539,
+  "respawns": 0,
+  "suspect": false
+ },
+ "C09-Race": {
+  "author_time_s": 50.12,
+  "centerline": "C09-Race_official_0.5m_cl.npy",
+  "group": "Blue",
+  "length_m": 3764.8,
+  "max_sample_gap_m": 11.06,
+  "points": 7531,
+  "respawns": 0,
+  "suspect": false
+ },
+ "C10-Acrobatic": {
+  "author_time_s": 15.03,
+  "centerline": "C10-Acrobatic_official_0.5m_cl.npy",
+  "group": "Blue",
+  "length_m": 667.6,
+  "max_sample_gap_m": 7.37,
+  "points": 1336,
+  "respawns": 0,
+  "suspect": false
+ },
+ "C11-Race": {
+  "author_time_s": 50.04,
+  "centerline": "C11-Race_official_0.5m_cl.npy",
+  "group": "Blue",
+  "length_m": 4447.4,
+  "max_sample_gap_m": 12.48,
+  "points": 8896,
+  "respawns": 0,
+  "suspect": false
+ },
+ "C12-Obstacle": {
+  "author_time_s": 34.68,
+  "centerline": "C12-Obstacle_official_0.5m_cl.npy",
+  "group": "Blue",
+  "length_m": 1496.9,
+  "max_sample_gap_m": 7.13,
+  "points": 2995,
+  "respawns": 0,
+  "suspect": false
+ },
+ "C13-Race": {
+  "author_time_s": 44.87,
+  "centerline": "C13-Race_official_0.5m_cl.npy",
+  "group": "Blue",
+  "length_m": 4084.3,
+  "max_sample_gap_m": 13.85,
+  "points": 8170,
+  "respawns": 0,
+  "suspect": false
+ },
+ "C14-Endurance": {
+  "author_time_s": 116.91,
+  "centerline": "C14-Endurance_official_0.5m_cl.npy",
+  "group": "Blue",
+  "length_m": 9615.9,
+  "max_sample_gap_m": 13.89,
+  "points": 19234,
+  "respawns": 0,
+  "suspect": false
+ },
+ "C15-Speed": {
+  "author_time_s": 50.34,
+  "centerline": "C15-Speed_official_0.5m_cl.npy",
+  "group": "Blue",
+  "length_m": 5181.2,
+  "max_sample_gap_m": 15.14,
+  "points": 10364,
+  "respawns": 0,
+  "suspect": false
+ },
+ "D01-endurance": {
+  "author_time_s": 153.26,
+  "centerline": "D01-endurance_official_0.5m_cl.npy",
+  "group": "Red",
+  "length_m": 18632.6,
+  "max_sample_gap_m": 17.04,
+  "points": 37267,
+  "respawns": 0,
+  "suspect": false
+ },
+ "D02-Race": {
+  "author_time_s": 52.63,
+  "centerline": "D02-Race_official_0.5m_cl.npy",
+  "group": "Red",
+  "length_m": 4012.9,
+  "max_sample_gap_m": 12.83,
+  "points": 8027,
+  "respawns": 0,
+  "suspect": false
+ },
+ "D03-Acrobatic": {
+  "author_time_s": 15.94,
+  "centerline": "D03-Acrobatic_official_0.5m_cl.npy",
+  "group": "Red",
+  "length_m": 1495.3,
+  "max_sample_gap_m": 14.85,
+  "points": 2992,
+  "respawns": 0,
+  "suspect": false
+ },
+ "D04-Race": {
+  "author_time_s": 52.86,
+  "centerline": "D04-Race_official_0.5m_cl.npy",
+  "group": "Red",
+  "length_m": 4495.1,
+  "max_sample_gap_m": 13.12,
+  "points": 8992,
+  "respawns": 0,
+  "suspect": false
+ },
+ "D05-Race": {
+  "author_time_s": 71.43,
+  "centerline": "D05-Race_official_0.5m_cl.npy",
+  "group": "Red",
+  "length_m": 4629.9,
+  "max_sample_gap_m": 12.91,
+  "points": 9262,
+  "respawns": 0,
+  "suspect": false
+ },
+ "D06-Obstacle": {
+  "author_time_s": 70.53,
+  "centerline": "D06-Obstacle_official_0.5m_cl.npy",
+  "group": "Red",
+  "length_m": 8370.6,
+  "max_sample_gap_m": 16.19,
+  "points": 16743,
+  "respawns": 0,
+  "suspect": false
+ },
+ "D07-Race": {
+  "author_time_s": 60.37,
+  "centerline": "D07-Race_official_0.5m_cl.npy",
+  "group": "Red",
+  "length_m": 3499.2,
+  "max_sample_gap_m": 12.09,
+  "points": 7000,
+  "respawns": 0,
+  "suspect": false
+ },
+ "D08-Speed": {
+  "author_time_s": 52.44,
+  "centerline": "D08-Speed_official_0.5m_cl.npy",
+  "group": "Red",
+  "length_m": 5432.9,
+  "max_sample_gap_m": 14.96,
+  "points": 10867,
+  "respawns": 0,
+  "suspect": false
+ },
+ "D09-obstacle": {
+  "author_time_s": 46.47,
+  "centerline": "D09-obstacle_official_0.5m_cl.npy",
+  "group": "Red",
+  "length_m": 3157.4,
+  "max_sample_gap_m": 12.64,
+  "points": 6316,
+  "respawns": 0,
+  "suspect": false
+ },
+ "D10-Race": {
+  "author_time_s": 57.62,
+  "centerline": "D10-Race_official_0.5m_cl.npy",
+  "group": "Red",
+  "length_m": 4250.4,
+  "max_sample_gap_m": 11.33,
+  "points": 8502,
+  "respawns": 0,
+  "suspect": false
+ },
+ "D11-Acrobatic": {
+  "author_time_s": 14.65,
+  "centerline": "D11-Acrobatic_official_0.5m_cl.npy",
+  "group": "Red",
+  "length_m": 893.8,
+  "max_sample_gap_m": 12.98,
+  "points": 1789,
+  "respawns": 0,
+  "suspect": false
+ },
+ "D12-Speed": {
+  "author_time_s": 42.79,
+  "centerline": "D12-Speed_official_0.5m_cl.npy",
+  "group": "Red",
+  "length_m": 4648.8,
+  "max_sample_gap_m": 16.21,
+  "points": 9299,
+  "respawns": 0,
+  "suspect": false
+ },
+ "D13-Race": {
+  "author_time_s": 71.21,
+  "centerline": "D13-Race_official_0.5m_cl.npy",
+  "group": "Red",
+  "length_m": 4062.1,
+  "max_sample_gap_m": 11.78,
+  "points": 8126,
+  "respawns": 0,
+  "suspect": false
+ },
+ "D14-Endurance": {
+  "author_time_s": 177.09,
+  "centerline": "D14-Endurance_official_0.5m_cl.npy",
+  "group": "Red",
+  "length_m": 10638.7,
+  "max_sample_gap_m": 9.97,
+  "points": 21280,
+  "respawns": 0,
+  "suspect": false
+ },
+ "D15-Endurance": {
+  "author_time_s": 470.66,
+  "centerline": "D15-Endurance_official_0.5m_cl.npy",
+  "group": "Red",
+  "length_m": 28337.5,
+  "max_sample_gap_m": 9.86,
+  "points": 56678,
+  "respawns": 0,
+  "suspect": false
+ },
+ "E01-Obstacle": {
+  "author_time_s": 45.56,
+  "centerline": "E01-Obstacle_official_0.5m_cl.npy",
+  "group": "Black",
+  "length_m": 5711.0,
+  "max_sample_gap_m": 17.45,
+  "points": 11424,
+  "respawns": 0,
+  "suspect": false
+ },
+ "E02-Endurance": {
+  "author_time_s": 277.48,
+  "centerline": "E02-Endurance_official_0.5m_cl.npy",
+  "group": "Black",
+  "length_m": 21902.1,
+  "max_sample_gap_m": 13.92,
+  "points": 43807,
+  "respawns": 0,
+  "suspect": false
+ },
+ "E03-Endurance": {
+  "author_time_s": 329.78,
+  "centerline": "E03-Endurance_official_0.5m_cl.npy",
+  "group": "Black",
+  "length_m": 13836.1,
+  "max_sample_gap_m": 8.11,
+  "points": 27675,
+  "respawns": 0,
+  "suspect": false
+ },
+ "E04-Obstacle": {
+  "centerline": null,
+  "error": "no ghost in replay",
+  "group": "Black"
+ },
+ "E05-Endurance": {
+  "author_time_s": 3605.94,
+  "centerline": "E05-Endurance_official_0.5m_cl.npy",
+  "group": "Black",
+  "length_m": 322593.1,
+  "max_sample_gap_m": 1053.47,
+  "points": 643195,
+  "respawns": 1,
+  "suspect": true
+ }
+}
