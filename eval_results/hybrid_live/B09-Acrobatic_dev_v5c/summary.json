@@ -1,0 +1,45 @@
+{
+  "track": "B09-Acrobatic",
+  "controller": "purepursuit",
+  "speed_model": "eval_results\\speed_model\\speed_model_v1.pt",
+  "speed_scale": 1.0,
+  "top_speed_mps": null,
+  "centerline": "B09-Acrobatic_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "speed_caps": [],
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 139.46932799064794,
+      "end_m": 236.97781786298975,
+      "reference_horizontal_speed_mps": 49.84,
+      "required_speed_mps": 49.84
+    },
+    {
+      "start_m": 331.487100135536,
+      "end_m": 381.992161419092,
+      "reference_horizontal_speed_mps": 53.2,
+      "required_speed_mps": 53.2
+    }
+  ],
+  "runs": [
+    {
+      "finished": true,
+      "termination": "Finished",
+      "race_time_s": 17.73,
+      "completion_pct": 100.0,
+      "actions": 356,
+      "steps": 355,
+      "impact_suspects": 0,
+      "recovery_steps": 0,
+      "reversals": 0,
+      "slip_steps": 4,
+      "max_progress_m": 796.03,
+      "centerline_length_m": 796.03,
+      "run": 1
+    }
+  ],
+  "finishes": "1/1"
+}
