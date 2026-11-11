@@ -1,0 +1,48 @@
+{
+  "track": "A11-Race",
+  "controller": "purepursuit",
+  "centerline": "A11-Race_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "speed_caps": [],
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 204.95874208011412,
+      "end_m": 309.96316863978296,
+      "reference_horizontal_speed_mps": 38.88,
+      "required_speed_mps": 38.88
+    },
+    {
+      "start_m": 504.4683715361489,
+      "end_m": 531.4696966030848,
+      "reference_horizontal_speed_mps": 49.36,
+      "required_speed_mps": 49.36
+    },
+    {
+      "start_m": 740.47618338843,
+      "end_m": 798.9791764198304,
+      "reference_horizontal_speed_mps": 59.29,
+      "required_speed_mps": 59.29
+    }
+  ],
+  "runs": [
+    {
+      "finished": true,
+      "termination": "Finished",
+      "race_time_s": 25.38,
+      "completion_pct": 100.0,
+      "actions": 509,
+      "steps": 508,
+      "impact_suspects": 0,
+      "recovery_steps": 0,
+      "reversals": 0,
+      "slip_steps": 16,
+      "max_progress_m": 1141.49,
+      "centerline_length_m": 1141.49,
+      "run": 1
+    }
+  ],
+  "finishes": "1/1"
+}
