@@ -124,18 +124,27 @@ def detect_jumps(geometry: CenterlineGeometry, config: TrackProfileConfig) -> tu
     return tuple(jumps)
 
 
-def build_track_speed_profile(geometry: CenterlineGeometry, config: TrackProfileConfig | None = None) -> TrackSpeedProfile:
+def build_track_speed_profile(
+    geometry: CenterlineGeometry, config: TrackProfileConfig | None = None, base_speed_mps: np.ndarray | None = None
+) -> TrackSpeedProfile:
+    """``base_speed_mps`` (one value per point, e.g. the learned speed model) replaces the hand corner rule."""
+
     config = config or TrackProfileConfig()
     progress = geometry.cumulative_lengths
     curvature = smoothed_horizontal_curvature(geometry, config.curvature_window_m)
-    corner_limit = np.array(
-        [
-            curvature_target_speed_mps(
-                k, max_speed_mps=config.max_speed_mps, min_speed_mps=config.min_speed_mps, curvature_gain=config.curvature_gain
-            )
-            for k in curvature
-        ]
-    )
+    if base_speed_mps is not None:
+        if len(base_speed_mps) != len(progress):
+            raise ValueError("base_speed_mps needs one value per centerline point")
+        corner_limit = np.clip(np.asarray(base_speed_mps, dtype=float), config.min_speed_mps, config.max_speed_mps)
+    else:
+        corner_limit = np.array(
+            [
+                curvature_target_speed_mps(
+                    k, max_speed_mps=config.max_speed_mps, min_speed_mps=config.min_speed_mps, curvature_gain=config.curvature_gain
+                )
+                for k in curvature
+            ]
+        )
     # Backward pass: never be faster than what can be braked down for what's ahead.
     target = corner_limit.copy()
     for i in range(len(target) - 2, -1, -1):
