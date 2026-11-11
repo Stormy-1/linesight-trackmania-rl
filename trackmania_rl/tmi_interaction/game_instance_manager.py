@@ -25,7 +25,9 @@ import math
 import os
 import socket
 import subprocess
+import threading
 import time
+from pathlib import Path
 from typing import Callable, Dict, List
 
 import cv2
@@ -36,6 +38,7 @@ import psutil
 
 from config_files import config_copy, user_config
 from trackmania_rl import contact_materials, map_loader
+from trackmania_rl.hybrid_telemetry import HybridTelemetryWriter
 from trackmania_rl.tmi_interaction.tminterface2 import MessageType, TMInterface
 
 if config_copy.is_linux:
@@ -46,6 +49,16 @@ else:
     import win32gui
     import win32process
 
+    from trackmania_rl.tmi_interaction.boot_keys import (
+        BootKeyPresser,
+        is_foreground_window,
+        press_scancode,
+        start_in_background,
+    )
+
+# Press the keys a fresh game waits for (console, profile, map intro); see boot_keys.py.
+AUTO_BOOT_KEYS = (not config_copy.is_linux) and os.environ.get("LINESIGHT_NO_BOOT_KEYS") != "1"
+
 
 def _set_window_focus(trackmania_window):
     # https://stackoverflow.com/questions/14295337/win32gui-setactivewindow-error-the-specified-procedure-could-not-be-found
@@ -55,6 +68,16 @@ def _set_window_focus(trackmania_window):
         shell = win32com.client.Dispatch("WScript.Shell")
         shell.SendKeys("%")
         win32gui.SetForegroundWindow(trackmania_window)
+
+
+def _set_window_focus_from_thread(trackmania_window):
+    """Focus from a background thread: COM must be initialised per thread (boot keys run in one)."""
+
+    if not config_copy.is_linux:
+        import pythoncom
+
+        pythoncom.CoInitialize()  # idempotent per thread
+    _set_window_focus(trackmania_window)
 
 
 def ensure_not_minimized(trackmania_window):
@@ -128,6 +151,12 @@ class GameInstanceManager:
         self.start_states = {}
         self.game_spawning_lock = game_spawning_lock
         self.game_activated = False
+        self.race_started_event = threading.Event()
+        self.boot_keys = (
+            BootKeyPresser(press=press_scancode, focus=_set_window_focus_from_thread, is_foreground=is_foreground_window)
+            if AUTO_BOOT_KEYS
+            else None
+        )
 
     def get_tm_window_id(self):
         assert self.tm_process_id is not None
@@ -238,6 +267,8 @@ class GameInstanceManager:
             time.sleep(0)
 
         self.get_tm_window_id()
+        if self.boot_keys is not None:
+            start_in_background(self.boot_keys.run_profile_phase, self.tm_window_id)
 
     def is_game_running(self):
         return (self.tm_process_id is not None) and (self.tm_process_id in (p.pid for p in psutil.process_iter()))
@@ -277,6 +308,9 @@ class GameInstanceManager:
         map_loader.hide_personal_record_replay(map_path, True)
         self.iface.execute_command(f"map {map_path}")
         self.UI_disabled = False
+        if self.boot_keys is not None:
+            self.race_started_event.clear()
+            start_in_background(self.boot_keys.run_intro_phase, self.tm_window_id, self.race_started_event)
         (
             self.next_real_checkpoint_positions,
             self.max_allowable_distance_to_real_checkpoint,
@@ -321,6 +355,26 @@ class GameInstanceManager:
             "state_float": [],
             "furthest_zone_idx": 0,
         }
+
+        # Optional, explicitly requested privileged telemetry capture for the
+        # hybrid-state offline analyzer.  Normal training remains unchanged
+        # unless the caller sets this environment variable before a run.
+        hybrid_telemetry_writer = None
+        hybrid_telemetry_dir = os.environ.get("LINESIGHT_HYBRID_TELEMETRY_DIR")
+        hybrid_action_capture_dir = os.environ.get("LINESIGHT_HYBRID_ACTION_CAPTURE_DIR")
+        hybrid_randomized_capture_dir = os.environ.get("LINESIGHT_HYBRID_RANDOMIZED_ACTION_CAPTURE_DIR")
+        hybrid_capture_dir = hybrid_randomized_capture_dir or hybrid_action_capture_dir or hybrid_telemetry_dir
+        hybrid_action_capture = bool(hybrid_action_capture_dir or hybrid_randomized_capture_dir)
+        hybrid_randomized_capture = bool(hybrid_randomized_capture_dir)
+        if hybrid_capture_dir:
+            map_stem = os.path.splitext(os.path.basename(map_path))[0].replace(" ", "_")
+            telemetry_filename = f"{map_stem}_{int(time.time() * 1000)}_{os.getpid()}.csv"
+            hybrid_telemetry_writer = HybridTelemetryWriter(
+                Path(hybrid_capture_dir) / telemetry_filename,
+                include_action_columns=hybrid_action_capture,
+                include_randomization_columns=hybrid_randomized_capture,
+            )
+            end_race_stats["hybrid_telemetry_path"] = str(hybrid_telemetry_writer.path)
 
         last_progress_improvement_ms = 0
 
@@ -393,6 +447,24 @@ class GameInstanceManager:
                         sim_state_dyna_current.angular_speed,
                         dtype=np.float32,
                     )  # (3,)
+
+                    if hybrid_telemetry_writer is not None:
+                        # The linear velocity is already expressed in world
+                        # coordinates and is a more reliable forward-heading
+                        # proxy here than guessing which rotation-matrix axis
+                        # TMInterface exposes as the car's forward axis.
+                        speed_mps = float(np.linalg.norm(sim_state_velocity))
+                        if speed_mps > 1e-6:
+                            telemetry_heading = sim_state_velocity / speed_mps
+                        else:
+                            telemetry_heading = sim_state_orientation[0]
+                        if not hybrid_action_capture:
+                            hybrid_telemetry_writer.write_sample(
+                                float(sim_state_race_time) / 1000.0,
+                                sim_state_position,
+                                telemetry_heading,
+                                speed_mps,
+                            )
 
                     gearbox_state = sim_state_mobil.gearbox_state
                     counter_gearbox_state = 0
@@ -705,6 +777,16 @@ class GameInstanceManager:
                         pc7 = time.perf_counter_ns()
                         instrumentation__convert_frame += pc7 - pc6
 
+                        # Hybrid controllers need the raw pose, not just the RL float vector.
+                        observe_simulation_state = getattr(exploration_policy, "observe_simulation_state", None)
+                        if observe_simulation_state is not None:
+                            observe_simulation_state(
+                                race_time_s=float(sim_state_race_time) / 1000.0,
+                                position=sim_state_position,
+                                velocity=sim_state_velocity,
+                                orientation=sim_state_orientation,
+                            )
+
                         (
                             action_idx,
                             action_was_greedy,
@@ -717,6 +799,24 @@ class GameInstanceManager:
 
                         self.request_inputs(action_idx, rollout_results)
                         self.request_speed(self.running_speed)
+
+                        if hybrid_telemetry_writer is not None and hybrid_action_capture:
+                            action_is_randomized = getattr(exploration_policy, "last_action_is_randomized", None)
+                            if hybrid_randomized_capture and not isinstance(action_is_randomized, (bool, np.bool_)):
+                                raise RuntimeError(
+                                    "randomized action capture requires a policy with "
+                                    "last_action_is_randomized provenance"
+                                )
+                            hybrid_telemetry_writer.write_sample(
+                                float(sim_state_race_time) / 1000.0,
+                                sim_state_position,
+                                telemetry_heading,
+                                speed_mps,
+                                action_idx=action_idx,
+                                action_inputs=config_copy.inputs[action_idx],
+                                action_was_greedy=action_was_greedy,
+                                action_is_randomized=action_is_randomized,
+                            )
 
                         if n_th_action_we_compute == 0:
                             end_race_stats["value_starting_frame"] = q_value
@@ -732,6 +832,7 @@ class GameInstanceManager:
 
                         compute_action_asap = False
                         n_th_action_we_compute += 1
+                        self.race_started_event.set()
 
                         if not self.game_activated:
                             _set_window_focus(self.tm_window_id)
@@ -785,5 +886,8 @@ class GameInstanceManager:
             self.timeout_has_been_set = False
             self.game_activated = False
             self.msgtype_response_to_wakeup_TMI = None
+        finally:
+            if hybrid_telemetry_writer is not None:
+                hybrid_telemetry_writer.close()
 
         return rollout_results, end_race_stats
