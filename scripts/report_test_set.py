@@ -50,8 +50,8 @@ class RunMetrics:
         return round(self.race_time_s / self.replay_time_s, 2) if self.finished else None
 
 
-def run_dir_name(stem: str, tag: str) -> str:
-    return f"{stem}_test_{tag}"
+def run_dir_name(stem: str, tag: str, split_key: str = "test") -> str:
+    return f"{stem}_{split_key}_{tag}"
 
 
 def run_metrics(stem: str, tier: str, replay_time_s: float, summary: dict, rows: list[dict]) -> RunMetrics:
@@ -127,12 +127,18 @@ def format_table(results: list[RunMetrics]) -> str:
     return "\n".join(lines)
 
 
+def campaign_maps(stems: list[str], manifest: dict) -> list[str]:
+    """Maps with an official replay (Hockolicious, a dev map, has none)."""
+
+    return [s for s in stems if s in manifest]
+
+
 def collect(split_key: str, tag: str) -> tuple[list[RunMetrics], list[str]]:
     manifest = json.loads(MANIFEST.read_text())
     results, missing = [], []
-    for stem in load_split()[split_key]:
+    for stem in campaign_maps(load_split()[split_key], manifest):
         entry = manifest[stem]
-        metrics = load_run(stem, entry["group"], entry["author_time_s"], run_dir_name(stem, tag))
+        metrics = load_run(stem, entry["group"], entry["author_time_s"], run_dir_name(stem, tag, split_key))
         if metrics is None:
             missing.append(stem)
         else:
@@ -142,8 +148,8 @@ def collect(split_key: str, tag: str) -> tuple[list[RunMetrics], list[str]]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--tag", required=True, help="run names are <map>_test_<tag>")
-    parser.add_argument("--set", default="test", choices=("test", "rl_train"))
+    parser.add_argument("--tag", required=True, help="run names are <map>_<set>_<tag>")
+    parser.add_argument("--set", default="test", choices=("test", "rl_train", "dev"))
     parser.add_argument("--json", type=Path, help="also write per-map metrics + aggregate here")
     args = parser.parse_args()
 

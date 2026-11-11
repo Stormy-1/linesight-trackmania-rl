@@ -42,6 +42,7 @@ from trackmania_rl.hybrid_live import HybridLivePolicy, HybridLivePolicyConfig
 from trackmania_rl.hybrid_mpc import ShortHorizonMPCConfig, ShortHorizonMPCController
 from trackmania_rl.hybrid_state import build_centerline_geometry
 from trackmania_rl.hybrid_track_profile import TrackProfileConfig, build_track_speed_profile
+from trackmania_rl.speed_model import learned_base_speed, load_speed_model
 from trackmania_rl.map_loader import load_next_map_zone_centers
 from trackmania_rl.tmi_interaction import game_instance_manager
 
@@ -57,13 +58,24 @@ def parse_speed_cap(text: str) -> tuple[float, float, float]:
 
 
 def make_controller(
-    name: str, max_speed_mps: float | None, centerline: np.ndarray, speed_caps: tuple[tuple[float, float, float], ...] = ()
+    name: str,
+    max_speed_mps: float | None,
+    centerline: np.ndarray,
+    speed_caps: tuple[tuple[float, float, float], ...] = (),
+    speed_model: Path | None = None,
+    speed_scale: float = 1.0,
+    top_speed_mps: float | None = None,
 ):
     if name == "purepursuit":
         profile_config = TrackProfileConfig(speed_caps=speed_caps)
-        if max_speed_mps is not None:
-            profile_config = dataclasses.replace(profile_config, max_speed_mps=max_speed_mps)
-        profile = build_track_speed_profile(build_centerline_geometry(centerline), profile_config)
+        for cap in (top_speed_mps, max_speed_mps):  # top speed: global; max speed: legacy per-run override
+            if cap is not None:
+                profile_config = dataclasses.replace(profile_config, max_speed_mps=cap)
+        geometry = build_centerline_geometry(centerline)
+        base = None
+        if speed_model is not None:
+            base = learned_base_speed(geometry, load_speed_model(speed_model), speed_scale)
+        profile = build_track_speed_profile(geometry, profile_config, base)
         return PurePursuitController(profile)
     if name == "mpc":
         config = ShortHorizonMPCConfig()
@@ -144,6 +156,9 @@ def main() -> None:
         default=None,
         help="centerline file under maps/ to drive instead of the track default (e.g. A05-Race_official_0.5m_cl.npy)",
     )
+    parser.add_argument("--speed-model", type=Path, default=None, help="learned speed model (.pt) for the target profile")
+    parser.add_argument("--speed-scale", type=float, default=1.0, help="global safety scale on the learned speed")
+    parser.add_argument("--top-speed", type=float, default=None, help="global top-speed limit of the profile (m/s)")
     parser.add_argument(
         "--speed-cap",
         action="append",
@@ -168,7 +183,9 @@ def main() -> None:
     centerline = np.load(BASE_DIR / "maps" / meta["cl_file"])
     zone_centers = load_next_map_zone_centers(meta["cl_file"], BASE_DIR)
     finish_zone_idx = len(zone_centers) - config_copy.n_zone_centers_extrapolate_after_end_of_map
-    controller = make_controller(args.controller, args.max_speed, centerline, tuple(args.speed_cap))
+    controller = make_controller(
+        args.controller, args.max_speed, centerline, tuple(args.speed_cap), args.speed_model, args.speed_scale, args.top_speed
+    )
     policy = HybridLivePolicy(centerline, controller, config=HybridLivePolicyConfig(unstick_enabled=not args.no_unstick))
 
     tmi = game_instance_manager.GameInstanceManager(
@@ -186,6 +203,9 @@ def main() -> None:
     summary = {
         "track": args.map or args.track,
         "controller": args.controller,
+        "speed_model": str(args.speed_model) if args.speed_model else None,
+        "speed_scale": args.speed_scale,
+        "top_speed_mps": args.top_speed,
         "centerline": meta["cl_file"],
         "max_speed_override_mps": args.max_speed,
         "speed_caps": [list(cap) for cap in args.speed_cap],

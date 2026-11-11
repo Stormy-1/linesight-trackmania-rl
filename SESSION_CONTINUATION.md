@@ -1,6 +1,6 @@
 # Project Linesight — Session continuation brief
 
-> Updated: 2026-11-12 (Step 1 done: map split, test-set runner, metrics, v4 baseline on the test set).
+> Updated: 2026-11-12 (Step 1 done; Step 2 done: learned speed model, offline r 0.81, test set 3/10 = no live gain → Step 3).
 > Read `CLAUDE.md` first (rules, commands, measured facts). This file holds the
 > current state and the exact next step. History: `HANDOVER_DOC.md` §60.
 
@@ -149,7 +149,7 @@ If that doesn't work, swap B09 for another Green/acrobatic map (the user said sw
 Boot-keys fix: the background thread now calls `pythoncom.CoInitialize()` (`_set_window_focus_from_thread`).
 Before that, focus always failed in that thread.
 
-## Next step (do this first) — THE FULL PLAN (user-approved 2026-11-11). Step 1 done → do Step 2
+## Next step (do this first) — THE FULL PLAN (user-approved 2026-11-11). Steps 1–2 done → do Step 3
 Keep live driving small (each map costs ~5 min). The 64 official replays are **offline** data and cost nothing to use.
 
 **Step 1 — evaluation protocol: DONE (2026-11-12, HANDOVER §67).**
@@ -168,8 +168,33 @@ mean completion 57.9%, median time ratio 1.60, contacts 12 landings / 0 bumps / 
 Finishes: A09 41.51 s (1.60), A15 41.39 s (1.63), B07 44.97 s (1.48). Note: C02 finished in v3b (62.66 s) but v4
 stalls at 2693/2849 m (94.6%) — a v4 regression or run-to-run luck; look at it only through general fixes, never by tuning C02.
 
-**NEXT: Step 2 (learned speed model from pro replays).** Train on `offline_train` only; validate by held-out *map*
-(e.g. leave dev maps out); then drive the test set once (`--tag v5`) and compare with the v4 baseline table.
+**Step 2 DONE (2026-11-12, HANDOVER §68).** Offline part:
+- `trackmania_rl/speed_features.py`: 17 geometry-only features per centerline point (curvature here/ahead in 5 windows/
+  behind in 2, slope ×3, vertical curvature + crest ahead, jump in/speed/distance-to-next/next-speed, distance from start).
+- `scripts/build_speed_dataset.py` → `eval_results/speed_model/dataset.npz` (139k rows, 63 maps; target = pro speed
+  from ghost Δposition/0.1 s mapped by arclength; every 4th 0.5 m point).
+- `trackmania_rl/speed_model.py` (MLP 64-64, standardised in/out, Huber) + `scripts/train_speed_model.py`:
+  5-fold **by-map** CV on offline_train: **MLP r 0.81 / MAE 11.7 m/s; linear r 0.57 / 20.3; hand rule r 0.33 / 34.1.**
+  Test maps scored once (not used for choices): MLP r 0.84 / 10.3 vs hand r 0.21 / 31.1. Model: `speed_model_v1.pt`.
+- Finding: pros carry 65–110 m/s median on dev maps (A01 109, A03 94, A09 81); we carry 40–60. The 70 m/s profile cap
+  (`TrackProfileConfig.max_speed_mps`) is the main limit, and is a hand-set number (step 3 territory: vehicle limits).
+- Integration: `build_track_speed_profile(..., base_speed_mps)` replaces the corner rule; braking pass + jump physics
+  stay. Runner: `--speed-model PATH --speed-scale S --top-speed MPS` (global, recorded in summary.json).
+  `run_test_set.py --set dev|test --extra "<global args>"` (rejects per-map args). Tests: `test_speed_model.py`.
+- Live dev tuning (dev maps only, global knobs only). Dev: v4 6/7 (median ratio 1.35, 2 walls, 134 rec); v5a ×0.85 6/7
+  (1.40); v5b ×0.85 top 90 5/7 (worse: controller can't use >70 m/s); **v5c ×1.0 top 70: 7/7** (1.48, 3 walls, 185 rec;
+  A01 and B09 now finish; slower on A03/A07/A11 where pro-speed corners push the car wide into recovery).
+- **Test set v5 = v5c (`eval_results/test_set_v5_speed_model.json`): 3/10, mean completion 52.3%, median ratio 1.63,
+  14 landings / 11 walls / 4 scrapes, 734 recovery steps** (v4: 3/10, 57.9%, 1.60, 12/2/1, 529). C02 now finishes
+  (63.63 s), A09 now fails (42.7%, wall). **No net gain:** the model predicts pro speed well, but pros drift through
+  corners at speeds our car + pure pursuit can't hold. The bottleneck moved to the vehicle/controller → Step 3.
+- A01 crest (349–506 m) is a "jump" lock at 58.9 m/s on a convex downhill road; the car drifts sideways airborne.
+  The model agrees with the pro there (75–84 m/s); it's in-air tracking, not speed.
+
+**NEXT: Step 3 (learned vehicle model / grip limit).** Fit from live logs (`eval_results/hybrid_live/*/run01.csv`, now
+incl. the v5 runs which probe higher corner speeds): max lateral accel vs speed (friction circle), steering → yaw-rate
+response, slip onset. Use it as a physics cap on the learned speed: target = min(learned pro speed, sqrt(a_lat_max / |k|)),
+plus braking from the fitted decel. Tune nothing per map; dev maps for any global choice; test set once as `--tag v6`.
 
 **Step 2 — learned speed model from pro replays (supervised DL / imitation, ~1–1.5 days).**
 - Replays give 100 ms ghost samples + the pro's control entries (`trackmania_rl/map_loader.py`
@@ -215,5 +240,5 @@ The new session starts from `CLAUDE.md` + this file.
 stuck on the line (10), end of the line (A10, B11), plus free-space carving and an edge-avoiding planner.
 
 ## Verification state
-- Full pytest: 285 passed (2026-11-12, incl. the split and report tests).
+- Full pytest: 291 passed (2026-11-12, incl. split, report and speed-model tests).
 - Nothing is committed. All work is uncommitted in `TRACK_Copy`. New 2026-11-12: `scripts/make_map_split.py`, `run_test_set.py`, `report_test_set.py`, `maps/map_split.json` (run_showcase.ps1 deleted).

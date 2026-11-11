@@ -63,3 +63,4 @@ wait_5m.py
 /eval_results/hybrid_rollouts/hybrid_recovery_boundary_comparison_step25.json
 /eval_results/hybrid_rollouts/hybrid_recovery_boundary_comparison_step70.json
 /.opencode/vendor/
+/eval_results/speed_model/dataset.npz

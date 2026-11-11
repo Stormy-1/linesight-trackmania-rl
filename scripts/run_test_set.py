@@ -8,12 +8,14 @@ game can't be reached the batch stops so it doesn't burn through the list.
 Usage (from the repo root):
     python scripts/run_test_set.py --tag v4                 # test set -> <map>_test_v4
     python scripts/run_test_set.py --tag v4 --set rl_train
+    python scripts/run_test_set.py --set dev --tag v5a --extra "--speed-model eval_results/speed_model/speed_model_v1.pt --speed-scale 0.85"
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import shlex
 import shutil
 import subprocess
 import sys
@@ -24,7 +26,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from classify_hybrid_impacts import LIVE_DIR
 from make_map_split import MANIFEST, load_split
-from report_test_set import collect, format_table, run_dir_name
+from report_test_set import campaign_maps, collect, format_table, run_dir_name
 
 RUNNER = ROOT / "scripts" / "run_hybrid_controller_live.py"
 COMMON_ARGS = ("--runs", "1", "--speed", "10", "--stuck-cutoff-s", "6")
@@ -36,9 +38,11 @@ def max_race_s(replay_time_s: float) -> int:
     return round(max(MIN_RACE_S, RACE_TIME_FACTOR * replay_time_s))
 
 
-def command_for(stem: str, replay_time_s: float, tag: str) -> list[str]:
-    return [sys.executable, str(RUNNER), "--map", stem, *COMMON_ARGS,
-            "--max-race-s", str(max_race_s(replay_time_s)), "--name", run_dir_name(stem, tag)]
+def command_for(stem: str, replay_time_s: float, tag: str, split_key: str = "test", extra: tuple[str, ...] = ()) -> list[str]:
+    """Identical for every map: only the time limit (from the replay time) and the name vary."""
+
+    return [sys.executable, str(RUNNER), "--map", stem, *COMMON_ARGS, *extra,
+            "--max-race-s", str(max_race_s(replay_time_s)), "--name", run_dir_name(stem, tag, split_key)]
 
 
 def termination(name: str) -> str:
@@ -52,16 +56,20 @@ def termination(name: str) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--tag", required=True)
-    parser.add_argument("--set", default="test", choices=("test", "rl_train"))
+    parser.add_argument("--set", default="test", choices=("test", "rl_train", "dev"))
+    parser.add_argument("--extra", default="", help='global runner args for every map, e.g. "--speed-model X.pt --speed-scale 0.85"')
     args = parser.parse_args()
+    extra = tuple(shlex.split(args.extra))
+    if any(a in ("--speed-cap", "--max-speed", "--map", "--name") for a in extra):
+        parser.error("--extra may only hold global settings")
 
     manifest = json.loads(MANIFEST.read_text())
-    for stem in load_split()[args.set]:
-        name = run_dir_name(stem, args.tag)
+    for stem in campaign_maps(load_split()[args.set], manifest):
+        name = run_dir_name(stem, args.tag, args.set)
         if (LIVE_DIR / name / "summary.json").exists():
             continue
         print(f"\n=== {stem} -> {name}", flush=True)
-        subprocess.run(command_for(stem, manifest[stem]["author_time_s"], args.tag), cwd=ROOT, check=False)
+        subprocess.run(command_for(stem, manifest[stem]["author_time_s"], args.tag, args.set, extra), cwd=ROOT, check=False)
         outcome = termination(name)
         print(f"--> {stem}: {outcome}", flush=True)
         if outcome in ("TMI_Disrupt", "no summary"):
