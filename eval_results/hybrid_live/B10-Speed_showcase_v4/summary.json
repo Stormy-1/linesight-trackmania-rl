@@ -1,0 +1,29 @@
+{
+  "track": "B10-Speed",
+  "controller": "purepursuit",
+  "centerline": "B10-Speed_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "speed_caps": [],
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [],
+  "runs": [
+    {
+      "finished": true,
+      "termination": "Finished",
+      "race_time_s": 73.29,
+      "completion_pct": 100.0,
+      "actions": 1467,
+      "steps": 1466,
+      "impact_suspects": 2,
+      "recovery_steps": 0,
+      "reversals": 0,
+      "slip_steps": 0,
+      "max_progress_m": 4159.9,
+      "centerline_length_m": 4159.9,
+      "run": 1
+    }
+  ],
+  "finishes": "1/1"
+}

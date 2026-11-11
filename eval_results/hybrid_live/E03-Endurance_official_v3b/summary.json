@@ -1,0 +1,275 @@
+{
+  "track": "E03-Endurance",
+  "controller": "purepursuit",
+  "centerline": "E03-Endurance_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 179.43106261222252,
+      "end_m": 222.43059359322982,
+      "reference_horizontal_speed_mps": 32.94,
+      "required_speed_mps": 32.94
+    },
+    {
+      "start_m": 261.92726192045734,
+      "end_m": 334.9263913486229,
+      "reference_horizontal_speed_mps": 34.16,
+      "required_speed_mps": 34.16
+    },
+    {
+      "start_m": 529.912225922926,
+      "end_m": 602.4114388384538,
+      "reference_horizontal_speed_mps": 34.46,
+      "required_speed_mps": 34.46
+    },
+    {
+      "start_m": 1039.850605503056,
+      "end_m": 1105.346737606007,
+      "reference_horizontal_speed_mps": 23.21,
+      "required_speed_mps": 23.21
+    },
+    {
+      "start_m": 1170.8405857098285,
+      "end_m": 1213.3394766929098,
+      "reference_horizontal_speed_mps": 29.48,
+      "required_speed_mps": 29.48
+    },
+    {
+      "start_m": 1310.334701006392,
+      "end_m": 1339.83419446841,
+      "reference_horizontal_speed_mps": 31.69,
+      "required_speed_mps": 31.69
+    },
+    {
+      "start_m": 1496.3222110888353,
+      "end_m": 1520.8214879428936,
+      "reference_horizontal_speed_mps": 26.38,
+      "required_speed_mps": 26.38
+    },
+    {
+      "start_m": 2136.299754028071,
+      "end_m": 2269.799665812231,
+      "reference_horizontal_speed_mps": 43.4,
+      "required_speed_mps": 43.4
+    },
+    {
+      "start_m": 2899.243962220957,
+      "end_m": 2976.742828923471,
+      "reference_horizontal_speed_mps": 31.27,
+      "required_speed_mps": 31.27
+    },
+    {
+      "start_m": 3174.227698181017,
+      "end_m": 3246.2272339852543,
+      "reference_horizontal_speed_mps": 33.92,
+      "required_speed_mps": 33.92
+    },
+    {
+      "start_m": 4364.184207608913,
+      "end_m": 4428.184343494096,
+      "reference_horizontal_speed_mps": 50.03,
+      "required_speed_mps": 50.03
+    },
+    {
+      "start_m": 4443.182276198357,
+      "end_m": 4504.682080265783,
+      "reference_horizontal_speed_mps": 39.64,
+      "required_speed_mps": 39.64
+    },
+    {
+      "start_m": 4878.6599642519295,
+      "end_m": 4947.159006857313,
+      "reference_horizontal_speed_mps": 33.17,
+      "required_speed_mps": 33.17
+    },
+    {
+      "start_m": 4992.647690878867,
+      "end_m": 5048.147615557844,
+      "reference_horizontal_speed_mps": 38.75,
+      "required_speed_mps": 38.75
+    },
+    {
+      "start_m": 5149.139709170728,
+      "end_m": 5241.138981803371,
+      "reference_horizontal_speed_mps": 37.94,
+      "required_speed_mps": 37.94
+    },
+    {
+      "start_m": 5297.131512730877,
+      "end_m": 5325.6268825258785,
+      "reference_horizontal_speed_mps": 51.92,
+      "required_speed_mps": 51.92
+    },
+    {
+      "start_m": 5660.5784033772325,
+      "end_m": 5727.075181107306,
+      "reference_horizontal_speed_mps": 24.66,
+      "required_speed_mps": 24.66
+    },
+    {
+      "start_m": 5790.562709000339,
+      "end_m": 5831.561347706339,
+      "reference_horizontal_speed_mps": 28.91,
+      "required_speed_mps": 28.91
+    },
+    {
+      "start_m": 6049.04925953707,
+      "end_m": 6106.547695499303,
+      "reference_horizontal_speed_mps": 29.61,
+      "required_speed_mps": 29.61
+    },
+    {
+      "start_m": 6358.02483958879,
+      "end_m": 6383.025063076156,
+      "reference_horizontal_speed_mps": 72.1,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 6760.01297730273,
+      "end_m": 6897.513285765655,
+      "reference_horizontal_speed_mps": 44.15,
+      "required_speed_mps": 44.15
+    },
+    {
+      "start_m": 7514.931081536445,
+      "end_m": 7587.429248254707,
+      "reference_horizontal_speed_mps": 30.03,
+      "required_speed_mps": 30.03
+    },
+    {
+      "start_m": 7790.422190387556,
+      "end_m": 7849.421601680976,
+      "reference_horizontal_speed_mps": 34.23,
+      "required_speed_mps": 34.23
+    },
+    {
+      "start_m": 8047.41105981738,
+      "end_m": 8069.41094905757,
+      "reference_horizontal_speed_mps": 41.28,
+      "required_speed_mps": 41.28
+    },
+    {
+      "start_m": 8975.881576724207,
+      "end_m": 9043.882170502311,
+      "reference_horizontal_speed_mps": 51.9,
+      "required_speed_mps": 51.9
+    },
+    {
+      "start_m": 9057.8792977992,
+      "end_m": 9118.879252969931,
+      "reference_horizontal_speed_mps": 41.73,
+      "required_speed_mps": 41.73
+    },
+    {
+      "start_m": 9144.375242105474,
+      "end_m": 9170.374700788721,
+      "reference_horizontal_speed_mps": 41.66,
+      "required_speed_mps": 41.66
+    },
+    {
+      "start_m": 9409.86567270223,
+      "end_m": 9449.865463931757,
+      "reference_horizontal_speed_mps": 31.58,
+      "required_speed_mps": 31.58
+    },
+    {
+      "start_m": 9490.860198613424,
+      "end_m": 9567.359291534176,
+      "reference_horizontal_speed_mps": 34.6,
+      "required_speed_mps": 34.6
+    },
+    {
+      "start_m": 9607.351444257416,
+      "end_m": 9660.351153688367,
+      "reference_horizontal_speed_mps": 37.13,
+      "required_speed_mps": 37.13
+    },
+    {
+      "start_m": 9759.342562865551,
+      "end_m": 9847.34181192713,
+      "reference_horizontal_speed_mps": 37.5,
+      "required_speed_mps": 37.5
+    },
+    {
+      "start_m": 10251.779932573982,
+      "end_m": 10315.276520071517,
+      "reference_horizontal_speed_mps": 24.35,
+      "required_speed_mps": 24.35
+    },
+    {
+      "start_m": 10381.265143479788,
+      "end_m": 10425.264019235303,
+      "reference_horizontal_speed_mps": 29.68,
+      "required_speed_mps": 29.68
+    },
+    {
+      "start_m": 10519.757513066941,
+      "end_m": 10552.757332278536,
+      "reference_horizontal_speed_mps": 33.46,
+      "required_speed_mps": 33.46
+    },
+    {
+      "start_m": 10705.23840133913,
+      "end_m": 10736.236605834294,
+      "reference_horizontal_speed_mps": 24.19,
+      "required_speed_mps": 24.19
+    },
+    {
+      "start_m": 11341.702557479515,
+      "end_m": 11475.202831075429,
+      "reference_horizontal_speed_mps": 43.12,
+      "required_speed_mps": 43.12
+    },
+    {
+      "start_m": 12107.63912337316,
+      "end_m": 12185.637395250467,
+      "reference_horizontal_speed_mps": 29.91,
+      "required_speed_mps": 29.91
+    },
+    {
+      "start_m": 12389.619524604374,
+      "end_m": 12468.119138108497,
+      "reference_horizontal_speed_mps": 33.75,
+      "required_speed_mps": 33.75
+    },
+    {
+      "start_m": 12637.10257745713,
+      "end_m": 12658.60243366343,
+      "reference_horizontal_speed_mps": 43.08,
+      "required_speed_mps": 43.08
+    },
+    {
+      "start_m": 13577.079004872388,
+      "end_m": 13653.579695836834,
+      "reference_horizontal_speed_mps": 54.93,
+      "required_speed_mps": 54.93
+    },
+    {
+      "start_m": 13666.579579277612,
+      "end_m": 13707.079632142832,
+      "reference_horizontal_speed_mps": 47.74,
+      "required_speed_mps": 47.74
+    }
+  ],
+  "runs": [
+    {
+      "finished": false,
+      "termination": "Stuck_Cutoff_2s",
+      "race_time_s": null,
+      "completion_pct": 17.96,
+      "actions": 1979,
+      "steps": 1979,
+      "impact_suspects": 6,
+      "recovery_steps": 174,
+      "reversals": 2,
+      "slip_steps": 110,
+      "max_progress_m": 2476.51,
+      "centerline_length_m": 13836.07,
+      "run": 1
+    }
+  ],
+  "finishes": "0/1"
+}
