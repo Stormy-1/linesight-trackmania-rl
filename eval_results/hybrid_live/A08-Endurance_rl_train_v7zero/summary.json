@@ -1,0 +1,44 @@
+{
+  "track": "A08-Endurance",
+  "controller": "purepursuit",
+  "speed_model": "eval_results\\speed_model\\speed_model_v1.pt",
+  "speed_scale": 1.0,
+  "top_speed_mps": 70.0,
+  "gravity_mps2": 24.9,
+  "range_sensor": "eval_results\\range_sensor\\footprints_v1.npz",
+  "residual": "zero",
+  "residual_config": {
+    "max_steering_delta": 0.25,
+    "max_target_speed_delta_mps": 8.0
+  },
+  "grip_model": "eval_results\\grip_model\\grip_model_v1.json",
+  "grip_risk": 0.2,
+  "centerline": "A08-Endurance_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "speed_caps": [],
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [],
+  "runs": [
+    {
+      "finished": true,
+      "termination": "Finished",
+      "race_time_s": 117.3,
+      "completion_pct": 100.0,
+      "actions": 2347,
+      "steps": 2346,
+      "impact_suspects": 0,
+      "recovery_steps": 0,
+      "reversals": 0,
+      "slip_steps": 0,
+      "residual_active_steps": 2346,
+      "max_progress_m": 6643.1,
+      "centerline_length_m": 6643.1,
+      "run": 1,
+      "rl_transitions": 2346,
+      "rl_return": 664.31
+    }
+  ],
+  "finishes": "1/1"
+}

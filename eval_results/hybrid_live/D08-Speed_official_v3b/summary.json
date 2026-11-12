@@ -1,0 +1,41 @@
+{
+  "track": "D08-Speed",
+  "controller": "purepursuit",
+  "centerline": "D08-Speed_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 204.45499722228058,
+      "end_m": 418.9590668762899,
+      "reference_horizontal_speed_mps": 59.25,
+      "required_speed_mps": 59.25
+    },
+    {
+      "start_m": 3662.406641254435,
+      "end_m": 3716.407665814927,
+      "reference_horizontal_speed_mps": 70.89,
+      "required_speed_mps": 70.0
+    }
+  ],
+  "runs": [
+    {
+      "finished": false,
+      "termination": "Stuck_Cutoff_2s",
+      "race_time_s": null,
+      "completion_pct": 7.37,
+      "actions": 327,
+      "steps": 327,
+      "impact_suspects": 6,
+      "recovery_steps": 40,
+      "reversals": 1,
+      "slip_steps": 43,
+      "max_progress_m": 372.87,
+      "centerline_length_m": 5432.88,
+      "run": 1
+    }
+  ],
+  "finishes": "0/1"
+}

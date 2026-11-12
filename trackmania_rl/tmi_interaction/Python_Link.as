@@ -321,8 +321,13 @@ void OnConnect(){
 
 void OnQueueProcessed(int fromTime, int toTime, const string&in commandLine, const array<string>&in args)
 {
-    PORT = uint16(GetVariableDouble("custom_port"));
-    log("Port donadigo" + GetVariableDouble("custom_port"));
+    double cp = GetVariableDouble("custom_port");
+    if (cp > 0) {
+        PORT = uint16(cp);
+    } else {
+        PORT = 8478;
+    }
+    log("Port donadigo: " + PORT);
     Init_Socket();
 }
 

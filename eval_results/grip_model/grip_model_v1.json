@@ -1,0 +1,163 @@
+{
+  "intercept": -12.000343255152522,
+  "demand_coef": 0.13194514581055647,
+  "speed_coef": 0.10759264456238263,
+  "train_maps": [
+    "A01-Race",
+    "A02-Race",
+    "A03-Race",
+    "A04-Acrobatic",
+    "A05-Race",
+    "A06-Obstacle",
+    "A07-Race",
+    "A08-Endurance",
+    "A10-Acrobatic",
+    "A11-Race",
+    "A12-Speed",
+    "A13-Race",
+    "A14-Race",
+    "B01-Race",
+    "B02-Race",
+    "B03-Race",
+    "B05-Race",
+    "B06-Obstacle",
+    "B08-Endurance",
+    "B09-Acrobatic",
+    "B10-Speed",
+    "B11-Race",
+    "B12-Race",
+    "B14-Speed",
+    "B15-Race",
+    "C01-Race",
+    "C03-Acrobatic",
+    "C04-Race",
+    "C05-Endurance",
+    "C06-Speed",
+    "C07-Race",
+    "C08-Obstacle",
+    "C09-Race",
+    "C11-Race",
+    "C12-Obstacle",
+    "C14-Endurance",
+    "C15-Speed",
+    "D01-endurance",
+    "D02-Race",
+    "D03-Acrobatic",
+    "D05-Race",
+    "D06-Obstacle",
+    "D08-Speed",
+    "D09-obstacle",
+    "D10-Race",
+    "D11-Acrobatic",
+    "D12-Speed",
+    "D13-Race",
+    "D14-Endurance",
+    "D15-Endurance",
+    "E01-Obstacle",
+    "E02-Endurance",
+    "E03-Endurance",
+    "Hockolicious"
+  ],
+  "n_samples": 32210,
+  "lomo": {
+    "auc": 0.7544323745990303,
+    "log_loss": 0.17307685676104223,
+    "auc_demand_only": 0.7545317704603983,
+    "auc_speed_only": 0.7084632947142004,
+    "base_rate": 0.05737348649487737,
+    "calibration": [
+      {
+        "pred": [
+          0,
+          0.05
+        ],
+        "n": 21412,
+        "mean_pred": 0.02069873297312512,
+        "observed": 0.02708761442181954
+      },
+      {
+        "pred": [
+          0.05,
+          0.1
+        ],
+        "n": 8247,
+        "mean_pred": 0.06991201577904764,
+        "observed": 0.024615011519340365
+      },
+      {
+        "pred": [
+          0.1,
+          0.2
+        ],
+        "n": 1142,
+        "mean_pred": 0.1389536764790943,
+        "observed": 0.212784588441331
+      },
+      {
+        "pred": [
+          0.2,
+          0.4
+        ],
+        "n": 639,
+        "mean_pred": 0.28377705979050816,
+        "observed": 0.39123630672926446
+      },
+      {
+        "pred": [
+          0.4,
+          1.01
+        ],
+        "n": 770,
+        "mean_pred": 0.6766032352918475,
+        "observed": 0.7428571428571429
+      }
+    ]
+  },
+  "lateral_limit_mps2": {
+    "0.1": {
+      "30": 49.8,
+      "40": 41.7,
+      "50": 33.5,
+      "60": 25.4,
+      "70": 17.2
+    },
+    "0.2": {
+      "30": 56.0,
+      "40": 47.8,
+      "50": 39.7,
+      "60": 31.5,
+      "70": 23.4
+    },
+    "0.3": {
+      "30": 60.1,
+      "40": 51.9,
+      "50": 43.8,
+      "60": 35.6,
+      "70": 27.4
+    },
+    "0.5": {
+      "30": 66.5,
+      "40": 58.3,
+      "50": 50.2,
+      "60": 42.0,
+      "70": 33.9
+    }
+  },
+  "test_score_once": {
+    "maps": [
+      "A09-Race",
+      "A15-Speed",
+      "B04-Acrobatic",
+      "B07-Race",
+      "B13-Obstacle",
+      "C02-Race",
+      "C10-Acrobatic",
+      "C13-Race",
+      "D04-Race",
+      "D07-Race"
+    ],
+    "n": 3189,
+    "auc": 0.8400101781619592,
+    "log_loss": 0.3312735364193117
+  }
+}

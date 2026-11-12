@@ -48,9 +48,39 @@ read_tb.py
 wait_5m.py
 .git_upstream_backup
 
-# Local working notes and plans: kept on disk, not part of the project repo
-CLOUD_MIGRATION.md
+# Linesight hybrid stack: keep the map split + manifest; skip regenerable >5 MB offline rollout dumps
+!/maps/*.json
+/eval_results/hybrid_rollouts/hybrid_midrollout_recovery_comparison.json
+/eval_results/hybrid_rollouts/hybrid_midrollout_recovery_comparison_step05.json
+/eval_results/hybrid_rollouts/hybrid_midrollout_recovery_comparison_step20.json
+/eval_results/hybrid_rollouts/hybrid_midrollout_recovery_comparison_step35.json
+/eval_results/hybrid_rollouts/hybrid_midrollout_recovery_comparison_step50.json
+/eval_results/hybrid_rollouts/hybrid_midrollout_recovery_comparison_step80.json
+/eval_results/hybrid_rollouts/hybrid_new_disturbance_recovery_comparison_step15.json
+/eval_results/hybrid_rollouts/hybrid_new_disturbance_recovery_comparison_step30.json
+/eval_results/hybrid_rollouts/hybrid_new_disturbance_recovery_comparison_step60.json
+/eval_results/hybrid_rollouts/hybrid_predictive_features.json
+/eval_results/hybrid_rollouts/hybrid_recovery_boundary_comparison_step25.json
+/eval_results/hybrid_rollouts/hybrid_recovery_boundary_comparison_step70.json
+/.opencode/vendor/
+/eval_results/speed_model/dataset.npz
+
+# Local working notes, plans, study material and AI-agent tooling: kept on disk, not part of the project repo
+HANDOVER_DOC.md
+SESSION_CONTINUATION.md
+CLAUDE.md
+WORKSPACE_SAFETY_POLICY.md
+SOLUTION.md
 GENERALIZATION_STRATEGY.md
 PROJECT_STORY.md
-SESSION_CONTINUATION.md
-HANDOVER_DOC.md
+ARCHITECTURE_DEEP_DIVE_AND_INTERVIEW_PREP.md
+CLOUD_MIGRATION.md
+HYBRID_AUTONOMOUS_RACING_PLAN.md
+relevant_changes.diff
+game_lifecycle.py
+interactive_curriculum/
+.opencode/
+opencode.jsonc
+.claude/
+.mcp.json
+.cbmignore

@@ -1,0 +1,200 @@
+{
+  "scope": "offline_action_response_holdout_consistency",
+  "capture_name": "action_transition_a01_20261103_retry3",
+  "fit_sources": [
+    "eval_results/hybrid_rollouts/action_transition_a01_20261103_retry3/A01-Race.Challenge_1793720895263_37200.csv",
+    "eval_results/hybrid_rollouts/action_transition_a01_20261103_retry3/A01-Race.Challenge_1793720904196_37200.csv"
+  ],
+  "heldout_sources": [
+    "eval_results/hybrid_rollouts/action_transition_a01_20261103_retry3/A01-Race.Challenge_1793720908486_37200.csv"
+  ],
+  "source_splits_disjoint": true,
+  "fit_by_action": {
+    "0": {
+      "transition_count": 264,
+      "mean_speed_change_rate_mps2": 8.108876073224994
+    },
+    "1": {
+      "transition_count": 399,
+      "mean_speed_change_rate_mps2": 3.7266859972387056
+    },
+    "2": {
+      "transition_count": 274,
+      "mean_speed_change_rate_mps2": 4.744195154983651
+    },
+    "3": {
+      "transition_count": 119,
+      "mean_speed_change_rate_mps2": -1.8574693974326566
+    },
+    "4": {
+      "transition_count": 2,
+      "mean_speed_change_rate_mps2": -5.678706169128346
+    },
+    "5": {
+      "transition_count": 11,
+      "mean_speed_change_rate_mps2": -9.278736114501905
+    },
+    "6": {
+      "transition_count": 75,
+      "mean_speed_change_rate_mps2": -14.88801204363512
+    },
+    "7": {
+      "transition_count": 6,
+      "mean_speed_change_rate_mps2": -70.37796974182204
+    },
+    "8": {
+      "transition_count": 114,
+      "mean_speed_change_rate_mps2": -16.163974770328494
+    },
+    "9": {
+      "transition_count": 191,
+      "mean_speed_change_rate_mps2": -1.6211437305230638
+    },
+    "10": {
+      "transition_count": 143,
+      "mean_speed_change_rate_mps2": -3.1145775401508717
+    },
+    "11": {
+      "transition_count": 103,
+      "mean_speed_change_rate_mps2": -3.7192315036810366
+    }
+  },
+  "heldout_by_action": {
+    "0": {
+      "transition_count": 132,
+      "mean_speed_change_rate_mps2": 5.8517705084699605
+    },
+    "1": {
+      "transition_count": 264,
+      "mean_speed_change_rate_mps2": 1.5793765855558266
+    },
+    "2": {
+      "transition_count": 236,
+      "mean_speed_change_rate_mps2": 4.180069838540086
+    },
+    "3": {
+      "transition_count": 61,
+      "mean_speed_change_rate_mps2": -2.3860215261334314
+    },
+    "4": {
+      "transition_count": 6,
+      "mean_speed_change_rate_mps2": -32.5659306844065
+    },
+    "5": {
+      "transition_count": 3,
+      "mean_speed_change_rate_mps2": -15.0378926595056
+    },
+    "7": {
+      "transition_count": 6,
+      "mean_speed_change_rate_mps2": -36.598370869954834
+    },
+    "8": {
+      "transition_count": 34,
+      "mean_speed_change_rate_mps2": -16.270441167495406
+    },
+    "9": {
+      "transition_count": 82,
+      "mean_speed_change_rate_mps2": -1.9975780568471981
+    },
+    "10": {
+      "transition_count": 40,
+      "mean_speed_change_rate_mps2": -4.7199540138245535
+    },
+    "11": {
+      "transition_count": 41,
+      "mean_speed_change_rate_mps2": -4.45660777208274
+    }
+  },
+  "comparison": {
+    "minimum_transitions": 10,
+    "compared_actions": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "8",
+      "9",
+      "10",
+      "11"
+    ],
+    "comparisons": [
+      {
+        "action_idx": "0",
+        "fit_transition_count": 264,
+        "heldout_transition_count": 132,
+        "fit_mean_speed_change_rate_mps2": 8.108876073224994,
+        "heldout_mean_speed_change_rate_mps2": 5.8517705084699605,
+        "sign_agrees": true
+      },
+      {
+        "action_idx": "1",
+        "fit_transition_count": 399,
+        "heldout_transition_count": 264,
+        "fit_mean_speed_change_rate_mps2": 3.7266859972387056,
+        "heldout_mean_speed_change_rate_mps2": 1.5793765855558266,
+        "sign_agrees": true
+      },
+      {
+        "action_idx": "2",
+        "fit_transition_count": 274,
+        "heldout_transition_count": 236,
+        "fit_mean_speed_change_rate_mps2": 4.744195154983651,
+        "heldout_mean_speed_change_rate_mps2": 4.180069838540086,
+        "sign_agrees": true
+      },
+      {
+        "action_idx": "3",
+        "fit_transition_count": 119,
+        "heldout_transition_count": 61,
+        "fit_mean_speed_change_rate_mps2": -1.8574693974326566,
+        "heldout_mean_speed_change_rate_mps2": -2.3860215261334314,
+        "sign_agrees": true
+      },
+      {
+        "action_idx": "8",
+        "fit_transition_count": 114,
+        "heldout_transition_count": 34,
+        "fit_mean_speed_change_rate_mps2": -16.163974770328494,
+        "heldout_mean_speed_change_rate_mps2": -16.270441167495406,
+        "sign_agrees": true
+      },
+      {
+        "action_idx": "9",
+        "fit_transition_count": 191,
+        "heldout_transition_count": 82,
+        "fit_mean_speed_change_rate_mps2": -1.6211437305230638,
+        "heldout_mean_speed_change_rate_mps2": -1.9975780568471981,
+        "sign_agrees": true
+      },
+      {
+        "action_idx": "10",
+        "fit_transition_count": 143,
+        "heldout_transition_count": 40,
+        "fit_mean_speed_change_rate_mps2": -3.1145775401508717,
+        "heldout_mean_speed_change_rate_mps2": -4.7199540138245535,
+        "sign_agrees": true
+      },
+      {
+        "action_idx": "11",
+        "fit_transition_count": 103,
+        "heldout_transition_count": 41,
+        "fit_mean_speed_change_rate_mps2": -3.7192315036810366,
+        "heldout_mean_speed_change_rate_mps2": -4.45660777208274,
+        "sign_agrees": true
+      }
+    ],
+    "sign_agreement_count": 8,
+    "sign_agreement_rate": 1.0,
+    "signs_replicate": true,
+    "causal_fitting_allowed": false
+  },
+  "real_physics_validated": false,
+  "promotion_allowed": false,
+  "decision": "descriptive_only_requires_randomized_action_diverse_capture",
+  "limitations": [
+    "Fit and held-out runs come from the same greedy foundational policy and map.",
+    "The action distribution is on-policy and not randomized.",
+    "Unobserved speed, map section, contact, and vehicle state confound action-conditioned means.",
+    "Sign replication is a consistency check, not causal identification or a safe MPC parameter."
+  ]
+}

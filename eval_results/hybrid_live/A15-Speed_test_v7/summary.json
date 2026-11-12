@@ -1,0 +1,48 @@
+{
+  "track": "A15-Speed",
+  "controller": "purepursuit",
+  "speed_model": "eval_results\\speed_model\\speed_model_v1.pt",
+  "speed_scale": 1.0,
+  "top_speed_mps": 70.0,
+  "gravity_mps2": 24.9,
+  "grip_model": "eval_results\\grip_model\\grip_model_v1.json",
+  "grip_risk": 0.2,
+  "centerline": "A15-Speed_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "speed_caps": [],
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 72.45200641007293,
+      "end_m": 214.94162863760457,
+      "reference_horizontal_speed_mps": 64.43,
+      "required_speed_mps": 64.43
+    },
+    {
+      "start_m": 610.9053930448532,
+      "end_m": 778.8936058482998,
+      "reference_horizontal_speed_mps": 75.61,
+      "required_speed_mps": 70.0
+    }
+  ],
+  "runs": [
+    {
+      "finished": true,
+      "termination": "Finished",
+      "race_time_s": 38.2,
+      "completion_pct": 100.0,
+      "actions": 765,
+      "steps": 764,
+      "impact_suspects": 1,
+      "recovery_steps": 0,
+      "reversals": 0,
+      "slip_steps": 0,
+      "max_progress_m": 2275.28,
+      "centerline_length_m": 2275.28,
+      "run": 1
+    }
+  ],
+  "finishes": "1/1"
+}

@@ -1,0 +1,28 @@
+{
+  "track": "D01-endurance",
+  "controller": "purepursuit",
+  "centerline": "D01-endurance_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [],
+  "runs": [
+    {
+      "finished": true,
+      "termination": "Finished",
+      "race_time_s": 326.97,
+      "completion_pct": 100.0,
+      "actions": 6541,
+      "steps": 6540,
+      "impact_suspects": 0,
+      "recovery_steps": 0,
+      "reversals": 0,
+      "slip_steps": 0,
+      "max_progress_m": 18632.64,
+      "centerline_length_m": 18632.64,
+      "run": 1
+    }
+  ],
+  "finishes": "1/1"
+}

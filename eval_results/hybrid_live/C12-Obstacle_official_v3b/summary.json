@@ -1,0 +1,41 @@
+{
+  "track": "C12-Obstacle",
+  "controller": "purepursuit",
+  "centerline": "C12-Obstacle_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 240.94874970316187,
+      "end_m": 284.94294634312297,
+      "reference_horizontal_speed_mps": 16.87,
+      "required_speed_mps": 16.87
+    },
+    {
+      "start_m": 1274.3672936209805,
+      "end_m": 1305.8609635840123,
+      "reference_horizontal_speed_mps": 15.35,
+      "required_speed_mps": 15.35
+    }
+  ],
+  "runs": [
+    {
+      "finished": false,
+      "termination": "Stuck_Cutoff_2s",
+      "race_time_s": null,
+      "completion_pct": 15.09,
+      "actions": 354,
+      "steps": 354,
+      "impact_suspects": 0,
+      "recovery_steps": 3,
+      "reversals": 1,
+      "slip_steps": 25,
+      "max_progress_m": 218.6,
+      "centerline_length_m": 1496.85,
+      "run": 1
+    }
+  ],
+  "finishes": "0/1"
+}

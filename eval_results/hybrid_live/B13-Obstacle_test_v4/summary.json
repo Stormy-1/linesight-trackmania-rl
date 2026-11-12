@@ -1,0 +1,42 @@
+{
+  "track": "B13-Obstacle",
+  "controller": "purepursuit",
+  "centerline": "B13-Obstacle_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "speed_caps": [],
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 256.95452998510865,
+      "end_m": 296.9483003738766,
+      "reference_horizontal_speed_mps": 20.25,
+      "required_speed_mps": 20.25
+    },
+    {
+      "start_m": 689.4299825206747,
+      "end_m": 729.9198969977183,
+      "reference_horizontal_speed_mps": 18.77,
+      "required_speed_mps": 18.77
+    }
+  ],
+  "runs": [
+    {
+      "finished": false,
+      "termination": "Stuck_Cutoff_2s",
+      "race_time_s": null,
+      "completion_pct": 7.96,
+      "actions": 245,
+      "steps": 245,
+      "impact_suspects": 0,
+      "recovery_steps": 25,
+      "reversals": 1,
+      "slip_steps": 39,
+      "max_progress_m": 183.0,
+      "centerline_length_m": 2414.44,
+      "run": 1
+    }
+  ],
+  "finishes": "0/1"
+}

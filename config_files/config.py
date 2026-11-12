@@ -19,16 +19,31 @@ This setup provides the possibility to:
 This file is preconfigured with sensible hyperparameters for the map ESL-Hockolicious, assuming the user
 has a computer with 16GB RAM.
 """
-from itertools import repeat
-
 from config_files.inputs_list import *
 from config_files.state_normalization import *
 from config_files.user_config import *
+from trackmania_rl.gen_v3_stage import GEN_V3_GATE, STAGE_1, stage_map_cycle
 
 W_downsized = 160
 H_downsized = 120
 
-run_name = "hocko_v1"
+# gen_v1, gen_v2, and gen_v3 are preserved evidence.  gen_v3_r1 is the
+# corrective Stage 1 branch and will be bootstrapped from the untouched
+# foundational checkpoint.
+run_name = "gen_v3_r1"
+gen_v3_stage_name = STAGE_1.name
+gen_v3_stage_index = 1
+gen_v3_active_new_map = STAGE_1.new_map
+gen_v3_eval_episodes_per_map = GEN_V3_GATE.episodes_per_map
+gen_v3_evaluation_interval_frames = GEN_V3_GATE.interval_frames
+gen_v3_stage_frame_budget = GEN_V3_GATE.stage_frame_budget
+gen_v3_replay_warmup_rollouts_per_map = GEN_V3_GATE.replay_warmup_rollouts_per_map
+gen_v3_min_replay_memories_before_learning = GEN_V3_GATE.min_replay_memories_before_learning
+gen_v3_minimum_hock_completion_rate = GEN_V3_GATE.minimum_hock_completion_rate
+gen_v3_maximum_hock_timeout_rate = GEN_V3_GATE.maximum_hock_timeout_rate
+gen_v3_minimum_new_map_completion_rate = GEN_V3_GATE.minimum_new_map_completion_rate
+gen_v3_minimum_new_map_completion_improvement = GEN_V3_GATE.minimum_new_map_completion_improvement
+gen_v3_rollback_if_both_maps_timeout = GEN_V3_GATE.rollback_if_both_maps_timeout
 running_speed = 80
 
 tm_engine_step_per_action = 5
@@ -53,22 +68,25 @@ margin_to_announce_finish_meters = 700
 
 global_schedule_speed = 1
 
+generalization_branch_start_frame = 3_180_286
 epsilon_schedule = [
-    (0, 1),
-    (50_000, 1),
-    (300_000, 0.1),
-    (3_000_000 * global_schedule_speed, 0.03),
+    (0, 0.10),
+    (generalization_branch_start_frame, 0.10),
+    (6_000_000 * global_schedule_speed, 0.03),
 ]
 epsilon_boltzmann_schedule = [
-    (0, 0.15),
-    (3_000_000 * global_schedule_speed, 0.03),
+    (0, 0.03),
+    (generalization_branch_start_frame, 0.03),
+    (6_000_000 * global_schedule_speed, 0.01),
 ]
 tau_epsilon_boltzmann = 0.01
 discard_non_greedy_actions_in_nsteps = True
 buffer_test_ratio = 0.05
 
 engineered_speedslide_reward_schedule = [
-    (0, 0.003),  # ENABLED for WR push — incentivizes perfect speedslides through corners
+    (0, 0.001),
+    (generalization_branch_start_frame, 0.001),
+    (6_000_000 * global_schedule_speed, 0),
 ]
 engineered_neoslide_reward_schedule = [
     (0, 0),
@@ -99,20 +117,20 @@ prio_epsilon = np.float32(2e-3)  # Defaults to 10^-6 in stable-baselines
 prio_beta = np.float32(1)
 
 number_times_single_memory_is_used_before_discard = 32  # 32 // 4
+# Limit the number of learner updates triggered by one rollout.  Without this
+# cap, crossing the warm-up threshold causes a large replay catch-up burst.
+max_training_batches_per_rollout = 8
 
 memory_size_schedule = [
-    (0, (50_000, 20_000)),
+    # Stage 1 warms both maps before any learner updates are allowed.
+    (0, (50_000, gen_v3_min_replay_memories_before_learning)),
     (5_000_000 * global_schedule_speed, (100_000, 75_000)),
     (7_000_000 * global_schedule_speed, (200_000, 150_000)),
 ]
 lr_schedule = [
-    (0, 1e-3),
-    (3_000_000 * global_schedule_speed, 5e-5),
-    (8_490_000 * global_schedule_speed, 5e-5),
-    (8_500_000 * global_schedule_speed, 1e-4),
-    (10_000_000 * global_schedule_speed, 5e-5),
-    (12_000_000 * global_schedule_speed, 5e-5),
-    (15_000_000 * global_schedule_speed, 1e-5),
+    (0, 1e-5),
+    (generalization_branch_start_frame, 1e-5),
+    (6_000_000 * global_schedule_speed, 5e-6),
 ]
 tensorboard_suffix_schedule = [
     (0, ""),
@@ -153,7 +171,9 @@ max_allowable_distance_to_virtual_checkpoint = np.sqrt((distance_between_checkpo
 
 timeout_during_run_ms = 10_100
 timeout_between_runs_ms = 600_000_000
-tmi_protection_timeout_s = 500
+# Bound local TMInterface recovery stalls.  A frozen TmForever instance should
+# be recycled within a minute rather than blocking the learner for ~8 minutes.
+tmi_protection_timeout_s = 60
 game_reboot_interval = 3600 * 12  # In seconds
 
 frames_before_save_best_runs = 1_500_000
@@ -171,7 +191,11 @@ use_jit = True
 # gpu_collectors_count is the number of Trackmania instances that will be launched in parallel.
 # It is recommended that users adjust this number depending on the performance of their machine.
 # We recommend trying different values and finding the one that maximises the number of batches done per unit of time.
-gpu_collectors_count = 2
+# Keep the corrective branch at one collector until its bounded learner ramp
+# and evaluation gates are validated.  Two collectors previously reproduced
+# TMI stalls after warm-up and are a later throughput comparison, not the
+# first correctness run.
+gpu_collectors_count = 1
 
 send_shared_network_every_n_batches = 10
 update_inference_network_every_n_actions = 20
@@ -286,8 +310,8 @@ map_cycle += [
     # repeat(("B03", '"Official Maps\Green\B03-Race.Challenge.Gbx"', "B03-Race_10m_cl.npy", False, True), 1),
     # repeat(("B05", '"Official Maps\Green\B05-Race.Challenge.Gbx"', "B05-Race_10m_cl.npy", True, True), 4),
     # repeat(("B05", '"Official Maps\Green\B05-Race.Challenge.Gbx"', "B05-Race_10m_cl.npy", False, True), 1),
-    repeat(("hock", "ESL-Hockolicious.Challenge.Gbx", "ESL-Hockolicious_0.5m_cl2.npy", True, True), 4),
-    repeat(("hock", "ESL-Hockolicious.Challenge.Gbx", "ESL-Hockolicious_0.5m_cl2.npy", False, True), 1),
+    # The active gen_v3 Stage 1 cycle is assigned immediately below.  Keep
+    # this list empty here so the failed gen_v2 six-map cycle is not active.
     # repeat(("A02", f'"Official Maps\A02-Race.Challenge.Gbx"', "A02-Race_0.5m_cl2.npy", False, False), 1),
     # repeat(("yellowmile", f'"The Yellow Mile_.Challenge.Gbx"', "YellowMile_0.5m_cl.npy", False, False), 1),
     # repeat(("te86", f'"te 86.Challenge.Gbx"', "te86_0.5m_cl.npy", False, False), 1),
@@ -328,3 +352,7 @@ map_cycle += [
     # repeat(("A07", f'"Official Maps/A07-Race.Challenge.Gbx"', f"A07-Race_0.5m_raceta.npy", True, True), 4),
     # repeat(("A07", f'"Official Maps/A07-Race.Challenge.Gbx"', f"A07-Race_0.5m_raceta.npy", False, True), 1),
 ]
+
+# Stage 1 is Hockolicious plus A01 only.  Later stages are represented by the
+# plan in gen_v3_stage.py but are not activated until Stage 1 is accepted.
+map_cycle = stage_map_cycle()
