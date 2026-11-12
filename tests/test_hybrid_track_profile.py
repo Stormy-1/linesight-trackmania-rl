@@ -41,7 +41,7 @@ def test_braking_preview_slows_before_corner():
 
 
 def test_detects_ballistic_arc_and_sets_floor():
-    g = 15.4
+    g = TrackProfileConfig().gravity_mps2
     v_h = 50.0
     ramp = straight(200.0)
     h = np.arange(0.5, 120.0, 0.5)
@@ -113,7 +113,7 @@ def test_pure_pursuit_steering_authority_shrinks_with_speed(speed, limit):
 
 def turn_then_jump(radius=60.0, v_h=90.0):
     """A 90-degree turn, then a short straight and a weak ballistic arc (required speed caps at 70)."""
-    g = 15.4
+    g = TrackProfileConfig().gravity_mps2
     lead = straight(100.0)
     angles = np.linspace(0.0, math.pi / 2, 200)[1:]
     arc = np.stack([100.0 + radius * np.sin(angles), np.zeros_like(angles), radius * (1 - np.cos(angles))], axis=1)
@@ -132,7 +132,7 @@ def test_jump_approach_never_exceeds_the_corner_limit():
 
 
 def test_jump_floor_window_is_reported():
-    g = 15.4
+    g = TrackProfileConfig().gravity_mps2
     v_h = 50.0
     ramp = straight(200.0)
     h = np.arange(0.5, 120.0, 0.5)
@@ -144,7 +144,7 @@ def test_jump_floor_window_is_reported():
 
 def test_pure_pursuit_full_throttle_below_jump_floor():
     # A01 v3b: proportional throttle left the car 3 m/s under the 58.9 m/s floor; it landed short.
-    g = 15.4
+    g = TrackProfileConfig().gravity_mps2
     v_h = 50.0
     ramp = straight(200.0)
     h = np.arange(0.5, 120.0, 0.5)
@@ -159,7 +159,7 @@ def test_pure_pursuit_full_throttle_below_jump_floor():
 
 def test_speed_cap_overrides_jump_floor_and_brakes_ahead():
     # Pace note: A01's 349-506 m "jump" is a hill crest over continuous road (block map).
-    g = 15.4
+    g = TrackProfileConfig().gravity_mps2
     v_h = 50.0
     ramp = straight(200.0)
     h = np.arange(0.5, 120.0, 0.5)

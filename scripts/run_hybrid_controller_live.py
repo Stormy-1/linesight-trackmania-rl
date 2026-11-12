@@ -43,6 +43,12 @@ from trackmania_rl.hybrid_mpc import ShortHorizonMPCConfig, ShortHorizonMPCContr
 from trackmania_rl.hybrid_state import build_centerline_geometry
 from trackmania_rl.hybrid_track_profile import TrackProfileConfig, build_track_speed_profile
 from trackmania_rl.speed_model import learned_base_speed, load_speed_model
+from trackmania_rl.grip_model import load_grip_model
+from trackmania_rl.hybrid_block_map import find_campaign_challenge, load_block_map
+from trackmania_rl.range_sensor import FootprintModel, RangeSensor
+from trackmania_rl.residual_action import ResidualConfig, ZeroResidualPolicy
+from trackmania_rl.residual_reward import build_transitions
+from trackmania_rl.residual_td3 import ActorResidualPolicy, TD3Agent
 from trackmania_rl.map_loader import load_next_map_zone_centers
 from trackmania_rl.tmi_interaction import game_instance_manager
 
@@ -65,6 +71,8 @@ def make_controller(
     speed_model: Path | None = None,
     speed_scale: float = 1.0,
     top_speed_mps: float | None = None,
+    grip_model: Path | None = None,
+    grip_risk: float = 0.2,
 ):
     if name == "purepursuit":
         profile_config = TrackProfileConfig(speed_caps=speed_caps)
@@ -75,7 +83,11 @@ def make_controller(
         base = None
         if speed_model is not None:
             base = learned_base_speed(geometry, load_speed_model(speed_model), speed_scale)
-        profile = build_track_speed_profile(geometry, profile_config, base)
+        grip_limit = None
+        if grip_model is not None:
+            fitted = load_grip_model(grip_model)
+            grip_limit = lambda curvature: fitted.speed_limit_mps(curvature, grip_risk)  # noqa: E731
+        profile = build_track_speed_profile(geometry, profile_config, base, grip_limit)
         return PurePursuitController(profile)
     if name == "mpc":
         config = ShortHorizonMPCConfig()
@@ -89,6 +101,27 @@ def make_controller(
     }[name]
     config = config_cls() if max_speed_mps is None else config_cls(max_speed_mps=max_speed_mps)
     return controller_cls(config)
+
+
+def make_range_sensor(footprints_path: Path, map_stem: str) -> RangeSensor:
+    """Virtual lidar over the map's block layout, rasters prebuilt so no live step stalls."""
+
+    challenge = find_campaign_challenge(map_stem)
+    if challenge is None:
+        raise SystemExit(f"--range-sensor needs the campaign map file for {map_stem!r} (not found)")
+    sensor = RangeSensor(load_block_map(challenge), FootprintModel.load(footprints_path))
+    sensor.prebuild()
+    return sensor
+
+
+def make_residual_policy(spec: str):
+    """'none' -> base stack only; 'zero' -> zero residual (logs transitions); else a TD3 checkpoint, no exploration noise."""
+
+    if spec == "none":
+        return None
+    if spec == "zero":
+        return ZeroResidualPolicy()
+    return ActorResidualPolicy(TD3Agent.load(Path(spec)))
 
 
 # A run that ended within this margin of the race limit timed out; earlier ends were stuck cutoffs.
@@ -158,7 +191,18 @@ def main() -> None:
     )
     parser.add_argument("--speed-model", type=Path, default=None, help="learned speed model (.pt) for the target profile")
     parser.add_argument("--speed-scale", type=float, default=1.0, help="global safety scale on the learned speed")
+    parser.add_argument("--grip-model", type=Path, default=None, help="fitted grip model (.json) capping corner speeds")
+    parser.add_argument("--grip-risk", type=float, default=0.2, help="global run-wide risk the grip cap allows (0-1)")
+    parser.add_argument(
+        "--range-sensor", type=Path, default=None, help="learned obstacle shapes (.npz): log virtual-lidar rays every step"
+    )
     parser.add_argument("--top-speed", type=float, default=None, help="global top-speed limit of the profile (m/s)")
+    parser.add_argument(
+        "--residual",
+        default="none",
+        help="Step 4 residual policy on top of pure pursuit: 'none', 'zero' (must reproduce the base run exactly) "
+        "or a TD3 checkpoint .pt (deterministic actor); any residual also records RL transitions (runXX_rl.npz)",
+    )
     parser.add_argument(
         "--speed-cap",
         action="append",
@@ -168,6 +212,12 @@ def main() -> None:
         help="pace note: cap the target speed between two progress marks (repeatable)",
     )
     args = parser.parse_args()
+    if not 0.0 < args.grip_risk < 1.0:
+        parser.error("--grip-risk must be in (0, 1)")
+    if args.range_sensor is not None and not args.range_sensor.is_file():
+        parser.error(f"{args.range_sensor} not found (run scripts/build_range_sensor.py)")
+    if args.grip_model is not None and not args.grip_model.is_file():
+        parser.error(f"{args.grip_model} not found (run scripts/fit_grip_model.py)")
 
     meta = campaign_meta(args.map) if args.map else dict(TRACKS[args.track])
     if not (BASE_DIR / "maps" / meta["cl_file"]).is_file() and args.centerline is None:
@@ -184,9 +234,22 @@ def main() -> None:
     zone_centers = load_next_map_zone_centers(meta["cl_file"], BASE_DIR)
     finish_zone_idx = len(zone_centers) - config_copy.n_zone_centers_extrapolate_after_end_of_map
     controller = make_controller(
-        args.controller, args.max_speed, centerline, tuple(args.speed_cap), args.speed_model, args.speed_scale, args.top_speed
+        args.controller, args.max_speed, centerline, tuple(args.speed_cap), args.speed_model, args.speed_scale, args.top_speed,
+        args.grip_model, args.grip_risk,
     )
-    policy = HybridLivePolicy(centerline, controller, config=HybridLivePolicyConfig(unstick_enabled=not args.no_unstick))
+    if args.residual != "none" and args.controller != "purepursuit":
+        parser.error("--residual needs --controller purepursuit")
+    if args.residual not in ("none", "zero") and not Path(args.residual).is_file():
+        parser.error(f"--residual: {args.residual} is not 'none', 'zero' or an existing checkpoint")
+    residual_config = ResidualConfig()
+    policy = HybridLivePolicy(
+        centerline,
+        controller,
+        config=HybridLivePolicyConfig(unstick_enabled=not args.no_unstick),
+        range_sensor=make_range_sensor(args.range_sensor, args.map or meta["name"]) if args.range_sensor else None,
+        residual_policy=make_residual_policy(args.residual),
+        residual_config=residual_config,
+    )
 
     tmi = game_instance_manager.GameInstanceManager(
         game_spawning_lock=Lock(),
@@ -206,6 +269,12 @@ def main() -> None:
         "speed_model": str(args.speed_model) if args.speed_model else None,
         "speed_scale": args.speed_scale,
         "top_speed_mps": args.top_speed,
+        "gravity_mps2": TrackProfileConfig().gravity_mps2,
+        "range_sensor": str(args.range_sensor) if args.range_sensor else None,
+        "residual": args.residual,
+        "residual_config": dataclasses.asdict(residual_config) if args.residual != "none" else None,
+        "grip_model": str(args.grip_model) if args.grip_model else None,
+        "grip_risk": args.grip_risk if args.grip_model else None,
         "centerline": meta["cl_file"],
         "max_speed_override_mps": args.max_speed,
         "speed_caps": [list(cap) for cap in args.speed_cap],
@@ -225,6 +294,12 @@ def main() -> None:
             policy.close()
             run = summarize_run(rollout_results, end_race_stats, finish_zone_idx, tmi.last_rollout_crashed, args.max_race_s)
             run.update(policy.summary(), run=run_idx)
+            if args.residual != "none":
+                transitions = build_transitions(policy.step_records, run["termination"])
+                if transitions is not None:
+                    np.savez_compressed(out_dir / f"run{run_idx:02d}_rl.npz", **transitions.as_dict())
+                    run["rl_transitions"] = int(len(transitions.rewards))
+                    run["rl_return"] = round(float(transitions.rewards.sum()), 3)
             summary["runs"].append(run)
             print(
                 f"run {run_idx}/{args.runs}: {run['termination']:<15} {run['completion_pct']:6.2f}% "

@@ -1,6 +1,6 @@
 # Project Linesight — Session continuation brief
 
-> Updated: 2026-11-12 (Step 1 done; Step 2 done: learned speed model, offline r 0.81, test set 3/10 = no live gain → Step 3).
+> Updated: 2026-11-13 (STEP 4 DONE — headline (§84): base + residual RL on the held-out test set 4/10, mean completion 58.1%, recovery 431 (v7 base: 2/10, 46.2%, 747). Best ever on finishes and completion. Next: README/architecture/results, then ask the user about committing, then the website. Commits still PAUSED.)
 > Read `CLAUDE.md` first (rules, commands, measured facts). This file holds the
 > current state and the exact next step. History: `HANDOVER_DOC.md` §60.
 
@@ -149,7 +149,7 @@ If that doesn't work, swap B09 for another Green/acrobatic map (the user said sw
 Boot-keys fix: the background thread now calls `pythoncom.CoInitialize()` (`_set_window_focus_from_thread`).
 Before that, focus always failed in that thread.
 
-## Next step (do this first) — THE FULL PLAN (user-approved 2026-11-11). Steps 1–2 done → do Step 3
+## Next step (do this first) — THE FULL PLAN (user-approved 2026-11-11). Steps 1–3 done → see "NEXT after Step 3"
 Keep live driving small (each map costs ~5 min). The 64 official replays are **offline** data and cost nothing to use.
 
 **Step 1 — evaluation protocol: DONE (2026-11-12, HANDOVER §67).**
@@ -196,6 +196,112 @@ incl. the v5 runs which probe higher corner speeds): max lateral accel vs speed 
 response, slip onset. Use it as a physics cap on the learned speed: target = min(learned pro speed, sqrt(a_lat_max / |k|)),
 plus braking from the fitted decel. Tune nothing per map; dev maps for any global choice; test set once as `--tag v6`.
 
+**Step 3 DONE (2026-11-12, HANDOVER §69): learned grip limit.**
+- `trackmania_rl/grip_model.py` + `scripts/fit_grip_model.py` → `eval_results/grip_model/grip_model_v1.json`.
+  Logistic regression on our own live logs (54 non-test maps, 32k on-ground cornering steps):
+  `logit P(run wide within 1 s) = −12.0 + 0.132·v²|k| + 0.108·v`. Leave-one-map-out AUC 0.754 (demand-only 0.737,
+  speed-only 0.708). At risk 0.2: a_lat_max 56/48/40/32/23 m/s² at 30/40/50/60/70 m/s (car + steering cap).
+  Braking decel couldn't be fitted (noisy), so 15 m/s² stays.
+- Profile: `build_track_speed_profile(..., grip_limit=...)`: corner limit = min(learned pro speed, grip limit).
+  Runner: `--grip-model eval_results/grip_model/grip_model_v1.json --grip-risk 0.2` (global, logged).
+- Dev: v6a risk 0.2 **7/7, ratio 1.33, 1 wall, 1 recovery step** (v5c 7/7, 1.48, 3 walls, 185). v6b risk 0.3 failed A01 → stopped.
+- **Test set v6 (`eval_results/test_set_v6_grip_model.json`): 2/10, mean completion 54.0%, median ratio 1.50,
+  19 landings / 0 bumps / 2 walls / 0 scrapes, 677 recovery steps** (v4 3/10, 1.60, 2 walls; v5 3/10, 1.63, 11 walls).
+  A15 40.11 s and B07 42.93 s are the best times yet. Lost: A09 (66%, airborne over a drop at 1250 m with steering
+  pinned at the 0.5 cap) and C02 (94.8%, a hard landing at 2635 m that all versions hit; v5 got lucky after it).
+- Full live command (v6 settings): `--speed-model eval_results/speed_model/speed_model_v1.pt --top-speed 70
+  --grip-model eval_results/grip_model/grip_model_v1.json --grip-risk 0.2`.
+
+**Gravity fix DONE (2026-11-12, HANDOVER §70).** Ghost free fall gives **g = 24.9 m/s²** (2,328 samples, 53 maps; was 15.4).
+With 24.9 the jump detector's speed matches the pro's (ratio 1.01 vs 0.80). Now `TrackProfileConfig.gravity_mps2 = 24.9` and the
+impact classifier uses 24.9; `speed_features` pins 15.4 so `speed_model_v1` keeps its training features. Dev v7a 6/7 (ratio 1.29;
+B09 platform-edge grind). **Test v7 (`eval_results/test_set_v7_gravity.json`): 2/10, completion 46.2%, ratio 1.44, 1 wall.**
+A15 38.20 s and C02 57.60 s are best-ever; B07 lost (2 m off the line after a faster landing, head-on hit at 286 m).
+Finished sets churn v4→v7 (each change flips 1–2 maps through landing events) → the bottleneck is tracking precision around
+jumps and landings, plus fixed early stalls (B13, C13, D04 < 10%; B04 54%, C10 45%, D07 55% at the same spot every version).
+Test-set looks so far: v4, v5, v6, v7. Don't run it again before a substantively new component.
+
+**USER DIRECTION (2026-11-12):** commit PAUSED; takeoff/landing controller fix PAUSED. **No overfitting:** no micro-adjustments,
+only general components (sensor, physics rule, learned policy). Verdicts on the user's ideas (HANDOVER §71): (1) virtual lidar → built;
+(2) rover-style jump-readiness check (brake, reverse, retry run-up) → only if logs show under-speed takeoffs still fail;
+(3) LLM / multi-agent in the control loop → no (latency, non-determinism); present the stack as the sense–evaluate–decide–act–
+correct loop instead. A small CNN/GRU encoder for the RL policy is fine; a transformer is oversized.
+
+**Virtual range sensor DONE offline (HANDOVER §71):** `trackmania_rl/range_sensor.py`, `scripts/build_range_sensor.py`,
+`eval_results/range_sensor/footprints_v1.npz` + `validation_v1.json`. Obstacle shapes per hazard block type and height are learned
+from 53 pro ghosts (unvisited 1 m bins = configuration-space obstacle); rays are cast over them. Leave-one-map-out on 43 wall hits:
+it reads contact (≤ 2 m) at 56% of hits vs 10% of ordinary steps; warning AUC 0.62 (lateral error 0.76), but lateral + range 0.755 >
+lateral 0.717. → Use it as an **RL observation**, not as a standalone safety rule. **Wired into live logging (HANDOVER §72):** runner `--range-sensor eval_results/range_sensor/footprints_v1.npz` logs `sensor_yaw_rad` + 13 rays
+`range_-90`…`range_+90` per step; doesn't change decisions. A07 check: identical to v7a (all 760 steps), live = offline rays for 99.5%.
+
+**NEXT (user's call):** Step 4, residual RL on steering + target speed. Observation: track-relative state, lookahead geometry,
+range-sensor rays, airborne flag; small MLP/1D-CNN (GRU if memory is needed). Train on rl_train maps; headline = base vs base+RL on the
+test set (test-set looks so far: v4–v7). The sensor wiring is done. Next sub-step: the RL environment/observation builder around
+`HybridLivePolicy` (base command + residual), reusing the Linesight collector/learner infrastructure.
+
+**Step 4 setup DONE (2026-11-12, HANDOVER §73): residual RL plumbing, no training yet.**
+- `trackmania_rl/residual_observation.py` (39-D obs, fixed physical scales: track state + base command, lookahead geometry,
+  13 lidar rays, wheel ground contact), `residual_action.py` (a ∈ [−1,1]² → Δsteer 0.25, Δtarget 8 m/s; clipped to the
+  steering cap; shielded = off in recovery/slip/reverse; `ZeroResidualPolicy`), `residual_reward.py` (0.1/m progress − 0.4 impact
+  − 0.05 recovery/reverse step − 0.05|a|², −10 stuck; `build_transitions`).
+- `PurePursuitController.command(..., target_speed_offset_mps=0.0)`; `HybridLivePolicy(residual_policy=...)` records `step_records`;
+  `game_instance_manager` passes `wheel_contact` to `observe_simulation_state`. Runner `--residual zero` writes `runXX_rl.npz`.
+- Tests `tests/test_residual_rl.py` (18). Suite **333 pass**.
+- Live smoke `A07-Race_dev_v7a_residual0`: 37.98 s, **760/760 steps identical to v7a**; airborne flag fires exactly at the 3 jumps.
+
+**NEXT (Step 4 training), in order:**
+1. DONE (HANDOVER §74): `trackmania_rl/residual_td3.py` (TD3, zero-init actor, TD3+BC-style anchor to the base command,
+   shield-aware targets via `next_residual_active`, `ReplayBuffer.add_npz`, `ActorResidualPolicy` with exploration noise,
+   save/load); runner `--residual PATH.pt`; `tests/test_residual_td3.py` (10). Suite 343 pass.
+   Note: `A07-Race_dev_v7a_residual0/run01_rl.npz` predates `next_residual_active` and won't load; re-record if needed.
+2. DONE (HANDOVER §75): `run_test_set.py --set rl_train --tag v7zero` → `<map>_rl_train_v7zero`. **Base on rl_train: 2/6 finish**
+   (A08 117.30 s, B12 69.84 s); A06 stuck 98.5%, B11 stuck at its line end (100%), C05 9.1%, D05 9.2%. 6,845 transitions load.
+   Optional general fix before training: encode the slip angle as sin/cos (it wraps at ±π during spins).
+3. DONE (HANDOVER §76): `scripts/burn_in_residual_critic.py --updates 100000 --out eval_results/residual_rl/critic_burnin_v2`
+   (target noise 0 = exact evaluation of the base stack). Q vs true return r 0.89–1.00 on the 6 maps; still 2–7 under (slow
+   propagation, harmless offset). v1 (TD3 noise 0.2) was 5–17 under. Start training from `critic_burnin_v2.pt`.
+4. DONE (HANDOVER §77): `trackmania_rl/residual_training.py` + `scripts/train_residual.py` (dry-checked, not run live yet).
+   **Next action:** first live training run, e.g.
+   `python scripts/train_residual.py --name td3_v1 --episodes 60` (~1 h; resumable with `--resume`; log `eval_results/residual_rl/td3_v1/train_log.jsonl`).
+   Watch: episode return per map vs the §75 base returns, |residual| growing slowly after the 5k-step actor warm-up, no new stalls.
+4b. DONE (HANDOVER §78): `td3_v1` live, 60 episodes (~1 h). Outcome spread = exploration noise, no learning trend; the deterministic
+   actor stayed at |a| ≈ 0.01–0.02 because the anchor λ = 2.5/|Q| ≈ 0.23 outweighs the critic's action gradient (≈ 0.15–0.19).
+   **Next action:** offline, retrain the actor on td3_v1's buffer (`eval_results/residual_rl/td3_v1/episodes/*.npz` + seed runs) with
+   the anchor off (pure TD3; the reward's 0.05·|a|² stays) and check |a|, Q(π) − Q(0); then `td3_v2` live from td3_v1's critic + buffer.
+   Needs: a `--anchor-alpha`/no-anchor option in TD3Config + train script, and init-from-run (critic + episodes) in train_residual.py.
+4c. DONE (HANDOVER §79): offline retrain on td3_v1's buffer (`scripts/retrain_residual_offline.py`). No anchor → saturated, map-inconsistent
+   corrections (offline extrapolation); **alpha 25 → |a| 0.07–0.15, in-data** (`eval_results/residual_rl/td3_v1_offline_anchor_25.pt`).
+   Critic's best gain even unconstrained ≤ 0.1 reward → the exploration signal is weak (white noise redrawn every 50 ms).
+   **Next action (td3_v2):** add held exploration noise (one draw per ~10 steps, σ ~0.2) to `ActorResidualPolicy` + a train-script option;
+   anchor alpha 25 option in train_residual.py; init from `td3_v1_offline_anchor_25.pt` + td3_v1 episodes as buffer; 60 episodes; then
+   deterministic eval on dev maps vs v7a.
+4d. DONE (HANDOVER §80): `td3_v2` (60 episodes, ~1 h): A06 2/12 finish (base never), C05 5/9 (base 9%), A08 115.8–121.2 s; deterministic
+   actor |a| 0.07–0.15 with a consistent heading-damping pattern. Checkpoint `eval_results/residual_rl/td3_v2/latest.pt`.
+   **Next action:** deterministic eval, one run per map, identical args:
+   `python scripts/run_test_set.py --set rl_train --tag td3v2 --extra "<v7a args> --range-sensor eval_results/range_sensor/footprints_v1.npz --residual eval_results/residual_rl/td3_v2/latest.pt"`
+   vs `<map>_rl_train_v7zero` (§75); then the same with `--set dev` vs v7a.
+4e. DONE (HANDOVER §81): deterministic `<map>_rl_train_td3v2`: finishes 2/6 → 3/6 (C05 169.35 s fixed; A08 −0.83 s; B12 −1.84 s),
+   but A06 98.5% → 15.8% and B11 99.98% → 54.7% (residual lowers the speed into marginal jumps / acts while airborne).
+   **Open decision (ask the user):** (1) shield extension: Δtarget ≥ 0 on jump-locked approaches + no residual while airborne,
+   re-eval td3_v2 (no retraining); or (2) more training (td3_v3 `--resume`-style from td3_v2). Then dev maps vs v7a; test set once.
+4f. DONE (HANDOVER §82): jump-floor + airborne shield → A06 98.5/15.8/**92.7%** but B12 and C05 lose their finishes; overall 1/6.
+   A jump's required speed is the pro's speed, not a minimum, so the rule isn't justified generally. **Shields default OFF** (options kept).
+   Lesson: single deterministic runs flip at knife-edge jumps; 6 maps can't separate small policy differences.
+   **Next action:** dev-map eval of td3_v2 (unshielded, `td3_v2/final.pt`) vs v7a: `run_test_set.py --set dev --tag td3v2 --extra "<v7a args>
+   --range-sensor ... --residual eval_results/residual_rl/td3_v2/final.pt"` (dev v7a runs: `<map>_dev_v7a`). Optionally a robustness
+   metric (finish rate over a few slightly perturbed runs per map) before the single test-set look.
+4g. DONE (HANDOVER §83): dev eval `<map>_dev_td3v2`: 6/7 (same as v7a), times −0.46/−0.11/−0.77/−0.38 s on A02/A03/A05/A11,
+   +0.22/+0.23 s on A01/A07; walls 1 → 0; recovery 97 → 196 (A01, B09). Small, suggestive gain; no finish lost on unseen maps.
+   **Open decision (ask the user):** run the held-out test set ONCE now (`run_test_set.py --tag v8_rl --extra "<v7a args> --range-sensor
+   ... --residual eval_results/residual_rl/td3_v2/final.pt"`, vs v7 2/10), or first train more (td3_v3) / add a robustness metric.
+4h. DONE — **HEADLINE (HANDOVER §84):** test set `v8_rl` (td3_v2/final.pt): **4/10 finish** (A09 39.56 s and B07 41.82 s, both best ever,
+   + A15 38.39 s, C02 62.37 s), mean completion 58.1%, recovery 431 vs v7 2/10, 46.2%, 747. No v7 finish lost. Report
+   `eval_results/test_set_v8_rl_td3v2.json`. Test-set looks: v4–v7, v8_rl — don't look again without a substantively new component.
+   **Next (phase 1 wrap-up):** README / architecture / results write-up (resume-ready); ask the user about committing everything
+   (all Step 3+ work is uncommitted); then phase 2, the website. Optional later: td3_v3 (more training), robustness metric.
+5. Evaluate on dev maps (choices only there), then the test set ONCE as `--tag v8_rl` vs v7. Headline = base vs base+RL.
+Rules: no per-map knobs, no micro-adjustments, train only on rl_train, ask before commit/push.
+
 **Step 2 — learned speed model from pro replays (supervised DL / imitation, ~1–1.5 days).**
 - Replays give 100 ms ghost samples + the pro's control entries (`trackmania_rl/map_loader.py`
   `gbx_to_raw_pos_list`; `ghost.records`, `ghost.control_entries`, `ghost.sample_period`). Speed = Δposition.
@@ -240,5 +346,5 @@ The new session starts from `CLAUDE.md` + this file.
 stuck on the line (10), end of the line (A10, B11), plus free-space carving and an edge-avoiding planner.
 
 ## Verification state
-- Full pytest: 291 passed (2026-11-12, incl. split, report and speed-model tests).
+- Full pytest: 358 passed (2026-11-12, incl. residual-RL 18 + TD3 11 + training 8 tests).
 - Nothing is committed. All work is uncommitted in `TRACK_Copy`. New 2026-11-12: `scripts/make_map_split.py`, `run_test_set.py`, `report_test_set.py`, `maps/map_split.json` (run_showcase.ps1 deleted).

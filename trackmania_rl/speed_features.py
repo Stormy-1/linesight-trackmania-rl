@@ -25,6 +25,9 @@ SLOPE_WINDOWS_M = ((-5.0, 5.0), (0.0, 30.0), (30.0, 80.0))
 CREST_HALF_WINDOW_M = 10.0
 JUMP_LOOKAHEAD_M = 200.0
 START_CLIP_M = 300.0
+# speed_model_v1 was trained with jump features from the old 15.4 m/s^2 gravity constant.
+# Keep the features identical so the saved model sees what it was trained on (HANDOVER §70).
+FEATURE_GRAVITY_MPS2 = 15.4
 
 FEATURE_NAMES = (
     ("abs_curvature",)
@@ -65,7 +68,7 @@ def _vertical_curvature(progress: np.ndarray, y: np.ndarray) -> np.ndarray:
 
 
 def _jump_features(progress: np.ndarray, geometry: CenterlineGeometry) -> np.ndarray:
-    jumps = detect_jumps(geometry, TrackProfileConfig())
+    jumps = detect_jumps(geometry, TrackProfileConfig(gravity_mps2=FEATURE_GRAVITY_MPS2))
     in_jump = np.zeros(len(progress))
     jump_speed = np.zeros(len(progress))
     to_next = np.full(len(progress), JUMP_LOOKAHEAD_M)

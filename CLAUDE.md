@@ -24,7 +24,7 @@ Full history: `HANDOVER_DOC.md` (section 60 onward is the live-driving era).
 - Ask before committing or pushing.
 
 ## Commands
-- Python: `C:\Users\parik\miniconda3\envs\linesight\python.exe` (3.11). Tests: `-m pytest -q -p no:cacheprovider` (285 pass, ~45s).
+- Python: `C:\Users\parik\miniconda3\envs\linesight\python.exe` (3.11). Tests: `-m pytest -q -p no:cacheprovider` (358 pass, ~45s).
 - Live run, one map:
   `& "C:\Users\parik\miniconda3\envs\linesight\python.exe" scripts\run_hybrid_controller_live.py --track A05 --runs 1 --speed 10 --stuck-cutoff-s 6 --name A05_pp_v3`
   - Tracks: A01 A03 A05 A07 A11 hock (old recorded lines).
@@ -42,11 +42,13 @@ Full history: `HANDOVER_DOC.md` (section 60 onward is the live-driving era).
 - `trackmania_rl/hybrid_track_profile.py`: smoothed horizontal curvature, braking pass, ballistic jump detection with reference-speed lock.
 - `trackmania_rl/hybrid_controller.py`: `PurePursuitController` (the live default; the older controllers are kept as baselines).
 - `trackmania_rl/tmi_interaction/game_instance_manager.py`: `observe_simulation_state` hook.
+- `trackmania_rl/grip_model.py` (learned lateral-grip limit), `trackmania_rl/range_sensor.py` (virtual lidar, obstacle shapes learned from pro ghosts).
+- Step 4 residual RL: `trackmania_rl/residual_observation.py` (39-D obs), `residual_action.py` (shielded Δsteer/Δtarget), `residual_reward.py` (reward + transitions), `residual_td3.py` (TD3 learner, §74), `residual_training.py` + `scripts/train_residual.py` (live training, §77); runner `--residual zero|PATH.pt` (HANDOVER §73).
 
 ## Measured facts (don't re-derive)
 - Positive steering = RIGHT key; it increases the world yaw `atan2(z, x)`.
 - Car forward axis is `orientation[2]`.
-- Gravity is about 15.4 m/s². Brake held at standstill = reverse.
+- Gravity is 24.9 m/s² (pro-ghost free fall, `scripts/measure_gravity.py`; the old 15.4 was wrong, HANDOVER §70). Brake held at standstill = reverse.
 - There is no collision telemetry: `impact_suspect` = speed drop > 4 m/s in 50 ms. That also catches hard landings.
 - Centerlines are recorded reference runs. Over a jump they trace the reference's flight arc, so the car can legitimately run several metres below them.
 - Recorded centerlines: A01, A03, A05, A07, A11, Hockolicious and map5.
