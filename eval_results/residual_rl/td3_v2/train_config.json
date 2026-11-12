@@ -1,0 +1,47 @@
+{
+  "training": {
+    "exploration_noise": 0.2,
+    "noise_hold_steps": 10,
+    "updates_per_transition": 1.0,
+    "max_updates_per_episode": 5000,
+    "actor_warmup_transitions": 5000,
+    "checkpoint_every_episodes": 1,
+    "buffer_capacity": 500000,
+    "seed": 0
+  },
+  "td3": {
+    "hidden_units": 256,
+    "gamma": 0.99,
+    "tau": 0.005,
+    "actor_lr": 0.0003,
+    "critic_lr": 0.0003,
+    "batch_size": 256,
+    "policy_delay": 2,
+    "target_noise": 0.2,
+    "target_noise_clip": 0.5,
+    "anchor_alpha": 25.0,
+    "max_grad_norm": 10.0
+  },
+  "init": "eval_results\\residual_rl\\td3_v1_offline_anchor_25.pt",
+  "maps": [
+    "A06-Obstacle",
+    "A08-Endurance",
+    "B11-Race",
+    "B12-Race",
+    "C05-Endurance",
+    "D05-Race"
+  ],
+  "seed_runs": [
+    "A06-Obstacle_rl_train_v7zero",
+    "A08-Endurance_rl_train_v7zero",
+    "B11-Race_rl_train_v7zero",
+    "B12-Race_rl_train_v7zero",
+    "C05-Endurance_rl_train_v7zero",
+    "D05-Race_rl_train_v7zero"
+  ],
+  "episodes_per_map": 3,
+  "game_speed": 10.0,
+  "buffer_from": [
+    "eval_results\\residual_rl\\td3_v1\\episodes"
+  ]
+}
