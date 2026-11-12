@@ -64,3 +64,23 @@ wait_5m.py
 /eval_results/hybrid_rollouts/hybrid_recovery_boundary_comparison_step70.json
 /.opencode/vendor/
 /eval_results/speed_model/dataset.npz
+
+# Local working notes, plans, study material and AI-agent tooling: kept on disk, not part of the project repo
+HANDOVER_DOC.md
+SESSION_CONTINUATION.md
+CLAUDE.md
+WORKSPACE_SAFETY_POLICY.md
+SOLUTION.md
+GENERALIZATION_STRATEGY.md
+PROJECT_STORY.md
+ARCHITECTURE_DEEP_DIVE_AND_INTERVIEW_PREP.md
+CLOUD_MIGRATION.md
+HYBRID_AUTONOMOUS_RACING_PLAN.md
+relevant_changes.diff
+game_lifecycle.py
+interactive_curriculum/
+.opencode/
+opencode.jsonc
+.claude/
+.mcp.json
+.cbmignore
