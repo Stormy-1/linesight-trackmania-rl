@@ -1,171 +1,176 @@
-# 🏎️ Linesight — TrackMania RL World Record Agent
+# Linesight hybrid: a self-driving car for TrackMania
 
-> **Teaching an AI to drive faster than any human — 240 milliseconds at a time.**
+A classical robotics stack drives the car. Learned models replace its hand-set numbers, and a
+residual reinforcement-learning policy adds small corrections on top. Everything is judged on a
+**held-out set of 10 maps** that no part of the system was tuned on.
 
-An autonomous racing agent trained with **Deep Reinforcement Learning** (Implicit Quantile Networks) to master *TrackMania Nations Forever*. The agent learns entirely from pixels and game telemetry — no hardcoded racing lines, no replay imitation, no human demonstrations.
+Built on [Linesight](https://github.com/Linesight-RL/linesight), an open-source RL framework for
+TrackMania Nations Forever (see [ATTRIBUTION.md](ATTRIBUTION.md)).
 
-<!-- TODO: Replace with showcase website link once built -->
-<!-- 🌐 **[View the Full Story →](https://stormy-1.github.io/linesight-trackmania-rl/)** -->
+## Headline result
 
----
+Held-out test set: 10 campaign maps across four difficulty tiers. Each map is driven once, with identical
+arguments for every map. The test set was evaluated only five times, each time after a new component was added.
 
-## 📊 Results
+| Version | What it added | Finished | Mean completion | Median time vs pro | Wall hits | Recovery steps |
+|---|---|---|---|---|---|---|
+| v4 | classical stack | 3/10 | 57.9% | 1.60× | 2 | 529 |
+| v5 | + speed model learned from pro replays | 3/10 | 52.3% | 1.63× | 11 | 734 |
+| v6 | + grip limit learned from our own logs | 2/10 | 54.0% | 1.50× | 2 | 677 |
+| v7 | + measured in-game gravity | 2/10 | 46.2% | 1.44× | 1 | 747 |
+| **v8_rl** | **+ residual TD3 policy** | **4/10** | **58.1%** | 1.50× | 1 | **431** |
 
-| Metric | Value |
-|---|---|
-| **Track** | `ESL-Hockolicious` |
-| **Agent's Personal Best** | **`54.000s`** |
-| **Human Purist World Record** | **`53.760s`** |
-| **Gap to WR** | **0.24s (240 ms)** — 99.6% of human perfection |
-| **Total Training Frames** | 10,650,000+ (~15 hours of accelerated sim time) |
-| **Training Speed** | 80× real-time physics simulation |
+Base + residual RL is the best result so far. It finished 4 maps against the base stack's 2, lost
+none of the base's finishes, and cut recovery steps by 42%. It set the project's best times on A09 (39.56 s)
+and B07 (41.82 s). The policy was trained on 6 other maps.
 
-The agent is actively training on an Azure cloud VM, hunting down the final 240 milliseconds.
+Sources: `eval_results/test_set_v4_baseline.json` … `eval_results/test_set_v8_rl_td3v2.json`.
+Per-map tables, the dev and training-map results, and the model validations are in [RESULTS.md](RESULTS.md).
 
----
+## How the project got here
 
-## 🧠 How It Works
+1. **Pure RL memorised one map.** The Linesight IQN agent, trained from pixels on Hockolicious,
+   drove that map in about 54 s. On five other campaign maps (10 runs each), the 3.18M-frame checkpoint finished
+   0 of 50 runs. The 10.6M-frame checkpoint finished 8, all of them on A03
+   (`eval_results/benchmark_20261014_190540.csv`).
+2. **A classical robotics stack generalised.** Map matching, a track speed profile, pure pursuit, and
+   recovery behaviours finished 27 of 63 campaign maps, one run each. It had been developed on only 5 of them.
+3. **Learned models replaced the hand-set numbers.** Corner speeds came from pro replays, the grip limit
+   from our own driving logs, gravity from ghost free fall, and obstacle shapes from pro ghosts.
+4. **Residual RL learned the corrections.** A TD3 policy adds bounded steering and target-speed corrections to
+   the stack's command. It starts at exactly zero, so training begins from the base stack's behaviour.
 
-### Architecture
-- **Algorithm:** [Implicit Quantile Network (IQN)](https://arxiv.org/abs/1806.06923) — a distributional RL method that learns the full distribution of future returns, not just the expected value.
-- **Input:** 160×120 downscaled game frames + floating-point telemetry (speed, RPM, steering state).
-- **Output:** Discrete action selection across all combinations of `{Steer Left, Steer Right, Gas, Brake, No Input}`.
-- **Game Interface:** [TMInterface](https://donadigo.com/tminterface) — a C++/AngelScript injection API that provides direct memory access to TrackMania's physics engine.
+## Architecture
 
-### Training Pipeline
-```
-┌──────────────────────────────────────────────────────────────────────┐
-│                         Training Loop                                │
-│                                                                      │
-│  ┌─────────────┐    ┌──────────────┐    ┌─────────────────────────┐  │
-│  │  Collector 1 │───▶│              │    │                         │  │
-│  │  (TM @ 80x)  │    │   Replay     │───▶│   IQN Learner Process   │  │
-│  ├─────────────┤    │   Buffer     │    │   (Gradient Updates)    │  │
-│  │  Collector 2 │───▶│  (200K txns) │    │                         │  │
-│  │  (TM @ 80x)  │    └──────────────┘    └─────────────────────────┘  │
-│  └─────────────┘                                                     │
-└──────────────────────────────────────────────────────────────────────┘
-```
-
-- **Dual collectors** run independent TrackMania instances at 80× speed, gathering experience rollouts.
-- A **central replay buffer** (200,000 transitions) stores experiences for off-policy learning.
-- The **IQN learner** samples mini-batches and performs gradient descent on the quantile Huber loss.
-- Weights are shared asynchronously: collectors pull fresh network weights every few rollouts.
-
-### Key Hyperparameters
-| Parameter | Value | Notes |
-|---|---|---|
-| Discount (γ) | 1.0 | Infinite horizon (annealed from 0.9 to 1.0 over 2.5M frames) |
-| Exploration (ε) | 0.03 | Floor reached at ~3M frames |
-| Learning Rate | 5e-5 → 1e-5 | Cosine-like schedule with a warmup bump at 8.5M frames |
-| IQN Quantiles (N/N'/K) | 8/8/32 | Symmetric tau sampling |
-| Batch Size | 512 | |
-| Buffer Size | 200,000 | Expanded from 50K at 5M frames |
-
----
-
-## ☁️ Cloud Infrastructure
-
-Training outgrew the local laptop at ~10M frames. The agent now trains on Azure:
-
-| Component | Spec |
-|---|---|
-| **VM** | `Standard_E4as_v4` (4 vCPU AMD EPYC, 32 GiB RAM) |
-| **OS** | Windows Server 2022 Datacenter |
-| **GPU** | None (CPU-only — Azure Student 0-core GPU quota) |
-| **Region** | East Asia |
-| **Cost** | ~$0.52/hr ($100 Azure for Students budget) |
-
-> **Why not Google Colab?** TrackMania is a 32-bit Windows DirectX 9 executable. It requires live DLL injection, socket IPC, and an active display surface — none of which are possible in Colab's headless Linux containers. See [`CLOUD_MIGRATION.md`](CLOUD_MIGRATION.md) for the full technical analysis.
-
----
-
-## 🛡️ Generalization Strategy
-
-Pushing to 100% mastery on a single map risks **entropy collapse** (the policy becomes so confident it can't explore on new tracks) and **catastrophic forgetting** (training on Map B destroys Map A knowledge).
-
-Our approach:
-1. **Save a 95% foundational checkpoint** (~54.45s) before the policy over-specializes.
-2. **Beat the WR** on Hockolicious with the active run.
-3. **Branch from the 95% checkpoint** and train on a 3–5 map interleaved curriculum to build a generalized driving AI.
-
-See [`GENERALIZATION_STRATEGY.md`](GENERALIZATION_STRATEGY.md) for the full technical breakdown.
-
----
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Windows 10/11 or Windows Server 2022
-- [TrackMania Nations Forever](https://www.trackmania.com/) (free)
-- [TMInterface v2.1.0](https://donadigo.com/tminterface)
-- [TMLoader](https://github.com/donadigo/TMLoader)
-- [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
-
-### Setup
-```powershell
-# Create conda environment (MUST be Python 3.11 — newer versions break torchrl)
-conda create -n linesight python=3.11.16 -y
-conda activate linesight
-
-# Install PyTorch (GPU)
-pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
-# OR for CPU-only:
-# pip install torch torchvision
-
-# Install dependencies (torchrl pinned to 0.2.1!)
-pip install -r requirements_pip.txt
-pip install -e . --no-deps
+```mermaid
+flowchart LR
+    subgraph Sense
+        S1[Game state via TMInterface<br/>pose, velocity, wheel contact]
+        S2[Map matching<br/>progress, lateral and heading error]
+        S3[Virtual lidar<br/>13 rays over learned obstacle shapes]
+    end
+    subgraph Plan
+        P1[Official-replay racing line]
+        P2[Track speed profile<br/>learned pro speed, learned grip cap,<br/>braking pass, jump physics]
+    end
+    subgraph Act
+        A1[Pure pursuit<br/>steering + speed control]
+        A2[Safety layers<br/>steering cap, slip guard,<br/>recovery, unstick/reverse]
+        A3[Sigma-delta adapter<br/>onto 12 digital key combos]
+    end
+    subgraph Correct
+        R1[Residual TD3 policy<br/>Δsteering, Δtarget speed]
+    end
+    S1 --> S2 --> A1
+    S1 --> S3 --> R1
+    P1 --> S2
+    P1 --> P2 --> A1
+    S2 --> R1
+    R1 --> A1
+    A1 --> A2 --> A3 --> S1
 ```
 
-### Train
-```powershell
-# IMPORTANT: Close TMLoader GUI before running!
-python scripts/train.py
+The loop runs every 50 ms of game time. Every component and its design decision are explained in [ARCHITECTURE.md](ARCHITECTURE.md).
+
+| Component | Field | What it replaced | Evidence |
+|---|---|---|---|
+| Map matching on the official-replay line | Robotics (localisation) | the RL agent's recorded lines | `eval_results/hybrid_live/*_official_v3b/` |
+| Block map of every campaign map | Robotics (mapping) | nothing (new) | `trackmania_rl/hybrid_block_map.py` |
+| Pure pursuit + speed-dependent steering cap | Robotics (control) | the RL agent's driving | `eval_results/test_set_v4_baseline.json` |
+| Recovery, unstick/reverse, slip guard | Robotics (safety layers) | nothing (new) | `eval_results/hybrid_live/` |
+| Speed model: MLP on 18 track-geometry features | Supervised DL | a hand-written curvature rule | `eval_results/speed_model/validation_v1.json` |
+| Grip limit: logistic model of "runs wide" | ML / system identification | a fixed corner speed limit | `eval_results/grip_model/grip_model_v1.json` |
+| Gravity measured from pro-ghost free fall | Measurement | a wrong guess (15.4 m/s²) | `eval_results/gravity_measurement.json` |
+| Virtual lidar, obstacle shapes learned from ghosts | Learned perception | nothing (new) | `eval_results/range_sensor/validation_v1.json` |
+| Residual TD3 policy | Deep RL | nothing (corrections on top) | `eval_results/residual_rl/td3_v2/` |
+
+## Evaluation protocol
+
+- **Fixed split** (`maps/map_split.json`, seed 20261112, drawn once and never re-drawn):
+  - **dev**: the 7 maps used for every design choice, plus Hockolicious.
+  - **test**: 10 held-out maps.
+  - **rl_train**: 6 maps the residual policy trains on.
+  - **offline_train**: the 53 non-test official replays, used as offline data.
+- **No per-map tuning.** `scripts/run_test_set.py` passes identical arguments to every map.
+  `scripts/report_test_set.py` refuses any run that has a per-map speed cap.
+- **Metrics.** Finish rate is the headline. Also reported: mean completion, time ratio against the official
+  replay (median over finished maps), recovery steps, and contacts (landings, bumps, wall hits, scrapes).
+  Contacts are a quality measure, not a failure, because light wall touches and hard landings are normal in the game.
+- **Test-set looks:** v4, v5, v6, v7, v8_rl. Each one came only after a substantively new component was added.
+
+## Limitations
+
+- **The sample is small.** 10 maps, one deterministic run each. Single runs flip between finishing and failing
+  at knife-edge jumps (a sub-m/s change at takeoff), so the v7 → v8_rl gain is a two-map swing.
+  It is consistent with the dev-map result (no lost finishes, small speed-ups), but it is evidence, not proof.
+- **Some failures are out of reach for the residual.** B13, C13 and D04 stall in the first 10% in every version,
+  and B04, C10 and D07 stall at the same spots in every version. These look like line or geometry problems that
+  a ±0.25-steering / ±8 m/s correction can't fix.
+- **The car is slow.** Finished maps take about 1.4–1.6× the pro's time. Pros drift through corners at speeds
+  this car and controller can't hold.
+- **There is no collision telemetry.** Contacts are inferred from speed and trajectory (an "impact" is a speed
+  drop of more than 4 m/s in 50 ms).
+
+## Repository layout
+
+```text
+trackmania_rl/
+  hybrid_live.py            live policy: map matching, safety layers, sigma-delta key adapter, logging
+  hybrid_controller.py      PurePursuitController (the live controller)
+  hybrid_track_profile.py   speed profile: curvature, braking pass, jump detection
+  hybrid_block_map.py       block layout of any campaign map
+  speed_features.py, speed_model.py         learned speed model
+  grip_model.py                              learned grip limit
+  range_sensor.py                            virtual lidar
+  residual_observation.py, residual_action.py, residual_reward.py,
+  residual_td3.py, residual_training.py      residual RL
+  tmi_interaction/          game connection (from Linesight) + unattended launch keys
+scripts/
+  run_hybrid_controller_live.py   drive one map live
+  run_test_set.py, report_test_set.py, make_map_split.py   evaluation protocol
+  build_official_centerlines.py   racing lines from the game's official replays
+  build_speed_dataset.py, train_speed_model.py, fit_grip_model.py,
+  build_range_sensor.py, measure_gravity.py                learned models
+  burn_in_residual_critic.py, train_residual.py, retrain_residual_offline.py   RL
+eval_results/               every result quoted here (per-step CSV logs, models, reports)
+tests/                      pytest suite
 ```
 
-### Monitor
-```powershell
-python -c "import joblib; s = joblib.load('save/hocko_v1/accumulated_stats.joblib'); print(f'Frames: {s[\"cumul_number_frames_played\"]:,} | PB: {s[\"alltime_min_ms\"][\"hock\"]/1000:.3f}s')"
+The original Linesight IQN agent (`trackmania_rl/agents/`, `trackmania_rl/multiprocess/`) is still in the
+repo. It provides the pure-RL baseline and the game interface.
+
+## Running it
+
+You need TrackMania Nations Forever, [TMInterface](https://donadigo.com/tminterface), and Python 3.11.
+Set up the environment as in [Linesight's installation guide](https://linesight-rl.github.io/linesight/build/html/installation.html),
+then `pip install -r requirements_pip.txt`.
+
+The racing lines are built from the game's own official replays, which are not in this repo:
+
+```bash
+python scripts/build_official_centerlines.py --install
 ```
 
----
+Drive one map with the v7 base stack plus the residual policy:
 
-## 📂 Project Structure
-
-```
-linesight-trackmania-rl/
-├── config_files/           # Training hyperparameters & user configuration
-│   ├── config.py           # Main config (copied to config_copy.py at runtime)
-│   ├── user_config.py      # Local paths & TMNF credentials
-│   ├── inputs_list.py      # Action space definition
-│   └── state_normalization.py
-├── trackmania_rl/          # Core RL library
-│   ├── agents/
-│   │   └── iqn.py          # Implicit Quantile Network implementation
-│   ├── multiprocess/
-│   │   ├── collector_process.py   # Experience collection workers
-│   │   └── learner_process.py     # Gradient update loop
-│   ├── tmi_interaction/
-│   │   └── game_instance_manager.py  # TMInterface socket bridge
-│   ├── buffer_utilities.py
-│   └── analysis_metrics.py
-├── scripts/
-│   └── train.py            # Training entry point
-├── GENERALIZATION_STRATEGY.md
-├── CLOUD_MIGRATION.md
-├── PROJECT_STORY.md
-└── ATTRIBUTION.md
+```bash
+python scripts/run_hybrid_controller_live.py --map A02-Race --runs 1 --speed 10 --stuck-cutoff-s 6 --speed-model eval_results/speed_model/speed_model_v1.pt --top-speed 70 --grip-model eval_results/grip_model/grip_model_v1.json --grip-risk 0.2 --range-sensor eval_results/range_sensor/footprints_v1.npz --residual eval_results/residual_rl/td3_v2/final.pt --name A02_demo
 ```
 
----
+Reproduce the headline table from the logged runs (no game needed):
 
-## 🙏 Attribution
+```bash
+python scripts/report_test_set.py --tag v8_rl
+```
 
-This project builds on the **[Linesight](https://github.com/Linesight-RL/linesight)** framework by the Linesight-RL team. See [`ATTRIBUTION.md`](ATTRIBUTION.md) for full credits.
+Run the tests:
 
----
+```bash
+python -m pytest -q -p no:cacheprovider
+```
 
-## 📄 License
+## Credits
 
-This project inherits the license from the upstream [Linesight](https://github.com/Linesight-RL/linesight) repository. See the original project for license details.
+The game interface, process management and the original IQN agent come from
+[Linesight](https://github.com/Linesight-RL/linesight). The hybrid stack, the learned models, the residual RL
+and the evaluation protocol are this project's work. See [ATTRIBUTION.md](ATTRIBUTION.md).

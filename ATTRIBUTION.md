@@ -26,6 +26,8 @@ Starting from the upstream Linesight codebase, my contributions include:
 
 7. **10.6M+ Frame Training Run** — Trained the agent to a personal best of **54.000s** on ESL-Hockolicious (0.24s from the human World Record of 53.760s).
 
+8. **Hybrid self-driving stack (the current project)** — A classical robotics stack (map matching, speed profile, pure pursuit, safety layers), learned models replacing its hand-set numbers, and a residual TD3 policy on top, evaluated on held-out maps. See [README.md](README.md), [ARCHITECTURE.md](ARCHITECTURE.md) and [RESULTS.md](RESULTS.md).
+
 ## Thank You
 
 A huge thank you to the Linesight-RL team for creating and open-sourcing this incredible framework. Without their foundational work on the IQN architecture, TMInterface bridge, and training pipeline, this project would not exist.
