@@ -1,0 +1,34 @@
+{
+  "track": "A01",
+  "controller": "purepursuit",
+  "max_speed_override_mps": null,
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 349.49422184304177,
+      "end_m": 467.00643866302244,
+      "reference_horizontal_speed_mps": 57.55,
+      "required_speed_mps": 57.55
+    }
+  ],
+  "runs": [
+    {
+      "finished": true,
+      "termination": "Finished",
+      "race_time_s": 47.98,
+      "completion_pct": 100.0,
+      "actions": 961,
+      "steps": 960,
+      "impact_suspects": 1,
+      "recovery_steps": 125,
+      "reversals": 0,
+      "slip_steps": 65,
+      "max_progress_m": 2202.68,
+      "centerline_length_m": 2202.68,
+      "run": 1
+    }
+  ],
+  "finishes": "1/1"
+}

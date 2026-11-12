@@ -1,0 +1,41 @@
+{
+  "track": "B14-Speed",
+  "controller": "purepursuit",
+  "centerline": "B14-Speed_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 86.46139192523725,
+      "end_m": 149.96368616917468,
+      "reference_horizontal_speed_mps": 64.36,
+      "required_speed_mps": 64.36
+    },
+    {
+      "start_m": 1586.5029194688864,
+      "end_m": 1717.5049031976964,
+      "reference_horizontal_speed_mps": 69.08,
+      "required_speed_mps": 69.08
+    }
+  ],
+  "runs": [
+    {
+      "finished": true,
+      "termination": "Finished",
+      "race_time_s": 64.9,
+      "completion_pct": 100.0,
+      "actions": 1299,
+      "steps": 1298,
+      "impact_suspects": 4,
+      "recovery_steps": 37,
+      "reversals": 0,
+      "slip_steps": 0,
+      "max_progress_m": 3530.56,
+      "centerline_length_m": 3530.56,
+      "run": 1
+    }
+  ],
+  "finishes": "1/1"
+}

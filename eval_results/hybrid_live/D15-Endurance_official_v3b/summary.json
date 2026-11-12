@@ -1,0 +1,509 @@
+{
+  "track": "D15-Endurance",
+  "controller": "purepursuit",
+  "centerline": "D15-Endurance_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 63.436126162515826,
+      "end_m": 83.93592811147364,
+      "reference_horizontal_speed_mps": 54.84,
+      "required_speed_mps": 54.84
+    },
+    {
+      "start_m": 191.43525531843372,
+      "end_m": 216.93494021793936,
+      "reference_horizontal_speed_mps": 51.7,
+      "required_speed_mps": 51.7
+    },
+    {
+      "start_m": 1119.3998004763012,
+      "end_m": 1139.8996230886564,
+      "reference_horizontal_speed_mps": 60.31,
+      "required_speed_mps": 60.31
+    },
+    {
+      "start_m": 1314.3986316740447,
+      "end_m": 1579.3976420586189,
+      "reference_horizontal_speed_mps": 63.07,
+      "required_speed_mps": 63.07
+    },
+    {
+      "start_m": 2192.369871870841,
+      "end_m": 2281.3694910882004,
+      "reference_horizontal_speed_mps": 68.82,
+      "required_speed_mps": 68.82
+    },
+    {
+      "start_m": 2316.8681564276408,
+      "end_m": 2339.367972161115,
+      "reference_horizontal_speed_mps": 63.65,
+      "required_speed_mps": 63.65
+    },
+    {
+      "start_m": 2659.8543564526876,
+      "end_m": 2720.8538249574985,
+      "reference_horizontal_speed_mps": 42.96,
+      "required_speed_mps": 42.96
+    },
+    {
+      "start_m": 2891.8438481505045,
+      "end_m": 2915.8438227295055,
+      "reference_horizontal_speed_mps": 66.99,
+      "required_speed_mps": 66.99
+    },
+    {
+      "start_m": 3019.3430876595094,
+      "end_m": 3051.342487922056,
+      "reference_horizontal_speed_mps": 61.69,
+      "required_speed_mps": 61.69
+    },
+    {
+      "start_m": 3954.8080449446084,
+      "end_m": 3989.307924599211,
+      "reference_horizontal_speed_mps": 59.93,
+      "required_speed_mps": 59.93
+    },
+    {
+      "start_m": 4021.807778686398,
+      "end_m": 4045.3075937503345,
+      "reference_horizontal_speed_mps": 73.3,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 4145.3029955660195,
+      "end_m": 4380.3020289558235,
+      "reference_horizontal_speed_mps": 60.04,
+      "required_speed_mps": 60.04
+    },
+    {
+      "start_m": 4585.794378529192,
+      "end_m": 4617.793335854507,
+      "reference_horizontal_speed_mps": 36.63,
+      "required_speed_mps": 36.63
+    },
+    {
+      "start_m": 4780.280045969302,
+      "end_m": 4813.779266921941,
+      "reference_horizontal_speed_mps": 34.5,
+      "required_speed_mps": 34.5
+    },
+    {
+      "start_m": 5050.77316831508,
+      "end_m": 5136.7728951936615,
+      "reference_horizontal_speed_mps": 67.6,
+      "required_speed_mps": 67.6
+    },
+    {
+      "start_m": 5165.270195233368,
+      "end_m": 5196.770035113436,
+      "reference_horizontal_speed_mps": 70.74,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 5521.255849653517,
+      "end_m": 5578.754923514344,
+      "reference_horizontal_speed_mps": 41.43,
+      "required_speed_mps": 41.43
+    },
+    {
+      "start_m": 5754.746677690309,
+      "end_m": 5778.746587919656,
+      "reference_horizontal_speed_mps": 66.05,
+      "required_speed_mps": 66.05
+    },
+    {
+      "start_m": 5879.745801247504,
+      "end_m": 5910.24548643817,
+      "reference_horizontal_speed_mps": 57.75,
+      "required_speed_mps": 57.75
+    },
+    {
+      "start_m": 6797.211405021113,
+      "end_m": 6831.211242677099,
+      "reference_horizontal_speed_mps": 59.29,
+      "required_speed_mps": 59.29
+    },
+    {
+      "start_m": 6863.711142637722,
+      "end_m": 6887.211197264798,
+      "reference_horizontal_speed_mps": 66.03,
+      "required_speed_mps": 66.03
+    },
+    {
+      "start_m": 6993.709920974471,
+      "end_m": 7230.708858406659,
+      "reference_horizontal_speed_mps": 60.17,
+      "required_speed_mps": 60.17
+    },
+    {
+      "start_m": 7886.683740401554,
+      "end_m": 7982.68357736001,
+      "reference_horizontal_speed_mps": 70.65,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 8365.167151627744,
+      "end_m": 8423.166490645062,
+      "reference_horizontal_speed_mps": 42.07,
+      "required_speed_mps": 42.07
+    },
+    {
+      "start_m": 8512.159130792648,
+      "end_m": 8540.659072069133,
+      "reference_horizontal_speed_mps": 49.7,
+      "required_speed_mps": 49.7
+    },
+    {
+      "start_m": 8596.65898482286,
+      "end_m": 8620.158842456533,
+      "reference_horizontal_speed_mps": 68.14,
+      "required_speed_mps": 68.14
+    },
+    {
+      "start_m": 8721.658099513748,
+      "end_m": 8751.15789453211,
+      "reference_horizontal_speed_mps": 52.37,
+      "required_speed_mps": 52.37
+    },
+    {
+      "start_m": 9640.121634030007,
+      "end_m": 9660.621465205044,
+      "reference_horizontal_speed_mps": 59.91,
+      "required_speed_mps": 59.91
+    },
+    {
+      "start_m": 9835.11697813258,
+      "end_m": 10090.115990376993,
+      "reference_horizontal_speed_mps": 62.78,
+      "required_speed_mps": 62.78
+    },
+    {
+      "start_m": 10718.080662072041,
+      "end_m": 10810.580376771351,
+      "reference_horizontal_speed_mps": 66.64,
+      "required_speed_mps": 66.64
+    },
+    {
+      "start_m": 10847.079567791485,
+      "end_m": 10869.079538959333,
+      "reference_horizontal_speed_mps": 64.08,
+      "required_speed_mps": 64.08
+    },
+    {
+      "start_m": 11191.566728045707,
+      "end_m": 11248.065949966447,
+      "reference_horizontal_speed_mps": 40.07,
+      "required_speed_mps": 40.07
+    },
+    {
+      "start_m": 11339.06041595772,
+      "end_m": 11363.060121632234,
+      "reference_horizontal_speed_mps": 47.63,
+      "required_speed_mps": 47.63
+    },
+    {
+      "start_m": 11427.05997376484,
+      "end_m": 11450.559941438874,
+      "reference_horizontal_speed_mps": 70.79,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 11551.558792562102,
+      "end_m": 11577.558420649488,
+      "reference_horizontal_speed_mps": 52.22,
+      "required_speed_mps": 52.22
+    },
+    {
+      "start_m": 11744.545450595158,
+      "end_m": 11780.044136807093,
+      "reference_horizontal_speed_mps": 50.74,
+      "required_speed_mps": 50.74
+    },
+    {
+      "start_m": 12480.525880160621,
+      "end_m": 12508.525624988073,
+      "reference_horizontal_speed_mps": 60.79,
+      "required_speed_mps": 60.79
+    },
+    {
+      "start_m": 12676.023578304596,
+      "end_m": 12957.522472449256,
+      "reference_horizontal_speed_mps": 64.95,
+      "required_speed_mps": 64.95
+    },
+    {
+      "start_m": 13561.993399885892,
+      "end_m": 13659.493096709557,
+      "reference_horizontal_speed_mps": 70.28,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 14034.473633000449,
+      "end_m": 14092.47288274934,
+      "reference_horizontal_speed_mps": 41.24,
+      "required_speed_mps": 41.24
+    },
+    {
+      "start_m": 14182.967987084989,
+      "end_m": 14208.467873753263,
+      "reference_horizontal_speed_mps": 49.39,
+      "required_speed_mps": 49.39
+    },
+    {
+      "start_m": 14266.46782616892,
+      "end_m": 14290.46773296392,
+      "reference_horizontal_speed_mps": 72.09,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 14395.966692340136,
+      "end_m": 14420.466331258684,
+      "reference_horizontal_speed_mps": 50.92,
+      "required_speed_mps": 50.92
+    },
+    {
+      "start_m": 15305.935710269594,
+      "end_m": 15327.935560302529,
+      "reference_horizontal_speed_mps": 58.87,
+      "required_speed_mps": 58.87
+    },
+    {
+      "start_m": 15501.432956241633,
+      "end_m": 15781.932068436923,
+      "reference_horizontal_speed_mps": 64.81,
+      "required_speed_mps": 64.81
+    },
+    {
+      "start_m": 15794.915822478359,
+      "end_m": 15819.91574473926,
+      "reference_horizontal_speed_mps": 85.76,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 16391.393490118357,
+      "end_m": 16480.89313392355,
+      "reference_horizontal_speed_mps": 68.71,
+      "required_speed_mps": 68.71
+    },
+    {
+      "start_m": 16855.380469959964,
+      "end_m": 16914.379757227012,
+      "reference_horizontal_speed_mps": 41.25,
+      "required_speed_mps": 41.25
+    },
+    {
+      "start_m": 17004.37338614881,
+      "end_m": 17029.8731111956,
+      "reference_horizontal_speed_mps": 48.65,
+      "required_speed_mps": 48.65
+    },
+    {
+      "start_m": 17089.37306912418,
+      "end_m": 17112.872968257787,
+      "reference_horizontal_speed_mps": 68.05,
+      "required_speed_mps": 68.05
+    },
+    {
+      "start_m": 17218.372102041038,
+      "end_m": 17242.871766869364,
+      "reference_horizontal_speed_mps": 49.57,
+      "required_speed_mps": 49.57
+    },
+    {
+      "start_m": 18144.83809215809,
+      "end_m": 18173.337916716388,
+      "reference_horizontal_speed_mps": 58.76,
+      "required_speed_mps": 58.76
+    },
+    {
+      "start_m": 18205.837825823502,
+      "end_m": 18229.837761887524,
+      "reference_horizontal_speed_mps": 65.62,
+      "required_speed_mps": 65.62
+    },
+    {
+      "start_m": 18332.833805975515,
+      "end_m": 18590.83264228306,
+      "reference_horizontal_speed_mps": 62.09,
+      "required_speed_mps": 62.09
+    },
+    {
+      "start_m": 19231.80403047509,
+      "end_m": 19329.80376806924,
+      "reference_horizontal_speed_mps": 69.33,
+      "required_speed_mps": 69.33
+    },
+    {
+      "start_m": 19364.79973480653,
+      "end_m": 19385.799590840263,
+      "reference_horizontal_speed_mps": 63.0,
+      "required_speed_mps": 63.0
+    },
+    {
+      "start_m": 19434.79805539717,
+      "end_m": 19473.791793962224,
+      "reference_horizontal_speed_mps": 37.79,
+      "required_speed_mps": 37.79
+    },
+    {
+      "start_m": 19707.78578902767,
+      "end_m": 19764.2851095373,
+      "reference_horizontal_speed_mps": 41.1,
+      "required_speed_mps": 41.1
+    },
+    {
+      "start_m": 19853.78007249055,
+      "end_m": 19878.27982437904,
+      "reference_horizontal_speed_mps": 49.08,
+      "required_speed_mps": 49.08
+    },
+    {
+      "start_m": 20066.27856064842,
+      "end_m": 20098.778107974027,
+      "reference_horizontal_speed_mps": 54.14,
+      "required_speed_mps": 54.14
+    },
+    {
+      "start_m": 20975.74500358152,
+      "end_m": 21011.244802369405,
+      "reference_horizontal_speed_mps": 60.1,
+      "required_speed_mps": 60.1
+    },
+    {
+      "start_m": 21165.740128864953,
+      "end_m": 21427.239011596797,
+      "reference_horizontal_speed_mps": 62.98,
+      "required_speed_mps": 62.98
+    },
+    {
+      "start_m": 22057.20772944804,
+      "end_m": 22144.707376866398,
+      "reference_horizontal_speed_mps": 68.69,
+      "required_speed_mps": 68.69
+    },
+    {
+      "start_m": 22173.206178251483,
+      "end_m": 22208.205940665895,
+      "reference_horizontal_speed_mps": 61.69,
+      "required_speed_mps": 61.69
+    },
+    {
+      "start_m": 22524.191396693004,
+      "end_m": 22579.190448109413,
+      "reference_horizontal_speed_mps": 40.01,
+      "required_speed_mps": 40.01
+    },
+    {
+      "start_m": 22883.681216460296,
+      "end_m": 22909.18106501975,
+      "reference_horizontal_speed_mps": 51.53,
+      "required_speed_mps": 51.53
+    },
+    {
+      "start_m": 23070.170171367634,
+      "end_m": 23101.667573740608,
+      "reference_horizontal_speed_mps": 50.25,
+      "required_speed_mps": 50.25
+    },
+    {
+      "start_m": 23988.64721466089,
+      "end_m": 24261.146199749463,
+      "reference_horizontal_speed_mps": 63.4,
+      "required_speed_mps": 63.4
+    },
+    {
+      "start_m": 24273.643861114935,
+      "end_m": 24300.143840309236,
+      "reference_horizontal_speed_mps": 77.63,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 24856.617297870158,
+      "end_m": 24952.61696246903,
+      "reference_horizontal_speed_mps": 69.77,
+      "required_speed_mps": 69.77
+    },
+    {
+      "start_m": 24989.612974169468,
+      "end_m": 25010.112881510093,
+      "reference_horizontal_speed_mps": 62.75,
+      "required_speed_mps": 62.75
+    },
+    {
+      "start_m": 25060.610967643,
+      "end_m": 25098.106328905338,
+      "reference_horizontal_speed_mps": 36.74,
+      "required_speed_mps": 36.74
+    },
+    {
+      "start_m": 25328.100223497666,
+      "end_m": 25387.09957436623,
+      "reference_horizontal_speed_mps": 40.93,
+      "required_speed_mps": 40.93
+    },
+    {
+      "start_m": 25479.592440676093,
+      "end_m": 25506.592282558733,
+      "reference_horizontal_speed_mps": 48.67,
+      "required_speed_mps": 48.67
+    },
+    {
+      "start_m": 26605.55688576321,
+      "end_m": 26628.05670745621,
+      "reference_horizontal_speed_mps": 60.62,
+      "required_speed_mps": 60.62
+    },
+    {
+      "start_m": 26801.55481092976,
+      "end_m": 27068.55384186607,
+      "reference_horizontal_speed_mps": 63.53,
+      "required_speed_mps": 63.53
+    },
+    {
+      "start_m": 27690.52724404977,
+      "end_m": 27779.527112450047,
+      "reference_horizontal_speed_mps": 68.56,
+      "required_speed_mps": 68.56
+    },
+    {
+      "start_m": 27890.018688404733,
+      "end_m": 27915.518187035548,
+      "reference_horizontal_speed_mps": 34.48,
+      "required_speed_mps": 34.48
+    },
+    {
+      "start_m": 28162.9941939071,
+      "end_m": 28220.49356200517,
+      "reference_horizontal_speed_mps": 40.55,
+      "required_speed_mps": 40.55
+    },
+    {
+      "start_m": 28309.98323892707,
+      "end_m": 28336.483000493306,
+      "reference_horizontal_speed_mps": 48.0,
+      "required_speed_mps": 48.0
+    }
+  ],
+  "runs": [
+    {
+      "finished": true,
+      "termination": "Finished",
+      "race_time_s": 626.41,
+      "completion_pct": 100.0,
+      "actions": 12530,
+      "steps": 12529,
+      "impact_suspects": 22,
+      "recovery_steps": 237,
+      "reversals": 2,
+      "slip_steps": 509,
+      "max_progress_m": 28337.48,
+      "centerline_length_m": 28337.48,
+      "run": 1
+    }
+  ],
+  "finishes": "1/1"
+}

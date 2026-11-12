@@ -1,0 +1,2675 @@
+{
+  "scope": "offline_hybrid_recovery_dynamic_feasibility_diagnostic",
+  "evidence_class": "diagnostic_development_validation",
+  "offline_only": true,
+  "real_physics_validated": false,
+  "promotion_allowed": false,
+  "independent_confirmation": false,
+  "controller_defaults_modified": false,
+  "simulator_proxy": {
+    "dt_s": 0.1,
+    "max_braking_mps2": 18.0,
+    "linear_drag_mps2_per_mps": 0.05,
+    "max_yaw_rate_rad_s": 1.8,
+    "assumptions": [
+      "full braking and zero throttle",
+      "maximum yaw correction toward the local tangent",
+      "locally constant centerline tangent for one step"
+    ]
+  },
+  "records": [
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 0.03284335843818553,
+      "previous_state": {
+        "progress_m": 145.74780416162488,
+        "speed_mps": 26.307536035461723,
+        "heading_error_rad": -1.7635632693247356,
+        "lateral_error_m": 9.041244314990273
+      },
+      "current_state": {
+        "progress_m": 145.7149608031867,
+        "speed_mps": 25.725998355284414,
+        "heading_error_rad": -1.5835632693247357,
+        "lateral_error_m": 11.613633207198035
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 24.375998355284413,
+        "next_abs_heading_error_rad": 1.5835632693247357,
+        "estimated_along_tangent_displacement_m": -0.03111985159908398,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 0.6952612821160926,
+      "previous_state": {
+        "progress_m": 145.74780416162488,
+        "speed_mps": 26.307536035461723,
+        "heading_error_rad": -2.0253626571238845,
+        "lateral_error_m": 9.041244314990273
+      },
+      "current_state": {
+        "progress_m": 145.0525428795088,
+        "speed_mps": 25.725998355284414,
+        "heading_error_rad": -1.8451675666553025,
+        "lateral_error_m": 11.517560499180828
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 24.375998355284413,
+        "next_abs_heading_error_rad": 1.8453626571238846,
+        "estimated_along_tangent_displacement_m": -0.6609053143484486,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 1.3700197235226028,
+      "previous_state": {
+        "progress_m": 149.04185323939373,
+        "speed_mps": 32.00202973082296,
+        "heading_error_rad": -1.9862473363436313,
+        "lateral_error_m": 8.839046130965032
+      },
+      "current_state": {
+        "progress_m": 147.67183351587113,
+        "speed_mps": 31.392019582168846,
+        "heading_error_rad": -1.8598685612206076,
+        "lateral_error_m": 11.890202409325346
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 30.042019582168844,
+        "next_abs_heading_error_rad": 1.8062473363436313,
+        "estimated_along_tangent_displacement_m": -0.7008249646427729,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "recovery_h_1p4_l_0p12_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 1.3206880725298902,
+      "previous_state": {
+        "progress_m": 148.56474380224356,
+        "speed_mps": 31.496408834596807,
+        "heading_error_rad": -1.9841399087709388,
+        "lateral_error_m": 8.768266732462688
+      },
+      "current_state": {
+        "progress_m": 147.24405572971366,
+        "speed_mps": 29.951109582713492,
+        "heading_error_rad": -1.8579562241164782,
+        "lateral_error_m": 11.657592412481398
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.7710095598390717,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 29.538926790423822,
+        "next_abs_heading_error_rad": 1.8041399087709389,
+        "estimated_along_tangent_displacement_m": -0.6830338518761789,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "recovery_h_1p4_l_0p12_brake_0p45",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 1.3998892459307797,
+      "previous_state": {
+        "progress_m": 148.5974693925734,
+        "speed_mps": 33.8212597823882,
+        "heading_error_rad": -1.9836444129531192,
+        "lateral_error_m": 8.746546388775409
+      },
+      "current_state": {
+        "progress_m": 147.19758014664262,
+        "speed_mps": 32.84215348347626,
+        "heading_error_rad": -1.8574607282986588,
+        "lateral_error_m": 11.915390408220647
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 31.852153483476265,
+        "next_abs_heading_error_rad": 1.8036444129531193,
+        "estimated_along_tangent_displacement_m": -0.7349874253515911,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 43,
+      "actual_backward_distance_m": 0.17345377803997053,
+      "previous_state": {
+        "progress_m": 177.3497243526205,
+        "speed_mps": 20.04312776407085,
+        "heading_error_rad": 1.4840581067968674,
+        "lateral_error_m": 12.781871639192023
+      },
+      "current_state": {
+        "progress_m": 177.17627057458054,
+        "speed_mps": 19.492912125250495,
+        "heading_error_rad": 1.6598971451230504,
+        "lateral_error_m": 10.840313598604114
+      },
+      "actual_command": {
+        "steering": 0.9768835462565706,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 18.142912125250493,
+        "next_abs_heading_error_rad": 1.3040581067968675,
+        "estimated_along_tangent_displacement_m": 0.4782225159717757,
+        "reverse_unavoidable_proxy": false
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 1.318627394049571,
+      "previous_state": {
+        "progress_m": 148.53745409664518,
+        "speed_mps": 31.496408834596807,
+        "heading_error_rad": -1.9839165037403048,
+        "lateral_error_m": 8.742622024889899
+      },
+      "current_state": {
+        "progress_m": 147.2188267025956,
+        "speed_mps": 29.951109582713492,
+        "heading_error_rad": -1.8577328190858444,
+        "lateral_error_m": 11.630706366527857
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.7710095598390717,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 29.538926790423822,
+        "next_abs_heading_error_rad": 1.8039165037403049,
+        "estimated_along_tangent_displacement_m": -0.6823918048975095,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p45",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 43,
+      "actual_backward_distance_m": 0.16248835817671647,
+      "previous_state": {
+        "progress_m": 178.2203150297289,
+        "speed_mps": 17.82588771206539,
+        "heading_error_rad": 1.4869393092924152,
+        "lateral_error_m": 14.737458303867042
+      },
+      "current_state": {
+        "progress_m": 178.0578266715522,
+        "speed_mps": 16.926758273505065,
+        "heading_error_rad": 1.666939309292415,
+        "lateral_error_m": 13.052600093212273
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 15.936758273505063,
+        "next_abs_heading_error_rad": 1.3069393092924153,
+        "estimated_along_tangent_displacement_m": 0.4156402392986427,
+        "reverse_unavoidable_proxy": false
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p45",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 1.397783045074931,
+      "previous_state": {
+        "progress_m": 148.57102847019394,
+        "speed_mps": 33.8212597823882,
+        "heading_error_rad": -1.983434761548219,
+        "lateral_error_m": 8.720380536263907
+      },
+      "current_state": {
+        "progress_m": 147.173245425119,
+        "speed_mps": 32.84215348347626,
+        "heading_error_rad": -1.8572510768937587,
+        "lateral_error_m": 11.888034803229688
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 31.852153483476265,
+        "next_abs_heading_error_rad": 1.8034347615482191,
+        "estimated_along_tangent_displacement_m": -0.7343376457429671,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 1.3482323617875522,
+      "previous_state": {
+        "progress_m": 148.57700723795503,
+        "speed_mps": 31.496408834596807,
+        "heading_error_rad": -1.984238052019835,
+        "lateral_error_m": 8.780797514903972
+      },
+      "current_state": {
+        "progress_m": 147.22877487616748,
+        "speed_mps": 30.888926790423824,
+        "heading_error_rad": -1.8580543673653747,
+        "lateral_error_m": 11.760620340286183
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 29.538926790423822,
+        "next_abs_heading_error_rad": 1.8042380520198351,
+        "estimated_along_tangent_displacement_m": -0.6833158964161901,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p45",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 1.4009112311254626,
+      "previous_state": {
+        "progress_m": 148.6094378794809,
+        "speed_mps": 33.8212597823882,
+        "heading_error_rad": -1.9837403268381322,
+        "lateral_error_m": 8.75960672975486
+      },
+      "current_state": {
+        "progress_m": 147.20852664835544,
+        "speed_mps": 32.84215348347626,
+        "heading_error_rad": -1.8575566421836716,
+        "lateral_error_m": 11.928986540693494
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 31.852153483476265,
+        "next_abs_heading_error_rad": 1.8037403268381322,
+        "estimated_along_tangent_displacement_m": -0.7352846836933984,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p24_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 1.318627394049571,
+      "previous_state": {
+        "progress_m": 148.53745409664518,
+        "speed_mps": 31.496408834596807,
+        "heading_error_rad": -1.9839165037403048,
+        "lateral_error_m": 8.742622024889899
+      },
+      "current_state": {
+        "progress_m": 147.2188267025956,
+        "speed_mps": 29.951109582713492,
+        "heading_error_rad": -1.8577328190858444,
+        "lateral_error_m": 11.630706366527857
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.7710095598390717,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 29.538926790423822,
+        "next_abs_heading_error_rad": 1.8039165037403049,
+        "estimated_along_tangent_displacement_m": -0.6823918048975095,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p24_brake_0p45",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 1.397783045074931,
+      "previous_state": {
+        "progress_m": 148.57102847019394,
+        "speed_mps": 33.8212597823882,
+        "heading_error_rad": -1.983434761548219,
+        "lateral_error_m": 8.720380536263907
+      },
+      "current_state": {
+        "progress_m": 147.173245425119,
+        "speed_mps": 32.84215348347626,
+        "heading_error_rad": -1.8572510768937587,
+        "lateral_error_m": 11.888034803229688
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 31.852153483476265,
+        "next_abs_heading_error_rad": 1.8034347615482191,
+        "estimated_along_tangent_displacement_m": -0.7343376457429671,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 0.46714181221074114,
+      "previous_state": {
+        "progress_m": 491.3843595862765,
+        "speed_mps": 43.39811525921728,
+        "heading_error_rad": -1.8896324661110124,
+        "lateral_error_m": 8.154061219176704
+      },
+      "current_state": {
+        "progress_m": 490.91721777406576,
+        "speed_mps": 41.38112468292119,
+        "heading_error_rad": -1.6813404049116407,
+        "lateral_error_m": 12.250424659179062
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 1.0,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 41.3811246829212,
+        "next_abs_heading_error_rad": 1.7096324661110125,
+        "estimated_along_tangent_displacement_m": -0.5726756477336685,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 1.2771926319072122,
+      "previous_state": {
+        "progress_m": 491.3843595862765,
+        "speed_mps": 43.39811525921728,
+        "heading_error_rad": -2.1514318539101613,
+        "lateral_error_m": 8.154061219176704
+      },
+      "current_state": {
+        "progress_m": 490.1071669543693,
+        "speed_mps": 41.38112468292119,
+        "heading_error_rad": -1.9433254578031465,
+        "lateral_error_m": 11.992071319475777
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 1.0,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 41.3811246829212,
+        "next_abs_heading_error_rad": 1.9714318539101614,
+        "estimated_along_tangent_displacement_m": -1.6138788544515639,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 0.19430846433317583,
+      "previous_state": {
+        "progress_m": 498.6104855373547,
+        "speed_mps": 49.274443147057134,
+        "heading_error_rad": -1.973952244897346,
+        "lateral_error_m": 8.731221356498207
+      },
+      "current_state": {
+        "progress_m": 498.4161770730215,
+        "speed_mps": 48.57807093132185,
+        "heading_error_rad": -1.705491650045855,
+        "lateral_error_m": 13.493725618631446
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 47.22807093132185,
+        "next_abs_heading_error_rad": 1.7939522448973462,
+        "estimated_along_tangent_displacement_m": -1.045196803986865,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 1.0040524740135766,
+      "previous_state": {
+        "progress_m": 498.6104855373547,
+        "speed_mps": 49.274443147057134,
+        "heading_error_rad": -2.2357516326964952,
+        "lateral_error_m": 8.731221356498207
+      },
+      "current_state": {
+        "progress_m": 497.6064330633411,
+        "speed_mps": 48.57807093132185,
+        "heading_error_rad": -1.9595896060426818,
+        "lateral_error_m": 13.16363715909094
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 47.22807093132185,
+        "next_abs_heading_error_rad": 2.055751632696495,
+        "estimated_along_tangent_displacement_m": -2.2016254060745264,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p12_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 0.18120334873941601,
+      "previous_state": {
+        "progress_m": 498.59738042176093,
+        "speed_mps": 49.274443147057134,
+        "heading_error_rad": -1.9711164467243407,
+        "lateral_error_m": 8.71794872535652
+      },
+      "current_state": {
+        "progress_m": 498.4161770730215,
+        "speed_mps": 48.57807093132185,
+        "heading_error_rad": -1.7026558518728507,
+        "lateral_error_m": 13.483493217741069
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 47.22807093132185,
+        "next_abs_heading_error_rad": 1.7911164467243408,
+        "estimated_along_tangent_displacement_m": -1.0321317838620594,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p12_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 0.9925112534307914,
+      "previous_state": {
+        "progress_m": 498.59738042176093,
+        "speed_mps": 49.274443147057134,
+        "heading_error_rad": -2.23291583452349,
+        "lateral_error_m": 8.71794872535652
+      },
+      "current_state": {
+        "progress_m": 497.60486916833014,
+        "speed_mps": 48.57807093132185,
+        "heading_error_rad": -1.9567538078696776,
+        "lateral_error_m": 13.156888035187631
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 47.22807093132185,
+        "next_abs_heading_error_rad": 2.05291583452349,
+        "estimated_along_tangent_displacement_m": -2.1897679027911905,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p12_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 0.7200805928420664,
+      "previous_state": {
+        "progress_m": 496.4539723450081,
+        "speed_mps": 49.02420485707912,
+        "heading_error_rad": -1.9014793442648772,
+        "lateral_error_m": 8.584813844288835
+      },
+      "current_state": {
+        "progress_m": 495.733891752166,
+        "speed_mps": 47.96908383279372,
+        "heading_error_rad": -1.7214793442648768,
+        "lateral_error_m": 13.327231991200103
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 46.97908383279373,
+        "next_abs_heading_error_rad": 1.7214793442648773,
+        "estimated_along_tangent_displacement_m": -0.7052192139809528,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p12_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 1.9230078527314163,
+      "previous_state": {
+        "progress_m": 496.4539723450081,
+        "speed_mps": 49.02420485707912,
+        "heading_error_rad": -2.1632787320640263,
+        "lateral_error_m": 8.584813844288835
+      },
+      "current_state": {
+        "progress_m": 494.53096449227667,
+        "speed_mps": 47.96908383279372,
+        "heading_error_rad": -1.9832787320642284,
+        "lateral_error_m": 12.979173879864529
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 46.97908383279373,
+        "next_abs_heading_error_rad": 1.9832787320640264,
+        "estimated_along_tangent_displacement_m": -1.8833198889558098,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "first_backward_step": 47,
+      "actual_backward_distance_m": 0.36265183811565294,
+      "previous_state": {
+        "progress_m": 534.912535188583,
+        "speed_mps": 31.589557360637137,
+        "heading_error_rad": 1.6606944158271943,
+        "lateral_error_m": 14.23556980287731
+      },
+      "current_state": {
+        "progress_m": 534.5498833504673,
+        "speed_mps": 30.98160957383395,
+        "heading_error_rad": 1.840694415827195,
+        "lateral_error_m": 11.24956847763629
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 29.631609573833952,
+        "next_abs_heading_error_rad": 1.4806944158271944,
+        "estimated_along_tangent_displacement_m": 0.26662536291888833,
+        "reverse_unavoidable_proxy": false
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 0.18120334873941601,
+      "previous_state": {
+        "progress_m": 498.59738042176093,
+        "speed_mps": 49.274443147057134,
+        "heading_error_rad": -1.9711164467243407,
+        "lateral_error_m": 8.71794872535652
+      },
+      "current_state": {
+        "progress_m": 498.4161770730215,
+        "speed_mps": 48.57807093132185,
+        "heading_error_rad": -1.7026558518728507,
+        "lateral_error_m": 13.483493217741069
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 47.22807093132185,
+        "next_abs_heading_error_rad": 1.7911164467243408,
+        "estimated_along_tangent_displacement_m": -1.0321317838620594,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 0.9925112534307914,
+      "previous_state": {
+        "progress_m": 498.59738042176093,
+        "speed_mps": 49.274443147057134,
+        "heading_error_rad": -2.23291583452349,
+        "lateral_error_m": 8.71794872535652
+      },
+      "current_state": {
+        "progress_m": 497.60486916833014,
+        "speed_mps": 48.57807093132185,
+        "heading_error_rad": -1.9567538078696776,
+        "lateral_error_m": 13.156888035187631
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 47.22807093132185,
+        "next_abs_heading_error_rad": 2.05291583452349,
+        "estimated_along_tangent_displacement_m": -2.1897679027911905,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "first_backward_step": 46,
+      "actual_backward_distance_m": 0.21121103212306025,
+      "previous_state": {
+        "progress_m": 530.8135473220838,
+        "speed_mps": 27.976414026201496,
+        "heading_error_rad": 1.4690256057373308,
+        "lateral_error_m": 17.955059632166588
+      },
+      "current_state": {
+        "progress_m": 530.6023362899607,
+        "speed_mps": 27.02653195607049,
+        "heading_error_rad": 1.6490256057373314,
+        "lateral_error_m": 15.260672149462852
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 26.036531956070487,
+        "next_abs_heading_error_rad": 1.2890256057373308,
+        "estimated_along_tangent_displacement_m": 0.7239639328915768,
+        "reverse_unavoidable_proxy": false
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 0.7200805928420664,
+      "previous_state": {
+        "progress_m": 496.4539723450081,
+        "speed_mps": 49.02420485707912,
+        "heading_error_rad": -1.9014793442648772,
+        "lateral_error_m": 8.584813844288835
+      },
+      "current_state": {
+        "progress_m": 495.733891752166,
+        "speed_mps": 47.96908383279372,
+        "heading_error_rad": -1.7214793442648768,
+        "lateral_error_m": 13.327231991200103
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 46.97908383279373,
+        "next_abs_heading_error_rad": 1.7214793442648773,
+        "estimated_along_tangent_displacement_m": -0.7052192139809528,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 1.9230078527314163,
+      "previous_state": {
+        "progress_m": 496.4539723450081,
+        "speed_mps": 49.02420485707912,
+        "heading_error_rad": -2.1632787320640263,
+        "lateral_error_m": 8.584813844288835
+      },
+      "current_state": {
+        "progress_m": 494.53096449227667,
+        "speed_mps": 47.96908383279372,
+        "heading_error_rad": -1.9832787320642284,
+        "lateral_error_m": 12.979173879864529
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 46.97908383279373,
+        "next_abs_heading_error_rad": 1.9832787320640264,
+        "estimated_along_tangent_displacement_m": -1.8833198889558098,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 0.18120334873941601,
+      "previous_state": {
+        "progress_m": 498.59738042176093,
+        "speed_mps": 49.274443147057134,
+        "heading_error_rad": -1.9711164467243407,
+        "lateral_error_m": 8.71794872535652
+      },
+      "current_state": {
+        "progress_m": 498.4161770730215,
+        "speed_mps": 48.57807093132185,
+        "heading_error_rad": -1.7026558518728507,
+        "lateral_error_m": 13.483493217741069
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 47.22807093132185,
+        "next_abs_heading_error_rad": 1.7911164467243408,
+        "estimated_along_tangent_displacement_m": -1.0321317838620594,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 0.9925112534307914,
+      "previous_state": {
+        "progress_m": 498.59738042176093,
+        "speed_mps": 49.274443147057134,
+        "heading_error_rad": -2.23291583452349,
+        "lateral_error_m": 8.71794872535652
+      },
+      "current_state": {
+        "progress_m": 497.60486916833014,
+        "speed_mps": 48.57807093132185,
+        "heading_error_rad": -1.9567538078696776,
+        "lateral_error_m": 13.156888035187631
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 47.22807093132185,
+        "next_abs_heading_error_rad": 2.05291583452349,
+        "estimated_along_tangent_displacement_m": -2.1897679027911905,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 0.7200805928420664,
+      "previous_state": {
+        "progress_m": 496.4539723450081,
+        "speed_mps": 49.02420485707912,
+        "heading_error_rad": -1.9014793442648772,
+        "lateral_error_m": 8.584813844288835
+      },
+      "current_state": {
+        "progress_m": 495.733891752166,
+        "speed_mps": 47.96908383279372,
+        "heading_error_rad": -1.7214793442648768,
+        "lateral_error_m": 13.327231991200103
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 46.97908383279373,
+        "next_abs_heading_error_rad": 1.7214793442648773,
+        "estimated_along_tangent_displacement_m": -0.7052192139809528,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 1.9230078527314163,
+      "previous_state": {
+        "progress_m": 496.4539723450081,
+        "speed_mps": 49.02420485707912,
+        "heading_error_rad": -2.1632787320640263,
+        "lateral_error_m": 8.584813844288835
+      },
+      "current_state": {
+        "progress_m": 494.53096449227667,
+        "speed_mps": 47.96908383279372,
+        "heading_error_rad": -1.9832787320642284,
+        "lateral_error_m": 12.979173879864529
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 46.97908383279373,
+        "next_abs_heading_error_rad": 1.9832787320640264,
+        "estimated_along_tangent_displacement_m": -1.8833198889558098,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p24_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 0.18120334873941601,
+      "previous_state": {
+        "progress_m": 498.59738042176093,
+        "speed_mps": 49.274443147057134,
+        "heading_error_rad": -1.9711164467243407,
+        "lateral_error_m": 8.71794872535652
+      },
+      "current_state": {
+        "progress_m": 498.4161770730215,
+        "speed_mps": 48.57807093132185,
+        "heading_error_rad": -1.7026558518728507,
+        "lateral_error_m": 13.483493217741069
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 47.22807093132185,
+        "next_abs_heading_error_rad": 1.7911164467243408,
+        "estimated_along_tangent_displacement_m": -1.0321317838620594,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p24_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 0.9925112534307914,
+      "previous_state": {
+        "progress_m": 498.59738042176093,
+        "speed_mps": 49.274443147057134,
+        "heading_error_rad": -2.23291583452349,
+        "lateral_error_m": 8.71794872535652
+      },
+      "current_state": {
+        "progress_m": 497.60486916833014,
+        "speed_mps": 48.57807093132185,
+        "heading_error_rad": -1.9567538078696776,
+        "lateral_error_m": 13.156888035187631
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 47.22807093132185,
+        "next_abs_heading_error_rad": 2.05291583452349,
+        "estimated_along_tangent_displacement_m": -2.1897679027911905,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p24_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps",
+      "first_backward_step": 46,
+      "actual_backward_distance_m": 0.21121103212306025,
+      "previous_state": {
+        "progress_m": 530.8135473220838,
+        "speed_mps": 27.976414026201496,
+        "heading_error_rad": 1.4690256057373308,
+        "lateral_error_m": 17.955059632166588
+      },
+      "current_state": {
+        "progress_m": 530.6023362899607,
+        "speed_mps": 27.02653195607049,
+        "heading_error_rad": 1.6490256057373314,
+        "lateral_error_m": 15.260672149462852
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 26.036531956070487,
+        "next_abs_heading_error_rad": 1.2890256057373308,
+        "estimated_along_tangent_displacement_m": 0.7239639328915768,
+        "reverse_unavoidable_proxy": false
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p24_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 0.7200805928420664,
+      "previous_state": {
+        "progress_m": 496.4539723450081,
+        "speed_mps": 49.02420485707912,
+        "heading_error_rad": -1.9014793442648772,
+        "lateral_error_m": 8.584813844288835
+      },
+      "current_state": {
+        "progress_m": 495.733891752166,
+        "speed_mps": 47.96908383279372,
+        "heading_error_rad": -1.7214793442648768,
+        "lateral_error_m": 13.327231991200103
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 46.97908383279373,
+        "next_abs_heading_error_rad": 1.7214793442648773,
+        "estimated_along_tangent_displacement_m": -0.7052192139809528,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step25.json",
+      "injection_step": 25,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p24_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 26,
+      "actual_backward_distance_m": 1.9230078527314163,
+      "previous_state": {
+        "progress_m": 496.4539723450081,
+        "speed_mps": 49.02420485707912,
+        "heading_error_rad": -2.1632787320640263,
+        "lateral_error_m": 8.584813844288835
+      },
+      "current_state": {
+        "progress_m": 494.53096449227667,
+        "speed_mps": 47.96908383279372,
+        "heading_error_rad": -1.9832787320642284,
+        "lateral_error_m": 12.979173879864529
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 46.97908383279373,
+        "next_abs_heading_error_rad": 1.9832787320640264,
+        "estimated_along_tangent_displacement_m": -1.8833198889558098,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.32491160223815996,
+      "previous_state": {
+        "progress_m": 341.65940331162005,
+        "speed_mps": 44.31376959015724,
+        "heading_error_rad": -1.8244763734248486,
+        "lateral_error_m": 9.378928187198225
+      },
+      "current_state": {
+        "progress_m": 341.3344917093819,
+        "speed_mps": 43.642200742206455,
+        "heading_error_rad": -1.644741755056066,
+        "lateral_error_m": 13.731241691418225
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 42.29220074220646,
+        "next_abs_heading_error_rad": 1.6444763734248486,
+        "estimated_along_tangent_displacement_m": -0.3113272674881476,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.4368080093354934,
+      "previous_state": {
+        "progress_m": 341.65940331162005,
+        "speed_mps": 44.31376959015724,
+        "heading_error_rad": -2.0862757612239977,
+        "lateral_error_m": 9.378928187198225
+      },
+      "current_state": {
+        "progress_m": 340.22259530228456,
+        "speed_mps": 43.642200742206455,
+        "heading_error_rad": -1.9062757612239976,
+        "lateral_error_m": 13.499671441626134
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 42.29220074220646,
+        "next_abs_heading_error_rad": 1.9062757612239978,
+        "estimated_along_tangent_displacement_m": -1.3923519313227033,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.03755604922702105,
+      "previous_state": {
+        "progress_m": 369.95849740949814,
+        "speed_mps": 53.11281790204989,
+        "heading_error_rad": -1.757936899612459,
+        "lateral_error_m": 7.350981576523852
+      },
+      "current_state": {
+        "progress_m": 369.9209413602711,
+        "speed_mps": 52.39725381253964,
+        "heading_error_rad": -1.577936899612459,
+        "lateral_error_m": 12.570800550845414
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 51.047253812539644,
+        "next_abs_heading_error_rad": 1.577936899612459,
+        "estimated_along_tangent_displacement_m": -0.036450353542891216,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.3975103132547133,
+      "previous_state": {
+        "progress_m": 369.95849740949814,
+        "speed_mps": 53.11281790204989,
+        "heading_error_rad": -2.0197362874116083,
+        "lateral_error_m": 7.350981576523852
+      },
+      "current_state": {
+        "progress_m": 368.5609870962434,
+        "speed_mps": 52.39725381253964,
+        "heading_error_rad": -1.8397362874116079,
+        "lateral_error_m": 12.383168564541041
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 51.047253812539644,
+        "next_abs_heading_error_rad": 1.8397362874116083,
+        "estimated_along_tangent_displacement_m": -1.3563748041629478,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_1p4_l_0p12_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.07103355271880218,
+      "previous_state": {
+        "progress_m": 372.5344599779685,
+        "speed_mps": 55.58633496468484,
+        "heading_error_rad": -1.7642768376813118,
+        "lateral_error_m": 7.2330947623677995
+      },
+      "current_state": {
+        "progress_m": 372.4634264252497,
+        "speed_mps": 54.858403289861414,
+        "heading_error_rad": -1.5840270628425341,
+        "lateral_error_m": 12.697957844844888
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 53.50840328986142,
+        "next_abs_heading_error_rad": 1.584276837681312,
+        "estimated_along_tangent_displacement_m": -0.07212987663634428,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_1p4_l_0p12_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.4936282168222874,
+      "previous_state": {
+        "progress_m": 372.5344599779685,
+        "speed_mps": 55.58633496468484,
+        "heading_error_rad": -2.0260762254804607,
+        "lateral_error_m": 7.2330947623677995
+      },
+      "current_state": {
+        "progress_m": 371.0408317611462,
+        "speed_mps": 54.858403289861414,
+        "heading_error_rad": -1.8458264506416833,
+        "lateral_error_m": 12.492912457674503
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 53.50840328986142,
+        "next_abs_heading_error_rad": 1.8460762254804608,
+        "estimated_along_tangent_displacement_m": -1.4544456621917408,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_1p4_l_0p12_brake_0p45",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.25159368250461966,
+      "previous_state": {
+        "progress_m": 380.20776989020794,
+        "speed_mps": 56.58554738543514,
+        "heading_error_rad": -1.7956900987559652,
+        "lateral_error_m": 6.879571873252862
+      },
+      "current_state": {
+        "progress_m": 379.9561762077033,
+        "speed_mps": 55.49261964850797,
+        "heading_error_rad": -1.615747727007846,
+        "lateral_error_m": 12.382646306308374
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 54.50261964850797,
+        "next_abs_heading_error_rad": 1.6156900987559653,
+        "estimated_along_tangent_displacement_m": -0.24460063503175392,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_1p4_l_0p12_brake_0p45",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.6883732407388266,
+      "previous_state": {
+        "progress_m": 380.20776989020794,
+        "speed_mps": 56.58554738543514,
+        "heading_error_rad": -2.0574894865551143,
+        "lateral_error_m": 6.879571873252862
+      },
+      "current_state": {
+        "progress_m": 378.5193966494691,
+        "speed_mps": 55.49261964850797,
+        "heading_error_rad": -1.8775471148069294,
+        "lateral_error_m": 12.131475766099294
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 54.50261964850797,
+        "next_abs_heading_error_rad": 1.8774894865551144,
+        "estimated_along_tangent_displacement_m": -1.6454763772779017,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.07034471408860554,
+      "previous_state": {
+        "progress_m": 372.50643101316564,
+        "speed_mps": 55.58633496462348,
+        "heading_error_rad": -1.7641518836959393,
+        "lateral_error_m": 7.234595314907648
+      },
+      "current_state": {
+        "progress_m": 372.43608629907703,
+        "speed_mps": 54.858403289800364,
+        "heading_error_rad": -1.5839021088571617,
+        "lateral_error_m": 12.699474362520789
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 53.50840328980037,
+        "next_abs_heading_error_rad": 1.5841518836959394,
+        "estimated_along_tangent_displacement_m": -0.07146132800097704,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.4929651662953347,
+      "previous_state": {
+        "progress_m": 372.50643101316564,
+        "speed_mps": 55.58633496462348,
+        "heading_error_rad": -2.0259512714950887,
+        "lateral_error_m": 7.234595314907648
+      },
+      "current_state": {
+        "progress_m": 371.0134658468703,
+        "speed_mps": 54.858403289800364,
+        "heading_error_rad": -1.8457014966563106,
+        "lateral_error_m": 12.49460540182821
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 53.50840328980037,
+        "next_abs_heading_error_rad": 1.8459512714950888,
+        "estimated_along_tangent_displacement_m": -1.453802215700742,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p45",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.28786129115599124,
+      "previous_state": {
+        "progress_m": 382.58312719398765,
+        "speed_mps": 57.36168661218487,
+        "heading_error_rad": -1.8016103050850456,
+        "lateral_error_m": 6.7946016979119355
+      },
+      "current_state": {
+        "progress_m": 382.29526590283166,
+        "speed_mps": 55.274878179123945,
+        "heading_error_rad": -1.621937450649378,
+        "lateral_error_m": 12.272350252690401
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 1.0,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 55.274878179123945,
+        "next_abs_heading_error_rad": 1.6216103050850457,
+        "estimated_along_tangent_displacement_m": -0.28075278946316273,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p45",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.7186499890582354,
+      "previous_state": {
+        "progress_m": 382.58312719398765,
+        "speed_mps": 57.36168661218487,
+        "heading_error_rad": -2.0634096928841945,
+        "lateral_error_m": 6.7946016979119355
+      },
+      "current_state": {
+        "progress_m": 380.8644772049294,
+        "speed_mps": 55.274878179123945,
+        "heading_error_rad": -1.8837715104084003,
+        "lateral_error_m": 12.047213851329568
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 1.0,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 55.274878179123945,
+        "next_abs_heading_error_rad": 1.8834096928841946,
+        "estimated_along_tangent_displacement_m": -1.6999589138953266,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.07134516231980115,
+      "previous_state": {
+        "progress_m": 372.5470585558846,
+        "speed_mps": 55.58633496468484,
+        "heading_error_rad": -1.7643333637573144,
+        "lateral_error_m": 7.232424569385289
+      },
+      "current_state": {
+        "progress_m": 372.4757133935648,
+        "speed_mps": 54.858403289861414,
+        "heading_error_rad": -1.5840835889185367,
+        "lateral_error_m": 12.697280421826447
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 53.50840328986142,
+        "next_abs_heading_error_rad": 1.5843333637573145,
+        "estimated_along_tangent_displacement_m": -0.07243231104614967,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.4939281532289783,
+      "previous_state": {
+        "progress_m": 372.5470585558846,
+        "speed_mps": 55.58633496468484,
+        "heading_error_rad": -2.0261327515564633,
+        "lateral_error_m": 7.232424569385289
+      },
+      "current_state": {
+        "progress_m": 371.0531304026556,
+        "speed_mps": 54.858403289861414,
+        "heading_error_rad": -1.8458829767176856,
+        "lateral_error_m": 12.492155224755301
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 53.50840328986142,
+        "next_abs_heading_error_rad": 1.8461327515564634,
+        "estimated_along_tangent_displacement_m": -1.4547367339247188,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p45",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.25189261159107446,
+      "previous_state": {
+        "progress_m": 380.22009393480977,
+        "speed_mps": 56.58554738543514,
+        "heading_error_rad": -1.795743677377533,
+        "lateral_error_m": 6.879355432351286
+      },
+      "current_state": {
+        "progress_m": 379.9682013232187,
+        "speed_mps": 55.49261964850797,
+        "heading_error_rad": -1.615801305629414,
+        "lateral_error_m": 12.382417298968797
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 54.50261964850797,
+        "next_abs_heading_error_rad": 1.615743677377533,
+        "estimated_along_tangent_displacement_m": -0.24489235797974251,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p45",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.6886587792747036,
+      "previous_state": {
+        "progress_m": 380.22009393480977,
+        "speed_mps": 56.58554738543514,
+        "heading_error_rad": -2.057543065176682,
+        "lateral_error_m": 6.879355432351286
+      },
+      "current_state": {
+        "progress_m": 378.53143515553506,
+        "speed_mps": 55.49261964850797,
+        "heading_error_rad": -1.8776006934284972,
+        "lateral_error_m": 12.131170889781641
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 54.50261964850797,
+        "next_abs_heading_error_rad": 1.8775430651766822,
+        "estimated_along_tangent_displacement_m": -1.6457547660667804,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p24_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.07034471408860554,
+      "previous_state": {
+        "progress_m": 372.50643101316564,
+        "speed_mps": 55.58633496462348,
+        "heading_error_rad": -1.7641518836959393,
+        "lateral_error_m": 7.234595314907648
+      },
+      "current_state": {
+        "progress_m": 372.43608629907703,
+        "speed_mps": 54.858403289800364,
+        "heading_error_rad": -1.5839021088571617,
+        "lateral_error_m": 12.699474362520789
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 53.50840328980037,
+        "next_abs_heading_error_rad": 1.5841518836959394,
+        "estimated_along_tangent_displacement_m": -0.07146132800097704,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p24_brake_0p25",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.4929651662953347,
+      "previous_state": {
+        "progress_m": 372.50643101316564,
+        "speed_mps": 55.58633496462348,
+        "heading_error_rad": -2.0259512714950887,
+        "lateral_error_m": 7.234595314907648
+      },
+      "current_state": {
+        "progress_m": 371.0134658468703,
+        "speed_mps": 54.858403289800364,
+        "heading_error_rad": -1.8457014966563106,
+        "lateral_error_m": 12.49460540182821
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 53.50840328980037,
+        "next_abs_heading_error_rad": 1.8459512714950888,
+        "estimated_along_tangent_displacement_m": -1.453802215700742,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p24_brake_0p45",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.28786129115599124,
+      "previous_state": {
+        "progress_m": 382.58312719398765,
+        "speed_mps": 57.36168661218487,
+        "heading_error_rad": -1.8016103050850456,
+        "lateral_error_m": 6.7946016979119355
+      },
+      "current_state": {
+        "progress_m": 382.29526590283166,
+        "speed_mps": 55.274878179123945,
+        "heading_error_rad": -1.621937450649378,
+        "lateral_error_m": 12.272350252690401
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 1.0,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 55.274878179123945,
+        "next_abs_heading_error_rad": 1.6216103050850457,
+        "estimated_along_tangent_displacement_m": -0.28075278946316273,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A01-Race",
+      "profile": "recovery_h_2p2_l_0p24_brake_0p45",
+      "case_key": "A01-Race:A01-Race:anchor_01:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.7186499890582354,
+      "previous_state": {
+        "progress_m": 382.58312719398765,
+        "speed_mps": 57.36168661218487,
+        "heading_error_rad": -2.0634096928841945,
+        "lateral_error_m": 6.7946016979119355
+      },
+      "current_state": {
+        "progress_m": 380.8644772049294,
+        "speed_mps": 55.274878179123945,
+        "heading_error_rad": -1.8837715104084003,
+        "lateral_error_m": 12.047213851329568
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 1.0,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 55.274878179123945,
+        "next_abs_heading_error_rad": 1.8834096928841946,
+        "estimated_along_tangent_displacement_m": -1.6999589138953266,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.48649479870584855,
+      "previous_state": {
+        "progress_m": 707.9502755891899,
+        "speed_mps": 44.9832598579112,
+        "heading_error_rad": -1.8607736916011839,
+        "lateral_error_m": 9.544862963877721
+      },
+      "current_state": {
+        "progress_m": 707.4637807904841,
+        "speed_mps": 44.308343558621644,
+        "heading_error_rad": -1.6807868550905576,
+        "lateral_error_m": 13.94891042701824
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 42.95834355862165,
+        "next_abs_heading_error_rad": 1.680773691601184,
+        "estimated_along_tangent_displacement_m": -0.4714927467920654,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "captured_p25_guardrail",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.6095997069465966,
+      "previous_state": {
+        "progress_m": 707.9502755891899,
+        "speed_mps": 44.9832598579112,
+        "heading_error_rad": -2.122573079400333,
+        "lateral_error_m": 9.544862963877721
+      },
+      "current_state": {
+        "progress_m": 706.3406758822433,
+        "speed_mps": 44.308343558621644,
+        "heading_error_rad": -1.9425730794004465,
+        "lateral_error_m": 13.673078975555713
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 42.95834355862165,
+        "next_abs_heading_error_rad": 1.942573079400333,
+        "estimated_along_tangent_displacement_m": -1.5605536547348566,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.3383819510302146,
+      "previous_state": {
+        "progress_m": 760.6881886388222,
+        "speed_mps": 55.20820155122142,
+        "heading_error_rad": -1.8134305846178076,
+        "lateral_error_m": 7.76973102613687
+      },
+      "current_state": {
+        "progress_m": 760.349806687792,
+        "speed_mps": 54.48216054346531,
+        "heading_error_rad": -1.6332306972566735,
+        "lateral_error_m": 13.207272808494897
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 53.13216054346532,
+        "next_abs_heading_error_rad": 1.6334305846178077,
+        "estimated_along_tangent_displacement_m": -0.3325717953404086,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "live_defaults_reference",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.7341536566658533,
+      "previous_state": {
+        "progress_m": 760.6881886388222,
+        "speed_mps": 55.20820155122142,
+        "heading_error_rad": -2.0752299724169565,
+        "lateral_error_m": 7.76973102613687
+      },
+      "current_state": {
+        "progress_m": 758.9540349821564,
+        "speed_mps": 54.48216054346531,
+        "heading_error_rad": -1.8950300850558186,
+        "lateral_error_m": 12.933905291719604
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 53.13216054346532,
+        "next_abs_heading_error_rad": 1.8952299724169566,
+        "estimated_along_tangent_displacement_m": -1.6937046597032368,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p12_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.3802962449169627,
+      "previous_state": {
+        "progress_m": 761.6538741254932,
+        "speed_mps": 59.40298375501824,
+        "heading_error_rad": -1.816125763304046,
+        "lateral_error_m": 7.754330881265696
+      },
+      "current_state": {
+        "progress_m": 761.2735778805762,
+        "speed_mps": 58.65596883624315,
+        "heading_error_rad": -1.6359326775991356,
+        "lateral_error_m": 13.607438659150226
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 57.30596883624315,
+        "next_abs_heading_error_rad": 1.636125763304046,
+        "estimated_along_tangent_displacement_m": -0.3741104195279804,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p12_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.8848566729941467,
+      "previous_state": {
+        "progress_m": 761.6538741254932,
+        "speed_mps": 59.40298375501824,
+        "heading_error_rad": -2.077925151103195,
+        "lateral_error_m": 7.754330881265696
+      },
+      "current_state": {
+        "progress_m": 759.769017452499,
+        "speed_mps": 58.65596883624315,
+        "heading_error_rad": -1.897931992675938,
+        "lateral_error_m": 13.30906425968033
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 57.30596883624315,
+        "next_abs_heading_error_rad": 1.897925151103195,
+        "estimated_along_tangent_displacement_m": -1.8413865805604812,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p12_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.1636348568675885,
+      "previous_state": {
+        "progress_m": 750.5881023105972,
+        "speed_mps": 57.7782147566775,
+        "heading_error_rad": -1.7796706298388754,
+        "lateral_error_m": 8.0015184090273
+      },
+      "current_state": {
+        "progress_m": 750.4244674537296,
+        "speed_mps": 56.679323682894115,
+        "heading_error_rad": -1.5996706298388754,
+        "lateral_error_m": 13.667088191946004
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 55.68932368289411,
+        "next_abs_heading_error_rad": 1.5996706298388754,
+        "estimated_along_tangent_displacement_m": -0.16077669805801442,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p12_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.6244165154830625,
+      "previous_state": {
+        "progress_m": 750.5881023105972,
+        "speed_mps": 57.7782147566775,
+        "heading_error_rad": -2.0414700176380247,
+        "lateral_error_m": 8.0015184090273
+      },
+      "current_state": {
+        "progress_m": 748.9636857951141,
+        "speed_mps": 56.679323682894115,
+        "heading_error_rad": -1.861470017637911,
+        "lateral_error_m": 13.431786651271176
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 55.68932368289411,
+        "next_abs_heading_error_rad": 1.8614700176380248,
+        "estimated_along_tangent_displacement_m": -1.5960433211974636,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.3802962449169627,
+      "previous_state": {
+        "progress_m": 761.6538741254932,
+        "speed_mps": 59.40298375501824,
+        "heading_error_rad": -1.816125763304046,
+        "lateral_error_m": 7.754330881265696
+      },
+      "current_state": {
+        "progress_m": 761.2735778805762,
+        "speed_mps": 58.65596883624315,
+        "heading_error_rad": -1.6359326775991356,
+        "lateral_error_m": 13.607438659150226
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 57.30596883624315,
+        "next_abs_heading_error_rad": 1.636125763304046,
+        "estimated_along_tangent_displacement_m": -0.3741104195279804,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.8848566729941467,
+      "previous_state": {
+        "progress_m": 761.6538741254932,
+        "speed_mps": 59.40298375501824,
+        "heading_error_rad": -2.077925151103195,
+        "lateral_error_m": 7.754330881265696
+      },
+      "current_state": {
+        "progress_m": 759.769017452499,
+        "speed_mps": 58.65596883624315,
+        "heading_error_rad": -1.897931992675938,
+        "lateral_error_m": 13.30906425968033
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 57.30596883624315,
+        "next_abs_heading_error_rad": 1.897925151103195,
+        "estimated_along_tangent_displacement_m": -1.8413865805604812,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.1636348568675885,
+      "previous_state": {
+        "progress_m": 750.5881023105972,
+        "speed_mps": 57.7782147566775,
+        "heading_error_rad": -1.7796706298388754,
+        "lateral_error_m": 8.0015184090273
+      },
+      "current_state": {
+        "progress_m": 750.4244674537296,
+        "speed_mps": 56.679323682894115,
+        "heading_error_rad": -1.5996706298388754,
+        "lateral_error_m": 13.667088191946004
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 55.68932368289411,
+        "next_abs_heading_error_rad": 1.5996706298388754,
+        "estimated_along_tangent_displacement_m": -0.16077669805801442,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_1p4_l_0p24_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.6244165154830625,
+      "previous_state": {
+        "progress_m": 750.5881023105972,
+        "speed_mps": 57.7782147566775,
+        "heading_error_rad": -2.0414700176380247,
+        "lateral_error_m": 8.0015184090273
+      },
+      "current_state": {
+        "progress_m": 748.9636857951141,
+        "speed_mps": 56.679323682894115,
+        "heading_error_rad": -1.861470017637911,
+        "lateral_error_m": 13.431786651271176
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 55.68932368289411,
+        "next_abs_heading_error_rad": 1.8614700176380248,
+        "estimated_along_tangent_displacement_m": -1.5960433211974636,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.3802962449169627,
+      "previous_state": {
+        "progress_m": 761.6538741254932,
+        "speed_mps": 59.40298375501824,
+        "heading_error_rad": -1.816125763304046,
+        "lateral_error_m": 7.754330881265696
+      },
+      "current_state": {
+        "progress_m": 761.2735778805762,
+        "speed_mps": 58.65596883624315,
+        "heading_error_rad": -1.6359326775991356,
+        "lateral_error_m": 13.607438659150226
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 57.30596883624315,
+        "next_abs_heading_error_rad": 1.636125763304046,
+        "estimated_along_tangent_displacement_m": -0.3741104195279804,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.8848566729941467,
+      "previous_state": {
+        "progress_m": 761.6538741254932,
+        "speed_mps": 59.40298375501824,
+        "heading_error_rad": -2.077925151103195,
+        "lateral_error_m": 7.754330881265696
+      },
+      "current_state": {
+        "progress_m": 759.769017452499,
+        "speed_mps": 58.65596883624315,
+        "heading_error_rad": -1.897931992675938,
+        "lateral_error_m": 13.30906425968033
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 57.30596883624315,
+        "next_abs_heading_error_rad": 1.897925151103195,
+        "estimated_along_tangent_displacement_m": -1.8413865805604812,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.1636348568675885,
+      "previous_state": {
+        "progress_m": 750.5881023105972,
+        "speed_mps": 57.7782147566775,
+        "heading_error_rad": -1.7796706298388754,
+        "lateral_error_m": 8.0015184090273
+      },
+      "current_state": {
+        "progress_m": 750.4244674537296,
+        "speed_mps": 56.679323682894115,
+        "heading_error_rad": -1.5996706298388754,
+        "lateral_error_m": 13.667088191946004
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 55.68932368289411,
+        "next_abs_heading_error_rad": 1.5996706298388754,
+        "estimated_along_tangent_displacement_m": -0.16077669805801442,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p12_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.6244165154830625,
+      "previous_state": {
+        "progress_m": 750.5881023105972,
+        "speed_mps": 57.7782147566775,
+        "heading_error_rad": -2.0414700176380247,
+        "lateral_error_m": 8.0015184090273
+      },
+      "current_state": {
+        "progress_m": 748.9636857951141,
+        "speed_mps": 56.679323682894115,
+        "heading_error_rad": -1.861470017637911,
+        "lateral_error_m": 13.431786651271176
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 55.68932368289411,
+        "next_abs_heading_error_rad": 1.8614700176380248,
+        "estimated_along_tangent_displacement_m": -1.5960433211974636,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p24_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.3802962449169627,
+      "previous_state": {
+        "progress_m": 761.6538741254932,
+        "speed_mps": 59.40298375501824,
+        "heading_error_rad": -1.816125763304046,
+        "lateral_error_m": 7.754330881265696
+      },
+      "current_state": {
+        "progress_m": 761.2735778805762,
+        "speed_mps": 58.65596883624315,
+        "heading_error_rad": -1.6359326775991356,
+        "lateral_error_m": 13.607438659150226
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 57.30596883624315,
+        "next_abs_heading_error_rad": 1.636125763304046,
+        "estimated_along_tangent_displacement_m": -0.3741104195279804,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p24_brake_0p25",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.8848566729941467,
+      "previous_state": {
+        "progress_m": 761.6538741254932,
+        "speed_mps": 59.40298375501824,
+        "heading_error_rad": -2.077925151103195,
+        "lateral_error_m": 7.754330881265696
+      },
+      "current_state": {
+        "progress_m": 759.769017452499,
+        "speed_mps": 58.65596883624315,
+        "heading_error_rad": -1.897931992675938,
+        "lateral_error_m": 13.30906425968033
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.25,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 57.30596883624315,
+        "next_abs_heading_error_rad": 1.897925151103195,
+        "estimated_along_tangent_displacement_m": -1.8413865805604812,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p24_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 0.1636348568675885,
+      "previous_state": {
+        "progress_m": 750.5881023105972,
+        "speed_mps": 57.7782147566775,
+        "heading_error_rad": -1.7796706298388754,
+        "lateral_error_m": 8.0015184090273
+      },
+      "current_state": {
+        "progress_m": 750.4244674537296,
+        "speed_mps": 56.679323682894115,
+        "heading_error_rad": -1.5996706298388754,
+        "lateral_error_m": 13.667088191946004
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 55.68932368289411,
+        "next_abs_heading_error_rad": 1.5996706298388754,
+        "estimated_along_tangent_displacement_m": -0.16077669805801442,
+        "reverse_unavoidable_proxy": true
+      }
+    },
+    {
+      "report": "eval_results\\hybrid_rollouts\\hybrid_recovery_boundary_comparison_step70.json",
+      "injection_step": 70,
+      "map": "A07-Race",
+      "profile": "recovery_h_2p2_l_0p24_brake_0p45",
+      "case_key": "A07-Race:A07-Race:anchor_02:boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "disturbance": "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps",
+      "first_backward_step": 71,
+      "actual_backward_distance_m": 1.6244165154830625,
+      "previous_state": {
+        "progress_m": 750.5881023105972,
+        "speed_mps": 57.7782147566775,
+        "heading_error_rad": -2.0414700176380247,
+        "lateral_error_m": 8.0015184090273
+      },
+      "current_state": {
+        "progress_m": 748.9636857951141,
+        "speed_mps": 56.679323682894115,
+        "heading_error_rad": -1.861470017637911,
+        "lateral_error_m": 13.431786651271176
+      },
+      "actual_command": {
+        "steering": 1.0,
+        "throttle": 0.0,
+        "brake": 0.45,
+        "recovery": true
+      },
+      "feasibility": {
+        "next_speed_mps": 55.68932368289411,
+        "next_abs_heading_error_rad": 1.8614700176380248,
+        "estimated_along_tangent_displacement_m": -1.5960433211974636,
+        "reverse_unavoidable_proxy": true
+      }
+    }
+  ],
+  "overall": {
+    "event_count": 76,
+    "reverse_unavoidable_proxy_count": 71,
+    "reverse_unavoidable_proxy_rate": 0.9342105263157895,
+    "mean_estimated_authority_displacement_m": -0.9213179115865975,
+    "min_estimated_authority_displacement_m": -2.2016254060745264,
+    "max_estimated_authority_displacement_m": 0.7239639328915768,
+    "mean_actual_backward_distance_m": 0.9218410359811035,
+    "max_actual_backward_distance_m": 1.9230078527314163
+  },
+  "by_disturbance": {
+    "boundary_lateral_plus_8m_heading_minus_105deg_speed_minus_4mps": {
+      "event_count": 33,
+      "reverse_unavoidable_proxy_count": 31,
+      "reverse_unavoidable_proxy_rate": 0.9393939393939394,
+      "mean_estimated_authority_displacement_m": -0.37376992692578825,
+      "min_estimated_authority_displacement_m": -1.045196803986865,
+      "max_estimated_authority_displacement_m": 0.4782225159717757,
+      "mean_actual_backward_distance_m": 0.2836581019844745,
+      "max_actual_backward_distance_m": 0.7200805928420664
+    },
+    "boundary_lateral_plus_8m_heading_minus_120deg_speed_minus_4mps": {
+      "event_count": 40,
+      "reverse_unavoidable_proxy_count": 40,
+      "reverse_unavoidable_proxy_rate": 1.0,
+      "mean_estimated_authority_displacement_m": -1.4850076730183106,
+      "min_estimated_authority_displacement_m": -2.2016254060745264,
+      "max_estimated_authority_displacement_m": -0.6609053143484486,
+      "mean_actual_backward_distance_m": 1.4978531866678608,
+      "max_actual_backward_distance_m": 1.9230078527314163
+    },
+    "boundary_lateral_plus_8m_heading_minus_90deg_speed_minus_4mps": {
+      "event_count": 3,
+      "reverse_unavoidable_proxy_count": 0,
+      "reverse_unavoidable_proxy_rate": 0.0,
+      "mean_estimated_authority_displacement_m": 0.5715177429006807,
+      "min_estimated_authority_displacement_m": 0.26662536291888833,
+      "max_estimated_authority_displacement_m": 0.7239639328915768,
+      "mean_actual_backward_distance_m": 0.26169130078725783,
+      "max_actual_backward_distance_m": 0.36265183811565294
+    }
+  },
+  "by_injection_step": {
+    "25": {
+      "event_count": 36,
+      "reverse_unavoidable_proxy_count": 31,
+      "reverse_unavoidable_proxy_rate": 0.8611111111111112,
+      "mean_estimated_authority_displacement_m": -0.9202679659956341,
+      "min_estimated_authority_displacement_m": -2.2016254060745264,
+      "max_estimated_authority_displacement_m": 0.7239639328915768,
+      "mean_actual_backward_distance_m": 0.8980997157143749,
+      "max_actual_backward_distance_m": 1.9230078527314163
+    },
+    "70": {
+      "event_count": 40,
+      "reverse_unavoidable_proxy_count": 40,
+      "reverse_unavoidable_proxy_rate": 1.0,
+      "mean_estimated_authority_displacement_m": -0.9222628626184642,
+      "min_estimated_authority_displacement_m": -1.8413865805604812,
+      "max_estimated_authority_displacement_m": -0.036450353542891216,
+      "mean_actual_backward_distance_m": 0.9432082242211592,
+      "max_actual_backward_distance_m": 1.8848566729941467
+    }
+  },
+  "interpretation": {
+    "diagnostic_only": true,
+    "historical_metrics_unchanged": true,
+    "next_action": "use feasibility evidence to decide whether earlier trajectory shaping is required; do not relax continuity"
+  }
+}

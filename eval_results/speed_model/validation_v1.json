@@ -1,0 +1,179 @@
+{
+ "folds": [
+  {
+   "held_out_maps": [
+    "D02-Race",
+    "C05-Endurance",
+    "C14-Endurance",
+    "A04-Acrobatic",
+    "B12-Race",
+    "B06-Obstacle",
+    "A10-Acrobatic",
+    "C01-Race",
+    "D05-Race",
+    "E03-Endurance",
+    "C11-Race"
+   ],
+   "mlp": {
+    "mae_mps": 11.72,
+    "r": 0.849
+   },
+   "linear": {
+    "mae_mps": 19.59,
+    "r": 0.556
+   },
+   "hand_rule": {
+    "mae_mps": 25.34,
+    "r": 0.336
+   }
+  },
+  {
+   "held_out_maps": [
+    "A13-Race",
+    "A05-Race",
+    "B15-Race",
+    "A02-Race",
+    "D15-Endurance",
+    "C03-Acrobatic",
+    "D14-Endurance",
+    "D13-Race",
+    "B01-Race",
+    "A06-Obstacle",
+    "B03-Race"
+   ],
+   "mlp": {
+    "mae_mps": 9.31,
+    "r": 0.851
+   },
+   "linear": {
+    "mae_mps": 22.38,
+    "r": 0.514
+   },
+   "hand_rule": {
+    "mae_mps": 16.91,
+    "r": 0.468
+   }
+  },
+  {
+   "held_out_maps": [
+    "B08-Endurance",
+    "C15-Speed",
+    "B11-Race",
+    "E01-Obstacle",
+    "B09-Acrobatic",
+    "D01-endurance",
+    "D08-Speed",
+    "A11-Race",
+    "A14-Race",
+    "B02-Race",
+    "C08-Obstacle"
+   ],
+   "mlp": {
+    "mae_mps": 14.31,
+    "r": 0.718
+   },
+   "linear": {
+    "mae_mps": 23.71,
+    "r": 0.511
+   },
+   "hand_rule": {
+    "mae_mps": 51.29,
+    "r": 0.254
+   }
+  },
+  {
+   "held_out_maps": [
+    "A12-Speed",
+    "C12-Obstacle",
+    "A03-Race",
+    "D10-Race",
+    "D12-Speed",
+    "C07-Race",
+    "E02-Endurance",
+    "D09-obstacle",
+    "A08-Endurance",
+    "C06-Speed"
+   ],
+   "mlp": {
+    "mae_mps": 10.54,
+    "r": 0.816
+   },
+   "linear": {
+    "mae_mps": 17.29,
+    "r": 0.584
+   },
+   "hand_rule": {
+    "mae_mps": 33.32,
+    "r": 0.369
+   }
+  },
+  {
+   "held_out_maps": [
+    "B14-Speed",
+    "C04-Race",
+    "B10-Speed",
+    "A07-Race",
+    "B05-Race",
+    "A01-Race",
+    "C09-Race",
+    "D11-Acrobatic",
+    "D03-Acrobatic",
+    "D06-Obstacle"
+   ],
+   "mlp": {
+    "mae_mps": 12.8,
+    "r": 0.795
+   },
+   "linear": {
+    "mae_mps": 18.54,
+    "r": 0.703
+   },
+   "hand_rule": {
+    "mae_mps": 43.74,
+    "r": 0.214
+   }
+  }
+ ],
+ "feature_names": [
+  "abs_curvature",
+  "max_abs_curvature_ahead_0_15",
+  "max_abs_curvature_ahead_15_40",
+  "max_abs_curvature_ahead_40_80",
+  "max_abs_curvature_ahead_80_140",
+  "max_abs_curvature_ahead_140_220",
+  "max_abs_curvature_behind_0_40",
+  "max_abs_curvature_behind_40_120",
+  "slope_-5_5",
+  "slope_0_30",
+  "slope_30_80",
+  "vertical_curvature",
+  "min_vertical_curvature_ahead_50",
+  "in_jump",
+  "jump_speed",
+  "distance_to_next_jump",
+  "next_jump_speed",
+  "distance_from_start"
+ ],
+ "cv_mlp": {
+  "mae_mps": 11.736,
+  "r": 0.806
+ },
+ "cv_linear": {
+  "mae_mps": 20.302,
+  "r": 0.574
+ },
+ "cv_hand_rule": {
+  "mae_mps": 34.12,
+  "r": 0.328
+ },
+ "test_once": {
+  "mlp": {
+   "mae_mps": 10.25,
+   "r": 0.84
+  },
+  "hand_rule": {
+   "mae_mps": 31.06,
+   "r": 0.206
+  }
+ }
+}

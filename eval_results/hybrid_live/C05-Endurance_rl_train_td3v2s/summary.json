@@ -1,0 +1,95 @@
+{
+  "track": "C05-Endurance",
+  "controller": "purepursuit",
+  "speed_model": "eval_results\\speed_model\\speed_model_v1.pt",
+  "speed_scale": 1.0,
+  "top_speed_mps": 70.0,
+  "gravity_mps2": 24.9,
+  "range_sensor": "eval_results\\range_sensor\\footprints_v1.npz",
+  "residual": "eval_results/residual_rl/td3_v2/final.pt",
+  "residual_config": {
+    "max_steering_delta": 0.25,
+    "max_target_speed_delta_mps": 8.0,
+    "jump_floor_shield": true,
+    "airborne_shield": true
+  },
+  "grip_model": "eval_results\\grip_model\\grip_model_v1.json",
+  "grip_risk": 0.2,
+  "centerline": "C05-Endurance_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "speed_caps": [],
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 192.9187164134202,
+      "end_m": 224.41647801828813,
+      "reference_horizontal_speed_mps": 43.7,
+      "required_speed_mps": 43.7
+    },
+    {
+      "start_m": 334.410233136104,
+      "end_m": 391.9090871060843,
+      "reference_horizontal_speed_mps": 53.7,
+      "required_speed_mps": 53.7
+    },
+    {
+      "start_m": 768.383835286812,
+      "end_m": 807.8829343914249,
+      "reference_horizontal_speed_mps": 57.57,
+      "required_speed_mps": 57.57
+    },
+    {
+      "start_m": 1916.3589189093695,
+      "end_m": 1965.8555733360558,
+      "reference_horizontal_speed_mps": 77.12,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 1976.3554236229204,
+      "end_m": 2104.347612454313,
+      "reference_horizontal_speed_mps": 69.61,
+      "required_speed_mps": 69.61
+    },
+    {
+      "start_m": 4847.7552400039,
+      "end_m": 4901.754010496218,
+      "reference_horizontal_speed_mps": 53.02,
+      "required_speed_mps": 53.02
+    },
+    {
+      "start_m": 5280.727249453844,
+      "end_m": 5318.226470463969,
+      "reference_horizontal_speed_mps": 59.89,
+      "required_speed_mps": 59.89
+    },
+    {
+      "start_m": 6479.200462314741,
+      "end_m": 6655.692472229222,
+      "reference_horizontal_speed_mps": 75.15,
+      "required_speed_mps": 70.0
+    }
+  ],
+  "runs": [
+    {
+      "finished": false,
+      "termination": "Stuck_Cutoff_2s",
+      "race_time_s": null,
+      "completion_pct": 8.9,
+      "actions": 537,
+      "steps": 537,
+      "impact_suspects": 1,
+      "recovery_steps": 108,
+      "reversals": 3,
+      "slip_steps": 3,
+      "residual_active_steps": 378,
+      "max_progress_m": 798.57,
+      "centerline_length_m": 9073.13,
+      "run": 1,
+      "rl_transitions": 537,
+      "rl_return": 60.414
+    }
+  ],
+  "finishes": "0/1"
+}

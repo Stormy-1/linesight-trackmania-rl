@@ -1,0 +1,613 @@
+{
+  "scope": "offline_bounded_speed_profile_candidate_evaluation",
+  "controller_defaults_modified": false,
+  "trackmania_launched": false,
+  "training_started": false,
+  "azure_started": false,
+  "checkpoints_loaded": false,
+  "candidate_profiles_are_descriptive_only": true,
+  "centerline": {
+    "length_m": 128.4234192322127,
+    "points": 61
+  },
+  "evidence_summary": {
+    "observed_actual_speed_p25_mps": 68.70849323272705,
+    "observed_actual_speed_p50_mps": 74.62881278991699,
+    "observed_actual_speed_p75_mps": 79.45013046264648,
+    "observed_nominal_target_p25_mps": 12.0,
+    "observed_nominal_target_p50_mps": 12.0,
+    "observed_nominal_target_p75_mps": 69.99994215466207,
+    "observed_absolute_curvature_p50": 0.36643003043670674
+  },
+  "profiles": [
+    {
+      "name": "live_defaults_reference",
+      "role": "reference",
+      "description": "Current ConservativeControllerConfig defaults; included for comparison only.",
+      "config": {
+        "lookahead_m": 18.0,
+        "lookahead_speed_gain_m_per_mps": 0.25,
+        "heading_gain": 1.1,
+        "lateral_gain": 0.08,
+        "max_speed_mps": 70.0,
+        "min_speed_mps": 12.0,
+        "curvature_gain": 28.0,
+        "throttle_speed_gain": 0.08,
+        "recovery_lateral_limit_m": 8.0,
+        "recovery_heading_limit_rad": 0.9599310885968813
+      },
+      "scenarios": [
+        {
+          "name": "nominal_centerline_start",
+          "completion": {
+            "finished": true,
+            "elevation_tolerant_finished": true,
+            "termination_reason": "finished",
+            "elapsed_s": 4.1000000000000005
+          },
+          "progress": {
+            "progress_gain_m": 128.4234192322127,
+            "final_progress_m": 128.4234192322127,
+            "track_length_m": 128.4234192322127,
+            "progress_fraction": 1.0
+          },
+          "lateral_error": {
+            "mean_abs_m": 2.011245139247509,
+            "max_abs_m": 4.601770798983572,
+            "final_abs_m": 2.7470824495329107
+          },
+          "heading_error": {
+            "mean_abs_rad": 0.1969029947012078,
+            "max_abs_rad": 0.4468052682405621,
+            "final_abs_rad": 0.20031298633951877
+          },
+          "recovery": {
+            "samples": 0,
+            "rate": 0.0,
+            "first_recovery": null
+          },
+          "speed_target_behavior": {
+            "mean_actual_speed_mps": 30.04669833396313,
+            "mean_target_speed_mps": 47.78310307022613,
+            "mean_actual_minus_target_mps": -17.736404736263,
+            "mean_abs_actual_minus_target_mps": 18.182350559883833,
+            "fraction_actual_above_target": 0.0975609756097561,
+            "target_min_mps": 29.85337655362969,
+            "target_max_mps": 70.0
+          }
+        },
+        {
+          "name": "off_center_recovery_start",
+          "completion": {
+            "finished": true,
+            "elevation_tolerant_finished": true,
+            "termination_reason": "finished",
+            "elapsed_s": 4.6000000000000005
+          },
+          "progress": {
+            "progress_gain_m": 123.18785277533475,
+            "final_progress_m": 128.4234192322127,
+            "track_length_m": 128.4234192322127,
+            "progress_fraction": 1.0
+          },
+          "lateral_error": {
+            "mean_abs_m": 2.937586394271285,
+            "max_abs_m": 10.64599047550104,
+            "final_abs_m": 2.813406519957326
+          },
+          "heading_error": {
+            "mean_abs_rad": 0.2949114530203807,
+            "max_abs_rad": 0.7141034562968653,
+            "final_abs_rad": 0.21100292255812558
+          },
+          "recovery": {
+            "samples": 4,
+            "rate": 0.08695652173913043,
+            "first_recovery": {
+              "kind": "recovery_completion",
+              "reason": "tracking_rejoined",
+              "step_index": 4,
+              "timestamp_s": 0.4,
+              "progress_m": 9.490066719071882,
+              "lateral_error_m": -7.861860672664415,
+              "heading_error_rad": -0.6232367292544314,
+              "horizontal_distance_to_centerline_m": 7.861860672664415,
+              "elevation_error_m": 0.0
+            }
+          },
+          "speed_target_behavior": {
+            "mean_actual_speed_mps": 26.862769267452034,
+            "mean_target_speed_mps": 48.814205984072466,
+            "mean_actual_minus_target_mps": -21.95143671662043,
+            "mean_abs_actual_minus_target_mps": 22.172859523171613,
+            "fraction_actual_above_target": 0.08695652173913043,
+            "target_min_mps": 29.85337655362969,
+            "target_max_mps": 70.0
+          }
+        }
+      ],
+      "summary": {
+        "completion": {
+          "finished_scenarios": 2,
+          "scenario_count": 2,
+          "completion_rate": 1.0
+        },
+        "progress": {
+          "mean_progress_gain_m": 125.80563600377371,
+          "mean_final_progress_m": 128.4234192322127,
+          "mean_progress_fraction": 1.0
+        },
+        "lateral_error": {
+          "mean_of_scenario_mean_abs_m": 2.474415766759397,
+          "worst_max_abs_m": 10.64599047550104
+        },
+        "heading_error": {
+          "mean_of_scenario_mean_abs_rad": 0.24590722386079425,
+          "worst_max_abs_rad": 0.7141034562968653
+        },
+        "recovery": {
+          "total_samples": 4,
+          "mean_rate": 0.043478260869565216,
+          "scenarios_with_recovery": 1
+        },
+        "speed_target_behavior": {
+          "mean_actual_speed_mps": 28.45473380070758,
+          "mean_target_speed_mps": 48.298654527149296,
+          "mean_actual_minus_target_mps": -19.843920726441716,
+          "mean_abs_actual_minus_target_mps": 20.177605041527723,
+          "mean_fraction_actual_above_target": 0.09225874867444327
+        }
+      }
+    },
+    {
+      "name": "captured_p25_guardrail",
+      "role": "experimental_candidate",
+      "description": "Lower-speed guardrail anchored to the captured actual-speed p25.",
+      "config": {
+        "lookahead_m": 18.0,
+        "lookahead_speed_gain_m_per_mps": 0.25,
+        "heading_gain": 1.1,
+        "lateral_gain": 0.08,
+        "max_speed_mps": 54.967,
+        "min_speed_mps": 12.0,
+        "curvature_gain": 32.657,
+        "throttle_speed_gain": 0.08,
+        "recovery_lateral_limit_m": 8.0,
+        "recovery_heading_limit_rad": 0.9599310885968813
+      },
+      "scenarios": [
+        {
+          "name": "nominal_centerline_start",
+          "completion": {
+            "finished": true,
+            "elevation_tolerant_finished": true,
+            "termination_reason": "finished",
+            "elapsed_s": 4.800000000000001
+          },
+          "progress": {
+            "progress_gain_m": 128.4234192322127,
+            "final_progress_m": 128.4234192322127,
+            "track_length_m": 128.4234192322127,
+            "progress_fraction": 1.0
+          },
+          "lateral_error": {
+            "mean_abs_m": 1.8074522537313626,
+            "max_abs_m": 3.840868520131109,
+            "final_abs_m": 1.870975412008724
+          },
+          "heading_error": {
+            "mean_abs_rad": 0.1822146665916042,
+            "max_abs_rad": 0.38322654797600864,
+            "final_abs_rad": 0.20809504176410032
+          },
+          "recovery": {
+            "samples": 0,
+            "rate": 0.0,
+            "first_recovery": null
+          },
+          "speed_target_behavior": {
+            "mean_actual_speed_mps": 25.719143730773315,
+            "mean_target_speed_mps": 35.98573202721698,
+            "mean_actual_minus_target_mps": -10.266588296443667,
+            "mean_abs_actual_minus_target_mps": 11.925701506135477,
+            "fraction_actual_above_target": 0.2708333333333333,
+            "target_min_mps": 21.400750320077524,
+            "target_max_mps": 54.967
+          }
+        },
+        {
+          "name": "off_center_recovery_start",
+          "completion": {
+            "finished": true,
+            "elevation_tolerant_finished": true,
+            "termination_reason": "finished",
+            "elapsed_s": 5.2
+          },
+          "progress": {
+            "progress_gain_m": 123.18785277533475,
+            "final_progress_m": 128.4234192322127,
+            "track_length_m": 128.4234192322127,
+            "progress_fraction": 1.0
+          },
+          "lateral_error": {
+            "mean_abs_m": 2.677378399066548,
+            "max_abs_m": 10.64599047550104,
+            "final_abs_m": 2.1096054084653337
+          },
+          "heading_error": {
+            "mean_abs_rad": 0.27275866053527714,
+            "max_abs_rad": 0.7141034562968653,
+            "final_abs_rad": 0.21579625785926249
+          },
+          "recovery": {
+            "samples": 4,
+            "rate": 0.07692307692307693,
+            "first_recovery": {
+              "kind": "recovery_completion",
+              "reason": "tracking_rejoined",
+              "step_index": 4,
+              "timestamp_s": 0.4,
+              "progress_m": 9.490066719071882,
+              "lateral_error_m": -7.861860672664415,
+              "heading_error_rad": -0.6232367292544314,
+              "horizontal_distance_to_centerline_m": 7.861860672664415,
+              "elevation_error_m": 0.0
+            }
+          },
+          "speed_target_behavior": {
+            "mean_actual_speed_mps": 23.715810593995794,
+            "mean_target_speed_mps": 36.556807313493366,
+            "mean_actual_minus_target_mps": -12.840996719497571,
+            "mean_abs_actual_minus_target_mps": 13.847099765200523,
+            "fraction_actual_above_target": 0.21153846153846154,
+            "target_min_mps": 21.400750320077524,
+            "target_max_mps": 54.967
+          }
+        }
+      ],
+      "summary": {
+        "completion": {
+          "finished_scenarios": 2,
+          "scenario_count": 2,
+          "completion_rate": 1.0
+        },
+        "progress": {
+          "mean_progress_gain_m": 125.80563600377371,
+          "mean_final_progress_m": 128.4234192322127,
+          "mean_progress_fraction": 1.0
+        },
+        "lateral_error": {
+          "mean_of_scenario_mean_abs_m": 2.2424153263989552,
+          "worst_max_abs_m": 10.64599047550104
+        },
+        "heading_error": {
+          "mean_of_scenario_mean_abs_rad": 0.22748666356344066,
+          "worst_max_abs_rad": 0.7141034562968653
+        },
+        "recovery": {
+          "total_samples": 4,
+          "mean_rate": 0.038461538461538464,
+          "scenarios_with_recovery": 1
+        },
+        "speed_target_behavior": {
+          "mean_actual_speed_mps": 24.717477162384554,
+          "mean_target_speed_mps": 36.271269670355174,
+          "mean_actual_minus_target_mps": -11.55379250797062,
+          "mean_abs_actual_minus_target_mps": 12.886400635668,
+          "mean_fraction_actual_above_target": 0.2411858974358974
+        }
+      },
+      "evidence_basis": {
+        "observed_actual_speed_p25_mps": 68.70849323272705,
+        "observed_actual_speed_p50_mps": 74.62881278991699,
+        "observed_actual_speed_p75_mps": 79.45013046264648,
+        "observed_nominal_target_p25_mps": 12.0,
+        "observed_nominal_target_p50_mps": 12.0,
+        "observed_nominal_target_p75_mps": 69.99994215466207,
+        "observed_absolute_curvature_p50": 0.36643003043670674
+      }
+    },
+    {
+      "name": "captured_p50_balanced",
+      "role": "experimental_candidate",
+      "description": "Balanced experimental cap anchored to the captured actual-speed p50.",
+      "config": {
+        "lookahead_m": 18.0,
+        "lookahead_speed_gain_m_per_mps": 0.25,
+        "heading_gain": 1.1,
+        "lateral_gain": 0.08,
+        "max_speed_mps": 70.897,
+        "min_speed_mps": 12.0,
+        "curvature_gain": 28.397,
+        "throttle_speed_gain": 0.08,
+        "recovery_lateral_limit_m": 8.0,
+        "recovery_heading_limit_rad": 0.9599310885968813
+      },
+      "scenarios": [
+        {
+          "name": "nominal_centerline_start",
+          "completion": {
+            "finished": true,
+            "elevation_tolerant_finished": true,
+            "termination_reason": "finished",
+            "elapsed_s": 4.1000000000000005
+          },
+          "progress": {
+            "progress_gain_m": 128.4234192322127,
+            "final_progress_m": 128.4234192322127,
+            "track_length_m": 128.4234192322127,
+            "progress_fraction": 1.0
+          },
+          "lateral_error": {
+            "mean_abs_m": 2.0140564875030105,
+            "max_abs_m": 4.624248778536148,
+            "final_abs_m": 2.7013164867258816
+          },
+          "heading_error": {
+            "mean_abs_rad": 0.19947331307472427,
+            "max_abs_rad": 0.4436965974726279,
+            "final_abs_rad": 0.20101410617218018
+          },
+          "recovery": {
+            "samples": 0,
+            "rate": 0.0,
+            "first_recovery": null
+          },
+          "speed_target_behavior": {
+            "mean_actual_speed_mps": 30.114435673638997,
+            "mean_target_speed_mps": 48.222899089575165,
+            "mean_actual_minus_target_mps": -18.10846341593617,
+            "mean_abs_actual_minus_target_mps": 18.544729995587588,
+            "fraction_actual_above_target": 0.0975609756097561,
+            "target_min_mps": 29.9920388023596,
+            "target_max_mps": 70.897
+          }
+        },
+        {
+          "name": "off_center_recovery_start",
+          "completion": {
+            "finished": true,
+            "elevation_tolerant_finished": true,
+            "termination_reason": "finished",
+            "elapsed_s": 4.6000000000000005
+          },
+          "progress": {
+            "progress_gain_m": 123.18785277533475,
+            "final_progress_m": 128.4234192322127,
+            "track_length_m": 128.4234192322127,
+            "progress_fraction": 1.0
+          },
+          "lateral_error": {
+            "mean_abs_m": 2.9401422426632076,
+            "max_abs_m": 10.64599047550104,
+            "final_abs_m": 2.763902398616084
+          },
+          "heading_error": {
+            "mean_abs_rad": 0.29331742738346483,
+            "max_abs_rad": 0.7141034562968653,
+            "final_abs_rad": 0.21139384955709328
+          },
+          "recovery": {
+            "samples": 4,
+            "rate": 0.08695652173913043,
+            "first_recovery": {
+              "kind": "recovery_completion",
+              "reason": "tracking_rejoined",
+              "step_index": 4,
+              "timestamp_s": 0.4,
+              "progress_m": 9.490066719071882,
+              "lateral_error_m": -7.861860672664415,
+              "heading_error_rad": -0.6232367292544314,
+              "horizontal_distance_to_centerline_m": 7.861860672664415,
+              "elevation_error_m": 0.0
+            }
+          },
+          "speed_target_behavior": {
+            "mean_actual_speed_mps": 26.92378116576975,
+            "mean_target_speed_mps": 49.26656811713999,
+            "mean_actual_minus_target_mps": -22.342786951370243,
+            "mean_abs_actual_minus_target_mps": 22.55590372676249,
+            "fraction_actual_above_target": 0.08695652173913043,
+            "target_min_mps": 29.9920388023596,
+            "target_max_mps": 70.897
+          }
+        }
+      ],
+      "summary": {
+        "completion": {
+          "finished_scenarios": 2,
+          "scenario_count": 2,
+          "completion_rate": 1.0
+        },
+        "progress": {
+          "mean_progress_gain_m": 125.80563600377371,
+          "mean_final_progress_m": 128.4234192322127,
+          "mean_progress_fraction": 1.0
+        },
+        "lateral_error": {
+          "mean_of_scenario_mean_abs_m": 2.477099365083109,
+          "worst_max_abs_m": 10.64599047550104
+        },
+        "heading_error": {
+          "mean_of_scenario_mean_abs_rad": 0.24639537022909455,
+          "worst_max_abs_rad": 0.7141034562968653
+        },
+        "recovery": {
+          "total_samples": 4,
+          "mean_rate": 0.043478260869565216,
+          "scenarios_with_recovery": 1
+        },
+        "speed_target_behavior": {
+          "mean_actual_speed_mps": 28.519108419704374,
+          "mean_target_speed_mps": 48.744733603357574,
+          "mean_actual_minus_target_mps": -20.225625183653207,
+          "mean_abs_actual_minus_target_mps": 20.55031686117504,
+          "mean_fraction_actual_above_target": 0.09225874867444327
+        }
+      },
+      "evidence_basis": {
+        "observed_actual_speed_p25_mps": 68.70849323272705,
+        "observed_actual_speed_p50_mps": 74.62881278991699,
+        "observed_actual_speed_p75_mps": 79.45013046264648,
+        "observed_nominal_target_p25_mps": 12.0,
+        "observed_nominal_target_p50_mps": 12.0,
+        "observed_nominal_target_p75_mps": 69.99994215466207,
+        "observed_absolute_curvature_p50": 0.36643003043670674
+      }
+    },
+    {
+      "name": "captured_p75_exploratory",
+      "role": "experimental_candidate",
+      "description": "Upper exploratory cap anchored to the captured actual-speed p75.",
+      "config": {
+        "lookahead_m": 18.0,
+        "lookahead_speed_gain_m_per_mps": 0.25,
+        "heading_gain": 1.1,
+        "lateral_gain": 0.08,
+        "max_speed_mps": 75.478,
+        "min_speed_mps": 18.0,
+        "curvature_gain": 24.137,
+        "throttle_speed_gain": 0.08,
+        "recovery_lateral_limit_m": 8.0,
+        "recovery_heading_limit_rad": 0.9599310885968813
+      },
+      "scenarios": [
+        {
+          "name": "nominal_centerline_start",
+          "completion": {
+            "finished": false,
+            "elevation_tolerant_finished": false,
+            "termination_reason": "progress_complete_finish_gate_failed",
+            "elapsed_s": 3.9000000000000004
+          },
+          "progress": {
+            "progress_gain_m": 128.4234192322127,
+            "final_progress_m": 128.4234192322127,
+            "track_length_m": 128.4234192322127,
+            "progress_fraction": 1.0
+          },
+          "lateral_error": {
+            "mean_abs_m": 2.089088341775986,
+            "max_abs_m": 4.985917920489481,
+            "final_abs_m": 3.0015156804738994
+          },
+          "heading_error": {
+            "mean_abs_rad": 0.20006232981578792,
+            "max_abs_rad": 0.4631127136997053,
+            "final_abs_rad": 0.1904765548202345
+          },
+          "recovery": {
+            "samples": 0,
+            "rate": 0.0,
+            "first_recovery": null
+          },
+          "speed_target_behavior": {
+            "mean_actual_speed_mps": 31.674539366752963,
+            "mean_target_speed_mps": 53.85899176560219,
+            "mean_actual_minus_target_mps": -22.18445239884922,
+            "mean_abs_actual_minus_target_mps": 22.250850592916017,
+            "fraction_actual_above_target": 0.05128205128205128,
+            "target_min_mps": 34.955495142370786,
+            "target_max_mps": 75.478
+          }
+        },
+        {
+          "name": "off_center_recovery_start",
+          "completion": {
+            "finished": true,
+            "elevation_tolerant_finished": true,
+            "termination_reason": "finished",
+            "elapsed_s": 4.4
+          },
+          "progress": {
+            "progress_gain_m": 123.18785277533475,
+            "final_progress_m": 128.4234192322127,
+            "track_length_m": 128.4234192322127,
+            "progress_fraction": 1.0
+          },
+          "lateral_error": {
+            "mean_abs_m": 3.0461991130840333,
+            "max_abs_m": 10.64599047550104,
+            "final_abs_m": 3.1995174303892537
+          },
+          "heading_error": {
+            "mean_abs_rad": 0.30613486909486826,
+            "max_abs_rad": 0.7141034562968653,
+            "final_abs_rad": 0.20271099237852663
+          },
+          "recovery": {
+            "samples": 4,
+            "rate": 0.09090909090909091,
+            "first_recovery": {
+              "kind": "recovery_completion",
+              "reason": "tracking_rejoined",
+              "step_index": 4,
+              "timestamp_s": 0.4,
+              "progress_m": 9.490066719071882,
+              "lateral_error_m": -7.861860672664415,
+              "heading_error_rad": -0.6232367292544314,
+              "horizontal_distance_to_centerline_m": 7.861860672664415,
+              "elevation_error_m": 0.0
+            }
+          },
+          "speed_target_behavior": {
+            "mean_actual_speed_mps": 28.055900759682235,
+            "mean_target_speed_mps": 55.14417327967344,
+            "mean_actual_minus_target_mps": -27.088272519991186,
+            "mean_abs_actual_minus_target_mps": 27.088272519991186,
+            "fraction_actual_above_target": 0.0,
+            "target_min_mps": 35.23517373555987,
+            "target_max_mps": 75.478
+          }
+        }
+      ],
+      "summary": {
+        "completion": {
+          "finished_scenarios": 1,
+          "scenario_count": 2,
+          "completion_rate": 0.5
+        },
+        "progress": {
+          "mean_progress_gain_m": 125.80563600377371,
+          "mean_final_progress_m": 128.4234192322127,
+          "mean_progress_fraction": 1.0
+        },
+        "lateral_error": {
+          "mean_of_scenario_mean_abs_m": 2.56764372743001,
+          "worst_max_abs_m": 10.64599047550104
+        },
+        "heading_error": {
+          "mean_of_scenario_mean_abs_rad": 0.2530985994553281,
+          "worst_max_abs_rad": 0.7141034562968653
+        },
+        "recovery": {
+          "total_samples": 4,
+          "mean_rate": 0.045454545454545456,
+          "scenarios_with_recovery": 1
+        },
+        "speed_target_behavior": {
+          "mean_actual_speed_mps": 29.8652200632176,
+          "mean_target_speed_mps": 54.50158252263782,
+          "mean_actual_minus_target_mps": -24.636362459420205,
+          "mean_abs_actual_minus_target_mps": 24.6695615564536,
+          "mean_fraction_actual_above_target": 0.02564102564102564
+        }
+      },
+      "evidence_basis": {
+        "observed_actual_speed_p25_mps": 68.70849323272705,
+        "observed_actual_speed_p50_mps": 74.62881278991699,
+        "observed_actual_speed_p75_mps": 79.45013046264648,
+        "observed_nominal_target_p25_mps": 12.0,
+        "observed_nominal_target_p50_mps": 12.0,
+        "observed_nominal_target_p75_mps": 69.99994215466207,
+        "observed_absolute_curvature_p50": 0.36643003043670674
+      }
+    }
+  ],
+  "limitations": [
+    "The calibration input contains section percentiles from captured RL telemetry, not a raw speed map.",
+    "The simulator is a bounded kinematic model and does not represent TrackMania physics, jumps, collisions, or TMInterface.",
+    "Results compare deterministic software-in-the-loop behavior only; they are not live controller or real-map validation."
+  ],
+  "calibration_input": "eval_results\\hybrid_rollouts\\speed_profile_calibration.json"
+}

@@ -1,0 +1,737 @@
+{
+  "scope": "offline_recorded_speed_and_section_calibration",
+  "controller_modified": false,
+  "training_started": false,
+  "traces": [
+    {
+      "file": "eval_results\\hybrid_rollouts\\analysis_final_1792369556798.json",
+      "samples": 1095,
+      "duration_s": 54.7,
+      "progress_gain_m": 4043.0953476350596,
+      "mean_actual_speed_mps": 72.23906069694588,
+      "mean_nominal_target_speed_mps": 30.264933832471613,
+      "mean_actual_minus_nominal_mps": 41.97412686447427,
+      "fraction_above_nominal_target": 0.8931506849315068,
+      "sections": [
+        {
+          "bin_index": 0,
+          "progress_fraction_start": 0.0,
+          "progress_fraction_end": 0.1,
+          "samples": 133,
+          "actual_speed_mps": {
+            "p25": 30.639944076538086,
+            "p50": 73.60994720458984,
+            "p75": 80.87860107421875,
+            "p90": 83.8773422241211
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.0,
+            "p75": 70.0,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 0.0,
+            "p50": 0.3375386394598268,
+            "p75": 0.3909202464342177,
+            "p90": 0.5542281351234669
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": -1.1554057598601446,
+            "p50": 53.17009735107422,
+            "p75": 66.89157104492188,
+            "p90": 70.43165893554688
+          },
+          "fraction_above_nominal_target": 0.7443609022556391,
+          "mean_abs_lateral_error_m": 3.0986450206875613,
+          "mean_abs_heading_error_rad": 0.11251193928895975,
+          "mean_abs_elevation_error_m": 0.1403332013413022,
+          "recovery_rate": 0.08270676691729323
+        },
+        {
+          "bin_index": 1,
+          "progress_fraction_start": 0.1,
+          "progress_fraction_end": 0.2,
+          "samples": 101,
+          "actual_speed_mps": {
+            "p25": 69.33904266357422,
+            "p50": 78.46102142333984,
+            "p75": 84.2308349609375,
+            "p90": 86.85025787353516
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.0,
+            "p75": 17.997569639187063,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 0.10319335849108333,
+            "p50": 0.37621188192409816,
+            "p75": 0.40476551220329726,
+            "p90": 0.5064815755268505
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 46.44607162475586,
+            "p50": 62.112060546875,
+            "p75": 69.45597497752331,
+            "p90": 72.98578643798828
+          },
+          "fraction_above_nominal_target": 0.9306930693069307,
+          "mean_abs_lateral_error_m": 3.75399163199556,
+          "mean_abs_heading_error_rad": 0.13992275056515888,
+          "mean_abs_elevation_error_m": 0.3516973724364927,
+          "recovery_rate": 0.12871287128712872
+        },
+        {
+          "bin_index": 2,
+          "progress_fraction_start": 0.2,
+          "progress_fraction_end": 0.3,
+          "samples": 110,
+          "actual_speed_mps": {
+            "p25": 68.9239730834961,
+            "p50": 71.48152542114258,
+            "p75": 75.04855537414551,
+            "p90": 80.02019882202148
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.0,
+            "p75": 70.0,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 0.11465175800732494,
+            "p50": 0.2850733263086076,
+            "p75": 0.39092024643429785,
+            "p90": 0.5563634401815782
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 7.465476079357089,
+            "p50": 56.5314513011519,
+            "p75": 59.70495473794433,
+            "p90": 64.72561187744141
+          },
+          "fraction_above_nominal_target": 0.8727272727272727,
+          "mean_abs_lateral_error_m": 4.8519766974905805,
+          "mean_abs_heading_error_rad": 0.13894285949266877,
+          "mean_abs_elevation_error_m": 0.18654841087803775,
+          "recovery_rate": 0.16363636363636364
+        },
+        {
+          "bin_index": 3,
+          "progress_fraction_start": 0.3,
+          "progress_fraction_end": 0.4,
+          "samples": 115,
+          "actual_speed_mps": {
+            "p25": 62.78910446166992,
+            "p50": 66.82221984863281,
+            "p75": 70.53041458129883,
+            "p90": 71.88926391601562
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.0,
+            "p75": 12.230684128672719,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 0.05159670455361604,
+            "p50": 0.3762118819240168,
+            "p75": 0.44805485891992897,
+            "p90": 0.5406800286789976
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 45.214927673339844,
+            "p50": 51.836666107177734,
+            "p75": 58.11259078979492,
+            "p90": 59.877549743652345
+          },
+          "fraction_above_nominal_target": 0.8695652173913043,
+          "mean_abs_lateral_error_m": 4.127933148497969,
+          "mean_abs_heading_error_rad": 0.12876388478822223,
+          "mean_abs_elevation_error_m": 0.49419573295731606,
+          "recovery_rate": 0.008695652173913044
+        },
+        {
+          "bin_index": 4,
+          "progress_fraction_start": 0.4,
+          "progress_fraction_end": 0.5,
+          "samples": 110,
+          "actual_speed_mps": {
+            "p25": 70.35714530944824,
+            "p50": 74.07418060302734,
+            "p75": 76.01700019836426,
+            "p90": 76.85898284912109
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.0,
+            "p75": 69.99994272182727,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 0.10319335849050428,
+            "p50": 0.37975278363144277,
+            "p75": 0.43651629470519066,
+            "p90": 0.5930092790201432
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 5.373532533596887,
+            "p50": 58.030731201171875,
+            "p75": 63.58852881884769,
+            "p90": 64.56977005004883
+          },
+          "fraction_above_nominal_target": 0.9181818181818182,
+          "mean_abs_lateral_error_m": 3.211020786372577,
+          "mean_abs_heading_error_rad": 0.12210850428155587,
+          "mean_abs_elevation_error_m": 0.6133594315462139,
+          "recovery_rate": 0.0
+        },
+        {
+          "bin_index": 5,
+          "progress_fraction_start": 0.5,
+          "progress_fraction_end": 0.6,
+          "samples": 109,
+          "actual_speed_mps": {
+            "p25": 71.48135375976562,
+            "p50": 74.71995544433594,
+            "p75": 78.02165985107422,
+            "p90": 79.7568572998047
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.0,
+            "p75": 69.99991899645876,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 0.1118593222742029,
+            "p50": 0.36643003043625144,
+            "p75": 0.4047655122031008,
+            "p90": 0.5456869148917309
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 9.607861460084209,
+            "p50": 60.024090211898304,
+            "p75": 63.105177077393954,
+            "p90": 67.19828186035156
+          },
+          "fraction_above_nominal_target": 0.9357798165137615,
+          "mean_abs_lateral_error_m": 4.863524450392251,
+          "mean_abs_heading_error_rad": 0.12009253025590286,
+          "mean_abs_elevation_error_m": 0.25420479737519525,
+          "recovery_rate": 0.22018348623853212
+        },
+        {
+          "bin_index": 6,
+          "progress_fraction_start": 0.6,
+          "progress_fraction_end": 0.7,
+          "samples": 98,
+          "actual_speed_mps": {
+            "p25": 74.85431289672852,
+            "p50": 84.52046203613281,
+            "p75": 90.13785362243652,
+            "p90": 91.97673034667969
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.0,
+            "p75": 13.532441209514534,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 2.9223581424085352e-08,
+            "p50": 0.3713209561800148,
+            "p75": 0.39092024643429785,
+            "p90": 0.5396417946620357
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 50.2333288192749,
+            "p50": 68.56659317016602,
+            "p75": 76.98388213606651,
+            "p90": 79.25871887207032
+          },
+          "fraction_above_nominal_target": 0.9693877551020408,
+          "mean_abs_lateral_error_m": 3.411479186372797,
+          "mean_abs_heading_error_rad": 0.15876129797554048,
+          "mean_abs_elevation_error_m": 0.2222627466325045,
+          "recovery_rate": 0.11224489795918367
+        },
+        {
+          "bin_index": 7,
+          "progress_fraction_start": 0.7,
+          "progress_fraction_end": 0.8,
+          "samples": 113,
+          "actual_speed_mps": {
+            "p25": 64.8233642578125,
+            "p50": 68.35234069824219,
+            "p75": 74.96482849121094,
+            "p90": 77.21562805175782
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.0,
+            "p75": 17.99756963912392,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 4.132838519105626e-08,
+            "p50": 0.37621188192404054,
+            "p75": 0.4889750597824845,
+            "p90": 0.5456869148923311
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 48.49278259277344,
+            "p50": 53.307098388671875,
+            "p75": 59.37995910644531,
+            "p90": 64.12758331298828
+          },
+          "fraction_above_nominal_target": 0.9026548672566371,
+          "mean_abs_lateral_error_m": 4.031330635470225,
+          "mean_abs_heading_error_rad": 0.15677729270528695,
+          "mean_abs_elevation_error_m": 0.6492927102840034,
+          "recovery_rate": 0.07964601769911504
+        },
+        {
+          "bin_index": 8,
+          "progress_fraction_start": 0.8,
+          "progress_fraction_end": 0.9,
+          "samples": 107,
+          "actual_speed_mps": {
+            "p25": 66.43741989135742,
+            "p50": 77.12760162353516,
+            "p75": 81.58832550048828,
+            "p90": 82.10138092041015
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.230684128693674,
+            "p75": 70.0,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 0.0,
+            "p50": 0.10319335849108333,
+            "p75": 0.39092024643421436,
+            "p90": 0.4056792540460312
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 10.398014068603516,
+            "p50": 50.11766815185547,
+            "p75": 62.298946380615234,
+            "p90": 69.60020294189454
+          },
+          "fraction_above_nominal_target": 0.8691588785046729,
+          "mean_abs_lateral_error_m": 3.393427810201144,
+          "mean_abs_heading_error_rad": 0.11949602750909435,
+          "mean_abs_elevation_error_m": 0.2235444253560906,
+          "recovery_rate": 0.09345794392523364
+        },
+        {
+          "bin_index": 9,
+          "progress_fraction_start": 0.9,
+          "progress_fraction_end": 1.0,
+          "samples": 99,
+          "actual_speed_mps": {
+            "p25": 74.75672149658203,
+            "p50": 82.87460327148438,
+            "p75": 89.6334342956543,
+            "p90": 93.07932739257812
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 17.997569639175914,
+            "p75": 70.0,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 0.0,
+            "p50": 0.28507332630900634,
+            "p75": 0.39092024643429785,
+            "p90": 0.5064815755262789
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 14.257251739501953,
+            "p50": 56.63275146484375,
+            "p75": 71.39444732666016,
+            "p90": 78.06051177978516
+          },
+          "fraction_above_nominal_target": 0.9696969696969697,
+          "mean_abs_lateral_error_m": 4.641330317373797,
+          "mean_abs_heading_error_rad": 0.11593421051917506,
+          "mean_abs_elevation_error_m": 0.04461817060198028,
+          "recovery_rate": 0.20202020202020202
+        }
+      ]
+    },
+    {
+      "file": "eval_results\\hybrid_rollouts\\analysis_final_1792369534482.json",
+      "samples": 1094,
+      "duration_s": 54.65,
+      "progress_gain_m": 4042.697231518799,
+      "mean_actual_speed_mps": 72.23454711620289,
+      "mean_nominal_target_speed_mps": 30.100758381002958,
+      "mean_actual_minus_nominal_mps": 42.133788735199936,
+      "fraction_above_nominal_target": 0.8884826325411335,
+      "sections": [
+        {
+          "bin_index": 0,
+          "progress_fraction_start": 0.0,
+          "progress_fraction_end": 0.1,
+          "samples": 132,
+          "actual_speed_mps": {
+            "p25": 29.728031158447266,
+            "p50": 74.0605697631836,
+            "p75": 81.23575401306152,
+            "p90": 84.29225463867188
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.0,
+            "p75": 70.0,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 0.0,
+            "p50": 0.28507332630900634,
+            "p75": 0.3909202464342376,
+            "p90": 0.5552957876520901
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": -2.456666946411133,
+            "p50": 48.556121826171875,
+            "p75": 67.03857612609863,
+            "p90": 70.7922737121582
+          },
+          "fraction_above_nominal_target": 0.7348484848484849,
+          "mean_abs_lateral_error_m": 3.1187280784348186,
+          "mean_abs_heading_error_rad": 0.11066943847156455,
+          "mean_abs_elevation_error_m": 0.13039252850776206,
+          "recovery_rate": 0.06818181818181818
+        },
+        {
+          "bin_index": 1,
+          "progress_fraction_start": 0.1,
+          "progress_fraction_end": 0.2,
+          "samples": 102,
+          "actual_speed_mps": {
+            "p25": 68.45264434814453,
+            "p50": 78.0908203125,
+            "p75": 83.86299896240234,
+            "p90": 86.69386978149414
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.230684128653236,
+            "p75": 69.99994158749686,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 0.11140048412789322,
+            "p50": 0.37132095618001537,
+            "p75": 0.506481575526136,
+            "p90": 0.5355780056466314
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 17.20227813720703,
+            "p50": 59.5179443359375,
+            "p75": 68.14348176935036,
+            "p90": 72.19607375493695
+          },
+          "fraction_above_nominal_target": 0.9019607843137255,
+          "mean_abs_lateral_error_m": 3.7093512114318994,
+          "mean_abs_heading_error_rad": 0.12436027722871362,
+          "mean_abs_elevation_error_m": 0.3631913928987234,
+          "recovery_rate": 0.13725490196078433
+        },
+        {
+          "bin_index": 2,
+          "progress_fraction_start": 0.2,
+          "progress_fraction_end": 0.3,
+          "samples": 110,
+          "actual_speed_mps": {
+            "p25": 68.49301338195801,
+            "p50": 71.67165756225586,
+            "p75": 74.67999458312988,
+            "p90": 79.41432647705078
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.0,
+            "p75": 17.997569639216856,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 0.1490269565560498,
+            "p50": 0.28507332630957805,
+            "p75": 0.39092024643429785,
+            "p90": 0.5026830070476737
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 51.31899375414497,
+            "p50": 57.99325942993164,
+            "p75": 60.2976470372819,
+            "p90": 66.16862258911134
+          },
+          "fraction_above_nominal_target": 0.8727272727272727,
+          "mean_abs_lateral_error_m": 5.077748776600365,
+          "mean_abs_heading_error_rad": 0.1341326036900319,
+          "mean_abs_elevation_error_m": 0.20628870415167336,
+          "recovery_rate": 0.22727272727272727
+        },
+        {
+          "bin_index": 3,
+          "progress_fraction_start": 0.3,
+          "progress_fraction_end": 0.4,
+          "samples": 116,
+          "actual_speed_mps": {
+            "p25": 62.82823085784912,
+            "p50": 66.7947769165039,
+            "p75": 70.79954528808594,
+            "p90": 72.55367279052734
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.0,
+            "p75": 12.069143348431057,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 0.10319335849103733,
+            "p50": 0.38533651503265826,
+            "p75": 0.4889750597820951,
+            "p90": 0.5456869148921901
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 44.93306878234447,
+            "p50": 51.966834144169475,
+            "p75": 58.71812057495117,
+            "p90": 60.46235656738281
+          },
+          "fraction_above_nominal_target": 0.853448275862069,
+          "mean_abs_lateral_error_m": 4.299940036667203,
+          "mean_abs_heading_error_rad": 0.13396482340143284,
+          "mean_abs_elevation_error_m": 0.45044626440039043,
+          "recovery_rate": 0.0
+        },
+        {
+          "bin_index": 4,
+          "progress_fraction_start": 0.4,
+          "progress_fraction_end": 0.5,
+          "samples": 109,
+          "actual_speed_mps": {
+            "p25": 70.53482055664062,
+            "p50": 74.626953125,
+            "p75": 76.6317138671875,
+            "p90": 77.44318389892578
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.0,
+            "p75": 69.99994272182727,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 0.14902695655615483,
+            "p50": 0.3797527836315429,
+            "p75": 0.4047655122034763,
+            "p90": 0.5500671755973823
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 6.813321351956262,
+            "p50": 57.884742736816406,
+            "p75": 64.03355407714844,
+            "p90": 64.95121765136719
+          },
+          "fraction_above_nominal_target": 0.9541284403669725,
+          "mean_abs_lateral_error_m": 3.2267846061031893,
+          "mean_abs_heading_error_rad": 0.13254910015856086,
+          "mean_abs_elevation_error_m": 0.6469127221832943,
+          "recovery_rate": 0.0
+        },
+        {
+          "bin_index": 5,
+          "progress_fraction_start": 0.5,
+          "progress_fraction_end": 0.6,
+          "samples": 108,
+          "actual_speed_mps": {
+            "p25": 72.02084541320801,
+            "p50": 74.63067245483398,
+            "p75": 77.55327224731445,
+            "p90": 80.55770263671874
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.0,
+            "p75": 69.99994272182727,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 4.132838519105261e-08,
+            "p50": 0.34930865704128283,
+            "p75": 0.39092024643429785,
+            "p90": 0.542182094543099
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 10.21960116667604,
+            "p50": 60.3651123046875,
+            "p75": 63.06031856015018,
+            "p90": 67.49363327026367
+          },
+          "fraction_above_nominal_target": 0.9537037037037037,
+          "mean_abs_lateral_error_m": 5.048332552226704,
+          "mean_abs_heading_error_rad": 0.11937027381834626,
+          "mean_abs_elevation_error_m": 0.2667266367475119,
+          "recovery_rate": 0.17592592592592593
+        },
+        {
+          "bin_index": 6,
+          "progress_fraction_start": 0.6,
+          "progress_fraction_end": 0.7,
+          "samples": 101,
+          "actual_speed_mps": {
+            "p25": 73.66362762451172,
+            "p50": 83.37210083007812,
+            "p75": 90.21466064453125,
+            "p90": 92.0181884765625
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.0,
+            "p75": 13.532441209536204,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 0.16868965225841795,
+            "p50": 0.37621188192409816,
+            "p75": 0.4069157173355276,
+            "p90": 0.5456869148923351
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 50.52276435763445,
+            "p50": 66.47473907470703,
+            "p75": 74.98553466796875,
+            "p90": 79.01481628417969
+          },
+          "fraction_above_nominal_target": 0.9702970297029703,
+          "mean_abs_lateral_error_m": 3.95609022747936,
+          "mean_abs_heading_error_rad": 0.17010264625010035,
+          "mean_abs_elevation_error_m": 0.25439306192436556,
+          "recovery_rate": 0.15841584158415842
+        },
+        {
+          "bin_index": 7,
+          "progress_fraction_start": 0.7,
+          "progress_fraction_end": 0.8,
+          "samples": 109,
+          "actual_speed_mps": {
+            "p25": 65.30160522460938,
+            "p50": 68.84442901611328,
+            "p75": 77.88085174560547,
+            "p90": 81.26207885742187
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.0,
+            "p75": 17.99756963918167,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 5.06167278056455e-08,
+            "p50": 0.366430030437162,
+            "p75": 0.4889750597820596,
+            "p90": 0.5235891374214917
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 49.865238189697266,
+            "p50": 54.71953582763672,
+            "p75": 60.865234375,
+            "p90": 67.08809181123547
+          },
+          "fraction_above_nominal_target": 0.8807339449541285,
+          "mean_abs_lateral_error_m": 3.292346317011562,
+          "mean_abs_heading_error_rad": 0.15033555606419832,
+          "mean_abs_elevation_error_m": 0.5396042677191761,
+          "recovery_rate": 0.027522935779816515
+        },
+        {
+          "bin_index": 8,
+          "progress_fraction_start": 0.8,
+          "progress_fraction_end": 0.9,
+          "samples": 108,
+          "actual_speed_mps": {
+            "p25": 64.50622367858887,
+            "p50": 76.95376586914062,
+            "p75": 81.38808250427246,
+            "p90": 82.81408081054687
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 12.88156266910999,
+            "p75": 70.0,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 0.0,
+            "p50": 0.29348112721023856,
+            "p75": 0.3909202464342127,
+            "p90": 0.42033669043887606
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 11.129009246826172,
+            "p50": 48.104780197143555,
+            "p75": 63.80245143271809,
+            "p90": 69.30081787109376
+          },
+          "fraction_above_nominal_target": 0.8611111111111112,
+          "mean_abs_lateral_error_m": 4.286207079727358,
+          "mean_abs_heading_error_rad": 0.13155246220038816,
+          "mean_abs_elevation_error_m": 0.22285828162658292,
+          "recovery_rate": 0.1111111111111111
+        },
+        {
+          "bin_index": 9,
+          "progress_fraction_start": 0.9,
+          "progress_fraction_end": 1.0,
+          "samples": 99,
+          "actual_speed_mps": {
+            "p25": 73.28946685791016,
+            "p50": 81.47972869873047,
+            "p75": 89.47333526611328,
+            "p90": 93.47155456542968
+          },
+          "nominal_target_speed_mps": {
+            "p25": 12.0,
+            "p50": 17.99756963925094,
+            "p75": 70.0,
+            "p90": 70.0
+          },
+          "absolute_curvature": {
+            "p25": 0.0,
+            "p50": 0.1686896522585406,
+            "p75": 0.37975278363127907,
+            "p90": 0.39092024643429785
+          },
+          "speed_gap_actual_minus_nominal_mps": {
+            "p25": 13.552291927830936,
+            "p50": 54.299652099609375,
+            "p75": 66.9839841928257,
+            "p90": 78.55748138427734
+          },
+          "fraction_above_nominal_target": 0.9494949494949495,
+          "mean_abs_lateral_error_m": 4.4269426513075745,
+          "mean_abs_heading_error_rad": 0.10637113134834347,
+          "mean_abs_elevation_error_m": 0.047639244927301296,
+          "recovery_rate": 0.1414141414141414
+        }
+      ]
+    }
+  ],
+  "interpretation": [
+    "Observed speeds come from the existing RL evaluation policy, not the conservative controller.",
+    "Observed speeds are evidence for calibration, not automatically safe target speeds.",
+    "No controller parameter was changed by this report."
+  ],
+  "next_offline_action": "Compare section speed and curvature gaps, then choose bounded target-speed candidates for simulator-only testing."
+}

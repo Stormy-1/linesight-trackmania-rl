@@ -1,0 +1,36 @@
+{
+  "track": "A12-Speed",
+  "controller": "purepursuit",
+  "centerline": "A12-Speed_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "speed_caps": [],
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 55.456441560218515,
+      "end_m": 122.45364711509797,
+      "reference_horizontal_speed_mps": 62.16,
+      "required_speed_mps": 62.16
+    }
+  ],
+  "runs": [
+    {
+      "finished": true,
+      "termination": "Finished",
+      "race_time_s": 37.91,
+      "completion_pct": 100.0,
+      "actions": 760,
+      "steps": 759,
+      "impact_suspects": 0,
+      "recovery_steps": 0,
+      "reversals": 0,
+      "slip_steps": 0,
+      "max_progress_m": 2208.36,
+      "centerline_length_m": 2208.36,
+      "run": 1
+    }
+  ],
+  "finishes": "1/1"
+}

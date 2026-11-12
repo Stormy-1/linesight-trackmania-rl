@@ -1,0 +1,89 @@
+{
+  "track": "B02-Race",
+  "controller": "purepursuit",
+  "centerline": "B02-Race_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 159.45175911846593,
+      "end_m": 224.45131034938936,
+      "reference_horizontal_speed_mps": 61.49,
+      "required_speed_mps": 61.49
+    },
+    {
+      "start_m": 359.44744821473057,
+      "end_m": 397.43496401790037,
+      "reference_horizontal_speed_mps": 38.13,
+      "required_speed_mps": 38.13
+    },
+    {
+      "start_m": 432.9302513649536,
+      "end_m": 470.9289840364687,
+      "reference_horizontal_speed_mps": 33.43,
+      "required_speed_mps": 33.43
+    },
+    {
+      "start_m": 512.9249469310729,
+      "end_m": 565.4190576460301,
+      "reference_horizontal_speed_mps": 61.13,
+      "required_speed_mps": 61.13
+    },
+    {
+      "start_m": 580.4189848798765,
+      "end_m": 624.9181414710424,
+      "reference_horizontal_speed_mps": 90.03,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 692.4129045447099,
+      "end_m": 739.9109791240344,
+      "reference_horizontal_speed_mps": 74.63,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 791.4106842192587,
+      "end_m": 819.9099357980733,
+      "reference_horizontal_speed_mps": 97.93,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 896.9073510615883,
+      "end_m": 919.9066725368982,
+      "reference_horizontal_speed_mps": 87.41,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 1073.4019687205162,
+      "end_m": 1095.9008549400387,
+      "reference_horizontal_speed_mps": 78.06,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 1175.3991208140003,
+      "end_m": 1233.3988034075649,
+      "reference_horizontal_speed_mps": 62.37,
+      "required_speed_mps": 62.37
+    }
+  ],
+  "runs": [
+    {
+      "finished": true,
+      "termination": "Finished",
+      "race_time_s": 37.29,
+      "completion_pct": 100.0,
+      "actions": 747,
+      "steps": 746,
+      "impact_suspects": 2,
+      "recovery_steps": 27,
+      "reversals": 0,
+      "slip_steps": 12,
+      "max_progress_m": 1704.89,
+      "centerline_length_m": 1704.89,
+      "run": 1
+    }
+  ],
+  "finishes": "1/1"
+}

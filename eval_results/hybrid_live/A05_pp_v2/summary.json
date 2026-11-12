@@ -1,0 +1,51 @@
+{
+  "track": "A05",
+  "controller": "purepursuit",
+  "max_speed_override_mps": null,
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 169.49487894127464,
+      "end_m": 225.00827316131785,
+      "reference_horizontal_speed_mps": 40.43,
+      "required_speed_mps": 40.43
+    },
+    {
+      "start_m": 421.04432813525983,
+      "end_m": 509.5658637837522,
+      "reference_horizontal_speed_mps": 42.73,
+      "required_speed_mps": 42.73
+    },
+    {
+      "start_m": 555.5736633653677,
+      "end_m": 619.5888597045848,
+      "reference_horizontal_speed_mps": 38.52,
+      "required_speed_mps": 38.52
+    },
+    {
+      "start_m": 703.0970852810168,
+      "end_m": 732.1031881785362,
+      "reference_horizontal_speed_mps": 29.3,
+      "required_speed_mps": 29.3
+    }
+  ],
+  "runs": [
+    {
+      "finished": false,
+      "termination": "Stuck_Cutoff_2s",
+      "race_time_s": null,
+      "completion_pct": 85.39,
+      "actions": 505,
+      "steps": 505,
+      "impact_suspects": 3,
+      "recovery_steps": 105,
+      "reversals": 2,
+      "max_progress_m": 623.78,
+      "centerline_length_m": 732.1,
+      "run": 1
+    }
+  ],
+  "finishes": "0/1"
+}

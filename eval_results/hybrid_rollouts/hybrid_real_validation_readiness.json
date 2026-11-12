@@ -1,0 +1,109 @@
+{
+  "scope": "offline_hybrid_real_validation_readiness",
+  "offline_only": true,
+  "trackmania_launched": false,
+  "training_started": false,
+  "checkpoints_loaded": false,
+  "real_physics_validated": false,
+  "promotion_allowed": false,
+  "offline_preflight_complete": true,
+  "real_validation_authorization_required": true,
+  "telemetry_rows": {
+    "eval_results/hybrid_rollouts_crossmap/A01-Race.repaired.csv": 1072,
+    "eval_results/hybrid_rollouts_crossmap/A07-Race.repaired.csv": 308
+  },
+  "reports_checked": 4,
+  "checks": [
+    {
+      "name": "file:maps/A01-Race_0.5m_cl2.npy",
+      "passed": true,
+      "detail": "present"
+    },
+    {
+      "name": "file:maps/A07-Race_0.5m_cl2.npy",
+      "passed": true,
+      "detail": "present"
+    },
+    {
+      "name": "file:maps/ESL-Hockolicious_0.5m_cl2.npy",
+      "passed": true,
+      "detail": "present"
+    },
+    {
+      "name": "file:eval_results/hybrid_rollouts_crossmap/A01-Race.repaired.csv",
+      "passed": true,
+      "detail": "present"
+    },
+    {
+      "name": "file:eval_results/hybrid_rollouts_crossmap/A07-Race.repaired.csv",
+      "passed": true,
+      "detail": "present"
+    },
+    {
+      "name": "file:eval_results/hybrid_rollouts/hybrid_predictive_features.json",
+      "passed": true,
+      "detail": "present"
+    },
+    {
+      "name": "file:eval_results/hybrid_rollouts/hybrid_predictive_feature_calibration.json",
+      "passed": true,
+      "detail": "present"
+    },
+    {
+      "name": "file:eval_results/hybrid_rollouts/hybrid_recovery_authority_gap.json",
+      "passed": true,
+      "detail": "present"
+    },
+    {
+      "name": "file:eval_results/hybrid_rollouts/hybrid_shadow_observer.json",
+      "passed": true,
+      "detail": "present"
+    },
+    {
+      "name": "file:trackmania_rl/tmi_interaction/game_instance_manager.py",
+      "passed": true,
+      "detail": "present"
+    },
+    {
+      "name": "file:trackmania_rl/tmi_interaction/Python_Link.as",
+      "passed": true,
+      "detail": "present"
+    },
+    {
+      "name": "telemetry_schema:eval_results/hybrid_rollouts_crossmap/A01-Race.repaired.csv",
+      "passed": true,
+      "detail": "1072 validated rows; columns=timestamp_s,position_x_m,position_y_m,position_z_m,heading_x,heading_y,heading_z,speed_mps"
+    },
+    {
+      "name": "telemetry_schema:eval_results/hybrid_rollouts_crossmap/A07-Race.repaired.csv",
+      "passed": true,
+      "detail": "308 validated rows; columns=timestamp_s,position_x_m,position_y_m,position_z_m,heading_x,heading_y,heading_z,speed_mps"
+    },
+    {
+      "name": "report_provenance:eval_results/hybrid_rollouts/hybrid_predictive_features.json",
+      "passed": true,
+      "detail": "offline diagnostic flags are intact"
+    },
+    {
+      "name": "report_provenance:eval_results/hybrid_rollouts/hybrid_predictive_feature_calibration.json",
+      "passed": true,
+      "detail": "offline diagnostic flags are intact"
+    },
+    {
+      "name": "report_provenance:eval_results/hybrid_rollouts/hybrid_recovery_authority_gap.json",
+      "passed": true,
+      "detail": "offline diagnostic flags are intact"
+    },
+    {
+      "name": "report_provenance:eval_results/hybrid_rollouts/hybrid_shadow_observer.json",
+      "passed": true,
+      "detail": "offline diagnostic flags are intact"
+    },
+    {
+      "name": "controller_defaults_unchanged_in_process",
+      "passed": true,
+      "detail": "default dataclass values are stable"
+    }
+  ],
+  "next_action": "perform a separately authorized visible validation with explicit rollback and telemetry capture"
+}

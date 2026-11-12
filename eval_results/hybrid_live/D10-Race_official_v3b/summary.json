@@ -1,0 +1,119 @@
+{
+  "track": "D10-Race",
+  "controller": "purepursuit",
+  "centerline": "D10-Race_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 141.45572257457266,
+      "end_m": 275.45600953562763,
+      "reference_horizontal_speed_mps": 55.27,
+      "required_speed_mps": 55.27
+    },
+    {
+      "start_m": 394.95185931841985,
+      "end_m": 419.449832018037,
+      "reference_horizontal_speed_mps": 68.01,
+      "required_speed_mps": 68.01
+    },
+    {
+      "start_m": 473.9460970366083,
+      "end_m": 497.4437196199048,
+      "reference_horizontal_speed_mps": 68.74,
+      "required_speed_mps": 68.74
+    },
+    {
+      "start_m": 549.443917632364,
+      "end_m": 573.4429590915441,
+      "reference_horizontal_speed_mps": 80.54,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 641.9391670028147,
+      "end_m": 692.939447335505,
+      "reference_horizontal_speed_mps": 60.1,
+      "required_speed_mps": 60.1
+    },
+    {
+      "start_m": 1008.9374665139222,
+      "end_m": 1067.936630062005,
+      "reference_horizontal_speed_mps": 62.53,
+      "required_speed_mps": 62.53
+    },
+    {
+      "start_m": 1096.436126581778,
+      "end_m": 1127.4355656386304,
+      "reference_horizontal_speed_mps": 55.63,
+      "required_speed_mps": 55.63
+    },
+    {
+      "start_m": 1212.4285212657749,
+      "end_m": 1287.4244505116285,
+      "reference_horizontal_speed_mps": 71.44,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 1335.4212015390603,
+      "end_m": 1393.9214036873457,
+      "reference_horizontal_speed_mps": 59.48,
+      "required_speed_mps": 59.48
+    },
+    {
+      "start_m": 1522.9217191175942,
+      "end_m": 1604.422107382561,
+      "reference_horizontal_speed_mps": 64.74,
+      "required_speed_mps": 64.74
+    },
+    {
+      "start_m": 2051.910298310736,
+      "end_m": 2219.9114306112406,
+      "reference_horizontal_speed_mps": 71.6,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 2421.907599030763,
+      "end_m": 2503.403053548723,
+      "reference_horizontal_speed_mps": 74.62,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 2517.4031653902252,
+      "end_m": 2611.3994167297024,
+      "reference_horizontal_speed_mps": 81.94,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 3058.3975097994353,
+      "end_m": 3083.8960598394006,
+      "reference_horizontal_speed_mps": 88.53,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 3095.896041274898,
+      "end_m": 3226.8897392841322,
+      "reference_horizontal_speed_mps": 68.31,
+      "required_speed_mps": 68.31
+    }
+  ],
+  "runs": [
+    {
+      "finished": false,
+      "termination": "Stuck_Cutoff_2s",
+      "race_time_s": null,
+      "completion_pct": 8.18,
+      "actions": 566,
+      "steps": 566,
+      "impact_suspects": 1,
+      "recovery_steps": 355,
+      "reversals": 4,
+      "slip_steps": 44,
+      "max_progress_m": 337.4,
+      "centerline_length_m": 4250.39,
+      "run": 1
+    }
+  ],
+  "finishes": "0/1"
+}
