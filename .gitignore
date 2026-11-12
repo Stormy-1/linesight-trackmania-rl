@@ -47,3 +47,10 @@ training_report_*.md
 read_tb.py
 wait_5m.py
 .git_upstream_backup
+
+# Local working notes and plans: kept on disk, not part of the project repo
+CLOUD_MIGRATION.md
+GENERALIZATION_STRATEGY.md
+PROJECT_STORY.md
+SESSION_CONTINUATION.md
+HANDOVER_DOC.md
