@@ -785,6 +785,10 @@ class GameInstanceManager:
                                 position=sim_state_position,
                                 velocity=sim_state_velocity,
                                 orientation=sim_state_orientation,
+                                # has_ground_contact of the 4 wheels (residual-RL airborne flag)
+                                wheel_contact=None
+                                if sim_state_car_gear_and_wheels is None
+                                else sim_state_car_gear_and_wheels[4:8],
                             )
 
                         (

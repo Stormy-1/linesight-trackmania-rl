@@ -11,12 +11,14 @@ Built once per map from the centerline (which is a recorded reference run).
   steady negative ``d2y/dh2`` gives the reference horizontal speed
   ``v_h = sqrt(g / |d2y/dh2|)``.  The car must arrive near that speed or it
   falls short (A07 at 1577 m, Hockolicious at 967 m in the first live runs).
-  In-game gravity was measured at ~15.4 m/s^2 from a live free fall.
+  In-game gravity is 24.9 m/s^2: the median of 2,328 clean free-flight samples in the
+  official replay ghosts (``scripts/measure_gravity.py``; the old 15.4 was 20% off, HANDOVER §70).
 """
 
 from __future__ import annotations
 
 import math
+from collections.abc import Callable
 from dataclasses import dataclass
 
 import numpy as np
@@ -31,7 +33,7 @@ class TrackProfileConfig:
     min_speed_mps: float = 12.0
     curvature_gain: float = 28.0
     braking_decel_mps2: float = 15.0
-    gravity_mps2: float = 15.4
+    gravity_mps2: float = 24.9
     jump_fit_half_window_m: float = 6.0
     jump_min_length_m: float = 20.0
     jump_speed_range_mps: tuple[float, float] = (15.0, 110.0)
@@ -125,9 +127,16 @@ def detect_jumps(geometry: CenterlineGeometry, config: TrackProfileConfig) -> tu
 
 
 def build_track_speed_profile(
-    geometry: CenterlineGeometry, config: TrackProfileConfig | None = None, base_speed_mps: np.ndarray | None = None
+    geometry: CenterlineGeometry,
+    config: TrackProfileConfig | None = None,
+    base_speed_mps: np.ndarray | None = None,
+    grip_limit: Callable[[np.ndarray], np.ndarray] | None = None,
 ) -> TrackSpeedProfile:
-    """``base_speed_mps`` (one value per point, e.g. the learned speed model) replaces the hand corner rule."""
+    """``base_speed_mps`` (one value per point, e.g. the learned speed model) replaces the hand corner rule.
+
+    ``grip_limit`` maps smoothed horizontal curvature to the speed the car can hold
+    (the fitted grip model); the corner limit becomes ``min(base, grip)``.
+    """
 
     config = config or TrackProfileConfig()
     progress = geometry.cumulative_lengths
@@ -136,6 +145,8 @@ def build_track_speed_profile(
         if len(base_speed_mps) != len(progress):
             raise ValueError("base_speed_mps needs one value per centerline point")
         corner_limit = np.clip(np.asarray(base_speed_mps, dtype=float), config.min_speed_mps, config.max_speed_mps)
+        if grip_limit is not None:
+            corner_limit = np.maximum(np.minimum(corner_limit, grip_limit(curvature)), config.min_speed_mps)
     else:
         corner_limit = np.array(
             [
@@ -145,6 +156,8 @@ def build_track_speed_profile(
                 for k in curvature
             ]
         )
+        if grip_limit is not None:
+            corner_limit = np.maximum(np.minimum(corner_limit, grip_limit(curvature)), config.min_speed_mps)
     # Backward pass: never be faster than what can be braked down for what's ahead.
     target = corner_limit.copy()
     for i in range(len(target) - 2, -1, -1):

@@ -198,3 +198,39 @@ def test_slip_guard_has_hysteresis(tmp_path):
     policy.close()
     rows = list(csv.DictReader((tmp_path / "log.csv").read_text().splitlines()))
     assert [r["maneuver"] for r in rows] == ["slip", "slip", "drive"]
+
+
+class _FakeSensor:
+    """Range sensor stand-in: records the yaw it was asked about, returns fixed ranges."""
+
+    def __init__(self):
+        self.yaws = []
+
+    def scan(self, position, heading_rad):
+        self.yaws.append(heading_rad)
+        return np.arange(13, dtype=float)
+
+
+def _drive_two_steps(policy, tmp_path):
+    policy.reset(tmp_path / "log.csv")
+    for t in (0.0, 0.05):
+        v = np.array([0.0, 0.0, 30.0])  # moving along +z
+        policy.decide(race_time_s=t, position=np.array([10.0, 0.0, t * 30]), velocity=v, orientation=orientation_facing(v))
+    policy.close()
+    return list(csv.DictReader((tmp_path / "log.csv").read_text().splitlines()))
+
+
+def test_range_sensor_rays_are_logged_from_the_nose_direction(tmp_path):
+    sensor = _FakeSensor()
+    policy = HybridLivePolicy(straight_x_centerline(), ConservativeCenterlineController(), range_sensor=sensor)
+
+    rows = _drive_two_steps(policy, tmp_path)
+
+    assert sensor.yaws == pytest.approx([math.pi / 2, math.pi / 2])  # nose along +z
+    assert rows[0]["range_-90"] == "0.0" and rows[0]["range_+0"] == "6.0" and rows[0]["range_+90"] == "12.0"
+
+
+def test_no_sensor_means_no_range_columns(tmp_path):
+    policy = HybridLivePolicy(straight_x_centerline(), ConservativeCenterlineController())
+    rows = _drive_two_steps(policy, tmp_path)
+    assert not any(key.startswith("range_") for key in rows[0])

@@ -27,6 +27,18 @@ import numpy as np
 from config_files.inputs_list import inputs as ACTION_INPUTS
 from trackmania_rl.hybrid_controller import ControllerCommand
 from trackmania_rl.hybrid_state import CenterlineGeometry, TrackRelativeState, build_centerline_geometry, make_track_relative_state
+from trackmania_rl.range_sensor import RangeSensor, ray_field_names
+from trackmania_rl.residual_action import (
+    ZERO_RESIDUAL,
+    Residual,
+    ResidualConfig,
+    ResidualPolicy,
+    apply_steering_residual,
+    scale_residual,
+    shield_jump_floor,
+)
+from trackmania_rl.residual_observation import ResidualObservationBuilder
+from trackmania_rl.residual_reward import StepRecord
 
 
 class Controller(Protocol):
@@ -94,6 +106,7 @@ LOG_FIELDS = (
     "elevation_error_m", "heading_source", "forward_velocity_angle_rad", "steering", "throttle", "brake",
     "target_speed_mps", "recovery", "action_idx", "speed_drop_mps", "impact_suspect", "maneuver",
 )
+RESIDUAL_LOG_FIELDS = ("ground_contact", "residual_active", "residual_steering", "residual_target_speed_mps")
 
 
 @dataclass(frozen=True)
@@ -139,11 +152,26 @@ class HybridLivePolicy:
         *,
         adapter: DiscreteActionAdapter | None = None,
         config: HybridLivePolicyConfig | None = None,
+        range_sensor: RangeSensor | None = None,
+        residual_policy: ResidualPolicy | None = None,
+        residual_config: ResidualConfig | None = None,
     ):
         self.geometry = build_centerline_geometry(centerline_points)
+        # Virtual lidar (logged only; it doesn't change any decision yet).
+        self.range_sensor = range_sensor
+        self._ray_fields = ray_field_names() if range_sensor is not None else ()
         self.controller = controller
         self.adapter = adapter or DiscreteActionAdapter()
         self.config = config or HybridLivePolicyConfig()
+        # Step 4: a residual policy corrects the base command (None = base stack only).
+        self.residual_policy = residual_policy
+        self.residual_config = residual_config or ResidualConfig()
+        self.observation_builder = None
+        if residual_policy is not None:
+            profile = getattr(controller, "profile", None)
+            if profile is None or not hasattr(getattr(controller, "config", None), "steering_limit"):
+                raise TypeError("a residual policy needs a PurePursuitController (speed profile + steering cap)")
+            self.observation_builder = ResidualObservationBuilder(self.geometry, profile)
         self._log_file = None
         self._log_writer = None
         self.reset()
@@ -164,10 +192,14 @@ class HybridLivePolicy:
         self._reverse_until = -math.inf
         self._slipping = False
         self.slip_steps = 0
+        self.residual_active_steps = 0
+        self.step_records: list[StepRecord] = []
         if log_path is not None:
             log_path.parent.mkdir(parents=True, exist_ok=True)
             self._log_file = open(log_path, "w", newline="")  # noqa: SIM115 - lives across rollout steps, closed in close()
-            self._log_writer = csv.DictWriter(self._log_file, fieldnames=LOG_FIELDS)
+            fields = LOG_FIELDS + (("sensor_yaw_rad",) + self._ray_fields if self._ray_fields else ())
+            fields += RESIDUAL_LOG_FIELDS if self.residual_policy is not None else ()
+            self._log_writer = csv.DictWriter(self._log_file, fieldnames=fields)
             self._log_writer.writeheader()
 
     def close(self) -> None:
@@ -178,13 +210,20 @@ class HybridLivePolicy:
 
     # --- rollout-loop interface ------------------------------------------
     def observe_simulation_state(
-        self, *, race_time_s: float, position: np.ndarray, velocity: np.ndarray, orientation: np.ndarray
+        self,
+        *,
+        race_time_s: float,
+        position: np.ndarray,
+        velocity: np.ndarray,
+        orientation: np.ndarray,
+        wheel_contact: np.ndarray | None = None,
     ) -> None:
         self._observation = {
             "race_time_s": float(race_time_s),
             "position": np.asarray(position, dtype=np.float64),
             "velocity": np.asarray(velocity, dtype=np.float64),
             "orientation": np.asarray(orientation, dtype=np.float64),
+            "wheel_contact": None if wheel_contact is None else np.asarray(wheel_contact, dtype=np.float64),
         }
 
     def __call__(self, frame, floats) -> tuple[int, bool, float, np.ndarray]:
@@ -211,7 +250,13 @@ class HybridLivePolicy:
         return forward, "forward_axis", angle
 
     def decide(
-        self, *, race_time_s: float, position: np.ndarray, velocity: np.ndarray, orientation: np.ndarray
+        self,
+        *,
+        race_time_s: float,
+        position: np.ndarray,
+        velocity: np.ndarray,
+        orientation: np.ndarray,
+        wheel_contact: np.ndarray | None = None,
     ) -> tuple[int, ControllerCommand]:
         speed = float(np.linalg.norm(velocity))
         heading, source, forward_velocity_angle = self.heading(velocity, orientation)
@@ -227,6 +272,27 @@ class HybridLivePolicy:
         self._previous_segment = state.segment_index
         command = self.controller.command(state, self.geometry)
         slipping = self._update_slip(speed, forward_velocity_angle)
+        ranges = self._scan(position, orientation)
+        observation, action_out, residual = None, np.zeros(2, dtype=np.float32), ZERO_RESIDUAL
+        # Shielded residual: off while a safety layer (recovery, slip guard, reverse) owns the car.
+        airborne = self.residual_config.airborne_shield and wheel_contact is not None and not np.any(wheel_contact)
+        residual_active = (
+            self.residual_policy is not None
+            and not command.recovery
+            and not slipping
+            and not airborne
+            and race_time_s >= self._reverse_until
+        )
+        if self.residual_policy is not None:
+            observation = self.observation_builder.build(
+                state, command, slip_angle_rad=forward_velocity_angle, ranges_m=ranges, wheel_contact=wheel_contact
+            )
+        if residual_active:
+            action_out = np.clip(np.asarray(self.residual_policy.act(observation), dtype=np.float32), -1.0, 1.0)
+            residual = scale_residual(action_out, self.residual_config)
+            if self.residual_config.jump_floor_shield:
+                residual, action_out = shield_jump_floor(residual, action_out, self._jump_locked_ahead(state))
+            command = self._apply_residual(state, command, residual)
         if slipping:
             limit = self.config.slip_steer_limit
             counter = float(np.clip(-self.config.slip_steer_gain * forward_velocity_angle, -limit, limit))
@@ -246,33 +312,84 @@ class HybridLivePolicy:
         self.recovery_steps += int(command.recovery)
         self.slip_steps += int(slipping)
         self.max_progress_m = max(self.max_progress_m, state.progress_m)
+        if observation is not None:
+            self.residual_active_steps += int(residual_active)
+            self.step_records.append(
+                StepRecord(
+                    observation=observation,
+                    action=action_out,
+                    residual_active=residual_active,
+                    progress_m=state.progress_m,
+                    impact=impact,
+                    recovery=command.recovery,
+                    reversing=maneuver == "reverse",
+                )
+            )
 
         if self._log_writer is not None:
-            self._log_writer.writerow(
-                {
-                    "race_time_s": round(race_time_s, 3),
-                    "x": round(float(position[0]), 3),
-                    "y": round(float(position[1]), 3),
-                    "z": round(float(position[2]), 3),
-                    "speed_mps": round(speed, 3),
-                    "progress_m": round(state.progress_m, 3),
-                    "lateral_error_m": round(state.lateral_error_m, 3),
-                    "heading_error_rad": round(state.heading_error_rad, 4),
-                    "elevation_error_m": round(state.elevation_error_m, 3),
-                    "heading_source": source,
-                    "forward_velocity_angle_rad": round(forward_velocity_angle, 4),
-                    "steering": round(command.steering, 4),
-                    "throttle": round(command.throttle, 4),
-                    "brake": round(command.brake, 4),
-                    "target_speed_mps": round(command.target_speed_mps, 3),
-                    "recovery": command.recovery,
-                    "action_idx": action,
-                    "speed_drop_mps": round(speed_drop, 3),
-                    "impact_suspect": impact,
-                    "maneuver": maneuver,
-                }
-            )
+            row = {
+                "race_time_s": round(race_time_s, 3),
+                "x": round(float(position[0]), 3),
+                "y": round(float(position[1]), 3),
+                "z": round(float(position[2]), 3),
+                "speed_mps": round(speed, 3),
+                "progress_m": round(state.progress_m, 3),
+                "lateral_error_m": round(state.lateral_error_m, 3),
+                "heading_error_rad": round(state.heading_error_rad, 4),
+                "elevation_error_m": round(state.elevation_error_m, 3),
+                "heading_source": source,
+                "forward_velocity_angle_rad": round(forward_velocity_angle, 4),
+                "steering": round(command.steering, 4),
+                "throttle": round(command.throttle, 4),
+                "brake": round(command.brake, 4),
+                "target_speed_mps": round(command.target_speed_mps, 3),
+                "recovery": command.recovery,
+                "action_idx": action,
+                "speed_drop_mps": round(speed_drop, 3),
+                "impact_suspect": impact,
+                "maneuver": maneuver,
+            }
+            if ranges is not None:
+                row["sensor_yaw_rad"] = round(self._sensor_yaw(orientation), 4)
+                row.update({name: round(float(r), 2) for name, r in zip(self._ray_fields, ranges)})
+            if observation is not None:
+                row.update(
+                    ground_contact=round(float(observation[-1]), 2),
+                    residual_active=residual_active,
+                    residual_steering=round(residual.steering_delta, 4),
+                    residual_target_speed_mps=round(residual.target_speed_delta_mps, 3),
+                )
+            self._log_writer.writerow(row)
         return action, command
+
+    @staticmethod
+    def _sensor_yaw(orientation: np.ndarray) -> float:
+        forward = orientation[2]
+        return math.atan2(float(forward[2]), float(forward[0]))
+
+    def _scan(self, position: np.ndarray, orientation: np.ndarray) -> np.ndarray | None:
+        """Virtual-lidar ranges; rays fan out from the car's nose direction (None without a sensor)."""
+
+        if self.range_sensor is None:
+            return None
+        return self.range_sensor.scan(position, self._sensor_yaw(orientation))
+
+    def _jump_locked_ahead(self, state: TrackRelativeState) -> bool:
+        """True where the controller's speed preview point sits on a jump's required-speed approach."""
+
+        is_locked = getattr(self.controller.profile, "is_jump_locked", None)
+        preview = getattr(self.controller.config, "speed_preview_m", 0.0)
+        return bool(is_locked(state.progress_m + preview)) if is_locked else False
+
+    def _apply_residual(self, state: TrackRelativeState, base: ControllerCommand, residual: Residual) -> ControllerCommand:
+        """Base command + residual; a zero residual returns ``base`` untouched."""
+
+        command = base
+        if residual.target_speed_delta_mps != 0.0:
+            command = self.controller.command(state, self.geometry, target_speed_offset_mps=residual.target_speed_delta_mps)
+        limit = self.controller.config.steering_limit(max(state.speed_mps, 0.0))
+        steering = apply_steering_residual(command.steering, residual.steering_delta, limit)
+        return command if steering == command.steering else replace(command, steering=steering)
 
     def _update_slip(self, speed: float, angle: float) -> bool:
         cfg = self.config
@@ -309,6 +426,7 @@ class HybridLivePolicy:
             "recovery_steps": self.recovery_steps,
             "reversals": self.reversals,
             "slip_steps": self.slip_steps,
+            "residual_active_steps": self.residual_active_steps,
             "max_progress_m": round(self.max_progress_m, 2),
             "centerline_length_m": round(float(self.geometry.cumulative_lengths[-1]), 2),
         }

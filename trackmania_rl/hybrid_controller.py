@@ -406,7 +406,11 @@ class PurePursuitController:
         normal = np.array([tangent[1], -tangent[0]])
         return np.array([state.projection[0], state.projection[2]]) + state.lateral_error_m * normal
 
-    def command(self, state: TrackRelativeState, geometry: CenterlineGeometry) -> ControllerCommand:
+    def command(
+        self, state: TrackRelativeState, geometry: CenterlineGeometry, target_speed_offset_mps: float = 0.0
+    ) -> ControllerCommand:
+        """``target_speed_offset_mps`` is the residual policy's target-speed delta (ignored in recovery)."""
+
         cfg = self.config
         speed = max(state.speed_mps, 0.0)
         recovery = recovery_required(
@@ -428,6 +432,8 @@ class PurePursuitController:
                 return ControllerCommand(steering, 1.0, 0.0, target_speed, True)
         else:
             target_speed = self.profile.target_at(state.progress_m + cfg.speed_preview_m)
+            if target_speed_offset_mps != 0.0:
+                target_speed = max(0.0, target_speed + target_speed_offset_mps)
 
         speed_error = target_speed - speed
         if speed_error < -cfg.brake_overspeed_mps:
