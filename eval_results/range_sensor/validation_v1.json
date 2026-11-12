@@ -1,0 +1,28 @@
+{
+  "train_lomo": {
+    "maps": 53,
+    "driving_steps": 113248,
+    "wall_hits_scored": 43,
+    "nearest_at_hit_median_m": 2.0,
+    "hits_within_contact_m": 0.5581395348837209,
+    "nearest_ordinary_median_m": 30.0,
+    "ordinary_within_contact_m": 0.10251038596740404,
+    "false_solid_rate": 0.031655008344281504,
+    "auc_warning_range": 0.6155415936755517,
+    "auc_warning_cell_flag": 0.5660174548356678,
+    "auc_warning_lateral": 0.7622666031899152
+  },
+  "test_once": {
+    "maps": 10,
+    "driving_steps": 25771,
+    "wall_hits_scored": 7,
+    "nearest_at_hit_median_m": 17.5,
+    "hits_within_contact_m": 0.42857142857142855,
+    "nearest_ordinary_median_m": 40.5,
+    "ordinary_within_contact_m": 0.07182643243874888,
+    "false_solid_rate": 0.027382853581583766,
+    "auc_warning_range": 0.5763976606885499,
+    "auc_warning_cell_flag": 0.48733681140434204,
+    "auc_warning_lateral": 0.8640062576660782
+  }
+}

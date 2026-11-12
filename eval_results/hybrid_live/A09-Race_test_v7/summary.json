@@ -1,0 +1,54 @@
+{
+  "track": "A09-Race",
+  "controller": "purepursuit",
+  "speed_model": "eval_results\\speed_model\\speed_model_v1.pt",
+  "speed_scale": 1.0,
+  "top_speed_mps": 70.0,
+  "gravity_mps2": 24.9,
+  "grip_model": "eval_results\\grip_model\\grip_model_v1.json",
+  "grip_risk": 0.2,
+  "centerline": "A09-Race_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "speed_caps": [],
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 486.4925085827711,
+      "end_m": 555.497289851159,
+      "reference_horizontal_speed_mps": 79.37,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 1018.0213919055346,
+      "end_m": 1158.5314200550354,
+      "reference_horizontal_speed_mps": 75.14,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 1219.530386896211,
+      "end_m": 1302.0363245897809,
+      "reference_horizontal_speed_mps": 83.45,
+      "required_speed_mps": 70.0
+    }
+  ],
+  "runs": [
+    {
+      "finished": false,
+      "termination": "Stuck_Cutoff_2s",
+      "race_time_s": null,
+      "completion_pct": 69.25,
+      "actions": 705,
+      "steps": 705,
+      "impact_suspects": 2,
+      "recovery_steps": 211,
+      "reversals": 4,
+      "slip_steps": 77,
+      "max_progress_m": 1383.22,
+      "centerline_length_m": 2001.08,
+      "run": 1
+    }
+  ],
+  "finishes": "0/1"
+}
