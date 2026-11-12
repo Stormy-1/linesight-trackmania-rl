@@ -1,0 +1,53 @@
+{
+  "track": "A01-Race",
+  "controller": "purepursuit",
+  "speed_model": "eval_results\\speed_model\\speed_model_v1.pt",
+  "speed_scale": 1.0,
+  "top_speed_mps": 70.0,
+  "gravity_mps2": 24.9,
+  "range_sensor": "eval_results\\range_sensor\\footprints_v1.npz",
+  "residual": "eval_results/residual_rl/td3_v2/final.pt",
+  "residual_config": {
+    "max_steering_delta": 0.25,
+    "max_target_speed_delta_mps": 8.0,
+    "jump_floor_shield": false,
+    "airborne_shield": false
+  },
+  "grip_model": "eval_results\\grip_model\\grip_model_v1.json",
+  "grip_risk": 0.2,
+  "centerline": "A01-Race_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "speed_caps": [],
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 354.92203566596237,
+      "end_m": 505.4069226685809,
+      "reference_horizontal_speed_mps": 74.48,
+      "required_speed_mps": 70.0
+    }
+  ],
+  "runs": [
+    {
+      "finished": true,
+      "termination": "Finished",
+      "race_time_s": 42.98,
+      "completion_pct": 100.0,
+      "actions": 861,
+      "steps": 860,
+      "impact_suspects": 1,
+      "recovery_steps": 31,
+      "reversals": 0,
+      "slip_steps": 12,
+      "residual_active_steps": 817,
+      "max_progress_m": 2194.72,
+      "centerline_length_m": 2194.72,
+      "run": 1,
+      "rl_transitions": 860,
+      "rl_return": 216.275
+    }
+  ],
+  "finishes": "1/1"
+}

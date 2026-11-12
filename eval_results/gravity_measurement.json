@@ -1,0 +1,17 @@
+{
+  "gravity_mps2": 24.87,
+  "n_samples": 2328,
+  "n_maps": 53,
+  "iqr_mps2": [
+    24.55,
+    25.25
+  ],
+  "detector_over_pro_speed_median": {
+    "15.4": 0.801,
+    "measured": 1.012
+  },
+  "n_jumps": {
+    "15.4": 329,
+    "measured": 307
+  }
+}

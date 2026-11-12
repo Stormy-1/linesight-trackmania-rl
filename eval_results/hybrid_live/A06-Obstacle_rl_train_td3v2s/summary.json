@@ -1,0 +1,89 @@
+{
+  "track": "A06-Obstacle",
+  "controller": "purepursuit",
+  "speed_model": "eval_results\\speed_model\\speed_model_v1.pt",
+  "speed_scale": 1.0,
+  "top_speed_mps": 70.0,
+  "gravity_mps2": 24.9,
+  "range_sensor": "eval_results\\range_sensor\\footprints_v1.npz",
+  "residual": "eval_results/residual_rl/td3_v2/final.pt",
+  "residual_config": {
+    "max_steering_delta": 0.25,
+    "max_target_speed_delta_mps": 8.0,
+    "jump_floor_shield": true,
+    "airborne_shield": true
+  },
+  "grip_model": "eval_results\\grip_model\\grip_model_v1.json",
+  "grip_risk": 0.2,
+  "centerline": "A06-Obstacle_official_0.5m_cl.npy",
+  "max_speed_override_mps": null,
+  "speed_caps": [],
+  "game_speed": 10.0,
+  "stuck_cutoff_s": 6.0,
+  "unstick_enabled": true,
+  "jumps": [
+    {
+      "start_m": 152.46413875231016,
+      "end_m": 225.96732781504474,
+      "reference_horizontal_speed_mps": 46.48,
+      "required_speed_mps": 46.48
+    },
+    {
+      "start_m": 348.9688504496096,
+      "end_m": 462.4741819113709,
+      "reference_horizontal_speed_mps": 52.7,
+      "required_speed_mps": 52.7
+    },
+    {
+      "start_m": 546.4693875157083,
+      "end_m": 630.9730233219772,
+      "reference_horizontal_speed_mps": 49.69,
+      "required_speed_mps": 49.69
+    },
+    {
+      "start_m": 742.9742872734304,
+      "end_m": 841.4790630724927,
+      "reference_horizontal_speed_mps": 53.18,
+      "required_speed_mps": 53.18
+    },
+    {
+      "start_m": 1134.9772467187768,
+      "end_m": 1285.4852458208293,
+      "reference_horizontal_speed_mps": 65.07,
+      "required_speed_mps": 65.07
+    },
+    {
+      "start_m": 1335.481890085562,
+      "end_m": 1364.483437429758,
+      "reference_horizontal_speed_mps": 71.01,
+      "required_speed_mps": 70.0
+    },
+    {
+      "start_m": 1397.9805571072964,
+      "end_m": 1517.9868124205434,
+      "reference_horizontal_speed_mps": 59.03,
+      "required_speed_mps": 59.03
+    }
+  ],
+  "runs": [
+    {
+      "finished": false,
+      "termination": "Stuck_Cutoff_2s",
+      "race_time_s": null,
+      "completion_pct": 92.66,
+      "actions": 803,
+      "steps": 803,
+      "impact_suspects": 10,
+      "recovery_steps": 105,
+      "reversals": 1,
+      "slip_steps": 59,
+      "residual_active_steps": 474,
+      "max_progress_m": 1445.96,
+      "centerline_length_m": 1534.98,
+      "run": 1,
+      "rl_transitions": 803,
+      "rl_return": 123.281
+    }
+  ],
+  "finishes": "0/1"
+}
