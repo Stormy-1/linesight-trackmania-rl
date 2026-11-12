@@ -1,0 +1,250 @@
+{
+  "from": "eval_results\\residual_rl\\td3_v1\\latest.pt",
+  "anchor_alpha": 25.0,
+  "updates": 30000,
+  "buffer": 79256,
+  "before": {
+    "A06-Obstacle": {
+      "states": 5212,
+      "mean_action": [
+        0.006000000052154064,
+        -0.0010000000474974513
+      ],
+      "mean_abs_action": [
+        0.012000000104308128,
+        0.017999999225139618
+      ],
+      "saturated_share": [
+        0.0,
+        0.0
+      ],
+      "q_gain_mean": 0.0033,
+      "steer_vs_lateral_r": 0.096,
+      "steer_vs_sin_heading_r": -0.005,
+      "dtarget_near_jump": -0.027,
+      "dtarget_elsewhere": 0.002
+    },
+    "A08-Endurance": {
+      "states": 30789,
+      "mean_action": [
+        0.004000000189989805,
+        0.003000000026077032
+      ],
+      "mean_abs_action": [
+        0.008999999612569809,
+        0.013000000268220901
+      ],
+      "saturated_share": [
+        0.0,
+        0.0
+      ],
+      "q_gain_mean": 0.0031,
+      "steer_vs_lateral_r": 0.135,
+      "steer_vs_sin_heading_r": -0.149,
+      "dtarget_near_jump": null,
+      "dtarget_elsewhere": 0.003
+    },
+    "B11-Race": {
+      "states": 7671,
+      "mean_action": [
+        0.003000000026077032,
+        -0.004999999888241291
+      ],
+      "mean_abs_action": [
+        0.014000000432133675,
+        0.01899999938905239
+      ],
+      "saturated_share": [
+        0.0,
+        0.0
+      ],
+      "q_gain_mean": 0.0076,
+      "steer_vs_lateral_r": 0.049,
+      "steer_vs_sin_heading_r": -0.089,
+      "dtarget_near_jump": 0.002,
+      "dtarget_elsewhere": -0.005
+    },
+    "B12-Race": {
+      "states": 11171,
+      "mean_action": [
+        0.0,
+        0.0020000000949949026
+      ],
+      "mean_abs_action": [
+        0.008999999612569809,
+        0.014000000432133675
+      ],
+      "saturated_share": [
+        0.0,
+        0.0
+      ],
+      "q_gain_mean": 0.0037,
+      "steer_vs_lateral_r": -0.078,
+      "steer_vs_sin_heading_r": -0.085,
+      "dtarget_near_jump": -0.001,
+      "dtarget_elsewhere": 0.002
+    },
+    "C05-Endurance": {
+      "states": 15669,
+      "mean_action": [
+        0.003000000026077032,
+        -0.0020000000949949026
+      ],
+      "mean_abs_action": [
+        0.012000000104308128,
+        0.014999999664723873
+      ],
+      "saturated_share": [
+        0.0,
+        0.0
+      ],
+      "q_gain_mean": 0.0044,
+      "steer_vs_lateral_r": -0.118,
+      "steer_vs_sin_heading_r": -0.059,
+      "dtarget_near_jump": 0.003,
+      "dtarget_elsewhere": -0.002
+    },
+    "D05-Race": {
+      "states": 2604,
+      "mean_action": [
+        0.0,
+        -0.007000000216066837
+      ],
+      "mean_abs_action": [
+        0.012000000104308128,
+        0.014000000432133675
+      ],
+      "saturated_share": [
+        0.0,
+        0.0
+      ],
+      "q_gain_mean": 0.0041,
+      "steer_vs_lateral_r": 0.152,
+      "steer_vs_sin_heading_r": -0.021,
+      "dtarget_near_jump": -0.021,
+      "dtarget_elsewhere": -0.004
+    }
+  },
+  "after": {
+    "A06-Obstacle": {
+      "states": 5212,
+      "mean_action": [
+        -0.01899999938905239,
+        0.03400000184774399
+      ],
+      "mean_abs_action": [
+        0.10000000149011612,
+        0.1289999932050705
+      ],
+      "saturated_share": [
+        0.0,
+        0.0
+      ],
+      "q_gain_mean": 0.0162,
+      "steer_vs_lateral_r": -0.127,
+      "steer_vs_sin_heading_r": -0.064,
+      "dtarget_near_jump": -0.013,
+      "dtarget_elsewhere": 0.04
+    },
+    "A08-Endurance": {
+      "states": 30789,
+      "mean_action": [
+        -0.004000000189989805,
+        0.07199999690055847
+      ],
+      "mean_abs_action": [
+        0.07100000232458115,
+        0.10400000214576721
+      ],
+      "saturated_share": [
+        0.0,
+        0.0
+      ],
+      "q_gain_mean": 0.0179,
+      "steer_vs_lateral_r": 0.123,
+      "steer_vs_sin_heading_r": -0.175,
+      "dtarget_near_jump": null,
+      "dtarget_elsewhere": 0.072
+    },
+    "B11-Race": {
+      "states": 7671,
+      "mean_action": [
+        -0.03799999877810478,
+        0.009999999776482582
+      ],
+      "mean_abs_action": [
+        0.12099999934434891,
+        0.15199999511241913
+      ],
+      "saturated_share": [
+        0.001,
+        0.005
+      ],
+      "q_gain_mean": 0.0559,
+      "steer_vs_lateral_r": -0.035,
+      "steer_vs_sin_heading_r": -0.132,
+      "dtarget_near_jump": 0.059,
+      "dtarget_elsewhere": 0.009
+    },
+    "B12-Race": {
+      "states": 11171,
+      "mean_action": [
+        -0.017999999225139618,
+        0.03799999877810478
+      ],
+      "mean_abs_action": [
+        0.08500000089406967,
+        0.10999999940395355
+      ],
+      "saturated_share": [
+        0.0,
+        0.001
+      ],
+      "q_gain_mean": 0.0227,
+      "steer_vs_lateral_r": -0.145,
+      "steer_vs_sin_heading_r": -0.15,
+      "dtarget_near_jump": 0.01,
+      "dtarget_elsewhere": 0.039
+    },
+    "C05-Endurance": {
+      "states": 15669,
+      "mean_action": [
+        -0.02500000037252903,
+        0.03400000184774399
+      ],
+      "mean_abs_action": [
+        0.09799999743700027,
+        0.1120000034570694
+      ],
+      "saturated_share": [
+        0.001,
+        0.0
+      ],
+      "q_gain_mean": 0.0323,
+      "steer_vs_lateral_r": -0.18,
+      "steer_vs_sin_heading_r": -0.075,
+      "dtarget_near_jump": 0.085,
+      "dtarget_elsewhere": 0.03
+    },
+    "D05-Race": {
+      "states": 2604,
+      "mean_action": [
+        -0.06499999761581421,
+        -0.013000000268220901
+      ],
+      "mean_abs_action": [
+        0.14000000059604645,
+        0.08900000154972076
+      ],
+      "saturated_share": [
+        0.0,
+        0.0
+      ],
+      "q_gain_mean": 0.0356,
+      "steer_vs_lateral_r": 0.122,
+      "steer_vs_sin_heading_r": 0.097,
+      "dtarget_near_jump": -0.09,
+      "dtarget_elsewhere": 0.005
+    }
+  }
+}

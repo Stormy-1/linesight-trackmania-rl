@@ -1,0 +1,193 @@
+{
+  "runs": [
+    "A06-Obstacle_rl_train_v7zero",
+    "A08-Endurance_rl_train_v7zero",
+    "B11-Race_rl_train_v7zero",
+    "B12-Race_rl_train_v7zero",
+    "C05-Endurance_rl_train_v7zero",
+    "D05-Race_rl_train_v7zero"
+  ],
+  "updates": 30000,
+  "seed": 0,
+  "config": {
+    "hidden_units": 256,
+    "gamma": 0.99,
+    "tau": 0.005,
+    "actor_lr": 0.0003,
+    "critic_lr": 0.0003,
+    "batch_size": 256,
+    "policy_delay": 2,
+    "target_noise": 0.2,
+    "target_noise_clip": 0.5,
+    "anchor_alpha": 2.5,
+    "max_grad_norm": 10.0
+  },
+  "train_fit": {
+    "A06-Obstacle_rl_train_v7zero": {
+      "pearson_r": 0.899,
+      "mae": 11.31,
+      "bias": -11.252,
+      "return_mean": 13.386,
+      "return_std": 11.721
+    },
+    "A08-Endurance_rl_train_v7zero": {
+      "pearson_r": 0.72,
+      "mae": 17.224,
+      "bias": -17.224,
+      "return_mean": 27.587,
+      "return_std": 4.75
+    },
+    "B11-Race_rl_train_v7zero": {
+      "pearson_r": 0.887,
+      "mae": 11.205,
+      "bias": -11.202,
+      "return_mean": 16.459,
+      "return_std": 10.656
+    },
+    "B12-Race_rl_train_v7zero": {
+      "pearson_r": 0.573,
+      "mae": 14.731,
+      "bias": -14.551,
+      "return_mean": 24.445,
+      "return_std": 5.498
+    },
+    "C05-Endurance_rl_train_v7zero": {
+      "pearson_r": 0.927,
+      "mae": 6.682,
+      "bias": -6.534,
+      "return_mean": 6.604,
+      "return_std": 11.857
+    },
+    "D05-Race_rl_train_v7zero": {
+      "pearson_r": 0.987,
+      "mae": 5.533,
+      "bias": -5.533,
+      "return_mean": 4.232,
+      "return_std": 10.739
+    }
+  },
+  "curve": [
+    {
+      "update": 5000,
+      "critic_loss": 0.03418201208114624,
+      "q_mean": 4.2248640060424805,
+      "pearson_r": {
+        "A06-Obstacle_rl_train_v7zero": 0.856,
+        "A08-Endurance_rl_train_v7zero": 0.49,
+        "B11-Race_rl_train_v7zero": 0.667,
+        "B12-Race_rl_train_v7zero": 0.279,
+        "C05-Endurance_rl_train_v7zero": 0.863,
+        "D05-Race_rl_train_v7zero": 0.835
+      }
+    },
+    {
+      "update": 10000,
+      "critic_loss": 0.08419214189052582,
+      "q_mean": 6.459875106811523,
+      "pearson_r": {
+        "A06-Obstacle_rl_train_v7zero": 0.889,
+        "A08-Endurance_rl_train_v7zero": 0.577,
+        "B11-Race_rl_train_v7zero": 0.745,
+        "B12-Race_rl_train_v7zero": 0.346,
+        "C05-Endurance_rl_train_v7zero": 0.893,
+        "D05-Race_rl_train_v7zero": 0.915
+      }
+    },
+    {
+      "update": 15000,
+      "critic_loss": 0.1571808159351349,
+      "q_mean": 7.427234649658203,
+      "pearson_r": {
+        "A06-Obstacle_rl_train_v7zero": 0.911,
+        "A08-Endurance_rl_train_v7zero": 0.64,
+        "B11-Race_rl_train_v7zero": 0.793,
+        "B12-Race_rl_train_v7zero": 0.417,
+        "C05-Endurance_rl_train_v7zero": 0.921,
+        "D05-Race_rl_train_v7zero": 0.965
+      }
+    },
+    {
+      "update": 20000,
+      "critic_loss": 0.23454266786575317,
+      "q_mean": 7.400871753692627,
+      "pearson_r": {
+        "A06-Obstacle_rl_train_v7zero": 0.918,
+        "A08-Endurance_rl_train_v7zero": 0.685,
+        "B11-Race_rl_train_v7zero": 0.831,
+        "B12-Race_rl_train_v7zero": 0.485,
+        "C05-Endurance_rl_train_v7zero": 0.934,
+        "D05-Race_rl_train_v7zero": 0.984
+      }
+    },
+    {
+      "update": 25000,
+      "critic_loss": 0.28128713369369507,
+      "q_mean": 7.715115547180176,
+      "pearson_r": {
+        "A06-Obstacle_rl_train_v7zero": 0.915,
+        "A08-Endurance_rl_train_v7zero": 0.706,
+        "B11-Race_rl_train_v7zero": 0.861,
+        "B12-Race_rl_train_v7zero": 0.533,
+        "C05-Endurance_rl_train_v7zero": 0.936,
+        "D05-Race_rl_train_v7zero": 0.988
+      }
+    },
+    {
+      "update": 30000,
+      "critic_loss": 0.3207869529724121,
+      "q_mean": 6.0004191398620605,
+      "pearson_r": {
+        "A06-Obstacle_rl_train_v7zero": 0.899,
+        "A08-Endurance_rl_train_v7zero": 0.72,
+        "B11-Race_rl_train_v7zero": 0.887,
+        "B12-Race_rl_train_v7zero": 0.573,
+        "C05-Endurance_rl_train_v7zero": 0.927,
+        "D05-Race_rl_train_v7zero": 0.987
+      }
+    }
+  ],
+  "lomo": {
+    "A06-Obstacle_rl_train_v7zero": {
+      "pearson_r": 0.858,
+      "mae": 10.883,
+      "bias": -10.503,
+      "return_mean": 13.386,
+      "return_std": 11.721
+    },
+    "A08-Endurance_rl_train_v7zero": {
+      "pearson_r": 0.461,
+      "mae": 22.988,
+      "bias": -22.976,
+      "return_mean": 27.587,
+      "return_std": 4.75
+    },
+    "B11-Race_rl_train_v7zero": {
+      "pearson_r": 0.692,
+      "mae": 14.565,
+      "bias": -13.063,
+      "return_mean": 16.459,
+      "return_std": 10.656
+    },
+    "B12-Race_rl_train_v7zero": {
+      "pearson_r": 0.267,
+      "mae": 17.618,
+      "bias": -17.381,
+      "return_mean": 24.445,
+      "return_std": 5.498
+    },
+    "C05-Endurance_rl_train_v7zero": {
+      "pearson_r": 0.841,
+      "mae": 11.883,
+      "bias": -11.365,
+      "return_mean": 6.604,
+      "return_std": 11.857
+    },
+    "D05-Race_rl_train_v7zero": {
+      "pearson_r": 0.863,
+      "mae": 6.771,
+      "bias": -0.369,
+      "return_mean": 4.232,
+      "return_std": 10.739
+    }
+  }
+}
