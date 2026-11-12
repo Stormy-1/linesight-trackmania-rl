@@ -76,7 +76,7 @@ Training outgrew the local laptop at ~10M frames. The agent now trains on Azure:
 | **Region** | East Asia |
 | **Cost** | ~$0.52/hr ($100 Azure for Students budget) |
 
-> **Why not Google Colab?** TrackMania is a 32-bit Windows DirectX 9 executable. It requires live DLL injection, socket IPC, and an active display surface — none of which are possible in Colab's headless Linux containers. See [`CLOUD_MIGRATION.md`](CLOUD_MIGRATION.md) for the full technical analysis.
+> **Why not Google Colab?** TrackMania is a 32-bit Windows DirectX 9 executable. It requires live DLL injection, socket IPC, and an active display surface — none of which are possible in Colab's headless Linux containers.
 
 ---
 
@@ -88,8 +88,6 @@ Our approach:
 1. **Save a 95% foundational checkpoint** (~54.45s) before the policy over-specializes.
 2. **Beat the WR** on Hockolicious with the active run.
 3. **Branch from the 95% checkpoint** and train on a 3–5 map interleaved curriculum to build a generalized driving AI.
-
-See [`GENERALIZATION_STRATEGY.md`](GENERALIZATION_STRATEGY.md) for the full technical breakdown.
 
 ---
 
@@ -152,9 +150,6 @@ linesight-trackmania-rl/
 │   └── analysis_metrics.py
 ├── scripts/
 │   └── train.py            # Training entry point
-├── GENERALIZATION_STRATEGY.md
-├── CLOUD_MIGRATION.md
-├── PROJECT_STORY.md
 └── ATTRIBUTION.md
 ```
 
