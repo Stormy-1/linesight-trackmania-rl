@@ -1,6 +1,6 @@
 # Project Linesight — Session continuation brief
 
-> Updated: 2026-11-13 (STEP 4 DONE — headline (§84): base + residual RL on the held-out test set 4/10, mean completion 58.1%, recovery 431 (v7 base: 2/10, 46.2%, 747). Best ever on finishes and completion. Next: README/architecture/results, then ask the user about committing, then the website. Commits still PAUSED.)
+> Updated: 2026-11-13 (STEP 4 DONE — headline (§84): base + residual RL on the held-out test set 4/10, mean completion 58.1%, recovery 431 (v7 base: 2/10, 46.2%, 747). Best ever on finishes and completion. Committed 2026-11-13 (1adf915 code, a1755dd data). Next: README/architecture/results, then the website.)
 > Read `CLAUDE.md` first (rules, commands, measured facts). This file holds the
 > current state and the exact next step. History: `HANDOVER_DOC.md` §60.
 
@@ -297,8 +297,8 @@ test set (test-set looks so far: v4–v7). The sensor wiring is done. Next sub-s
 4h. DONE — **HEADLINE (HANDOVER §84):** test set `v8_rl` (td3_v2/final.pt): **4/10 finish** (A09 39.56 s and B07 41.82 s, both best ever,
    + A15 38.39 s, C02 62.37 s), mean completion 58.1%, recovery 431 vs v7 2/10, 46.2%, 747. No v7 finish lost. Report
    `eval_results/test_set_v8_rl_td3v2.json`. Test-set looks: v4–v7, v8_rl — don't look again without a substantively new component.
-   **Next (phase 1 wrap-up):** README / architecture / results write-up (resume-ready); ask the user about committing everything
-   (all Step 3+ work is uncommitted); then phase 2, the website. Optional later: td3_v3 (more training), robustness metric.
+   **Next (phase 1 wrap-up):** README / architecture / results write-up (resume-ready); then phase 2, the website.
+   (All Step 3+ work committed on `linesight-hybrid-stack`: 1adf915 code, a1755dd data; HANDOVER_DOC.md is gitignored by design.) Optional later: td3_v3 (more training), robustness metric.
 5. Evaluate on dev maps (choices only there), then the test set ONCE as `--tag v8_rl` vs v7. Headline = base vs base+RL.
 Rules: no per-map knobs, no micro-adjustments, train only on rl_train, ask before commit/push.
 
@@ -347,4 +347,4 @@ stuck on the line (10), end of the line (A10, B11), plus free-space carving and 
 
 ## Verification state
 - Full pytest: 358 passed (2026-11-12, incl. residual-RL 18 + TD3 11 + training 8 tests).
-- Nothing is committed. All work is uncommitted in `TRACK_Copy`. New 2026-11-12: `scripts/make_map_split.py`, `run_test_set.py`, `report_test_set.py`, `maps/map_split.json` (run_showcase.ps1 deleted).
+- Committed through 2026-11-13 on branch `linesight-hybrid-stack` (1adf915 code + tests + docs, a1755dd run data). Not pushed. `HANDOVER_DOC.md` is gitignored by design.
