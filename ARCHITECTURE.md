@@ -182,12 +182,29 @@ Design choices that made it work:
 - **Held exploration noise.** White noise redrawn every 50 ms mostly averages out through the key adapter. Holding each
   draw for 10 steps (0.5 s, σ 0.2) lets a correction last long enough to change the outcome.
 
-**Training** (`scripts/train_residual.py`) uses only the 6 rl_train maps. There were two runs of 60 live episodes,
-about 1 hour each: td3_v1, then td3_v2 initialised from td3_v1's data, ending with a 155k-transition buffer. The deterministic td3_v2 actor learned a consistent pattern:
-- extra heading damping on top of pure pursuit;
-- slightly lower targets just before jumps, slightly higher elsewhere.
+**Training** (`scripts/train_residual.py`) ran in three generations:
+- **td3_v1** (60 episodes, 6 rl_train maps): the actor stayed at about zero. The anchor was too strong.
+- **td3_v2** (60 episodes): weaker anchor and held exploration noise.
+- **td3_v3** (200 episodes, from td3_v2): 20 training maps, the 6 rl_train maps plus 14 drawn by a fixed rule
+  (`extended_training_maps`: never dev or test, no Black tier, replay ≤ 120 s, seed 20261113). It also trains with
+  seeded steering noise (σ 0.05), so corrections must work under perturbation. The buffer grew to 330k transitions.
 
-The final policy is `eval_results/residual_rl/td3_v2/final.pt`.
+**What the deterministic actors do** (`scripts/analyze_residual_policy.py`, the same 11,608 dev and training states):
+
+| | mean \|a\| (steer, speed) | steer vs sin(heading error), pooled r | maps with negative r | Δtarget speed |
+|---|---|---|---|---|
+| td3_v2 | 0.09, 0.11 | −0.13 | 8 of 13 | about +0.4 m/s everywhere |
+| td3_v3 | 0.13, 0.13 | −0.22 | 11 of 13 | about 0 on average |
+
+Both steer against the heading error, adding damping on top of pure pursuit. td3_v3 does it more consistently,
+which fits its training on more maps with noise. Its corrections stay small and almost never saturate (0.2% of states).
+Sources: `eval_results/residual_rl/td3_v2_behaviour.json`, `td3_v3_behaviour.json`.
+
+On held-out maps (RESULTS.md §0), td3_v3 finishes 27/100 runs against the base's 25/100. It cuts recovery steps by 23%
+and raises completion by 6.7 points, but the finish-rate difference isn't significant. It reliably fixes one map (B07)
+and reliably breaks another (C02).
+
+The final policy is `eval_results/residual_rl/td3_v3/final.pt`.
 
 ## 10. Rejected ideas, and why
 

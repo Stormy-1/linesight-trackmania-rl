@@ -3,13 +3,66 @@
 Every number below comes from a file in `eval_results/`. The source is named under each table, and the last section
 shows how to regenerate the tables. How the components work is in [ARCHITECTURE.md](ARCHITECTURE.md).
 
-Each run is one deterministic live drive of TrackMania Nations Forever at 10× game speed. A run ends at the finish,
-after being stuck for 6 s, or at the time limit.
-
-## 1. Held-out test set (the headline)
+Each run is one live drive of TrackMania Nations Forever at 10× game speed. Without added noise a run is
+deterministic. A run ends at the finish, after being stuck for 6 s, or at the time limit.
 
 The test maps are 10 campaign maps drawn once from the White, Green, Blue and Red tiers (`maps/map_split.json`).
 Nothing was tuned on them, and every map gets identical arguments.
+
+## 0. Robustness evaluation on the test set (the headline)
+
+**Method.** Three versions were each driven 10 times on every test map:
+- v7: classical stack + learned models;
+- v8_rl: + residual TD3 `td3_v2/final.pt`, trained on 6 maps;
+- v9_rl: + residual TD3 `td3_v3/final.pt`, trained on 20 maps with steering noise.
+
+Seeded Gaussian noise, σ 0.05, was added to the steering sent to the keys (`--steer-noise 0.05 --perturb-seed 0`).
+Run k receives the same noise stream in every version, so the runs pair up by (map, run).
+- **Settings fixed in advance.** The settings were fixed before any result was seen. The only check, on dev map A07,
+  confirmed that the noise changes outcomes without breaking the driving (3/3 finished, 37.97–38.24 s against
+  37.98 s without noise).
+- **Why v9_rl was allowed a test look.** It came after a dev-map rule fixed in advance (§2b).
+
+| Map | Tier | v7 | v8_rl | v9_rl | v7 / v8_rl / v9_rl mean completion | Paired v9_rl vs v7: only v7 / only v9_rl |
+|---|---|---|---|---|---|---|
+| A09-Race | White | 5/10 | 5/10 | 7/10 | 81.2 / 83.7 / 89.9% | 2 / 4 |
+| A15-Speed | White | 10/10 | 10/10 | 10/10 | 100 / 100 / 100% | 0 / 0 |
+| B04-Acrobatic | Green | 0/10 | 0/10 | 0/10 | 54.2 / 54.1 / 54.2% | 0 / 0 |
+| B07-Race | Green | 2/10 | 8/10 | **9/10** | 30.3 / 83.1 / 91.3% | 0 / 7 (p = 0.016) |
+| B13-Obstacle | Green | 0/10 | 0/10 | 0/10 | 8.3 / 8.2 / 8.3% | 0 / 0 |
+| C02-Race | Blue | **8/10** | 3/10 | 1/10 | 99.0 / 84.0 / 88.3% | 7 / 0 (p = 0.016) |
+| C10-Acrobatic | Blue | 0/10 | 0/10 | 0/10 | 45.0 / 46.0 / 45.0% | 0 / 0 |
+| C13-Race | Blue | 0/10 | 0/10 | 0/10 | 7.9 / 7.9 / 7.9% | 0 / 0 |
+| D04-Race | Red | 0/10 | 0/10 | 0/10 | 9.9 / 9.9 / 9.8% | 0 / 0 |
+| D07-Race | Red | 0/10 | 0/10 | 0/10 | 43.9 / 51.3 / 52.1% | 0 / 0 |
+| **Total** | | **25/100** | **26/100** | **27/100** | **48.0 / 52.8 / 54.7%** | **9 / 11** |
+
+Walls 41 / 39 / 32 and recovery steps 6,543 / 6,516 / 5,043 (v7 / v8_rl / v9_rl).
+
+**Result**
+- **Finish rate: no significant difference.** v9_rl vs v7: 16 pairs finished in both, 9 only in v7, 11 only in v9_rl,
+  and 64 in neither (exact sign test p = 0.82). v8_rl vs v7: 9 / 10 (p = 1).
+- **A consistent, learned map trade.** Both RL policies are better on B07 and worse on C02, and td3_v3 more strongly
+  so: 7 pairs to 0 on each, p = 0.016 each. With 10 maps tested, a multiple-comparison correction (×10) would take
+  both to p ≈ 0.16. The same direction in two separately trained policies makes chance an unlikely explanation.
+  The cause on C02 wasn't investigated: that would mean studying test-map logs.
+- **Completion and recovery improve, but within the noise.** v9_rl's mean completion is +6.7 points over v7 (bootstrap
+  over maps, 95% interval −1.6 to +20.0). Its recovery steps are 23% lower and its wall hits 22% lower.
+- **Lap times barely change.** On runs where both versions finished, times are similar: A15's median difference is
+  −0.07 s for td3_v2.
+
+**What this changes.** The single-run result below (v8_rl 4/10 vs v7 2/10) did not hold up. Run-to-run sensitivity at
+knife-edge jumps is large: under σ 0.05 noise, A09 finishes 5/10 and C02 8/10. That sensitivity explains both the
+single-run "gain" and the churn of the finished set from v4 to v7. The base stack's robust finish rate on held-out maps
+is about 25% of runs. Four maps (A09, A15, B07, C02) finish at least sometimes; the other six never do, in any version.
+
+Source: `eval_results/test_set_robustness_v7_v8rl.json` and `test_set_robustness_v7_v9rl.json`
+(`scripts/report_robustness.py`). Per-step logs: `eval_results/hybrid_live/<map>_test_{v7,v8_rl,v9_rl}_rob/`,
+`run01.csv` … `run10.csv`.
+
+## 1. Held-out test set, single run per map (development history)
+
+These five evaluations steered the project. Each is one deterministic run per map, so read them together with §0.
 
 | Version | What it added | Finished | Mean completion | Median time vs pro | Landings / bumps / walls / scrapes | Recovery steps |
 |---|---|---|---|---|---|---|
@@ -17,7 +70,7 @@ Nothing was tuned on them, and every map gets identical arguments.
 | v5 | + learned speed model | 3/10 | 52.3% | 1.63× | 14 / 0 / 11 / 4 | 734 |
 | v6 | + learned grip limit | 2/10 | 54.0% | 1.50× | 19 / 0 / 2 / 0 | 677 |
 | v7 | + measured gravity | 2/10 | 46.2% | 1.44× | 18 / 0 / 1 / 1 | 747 |
-| **v8_rl** | **+ residual TD3** | **4/10** | **58.1%** | 1.50× | 17 / 0 / 1 / 1 | **431** |
+| v8_rl | + residual TD3 | 4/10 | 58.1% | 1.50× | 17 / 0 / 1 / 1 | 431 |
 
 Per map: finish time, or completion % when the car got stuck.
 
@@ -46,13 +99,19 @@ Source: `eval_results/test_set_v4_baseline.json`, `test_set_v5_speed_model.json`
 - **v7.** Measured gravity made every surviving run faster (best A15 and C02), but the finish count didn't move.
 - **The finished set churns from v4 to v7.** Each change flips one or two maps through landing events, where the car
   comes down a few metres off the line. The bottleneck became tracking precision around jumps and landings.
-- **v8_rl.** The residual policy tipped both churning maps, A09 and B07, to the finish side, with best-ever times on
-  both. It kept both v7 finishes, and recovery steps fell 42%. With 10 maps and one run each, this is a two-map
-  swing: evidence, not proof. The median time ratio rises from 1.44 to 1.50 because two harder finishes enter the median.
+- **v8_rl.** In this single run, the residual policy tipped both churning maps, A09 and B07, to the finish side,
+  with best-ever times on both, and recovery steps fell 42%. The robustness evaluation (§0) shows this was mostly
+  luck: over 10 perturbed runs per map, the finish rate is the same as v7's.
+- **The test set was not perfectly blind.** No parameter was ever tuned on a test map. But after v6, the failure logs
+  of two test maps (A09 at 1250 m, C02 at 2635 m) were studied, and that study led to the gravity measurement in v7.
+  The fix is a general physics measurement (from 53 non-test pro ghosts), not a per-map adjustment. Still, looking at
+  the test set five times, and letting what it showed steer the next step, is a mild form of test-set leakage.
+  The robustness evaluation (§0) was a sixth look. It re-measured fixed versions with settings chosen beforehand,
+  and it changed no design choice.
 - **Untouched failures.** B13, C13 and D04 stall in the first 10% in every version, and B04, C10 and D07 stall at the
   same spot every time. They look like line or geometry problems for the classical layer, not small-correction problems.
 
-## 2. Dev maps: base vs base + RL
+## 2. Dev maps: base vs base + RL (single run)
 
 The dev maps are used for every design choice. The policy was never trained on them.
 
@@ -70,6 +129,27 @@ The dev maps are used for every design choice. The policy was never trained on t
 The policy was faster on 4 of the 6 finished maps and slower by about 0.2 s on 2. The six finish times sum to
 170.80 s for the base and 169.53 s with RL. The cost is more recovery steps, on A01 and B09.
 Source: `eval_results/hybrid_live/<map>_dev_v7a/` and `<map>_dev_td3v2/`.
+
+## 2b. Dev maps: robustness, and the rule that chose td3_v3
+
+The protocol is the same as §0: 10 runs per map, σ 0.05, seed 0, paired. The rule was fixed before any of these runs:
+td3_v3 gets the single test look only if it finishes more dev runs than both v7a and td3_v2, with ties broken by
+mean completion.
+
+| Map | v7a | td3_v2 | td3_v3 |
+|---|---|---|---|
+| A01-Race | 9/10 | 9/10 | 9/10 |
+| A02-Race | 10/10 | 10/10 | 10/10 |
+| A03-Race | 10/10 | 10/10 | 10/10 |
+| A05-Race | 9/10 | 10/10 | 10/10 |
+| A07-Race | 10/10 | 10/10 | 9/10 |
+| A11-Race | 10/10 | 10/10 | 10/10 |
+| B09-Acrobatic | 1/10 (72.2%) | 1/10 (68.4%) | 2/10 (88.2%) |
+| **Total** | **59/70**, 95.0%, 6 walls | **60/70**, 94.4%, 6 walls | **60/70**, 97.4%, 20 walls |
+
+td3_v3 passed the rule: it finished more runs than v7a, tied td3_v2, and had higher completion (mostly B09). Every
+difference is small: each pairing is 2–3 discordant runs, p = 1. td3_v3 hits walls more often on dev (20 vs 6).
+Source: `eval_results/dev_robustness_td3v2_rob_vs_v7a.json`, `eval_results/dev_robustness_td3v3_rob_vs_v7a.json`.
 
 ## 3. Training maps: base vs base + RL
 
@@ -90,6 +170,14 @@ that the base stack only just cleared. Single runs at knife-edge jumps flip on s
 held-out results are reported as evidence, not proof.
 Source: `eval_results/hybrid_live/<map>_rl_train_v7zero/` and `<map>_rl_train_td3v2/`.
 Training logs: `eval_results/residual_rl/td3_v1/train_log.jsonl` and `td3_v2/train_log.jsonl`.
+
+**td3_v3 training** (`eval_results/residual_rl/td3_v3/`):
+- 200 live episodes, initialised from td3_v2, with a buffer of 155k earlier transitions growing to about 330k.
+- 20 training maps: the 6 rl_train maps plus 14 drawn by `extended_training_maps`, seed 20261113. The rule excludes
+  dev, test and the Black tier, and any map with a replay over 120 s.
+- Seeded steering noise σ 0.05 during training, on a different seed from evaluation.
+- In the noisy training episodes, C05 went from 2/6 finishes in the first 100 episodes to 6/6 in the last 100.
+  The other maps changed little.
 
 ## 4. Full Nations campaign: the classical stack's generalisation
 
@@ -137,6 +225,9 @@ The details are in ARCHITECTURE.md §6–8. Every split is by map.
 ## Regenerating the tables
 
 ```bash
+python scripts/report_robustness.py --tag v8_rl_rob --compare v7_rob   # §0, robustness (also --tag v9_rl_rob)
+python scripts/report_robustness.py --set dev --tag td3v3_rob --compare v7a_rob   # §2b
+python scripts/analyze_residual_policy.py --checkpoint eval_results/residual_rl/td3_v3/final.pt --runs "*_dev_td3v2" "*_rl_train_td3v2"
 python scripts/report_test_set.py --tag v8_rl            # test set; also v4, v5, v6, v7
 python scripts/report_test_set.py --set dev --tag td3v2  # dev; base is --tag v7a
 python scripts/report_test_set.py --set rl_train --tag td3v2   # base is --tag v7zero
