@@ -234,3 +234,48 @@ def test_no_sensor_means_no_range_columns(tmp_path):
     policy = HybridLivePolicy(straight_x_centerline(), ConservativeCenterlineController())
     rows = _drive_two_steps(policy, tmp_path)
     assert not any(key.startswith("range_") for key in rows[0])
+
+
+def _drive_actions(policy, steps=60):
+    """Actions on a straight line with the car slightly off-centre (constant base command)."""
+    velocity = np.array([20.0, 0.0, 0.0])
+    actions = []
+    for step in range(steps):
+        policy.observe_simulation_state(
+            race_time_s=step * 0.05, position=np.array([50.0, 0.0, 0.5]), velocity=velocity, orientation=orientation_facing(velocity)
+        )
+        actions.append(policy(None, None)[0])
+    return actions
+
+
+def _noisy_policy(sigma, seed=7):
+    from trackmania_rl.hybrid_live import HybridLivePolicyConfig
+
+    config = HybridLivePolicyConfig(steering_noise_std=sigma, perturbation_seed=seed)
+    return HybridLivePolicy(straight_x_centerline(), ConservativeCenterlineController(), config=config)
+
+
+def test_zero_steering_noise_reproduces_the_unperturbed_policy():
+    plain = HybridLivePolicy(straight_x_centerline(), ConservativeCenterlineController())
+    assert _drive_actions(_noisy_policy(0.0)) == _drive_actions(plain)
+
+
+def test_steering_noise_is_reproducible_for_a_seed_and_changes_actions():
+    plain = _drive_actions(HybridLivePolicy(straight_x_centerline(), ConservativeCenterlineController()))
+    first, second = _drive_actions(_noisy_policy(0.3)), _drive_actions(_noisy_policy(0.3))
+    assert first == second
+    assert first != plain
+
+
+def test_steering_noise_differs_between_runs_and_seeds():
+    policy = _noisy_policy(0.3)
+    run_a = _drive_actions(policy)
+    policy.reset()
+    run_b = _drive_actions(policy)
+    assert run_a != run_b
+    assert _drive_actions(_noisy_policy(0.3, seed=8)) != _drive_actions(_noisy_policy(0.3, seed=7))
+
+
+def test_negative_steering_noise_is_rejected():
+    with pytest.raises(ValueError):
+        _noisy_policy(-0.1)

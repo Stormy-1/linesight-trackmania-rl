@@ -54,10 +54,12 @@ def run_dir_name(stem: str, tag: str, split_key: str = "test") -> str:
     return f"{stem}_{split_key}_{tag}"
 
 
-def run_metrics(stem: str, tier: str, replay_time_s: float, summary: dict, rows: list[dict]) -> RunMetrics:
+def run_metrics(
+    stem: str, tier: str, replay_time_s: float, summary: dict, rows: list[dict], run_index: int = 0
+) -> RunMetrics:
     if summary.get("speed_caps") or summary.get("max_speed_override_mps") is not None:
         raise ValueError(f"{stem}: per-map tuning (speed cap/override) is not allowed in an evaluation run")
-    run = summary["runs"][0]
+    run = summary["runs"][run_index]
     impacts = classify_impacts(rows)
     kinds = [i.kind for i in impacts]
     return RunMetrics(

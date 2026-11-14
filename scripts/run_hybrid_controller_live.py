@@ -204,6 +204,13 @@ def main() -> None:
         "or a TD3 checkpoint .pt (deterministic actor); any residual also records RL transitions (runXX_rl.npz)",
     )
     parser.add_argument(
+        "--steer-noise",
+        type=float,
+        default=0.0,
+        help="robustness eval: std of seeded Gaussian noise on the steering sent to the keys (0 = off)",
+    )
+    parser.add_argument("--perturb-seed", type=int, default=0, help="seed for --steer-noise (run k uses stream (seed, k))")
+    parser.add_argument(
         "--speed-cap",
         action="append",
         default=[],
@@ -214,6 +221,8 @@ def main() -> None:
     args = parser.parse_args()
     if not 0.0 < args.grip_risk < 1.0:
         parser.error("--grip-risk must be in (0, 1)")
+    if args.steer_noise < 0.0:
+        parser.error("--steer-noise must be >= 0")
     if args.range_sensor is not None and not args.range_sensor.is_file():
         parser.error(f"{args.range_sensor} not found (run scripts/build_range_sensor.py)")
     if args.grip_model is not None and not args.grip_model.is_file():
@@ -245,7 +254,9 @@ def main() -> None:
     policy = HybridLivePolicy(
         centerline,
         controller,
-        config=HybridLivePolicyConfig(unstick_enabled=not args.no_unstick),
+        config=HybridLivePolicyConfig(
+            unstick_enabled=not args.no_unstick, steering_noise_std=args.steer_noise, perturbation_seed=args.perturb_seed
+        ),
         range_sensor=make_range_sensor(args.range_sensor, args.map or meta["name"]) if args.range_sensor else None,
         residual_policy=make_residual_policy(args.residual),
         residual_config=residual_config,
@@ -281,6 +292,8 @@ def main() -> None:
         "game_speed": args.speed,
         "stuck_cutoff_s": args.stuck_cutoff_s,
         "unstick_enabled": not args.no_unstick,
+        "steering_noise_std": args.steer_noise,
+        "perturbation_seed": args.perturb_seed,
         "jumps": [dataclasses.asdict(j) for j in getattr(getattr(controller, "profile", None), "jumps", ())],
         "runs": [],
     }
