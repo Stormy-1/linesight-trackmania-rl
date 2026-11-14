@@ -1,0 +1,136 @@
+{
+ "tag": "td3v3_rob",
+ "set": "dev",
+ "per_map": {
+  "A01-Race": {
+   "tier": "White",
+   "runs": 10,
+   "finished": 9,
+   "mean_completion_pct": 93.6,
+   "median_time_s": 41.29
+  },
+  "A03-Race": {
+   "tier": "White",
+   "runs": 10,
+   "finished": 10,
+   "mean_completion_pct": 100.0,
+   "median_time_s": 25.95
+  },
+  "A05-Race": {
+   "tier": "White",
+   "runs": 10,
+   "finished": 10,
+   "mean_completion_pct": 100.0,
+   "median_time_s": 19.35
+  },
+  "A07-Race": {
+   "tier": "White",
+   "runs": 10,
+   "finished": 9,
+   "mean_completion_pct": 99.8,
+   "median_time_s": 38.17
+  },
+  "A11-Race": {
+   "tier": "White",
+   "runs": 10,
+   "finished": 10,
+   "mean_completion_pct": 100.0,
+   "median_time_s": 25.02
+  },
+  "A02-Race": {
+   "tier": "White",
+   "runs": 10,
+   "finished": 10,
+   "mean_completion_pct": 100.0,
+   "median_time_s": 18.77
+  },
+  "B09-Acrobatic": {
+   "tier": "Green",
+   "runs": 10,
+   "finished": 2,
+   "mean_completion_pct": 88.2,
+   "median_time_s": 19.16
+  }
+ },
+ "total": {
+  "maps": 7,
+  "runs": 70,
+  "finished": 60,
+  "finish_rate": 0.857,
+  "mean_completion_pct": 97.4,
+  "maps_finished_at_least_once": 7,
+  "walls": 20,
+  "recovery_steps": 1704
+ },
+ "compare": {
+  "baseline": "v7a_rob",
+  "baseline_per_map": {
+   "A01-Race": {
+    "tier": "White",
+    "runs": 10,
+    "finished": 9,
+    "mean_completion_pct": 92.8,
+    "median_time_s": 41.44
+   },
+   "A03-Race": {
+    "tier": "White",
+    "runs": 10,
+    "finished": 10,
+    "mean_completion_pct": 100.0,
+    "median_time_s": 25.86
+   },
+   "A05-Race": {
+    "tier": "White",
+    "runs": 10,
+    "finished": 9,
+    "mean_completion_pct": 99.8,
+    "median_time_s": 19.75
+   },
+   "A07-Race": {
+    "tier": "White",
+    "runs": 10,
+    "finished": 10,
+    "mean_completion_pct": 100.0,
+    "median_time_s": 38.09
+   },
+   "A11-Race": {
+    "tier": "White",
+    "runs": 10,
+    "finished": 10,
+    "mean_completion_pct": 100.0,
+    "median_time_s": 24.62
+   },
+   "A02-Race": {
+    "tier": "White",
+    "runs": 10,
+    "finished": 10,
+    "mean_completion_pct": 100.0,
+    "median_time_s": 19.13
+   },
+   "B09-Acrobatic": {
+    "tier": "Green",
+    "runs": 10,
+    "finished": 1,
+    "mean_completion_pct": 72.2,
+    "median_time_s": 18.24
+   }
+  },
+  "baseline_total": {
+   "maps": 7,
+   "runs": 70,
+   "finished": 59,
+   "finish_rate": 0.843,
+   "mean_completion_pct": 95.0,
+   "maps_finished_at_least_once": 7,
+   "walls": 6,
+   "recovery_steps": 1395
+  },
+  "pairs": {
+   "both": 57,
+   "only_a": 2,
+   "only_b": 3,
+   "neither": 8
+  },
+  "sign_test_p": 1.0
+ }
+}

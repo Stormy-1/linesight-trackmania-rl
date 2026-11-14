@@ -149,9 +149,36 @@ class ResidualTrainer:
 
 
 def illegal_training_maps(maps: list[str], rl_train: list[str]) -> list[str]:
-    """Maps that may not be trained on: anything outside the fixed rl_train split (dev = choices, test = scored once)."""
+    """Maps that may not be trained on: anything outside the allowed pool (dev = choices, test = scored once)."""
 
     return [m for m in maps if m not in rl_train]
+
+
+# Extended pool (td3_v3): more training maps, chosen by a fixed rule + seed, never dev or test.
+EXTENDED_POOL_EXCLUDED_GROUPS = ("Black",)  # as in the test-set draw: too costly live
+EXTENDED_POOL_MAX_REPLAY_S = 120.0  # keeps one episode under ~1 min of wall time at 10x
+
+
+def extended_training_maps(split: dict, manifest: dict, n_extra: int, seed: int) -> list[str]:
+    """rl_train + ``n_extra`` maps drawn (seeded) from the other offline_train maps.
+
+    Candidates: offline_train minus dev, test and rl_train; with an official replay; not Black;
+    replay at most 120 s. The rule uses map metadata only, never results.
+    """
+
+    excluded = set(split["dev"]) | set(split["test"]) | set(split["rl_train"])
+    candidates = sorted(
+        m for m in split["offline_train"]
+        if m not in excluded
+        and m in manifest
+        and manifest[m]["group"] not in EXTENDED_POOL_EXCLUDED_GROUPS
+        and manifest[m]["author_time_s"] <= EXTENDED_POOL_MAX_REPLAY_S
+    )
+    if n_extra > len(candidates):
+        raise ValueError(f"only {len(candidates)} candidate maps, asked for {n_extra}")
+    rng = np.random.default_rng(seed)
+    extra = [candidates[i] for i in sorted(rng.choice(len(candidates), size=n_extra, replace=False))]
+    return list(split["rl_train"]) + extra
 
 
 def _run_fields(run_summary: dict) -> dict:

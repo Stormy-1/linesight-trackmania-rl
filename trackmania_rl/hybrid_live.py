@@ -140,6 +140,17 @@ class HybridLivePolicyConfig:
     slip_steer_gain: float = 0.8
     slip_steer_limit: float = 0.5
     slip_min_speed_mps: float = 10.0
+    # Robustness evaluation only: seeded Gaussian noise on the steering sent to the key
+    # adapter (actuator noise). Runs are otherwise deterministic, so one run per map can't
+    # show how sensitive an outcome is. 0 = off (the default; bit-for-bit the normal policy).
+    # Each reset() draws from a new stream, so run k of a batch sees the same noise for
+    # every policy version driven with the same seed (paired comparison).
+    steering_noise_std: float = 0.0
+    perturbation_seed: int = 0
+
+    def __post_init__(self) -> None:
+        if self.steering_noise_std < 0.0:
+            raise ValueError(f"steering_noise_std must be >= 0, got {self.steering_noise_std}")
 
 
 class HybridLivePolicy:
@@ -174,12 +185,15 @@ class HybridLivePolicy:
             self.observation_builder = ResidualObservationBuilder(self.geometry, profile)
         self._log_file = None
         self._log_writer = None
+        self._resets = 0
         self.reset()
 
     # --- lifecycle -------------------------------------------------------
     def reset(self, log_path: Path | None = None) -> None:
         self.close()
         self.adapter.reset()
+        self._noise_rng = np.random.default_rng((self.config.perturbation_seed, self._resets))
+        self._resets += 1
         self._observation: dict | None = None
         self._previous_segment: int | None = None
         self._previous_speed: float | None = None
@@ -297,6 +311,7 @@ class HybridLivePolicy:
             limit = self.config.slip_steer_limit
             counter = float(np.clip(-self.config.slip_steer_gain * forward_velocity_angle, -limit, limit))
             command = replace(command, steering=counter)
+        command = self._perturb_steering(command)
         action = self.adapter.to_action_index(command)
         maneuver = self._unstick(race_time_s, speed, command)
         if maneuver == "drive" and slipping:
@@ -390,6 +405,15 @@ class HybridLivePolicy:
         limit = self.controller.config.steering_limit(max(state.speed_mps, 0.0))
         steering = apply_steering_residual(command.steering, residual.steering_delta, limit)
         return command if steering == command.steering else replace(command, steering=steering)
+
+    def _perturb_steering(self, command: ControllerCommand) -> ControllerCommand:
+        """Add the robustness-evaluation actuator noise (a no-op when it is off)."""
+
+        sigma = self.config.steering_noise_std
+        if sigma == 0.0:
+            return command
+        noisy = float(np.clip(command.steering + self._noise_rng.normal(0.0, sigma), -1.0, 1.0))
+        return replace(command, steering=noisy)
 
     def _update_slip(self, speed: float, angle: float) -> bool:
         cfg = self.config

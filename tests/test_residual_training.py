@@ -1,6 +1,7 @@
 """Residual TD3 training loop core, driven by fake episodes (no game)."""
 
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -12,7 +13,8 @@ from trackmania_rl.residual_td3 import TD3Agent, TD3Config
 from trackmania_rl.residual_training import ResidualTrainer, TrainingConfig, illegal_training_maps
 
 ROOT = Path(__file__).resolve().parents[1]
-SMALL = TD3Config(hidden_units=32, batch_size=16)
+sys.path.insert(0, str(ROOT / "scripts"))
+SMALL =TD3Config(hidden_units=32, batch_size=16)
 
 
 def fake_records(n=40, active=True, seed=0):
@@ -109,3 +111,29 @@ def test_only_rl_train_maps_may_be_trained_on():
     split = json.loads((ROOT / "maps" / "map_split.json").read_text())
     assert illegal_training_maps(split["rl_train"], split["rl_train"]) == []
     assert illegal_training_maps(["B12-Race", split["test"][0], split["dev"][0]], split["rl_train"]) == [split["test"][0], split["dev"][0]]
+
+
+def test_extended_training_pool_keeps_rl_train_and_never_touches_dev_or_test():
+    from make_map_split import MANIFEST, load_split
+    from trackmania_rl.residual_training import extended_training_maps
+
+    split, manifest = load_split(), json.loads(MANIFEST.read_text())
+    pool = extended_training_maps(split, manifest, n_extra=14, seed=20261113)
+    assert pool[: len(split["rl_train"])] == list(split["rl_train"])
+    assert len(pool) == len(split["rl_train"]) + 14 and len(set(pool)) == len(pool)
+    assert not set(pool) & (set(split["dev"]) | set(split["test"]))
+    extra = pool[len(split["rl_train"]):]
+    assert all(manifest[m]["group"] != "Black" and manifest[m]["author_time_s"] <= 120.0 for m in extra)
+    assert set(extra) <= set(split["offline_train"])
+    assert pool == extended_training_maps(split, manifest, n_extra=14, seed=20261113)
+    assert pool != extended_training_maps(split, manifest, n_extra=14, seed=1)
+
+
+def test_extended_pool_is_legal_and_dev_test_still_illegal():
+    from make_map_split import MANIFEST, load_split
+    from trackmania_rl.residual_training import extended_training_maps
+
+    split, manifest = load_split(), json.loads(MANIFEST.read_text())
+    pool = extended_training_maps(split, manifest, n_extra=14, seed=20261113)
+    assert illegal_training_maps(pool, pool) == []
+    assert illegal_training_maps([split["test"][0], split["dev"][0]], pool) == [split["test"][0], split["dev"][0]]

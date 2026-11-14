@@ -1,0 +1,177 @@
+{
+ "checkpoint": "eval_results\\residual_rl\\td3_v2\\final.pt",
+ "runs": [
+  "*_dev_td3v2",
+  "*_rl_train_td3v2"
+ ],
+ "pooled": {
+  "steps": 11608,
+  "mean_abs_action": [
+   0.09,
+   0.111
+  ],
+  "saturated_share": 0.0,
+  "corr_steer_vs_sin_heading_error": -0.135,
+  "corr_steer_vs_lateral_error": -0.129,
+  "mean_target_delta_near_jump_mps": 0.37,
+  "mean_target_delta_elsewhere_mps": 0.38
+ },
+ "per_run": {
+  "A01-Race_dev_td3v2": {
+   "steps": 817,
+   "mean_abs_action": [
+    0.078,
+    0.103
+   ],
+   "saturated_share": 0.0,
+   "corr_steer_vs_sin_heading_error": 0.052,
+   "corr_steer_vs_lateral_error": -0.138,
+   "mean_target_delta_near_jump_mps": -0.13,
+   "mean_target_delta_elsewhere_mps": 0.02
+  },
+  "A02-Race_dev_td3v2": {
+   "steps": 363,
+   "mean_abs_action": [
+    0.124,
+    0.181
+   ],
+   "saturated_share": 0.0,
+   "corr_steer_vs_sin_heading_error": -0.165,
+   "corr_steer_vs_lateral_error": -0.177,
+   "mean_target_delta_near_jump_mps": 1.84,
+   "mean_target_delta_elsewhere_mps": 0.89
+  },
+  "A03-Race_dev_td3v2": {
+   "steps": 515,
+   "mean_abs_action": [
+    0.066,
+    0.091
+   ],
+   "saturated_share": 0.0,
+   "corr_steer_vs_sin_heading_error": -0.06,
+   "corr_steer_vs_lateral_error": -0.071,
+   "mean_target_delta_near_jump_mps": -0.03,
+   "mean_target_delta_elsewhere_mps": 0.44
+  },
+  "A05-Race_dev_td3v2": {
+   "steps": 378,
+   "mean_abs_action": [
+    0.11,
+    0.139
+   ],
+   "saturated_share": 0.0,
+   "corr_steer_vs_sin_heading_error": -0.082,
+   "corr_steer_vs_lateral_error": -0.295,
+   "mean_target_delta_near_jump_mps": 0.65,
+   "mean_target_delta_elsewhere_mps": 0.87
+  },
+  "A06-Obstacle_rl_train_td3v2": {
+   "steps": 273,
+   "mean_abs_action": [
+    0.123,
+    0.104
+   ],
+   "saturated_share": 0.0,
+   "corr_steer_vs_sin_heading_error": 0.231,
+   "corr_steer_vs_lateral_error": -0.002,
+   "mean_target_delta_near_jump_mps": 0.71,
+   "mean_target_delta_elsewhere_mps": -0.31
+  },
+  "A07-Race_dev_td3v2": {
+   "steps": 765,
+   "mean_abs_action": [
+    0.099,
+    0.131
+   ],
+   "saturated_share": 0.003,
+   "corr_steer_vs_sin_heading_error": -0.296,
+   "corr_steer_vs_lateral_error": 0.116,
+   "mean_target_delta_near_jump_mps": 1.07,
+   "mean_target_delta_elsewhere_mps": 0.74
+  },
+  "A08-Endurance_rl_train_td3v2": {
+   "steps": 2330,
+   "mean_abs_action": [
+    0.064,
+    0.089
+   ],
+   "saturated_share": 0.0,
+   "corr_steer_vs_sin_heading_error": -0.214,
+   "corr_steer_vs_lateral_error": 0.039,
+   "mean_target_delta_near_jump_mps": null,
+   "mean_target_delta_elsewhere_mps": 0.53
+  },
+  "A11-Race_dev_td3v2": {
+   "steps": 478,
+   "mean_abs_action": [
+    0.132,
+    0.122
+   ],
+   "saturated_share": 0.0,
+   "corr_steer_vs_sin_heading_error": 0.015,
+   "corr_steer_vs_lateral_error": -0.063,
+   "mean_target_delta_near_jump_mps": -0.08,
+   "mean_target_delta_elsewhere_mps": 0.3
+  },
+  "B09-Acrobatic_dev_td3v2": {
+   "steps": 206,
+   "mean_abs_action": [
+    0.078,
+    0.145
+   ],
+   "saturated_share": 0.0,
+   "corr_steer_vs_sin_heading_error": 0.359,
+   "corr_steer_vs_lateral_error": -0.455,
+   "mean_target_delta_near_jump_mps": 0.45,
+   "mean_target_delta_elsewhere_mps": 0.47
+  },
+  "B11-Race_rl_train_td3v2": {
+   "steps": 535,
+   "mean_abs_action": [
+    0.155,
+    0.149
+   ],
+   "saturated_share": 0.0,
+   "corr_steer_vs_sin_heading_error": -0.353,
+   "corr_steer_vs_lateral_error": -0.281,
+   "mean_target_delta_near_jump_mps": 0.41,
+   "mean_target_delta_elsewhere_mps": 0.18
+  },
+  "B12-Race_rl_train_td3v2": {
+   "steps": 1343,
+   "mean_abs_action": [
+    0.093,
+    0.1
+   ],
+   "saturated_share": 0.001,
+   "corr_steer_vs_sin_heading_error": -0.257,
+   "corr_steer_vs_lateral_error": -0.212,
+   "mean_target_delta_near_jump_mps": -0.21,
+   "mean_target_delta_elsewhere_mps": 0.27
+  },
+  "C05-Endurance_rl_train_td3v2": {
+   "steps": 3351,
+   "mean_abs_action": [
+    0.087,
+    0.112
+   ],
+   "saturated_share": 0.0,
+   "corr_steer_vs_sin_heading_error": -0.155,
+   "corr_steer_vs_lateral_error": -0.054,
+   "mean_target_delta_near_jump_mps": 0.27,
+   "mean_target_delta_elsewhere_mps": 0.33
+  },
+  "D05-Race_rl_train_td3v2": {
+   "steps": 254,
+   "mean_abs_action": [
+    0.082,
+    0.107
+   ],
+   "saturated_share": 0.0,
+   "corr_steer_vs_sin_heading_error": 0.303,
+   "corr_steer_vs_lateral_error": 0.271,
+   "mean_target_delta_near_jump_mps": -0.33,
+   "mean_target_delta_elsewhere_mps": -0.4
+  }
+ }
+}

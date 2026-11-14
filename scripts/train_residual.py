@@ -3,8 +3,9 @@
 One game instance; the maps are driven in blocks (``--episodes-per-map`` in a row, so the
 map loads once per block). Every episode: the classical stack (v7a settings + virtual lidar)
 drives, the actor + Gaussian noise adds the residual, then the trainer learns from the run
-(``trackmania_rl/residual_training.py``). Only ``rl_train`` maps are allowed: dev maps are for
-choices, the test set is scored once at the end.
+(``trackmania_rl/residual_training.py``). Only the training pool is allowed: ``rl_train`` (default) or
+``--pool extended`` (rl_train + seeded extra maps, never dev or test). Dev maps are for choices; the test set
+is scored once at the end. ``--steer-noise`` adds seeded actuator noise during training (robustness).
 
 Needs TrackMania + TMInterface on the visible desktop. Resumable: rerun with ``--resume``.
 
@@ -36,11 +37,11 @@ from run_hybrid_controller_live import campaign_meta, make_controller, make_rang
 from run_test_set import max_race_s
 
 from config_files import config_copy
-from trackmania_rl.hybrid_live import HybridLivePolicy
+from trackmania_rl.hybrid_live import HybridLivePolicy, HybridLivePolicyConfig
 from trackmania_rl.map_loader import load_next_map_zone_centers
 from trackmania_rl.residual_action import ResidualConfig
 from trackmania_rl.residual_td3 import TD3Agent, TD3Config
-from trackmania_rl.residual_training import ResidualTrainer, TrainingConfig, illegal_training_maps
+from trackmania_rl.residual_training import ResidualTrainer, TrainingConfig, extended_training_maps, illegal_training_maps
 from trackmania_rl.tmi_interaction import game_instance_manager
 
 LIVE_DIR = ROOT / "eval_results" / "hybrid_live"
@@ -64,7 +65,7 @@ class MapContext:
     policy: HybridLivePolicy
 
 
-def build_context(stem: str, trainer: ResidualTrainer, manifest: dict) -> MapContext:
+def build_context(stem: str, trainer: ResidualTrainer, manifest: dict, policy_config: HybridLivePolicyConfig) -> MapContext:
     meta = campaign_meta(stem)
     centerline = np.load(ROOT / "maps" / meta["cl_file"])
     zone_centers = load_next_map_zone_centers(meta["cl_file"], ROOT)
@@ -74,6 +75,7 @@ def build_context(stem: str, trainer: ResidualTrainer, manifest: dict) -> MapCon
     policy = HybridLivePolicy(
         centerline,
         controller,
+        config=policy_config,
         range_sensor=make_range_sensor(FOOTPRINTS, stem),
         residual_policy=trainer.policy,
         residual_config=ResidualConfig(),
@@ -99,7 +101,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--name", required=True, help="output folder under eval_results/residual_rl/")
     parser.add_argument("--episodes", type=int, required=True, help="total episodes (including earlier ones on --resume)")
     parser.add_argument("--resume", action="store_true")
-    parser.add_argument("--maps", nargs="*", default=None, help="subset of the rl_train maps (default: all)")
+    parser.add_argument("--maps", nargs="*", default=None, help="subset of the training pool (default: all)")
+    parser.add_argument("--pool", default="rl_train", choices=("rl_train", "extended"),
+                        help="training maps: the fixed rl_train split, or rl_train + seeded extra non-dev/non-test maps")
+    parser.add_argument("--extra-maps", type=int, default=14, help="--pool extended: number of extra maps")
+    parser.add_argument("--pool-seed", type=int, default=20261113, help="--pool extended: seed of the extra-map draw")
+    parser.add_argument("--steer-noise", type=float, default=0.0,
+                        help="actuator noise on the steering during training (robustness; 0 = off)")
+    parser.add_argument("--perturb-seed", type=int, default=1000, help="seed of --steer-noise (eval uses 0)")
     parser.add_argument("--episodes-per-map", type=int, default=3)
     parser.add_argument("--init", type=Path, default=OUT_ROOT / "critic_burnin_v2.pt", help="starting checkpoint")
     parser.add_argument("--seed-data", default="*_rl_train_v7zero", help="zero-residual run folders preloaded into the buffer")
@@ -115,11 +124,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--port", type=int, default=config_copy.base_tmi_port)
     parser.add_argument("--keep-game", action="store_true")
     args = parser.parse_args()
-    rl_train = load_split()["rl_train"]
-    args.maps = args.maps or list(rl_train)
-    illegal = illegal_training_maps(args.maps, rl_train)
+    split = load_split()
+    pool = (
+        extended_training_maps(split, json.loads(MANIFEST.read_text()), args.extra_maps, args.pool_seed)
+        if args.pool == "extended" else list(split["rl_train"])
+    )
+    args.maps = args.maps or pool
+    illegal = illegal_training_maps(args.maps, pool)
     if illegal:
-        parser.error(f"training is only allowed on rl_train maps; not: {illegal}")
+        parser.error(f"training is only allowed on the {args.pool} pool; not: {illegal}")
+    if args.steer_noise < 0.0:
+        parser.error("--steer-noise must be >= 0")
     if args.episodes_per_map < 1 or args.episodes < 1:
         parser.error("--episodes and --episodes-per-map must be >= 1")
     return args
@@ -152,6 +167,8 @@ def make_trainer(args: argparse.Namespace, out_dir: Path) -> ResidualTrainer:
     if not args.resume:
         trainer.write_config({"init": str(args.init), "maps": args.maps, "seed_runs": [p.parent.name for p in seed_files],
                               "episodes_per_map": args.episodes_per_map, "game_speed": args.speed,
+                              "pool": args.pool, "pool_seed": args.pool_seed if args.pool == "extended" else None,
+                              "steer_noise": args.steer_noise, "perturb_seed": args.perturb_seed,
                               "buffer_from": [str(f) for f in args.buffer_from]})
     return trainer
 
@@ -169,12 +186,13 @@ def main() -> None:
         max_minirace_duration_ms=int(STUCK_CUTOFF_S * 1000),
         tmi_port=args.port,
     )
+    policy_config = HybridLivePolicyConfig(steering_noise_std=args.steer_noise, perturbation_seed=args.perturb_seed)
     contexts: dict[str, MapContext] = {}
     loaded_map = None
     try:
         while trainer.episodes < args.episodes:
             stem = args.maps[(trainer.episodes // args.episodes_per_map) % len(args.maps)]
-            ctx = contexts.get(stem) or contexts.setdefault(stem, build_context(stem, trainer, manifest))
+            ctx = contexts.get(stem) or contexts.setdefault(stem, build_context(stem, trainer, manifest, policy_config))
             tmi.max_overall_duration_ms = int(ctx.max_race_s * 1000)
             if stem != loaded_map:  # the first rollout after a map switch loads the map; it isn't trained on
                 print(f"[sync] loading {stem}", flush=True)
