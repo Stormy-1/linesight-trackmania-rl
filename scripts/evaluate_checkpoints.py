@@ -214,7 +214,7 @@ def run_benchmark_for_checkpoint(
         return
 
     file_hash = compute_file_sha256(ckpt_path)
-    state_dict = torch.load(ckpt_path, map_location=device, weights_only=False)
+    state_dict = torch.load(ckpt_path, map_location=device, weights_only=True)
     state_dict_hash = compute_state_dict_sha256(state_dict)
 
     print(f"\n=======================================================")

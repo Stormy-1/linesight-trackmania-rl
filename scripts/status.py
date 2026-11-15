@@ -1,6 +1,10 @@
 import sys
 from pathlib import Path
-import joblib
+
+# Import this repository's packages, not the copies an editable install may point at.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from trackmania_rl.safe_load import safe_joblib_load
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -21,7 +25,7 @@ if not stats_path.exists():
         print(f"Stats file not found at: {stats_path}")
         sys.exit(1)
 
-stats = joblib.load(stats_path)
+stats = safe_joblib_load(stats_path)
 frames = stats.get("cumul_number_frames_played", 0)
 alltime_min_ms = stats.get("alltime_min_ms", {})
 rolling_mean_ms = stats.get("rolling_mean_ms", {})

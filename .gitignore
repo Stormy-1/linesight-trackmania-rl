@@ -85,3 +85,6 @@ opencode.jsonc
 .claude/
 .mcp.json
 .cbmignore
+
+# Phone recordings of live runs (local only)
+track_videos/

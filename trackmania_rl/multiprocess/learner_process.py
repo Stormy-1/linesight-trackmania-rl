@@ -37,6 +37,7 @@ from trackmania_rl.analysis_metrics import (
 from trackmania_rl.buffer_utilities import make_buffers, resize_buffers
 from trackmania_rl.gen_v3_stage import StageController
 from trackmania_rl.map_reference_times import reference_times
+from trackmania_rl.safe_load import safe_joblib_load
 
 
 def _is_finite_scalar(value: typing.Any) -> bool:
@@ -238,7 +239,7 @@ def learner_process_fn(
 
     # noinspection PyBroadException
     try:
-        accumulated_stats = joblib.load(save_dir / "accumulated_stats.joblib")
+        accumulated_stats = safe_joblib_load(save_dir / "accumulated_stats.joblib")
         shared_steps.value = accumulated_stats["cumul_number_frames_played"]
         print(" =====================      Learner stats loaded !      ============================")
     except:
@@ -292,8 +293,8 @@ def learner_process_fn(
 
     # noinspection PyBroadException
     try:
-        optimizer1.load_state_dict(torch.load(f=save_dir / "optimizer1.torch", map_location=device, weights_only=False))
-        scaler.load_state_dict(torch.load(f=save_dir / "scaler.torch", map_location=device, weights_only=False))
+        optimizer1.load_state_dict(torch.load(f=save_dir / "optimizer1.torch", map_location=device, weights_only=True))
+        scaler.load_state_dict(torch.load(f=save_dir / "scaler.torch", map_location=device, weights_only=True))
         print(" =========================     Optimizer loaded !     ================================")
     except:
         print(" Could not load optimizer")
