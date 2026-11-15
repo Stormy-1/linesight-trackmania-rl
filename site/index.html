@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linesight: a self-driving TrackMania car</title>
+<meta name="description" content="Deep RL from pixels, then a robotics stack with learned models and a residual TD3 policy, judged on held-out TrackMania maps with paired 10-run robustness tests.">
+<meta property="og:title" content="Linesight: a self-driving TrackMania car">
+<meta property="og:description" content="Robotics drives, learned models set its numbers, residual RL corrects it. Every number from logged runs on maps it never saw.">
+<meta property="og:image" content="https://stormy-1.github.io/linesight-trackmania-rl/media/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0c0d0f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230c0d0f'/%3E%3Cpath d='M5 24 C 11 6, 21 26, 27 8' stroke='%23ffb000' stroke-width='3.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+</head>
+<body>
+<a class="skip" href="#era1">Skip to the story</a>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="brand" href="#top" aria-label="Linesight, back to top">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 24 C 11 6, 21 26, 28 8"/></svg>Linesight
+    </a>
+    <nav aria-label="Sections">
+      <a href="#era1">Deep RL</a><a href="#stack">Robotics</a><a href="#models">Learned models</a>
+      <a href="#rl">Residual RL</a><a href="#results">Results</a>
+    </nav>
+    <a class="gh" href="https://github.com/Stormy-1/linesight-trackmania-rl">Code on GitHub</a>
+  </div>
+</header>
+
+<main>
+<!-- 1. HERO -------------------------------------------------------------- -->
+<section id="top" class="hero">
+  <canvas id="hero3d" aria-label="3D replay of a logged run on B07-Race, a held-out map"></canvas>
+  <div class="wrap hero-copy" data-enter>
+    <p class="kicker">TrackMania Nations Forever · self-driving</p>
+    <h1>A car that learned to drive maps it never saw.</h1>
+    <p class="lead">It started as deep reinforcement learning from pixels and ended as a hybrid: a classical robotics
+      stack drives, learned models set its numbers, and a residual TD3 policy corrects it. Every claim here is
+      measured on 10 held-out maps.</p>
+    <dl class="stats">
+      <div><dt>Campaign maps finished by the robotics stack</dt><dd>27<span>/63</span></dd></div>
+      <div><dt>Held-out runs finished, base vs + residual RL</dt><dd>25 → 27<span>/100</span></dd></div>
+      <div><dt>Held-out map RL fixes, and one it breaks</dt><dd class="duo"><b class="rl">B07</b> <b class="bad">C02</b></dd></div>
+    </dl>
+  </div>
+  <div class="hud" aria-live="off">
+    <span class="hud-map">B07-Race · held-out · td3_v3</span>
+    <span><b id="hud-t">0.00</b> s</span>
+    <span><b id="hud-v">0</b> km/h</span>
+    <span>Δsteer <b id="hud-rs">+0.00</b></span>
+  </div>
+</section>
+
+<!-- 2. ERA 1 ------------------------------------------------------------- -->
+<section id="era1" class="band">
+  <div class="wrap">
+    <p class="kicker">Era 1 · Deep RL from pixels</p>
+    <h2>One track, mastered. Every other track, failed.</h2>
+    <div class="split">
+      <div class="prose">
+        <p>The project began with <a href="https://github.com/Linesight-RL/linesight">Linesight</a>'s Implicit
+          Quantile Network: distributional deep Q-learning that sees downscaled game frames plus telemetry and picks
+          one of 12 key combinations every step.</p>
+        <p>I made training portable between CPU and GPU, added self-healing game restarts, reward shaping and a
+          learning-rate schedule, then trained it for <strong>10.6 million frames</strong> on Hockolicious, locally and on a
+          cloud VM.</p>
+        <p>It got fast: <strong>about 54 s</strong> on Hockolicious, finishing 5 of 10 greedy evaluation runs (best 54.06 s).</p>
+      </div>
+      <figure class="video-frame">
+        <video data-src="media/era1_training.mp4" poster="media/era1_training.jpg" muted loop playsinline preload="none"></video>
+      </figure>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-head">
+        <h3>Learning Hockolicious</h3>
+        <p>Race time of each finished evaluation run during training, 0 → 10.7M frames</p>
+      </div>
+      <svg id="era1-curve" class="chart" role="img" aria-label="Evaluation race time falls from about 64 s to 54 s over 10.7 million frames"></svg>
+    </div>
+
+    <div class="split split-rev">
+      <figure class="video-frame">
+        <video data-src="media/era1_eval_fail.mp4" poster="media/era1_eval_fail.jpg" muted loop playsinline preload="none"></video>
+      </figure>
+      <div class="prose">
+        <h3>Then it met other maps.</h3>
+        <table class="mini" id="era1-bench">
+          <thead><tr><th>Checkpoint</th><th>Hockolicious (trained)</th><th>5 other campaign maps</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <p>All 8 finishes at 10.6M frames came on one map, A03. Fine-tuning on six maps at once was worse: the
+          training loss fell while the driving collapsed everywhere, Hockolicious included. The replay buffer filled
+          with failed runs and overwrote what the agent knew.</p>
+        <p class="takeaway">End-to-end RL can learn one track superbly but needs far more data to generalise. So the
+          driving went to a robotics stack, and RL was kept for what it could add on top.</p>
+      </div>
+    </div>
+
+    <div class="reel" aria-label="Era 1 clips">
+      <video data-src="media/era1_parallel.mp4" poster="media/era1_parallel.jpg" muted loop playsinline preload="none" aria-label="Two game instances collecting experience in parallel"></video>
+      <video data-src="media/era1_cloud.mp4" poster="media/era1_cloud.jpg" muted loop playsinline preload="none" aria-label="Training on a cloud VM, 10.6 million frames"></video>
+      <video data-src="media/era1_bestruns.mp4" poster="media/era1_bestruns.jpg" muted loop playsinline preload="none" aria-label="Saved best runs in the 54 second range"></video>
+    </div>
+  </div>
+</section>
+
+<!-- 3. ROBOTICS STACK ------------------------------------------------------ -->
+<section id="stack">
+  <div class="wrap">
+    <p class="kicker">The switch · A robotics stack</p>
+    <h2>Sense, plan, act. Developed on 5 maps, finished 27 of 63.</h2>
+    <ol class="pipeline" aria-label="Control loop, every 50 ms of game time">
+      <li><b>Sense</b><span>Pose from the game · map matching on the official-replay line · virtual lidar</span></li>
+      <li><b>Plan</b><span>Speed profile: corner limit, braking pass, jump physics</span></li>
+      <li><b>Act</b><span>Pure pursuit · steering cap, slip guard, recovery, unstick · sigma-delta onto 12 keys</span></li>
+      <li class="rl"><b>Correct</b><span>Residual TD3: bounded Δsteering and Δtarget speed</span></li>
+    </ol>
+    <div class="split">
+      <div class="prose">
+        <p>The game gives exact pose, so localisation is free. The hard parts are the map, the speed plan, and
+          steering a car with digital keys. 64 of the 65 campaign maps ship an official replay; its path, resampled every
+          0.5 m, became the racing line. On it, the controller finished A05 for the first time in the project
+          (21.58 s).</p>
+        <p>One run per map across the whole Nations campaign, before any learned component:</p>
+        <ul class="tiers" id="tier-list"></ul>
+      </div>
+      <figure class="video-frame four-three">
+        <video data-src="media/stack_campaign.mp4" poster="media/stack_campaign.jpg" muted loop playsinline preload="none"></video>
+      </figure>
+    </div>
+    <div class="campaign" id="campaign" aria-label="All 63 campaign maps; finished maps are highlighted"></div>
+    <p class="legend"><i class="sw ok"></i>finished <i class="sw no"></i>did not finish · hover a map for its result</p>
+  </div>
+</section>
+
+<!-- 4. LEARNED MODELS -------------------------------------------------------- -->
+<section id="models" class="band">
+  <div class="wrap">
+    <p class="kicker">Learning the numbers</p>
+    <h2>Hand-set constants, replaced by models fit to data.</h2>
+    <p class="intro">Every learned model is validated across maps: the maps it is scored on are never the maps it was fit on.</p>
+    <div class="cards">
+      <article class="card">
+        <h3>Speed model</h3>
+        <p class="what">An MLP on 18 track-geometry features (curvature ahead, slopes, crests, jumps) predicts how fast a pro drives each point. Data: 139,063 points from the official replays.</p>
+        <div class="vs"><div><span>hand rule</span><b>r 0.33</b></div><div><span>learned</span><b class="up">r 0.81</b></div></div>
+        <p class="fine">5-fold CV by map. MAE 34.1 → 11.7 m/s. Test maps, scored once: r 0.84.</p>
+      </article>
+      <article class="card">
+        <h3>Grip limit</h3>
+        <p class="what">A logistic model of "runs wide", fit on 32,210 cornering steps from this car's own logs, caps corner speed where pros drift and this car can't.</p>
+        <div class="vs"><div><span>speed alone</span><b>AUC 0.708</b></div><div><span>learned</span><b class="up">AUC 0.754</b></div></div>
+        <p class="fine">Leave-one-map-out, 54 maps. Single run on test maps: wall hits 11 → 2.</p>
+      </article>
+      <article class="card">
+        <h3>Gravity</h3>
+        <p class="what">Jump speeds come from a parabola fit, so gravity matters. It was measured from free fall in pro ghosts.</p>
+        <div class="vs"><div><span>old guess</span><b>15.4 m/s²</b></div><div><span>measured</span><b class="up">24.87 m/s²</b></div></div>
+        <p class="fine">2,328 samples, 53 maps. Predicted / pro jump speed: 0.80 → 1.01.</p>
+      </article>
+      <article class="card">
+        <h3>Virtual lidar</h3>
+        <p class="what">13 rays over the block map. Each block type's solid parts are learned from where pro ghosts never drive. It feeds the RL policy, not a safety rule.</p>
+        <div class="vs"><div><span>ordinary steps</span><b>10%</b></div><div><span>wall hits</span><b class="up">56%</b></div></div>
+        <p class="fine">Share of steps where a ray reads contact. Leave-one-map-out, 43 wall hits.</p>
+      </article>
+    </div>
+    <p class="takeaway">The models made the car faster and cleaner, but the held-out finish count stayed at 2–3 of 10 in
+      single runs: each change flipped a map or two at knife-edge jumps. That set up the question for RL.</p>
+  </div>
+</section>
+
+<!-- 5. RESIDUAL RL --------------------------------------------------------- -->
+<section id="rl">
+  <div class="wrap">
+    <p class="kicker">Era 2 · Residual reinforcement learning</p>
+    <h2>RL on top of the stack: small corrections, learned live.</h2>
+    <div class="split">
+      <div class="prose">
+        <p>A TD3 policy reads a 39-number state (track-relative pose, the stack's own command, lookahead geometry,
+          the 13 lidar rays, wheel contact) and adds <strong>Δsteering within ±0.25</strong> and <strong>Δtarget speed
+          within ±8 m/s</strong>, every 50 ms. It is rewarded for progress and penalised for impacts, recovery and
+          getting stuck. While a safety layer owns the car, it is switched off.</p>
+        <p>Its output starts at exactly zero, so training begins at the stack's behaviour, never from scratch: live,
+          760 of 760 steps matched the base exactly.</p>
+      </div>
+      <figure class="video-frame">
+        <video data-src="media/td3_training.mp4" poster="media/td3_training.jpg" muted loop playsinline preload="none"></video>
+      </figure>
+    </div>
+
+    <h3 class="sub">Three generations, each fixing what broke the last</h3>
+    <ol class="gens">
+      <li>
+        <span class="gen">Before training</span>
+        <p class="prob">A random critic would mislead the first updates.</p>
+        <p class="fix">Critic burn-in on the base stack's own runs: predicted vs true return r 0.89–1.00.</p>
+      </li>
+      <li>
+        <span class="gen">td3_v1</span>
+        <p class="prob">The actor never moved: mean |a| ≈ 0.02.</p>
+        <p class="fix">Diagnosed offline: the TD3+BC anchor outweighed the critic's gradient. Anchor weakened 10×.</p>
+      </li>
+      <li>
+        <span class="gen">td3_v2</span>
+        <p class="prob">White exploration noise averaged out through the digital-key adapter.</p>
+        <p class="fix">Held noise, one draw per 0.5 s. It learned to finish C05, a training map where the base stalls at 9%.</p>
+      </li>
+      <li>
+        <span class="gen">td3_v3</span>
+        <p class="prob">6 training maps and noise-free physics: narrow data.</p>
+        <p class="fix">20 maps (the 6 plus 14 drawn by a fixed rule, never dev or test), seeded steering noise, 200 live episodes.</p>
+      </li>
+    </ol>
+
+    <div class="chart-card">
+      <div class="chart-head">
+        <h3>Live training episodes</h3>
+        <p>Completion of every episode, by generation · <span class="key fin">finished</span> <span class="key">stopped</span></p>
+      </div>
+      <svg id="td3-chart" class="chart" role="img" aria-label="Completion per training episode for td3_v1, td3_v2 and td3_v3"></svg>
+    </div>
+    <p class="takeaway">What it learned (11,608 dev and training states): steer against the heading error, on 11 of 13
+      maps (pooled r −0.22). The corrections stay small, mean |a| 0.13, and almost never saturate.</p>
+  </div>
+</section>
+
+<!-- 6. RESULTS -------------------------------------------------------------- -->
+<section id="results" class="band">
+  <div class="wrap">
+    <p class="kicker">Held-out results</p>
+    <h2>Ten maps it never saw. Ten noisy runs each. Compared in pairs.</h2>
+    <p class="intro">Each test map was driven 10 times with seeded steering noise (σ 0.05). Run <i>k</i> gets the same
+      noise with and without RL, so every run has a twin. These are ghosts of the same run pair from the logs.</p>
+
+    <div class="duel" id="duel">
+      <div class="duel-tabs" role="tablist" aria-label="Choose a map">
+        <button role="tab" aria-selected="true" data-duel="b07">B07-Race: RL fixes it</button>
+        <button role="tab" aria-selected="false" data-duel="c02">C02-Race: RL breaks it</button>
+      </div>
+      <canvas id="duel-canvas" aria-label="Top-down replay of the base stack and the residual RL policy on the same noisy run"></canvas>
+      <div class="duel-bar">
+        <button id="duel-play" class="play" aria-label="Pause replay">❚❚</button>
+        <input id="duel-scrub" type="range" min="0" max="1000" value="0" aria-label="Replay time">
+        <span id="duel-time" class="mono">0.0 s</span>
+      </div>
+      <div class="duel-legend">
+        <div class="who base"><i></i><span>Base stack</span><b id="duel-base"></b></div>
+        <div class="who rl"><i></i><span>+ residual TD3 (td3_v3)</span><b id="duel-rl"></b></div>
+      </div>
+      <p class="duel-note" id="duel-note"></p>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-head">
+        <h3>All 100 run pairs</h3>
+        <p>Each square is one (map, run) pair, base stack vs + residual TD3 (td3_v3)</p>
+      </div>
+      <div id="paired" class="paired"></div>
+      <p class="legend">
+        <i class="sw both"></i>both finished <i class="sw onlyb"></i>only the base <i class="sw onlyr"></i>only with RL <i class="sw none"></i>neither
+      </p>
+    </div>
+
+    <div class="numbers">
+      <div><span>Runs finished</span><b>25 → 27</b><em>of 100 · sign test p = 0.82</em></div>
+      <div><span>Mean completion</span><b>48.0 → 54.7%</b><em>95% CI of the gain −1.6 to +20.0 pts</em></div>
+      <div><span>Recovery steps</span><b>−23%</b><em>6,543 → 5,043</em></div>
+      <div><span>Wall hits</span><b>41 → 32</b><em>across all 100 runs</em></div>
+    </div>
+
+    <div class="verdict">
+      <h3>What the data says</h3>
+      <ul>
+        <li><strong>A real, learned trade.</strong> RL fixes B07 (2/10 → 9/10) and breaks C02 (8/10 → 1/10), 7 pairs to 0
+          each way (p = 0.016 each, ≈ 0.16 after correcting for 10 maps). td3_v2, trained separately, makes the same trade.</li>
+        <li><strong>No significant net gain.</strong> 16 pairs finished in both, 9 only without RL, 11 only with it. Completion and
+          recovery improve, within the noise.</li>
+        <li><strong>One run per map lied.</strong> In single deterministic runs, RL looked like a clear win, 4/10 vs 2/10. Ten noisy
+          runs showed that was luck at knife-edge jumps.</li>
+        <li><strong>Selected fairly.</strong> td3_v3 got its one test look only by passing a dev-map rule written before any dev result.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 7. LIMITS --------------------------------------------------------------- -->
+<section id="limits">
+  <div class="wrap">
+    <p class="kicker">Limits, honestly</p>
+    <h2>What it can't do yet.</h2>
+    <div class="cols">
+      <div><h3>Six test maps never finish</h3><p>B13, C13 and D04 stall in the first 10% in every version; B04, C10 and D07 stall at the same spots. These look like line or geometry problems, out of reach of a ±0.25 correction.</p></div>
+      <div><h3>The car is slow</h3><p>Finished maps take about 1.4–1.6× the pro's time. Pros drift through corners at speeds this car and controller can't hold.</p></div>
+      <div><h3>The test set wasn't perfectly blind</h3><p>Nothing was tuned on it, but after v6 two test maps' failure logs were studied, which led to measuring gravity. A general physics fix, still a mild leak.</p></div>
+      <div><h3>No collision telemetry</h3><p>Contacts are inferred: an impact is a speed drop of more than 4 m/s in 50 ms, which also catches hard landings.</p></div>
+    </div>
+    <div class="links">
+      <a class="btn" href="https://github.com/Stormy-1/linesight-trackmania-rl">Read the code</a>
+      <a class="btn ghost" href="https://github.com/Stormy-1/linesight-trackmania-rl/blob/main/RESULTS.md">Every result, with sources</a>
+      <a class="btn ghost" href="https://github.com/Stormy-1/linesight-trackmania-rl/blob/main/ARCHITECTURE.md">How each part works</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Built on <a href="https://github.com/Linesight-RL/linesight">Linesight</a>, an open-source RL framework for TrackMania
+      Nations Forever: its game interface and IQN agent. The hybrid stack, learned models, residual RL and evaluation are
+      this project's work. Replays and charts are drawn from the logged runs in <code>eval_results/</code>; videos are phone
+      recordings of the screen.</p>
+  </div>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
