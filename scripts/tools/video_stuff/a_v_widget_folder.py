@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from trackmania_rl import run_to_video
+from trackmania_rl.safe_load import safe_joblib_load
 
 tmi_dir = Path("C:\\Users\\chopi\\Documents\\TMInterface\\Scripts")
 base_dir = Path(__file__).resolve().parents[3]
@@ -335,7 +336,7 @@ for a in run_dir.iterdir():
         infile_path=run_dir / run_name / "actions.joblib", outfile_path=out_dir / f"{run_name}.inputs"
     )
 
-    q_values = joblib.load(run_dir / run_name / "q_values.joblib")
+    q_values = safe_joblib_load(run_dir / run_name / "q_values.joblib")
     video_path = Path(r"D:\video2\widgets") / f"{run_name}.mov"
 
     def foo(frame_id):

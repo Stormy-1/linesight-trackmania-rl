@@ -222,7 +222,7 @@ def compute_weight_metrics(weight_tensor: torch.Tensor) -> Dict[str, float]:
 
 
 def analyze_checkpoint(ckpt_key: str, ckpt_path: Path, img_tensor: torch.Tensor, float_tensor: torch.Tensor, device: str) -> Dict:
-    state_dict = torch.load(ckpt_path, map_location="cpu", weights_only=False)
+    state_dict = torch.load(ckpt_path, map_location="cpu", weights_only=True)
     state_hash = compute_state_dict_sha256(state_dict)
 
     # Initialize uncompiled model on device for activation hook inspection

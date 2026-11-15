@@ -37,7 +37,6 @@ if __name__ == "__main__":
 # =======================================================================================================================
 
 import ctypes
-import joblib
 import os
 import random
 import signal
@@ -50,11 +49,15 @@ import torch.multiprocessing as mp
 from art import tprint
 from torch.multiprocessing import Lock
 
+# Import this repository's packages, not the copies an editable install may point at.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 from config_files import config_copy
 from trackmania_rl.agents.iqn import make_untrained_iqn_network
 from trackmania_rl.multiprocess.collector_process import collector_process_fn
 from trackmania_rl.multiprocess.learner_process import learner_process_fn
 from trackmania_rl.reproducibility import record_run_metadata
+from trackmania_rl.safe_load import safe_joblib_load
 from trackmania_rl.utilities import set_random_seed
 
 # noinspection PyUnresolvedReferences
@@ -144,7 +147,7 @@ if __name__ == "__main__":
             allowed_missing_keys=utilities.NON_PERSISTENT_NORMALIZATION_KEYS,
             allowed_unexpected_keys=utilities.NON_PERSISTENT_NORMALIZATION_KEYS,
         )
-        shared_steps.value = joblib.load(save_dir / "accumulated_stats.joblib")["cumul_number_frames_played"]
+        shared_steps.value = safe_joblib_load(save_dir / "accumulated_stats.joblib")["cumul_number_frames_played"]
 
     # Start worker process
     collector_processes = [

@@ -18,6 +18,7 @@ import torch
 from prettytable import PrettyTable
 
 from trackmania_rl import run_to_video
+from trackmania_rl.safe_load import safe_joblib_load
 
 
 # These buffers are intentionally registered with persistent=False in
@@ -267,7 +268,7 @@ def load_stage_baseline_start_frames(baseline_dir: Path) -> int:
     stats_path = Path(baseline_dir) / "accumulated_stats.joblib"
     if not stats_path.is_file():
         raise FileNotFoundError(f"Stage baseline stats not found: {stats_path}")
-    stats = joblib.load(stats_path)
+    stats = safe_joblib_load(stats_path)
     try:
         stage_start_frames = int(stats["cumul_number_frames_played"])
     except (KeyError, TypeError, ValueError) as error:
@@ -292,20 +293,15 @@ def load_model_checkpoint(
     ``strict=False`` is used only to collect both categories of incompatibility;
     every disallowed key is then reported in the raised error.
 
-    ``weights_only=False`` preserves loading of checkpoints written by older
-    versions of this project.  The fallback is limited to PyTorch versions
-    whose ``torch.load`` does not yet accept that keyword.
+    ``weights_only=True`` lets the file hold only tensors and plain
+    containers, so a crafted checkpoint cannot run code while it loads.
+    Every checkpoint this project has written loads that way.
     """
     checkpoint_path = Path(checkpoint_path)
     if not checkpoint_path.is_file():
         raise FileNotFoundError(f"Model checkpoint not found: {checkpoint_path}")
 
-    try:
-        state_dict = torch.load(f=checkpoint_path, map_location=map_location, weights_only=False)
-    except TypeError as error:
-        if "weights_only" not in str(error):
-            raise
-        state_dict = torch.load(f=checkpoint_path, map_location=map_location)
+    state_dict = torch.load(f=checkpoint_path, map_location=map_location, weights_only=True)
 
     if not isinstance(state_dict, Mapping):
         raise TypeError(

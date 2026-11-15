@@ -23,6 +23,11 @@ from typing import Any, Mapping
 
 import joblib
 
+# Import this repository's packages, not the copies an editable install may point at.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from trackmania_rl.safe_load import safe_joblib_load  # noqa: E402
+
 
 SOURCE_RELATIVE_PATH = Path("save") / "hocko_v1_foundational_checkpoint"
 DESTINATION_RELATIVE_PATH = Path("save") / "gen_v3_r1"
@@ -148,7 +153,7 @@ def bootstrap_generalization(
         )
 
     # Load and validate stats before creating or replacing anything.
-    source_stats = joblib.load(source_paths[STATS_FILENAME])
+    source_stats = safe_joblib_load(source_paths[STATS_FILENAME])
     if not isinstance(source_stats, Mapping):
         raise ValueError(f"Foundational stats must be a mapping, got {type(source_stats).__name__}")
     sanitized_stats = sanitize_stats(source_stats)

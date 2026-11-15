@@ -9,11 +9,11 @@ import tempfile
 from pathlib import Path
 from typing import List
 
-import joblib
 import matplotlib.pyplot as plt
 import numpy as np
 
 from config_files import config
+from trackmania_rl.safe_load import safe_joblib_load
 
 
 # ===============================================================
@@ -24,7 +24,7 @@ def write_actions_from_disk_in_tmi_format(infile_path: Path, outfile_path: Path)
     Input : path to a file on disk containing a list of action indices.
     Output: write a text file on disk containing the corresponding inputs, readable by TMI to load the replay
     """
-    write_actions_in_tmi_format(joblib.load(infile_path), outfile_path)
+    write_actions_in_tmi_format(safe_joblib_load(infile_path), outfile_path)
 
 
 def write_actions_in_tmi_format(action_idxs: List[int], outfile_path: Path):
@@ -72,7 +72,7 @@ def write_actions_in_tmi_format(action_idxs: List[int], outfile_path: Path):
 
 
 def make_widget_video_from_q_values_on_disk(q_values_path: Path, video_path: Path, q_value_gap):
-    make_widget_video_from_q_values(joblib.load(q_values_path), video_path, q_value_gap)
+    make_widget_video_from_q_values(safe_joblib_load(q_values_path), video_path, q_value_gap)
 
 
 def make_widget_video_from_q_values(q_values: List, video_path: Path, q_value_gap):
