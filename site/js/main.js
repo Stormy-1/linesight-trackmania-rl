@@ -4,6 +4,7 @@ import { mountEra1, mountTd3Chart } from "./charts.js";
 import { mountCampaign } from "./campaign.js";
 import { mountPaired } from "./paired.js";
 import { mountDuel } from "./duel.js";
+import { mountExplainer } from "./explainer.js";
 
 const load = (name) => fetch(`data/${name}.json`).then((r) => {
   if (!r.ok) throw new Error(`data/${name}.json: HTTP ${r.status}`);
@@ -16,14 +17,15 @@ function safely(label, fn) {
 
 async function start() {
   mountVideos();
-  const [replays, era1, campaign, td3, paired] = await Promise.all(
-    ["replays", "era1", "campaign", "td3", "paired"].map(load));
+  const [replays, era1, campaign, td3, paired, explainer] = await Promise.all(
+    ["replays", "era1", "campaign", "td3", "paired", "explainer"].map(load));
 
   safely("era1", () => mountEra1(era1));
   safely("campaign", () => mountCampaign(campaign));
+  safely("explainer", () => mountExplainer(explainer));
   safely("td3", () => mountTd3Chart(td3));
   safely("paired", () => mountPaired(paired));
-  safely("duel", () => mountDuel(replays, paired));
+  safely("duel", () => mountDuel(replays.stories, paired));
 
   // The 3D hero loads three.js from a CDN; keep the page working if that fails.
   import("./hero3d.js")

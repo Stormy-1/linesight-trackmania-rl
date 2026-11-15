@@ -13,11 +13,13 @@ import csv
 import glob
 import json
 import os
+import sys
 from pathlib import Path
 
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))   # the explainer rebuilds the speed plan with trackmania_rl's own code
 LIVE = ROOT / "eval_results" / "hybrid_live"
 OUT = ROOT / "site" / "data"
 
@@ -28,13 +30,17 @@ ROB_TAGS = {"base": "v7_rob", "td3_v2": "v8_rl_rob", "td3_v3": "v9_rl_rob"}
 CAMPAIGN_POINTS = 160          # centerline points per map in the campaign grid
 ERA1_RUNS = ("hocko_v1", "hocko_v1_2")   # this project's IQN run on Hockolicious, 0 -> 10.68M frames
 ERA1_TAG = "eval_race_time_finished_trained_hock"
+EXPLORER_STRIDE = 2            # explorer runs at 100 ms steps (logs are 50 ms)
+EXPLAINER_MAP = "A05-Race"     # a dev map: the stack was developed on it, so explaining it leaks nothing
+EXPLAINER_RUN = "A05-Race_dev_v7a"   # deterministic base stack, speed + grip models, finished 20.32 s
 
 
-def _write(name: str, payload: dict) -> None:
-    OUT.mkdir(parents=True, exist_ok=True)
+def _write(name: str, payload: dict, quiet: bool = False) -> None:
     path = OUT / name
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, separators=(",", ":")), encoding="utf-8")
-    print(f"wrote {path.relative_to(ROOT)} ({path.stat().st_size / 1024:.0f} KB)")
+    if not quiet:
+        print(f"wrote {path.relative_to(ROOT)} ({path.stat().st_size / 1024:.0f} KB)")
 
 
 def _summary(run_dir: Path) -> dict:
@@ -106,16 +112,6 @@ def _paired_run(map_name: str, base_finishes: bool) -> int:
     raise ValueError(f"no discordant pair on {map_name}")
 
 
-def _duel(map_name: str, base_finishes: bool) -> dict:
-    k = _paired_run(map_name, base_finishes)
-    out = {"map": map_name, "tier": TIERS[map_name[0]], "pair": k, "cl": _centerline_xz(map_name)}
-    for who in ("base", "td3_v3"):
-        d = LIVE / f"{map_name}_test_{ROB_TAGS[who]}"
-        out[who] = {**_run_meta(_summary(d), k), **_read_run(d / f"run{k:02d}.csv"),
-                    "source": str(d.relative_to(ROOT) / f"run{k:02d}.csv").replace("\\", "/")}
-    return out
-
-
 def build_replays() -> None:
     hero_dir = LIVE / "B07-Race_test_v9_rl_rob"
     k = _paired_run("B07-Race", base_finishes=False)
@@ -123,9 +119,97 @@ def build_replays() -> None:
             **_read_run(hero_dir / f"run{k:02d}.csv"),
             "jumps": _summary(hero_dir)["jumps"],
             "source": f"eval_results/hybrid_live/B07-Race_test_v9_rl_rob/run{k:02d}.csv"}
-    _write("replays.json", {"hero": hero,
-                            "b07": _duel("B07-Race", base_finishes=False),
-                            "c02": _duel("C02-Race", base_finishes=True)})
+    stories = {"b07": {"map": "B07-Race", "pair": _paired_run("B07-Race", base_finishes=False)},
+               "c02": {"map": "C02-Race", "pair": _paired_run("C02-Race", base_finishes=True)}}
+    _write("replays.json", {"hero": hero, "stories": stories})
+
+
+def _explorer_run(csv_path: Path, meta: dict) -> dict:
+    """A run thinned to what the explorer draws: 100 ms steps, position, speed, impacts, recovery."""
+    full = _read_run(csv_path, stride=EXPLORER_STRIDE)
+    return {**meta, **{k: full[k] for k in ("t", "x", "z", "v", "imp", "rec")}}
+
+
+def build_explorer() -> None:
+    """One lazily-fetched file per map: every campaign run, and all 10 test-set run pairs."""
+    for d in sorted(LIVE.glob("*_official_v3b")):
+        s = _summary(d)
+        stem = s["centerline"].replace("_official_0.5m_cl.npy", "")
+        payload = {"map": stem, "tier": TIERS[stem[0]], "cl": _centerline_xz(stem),
+                   "run": _explorer_run(d / "run01.csv", _run_meta(s, 1)),
+                   "source": str(d.relative_to(ROOT) / "run01.csv").replace("\\", "/")}
+        _write(f"campaign/{stem}.json", payload, quiet=True)
+    for m in TEST_MAPS:
+        runs = {}
+        for who in ("base", "td3_v3"):
+            d = LIVE / f"{m}_test_{ROB_TAGS[who]}"
+            s = _summary(d)
+            runs[who] = [_explorer_run(d / f"run{k:02d}.csv", _run_meta(s, k)) for k in range(1, 11)]
+        _write(f"pairs/{m}.json", {"map": m, "tier": TIERS[m[0]], "cl": _centerline_xz(m), **runs,
+                                   "source": f"eval_results/hybrid_live/{m}_test_{{v7,v9_rl}}_rob/run*.csv"})
+    print(f"explorer: {len(list((OUT / 'campaign').glob('*.json')))} campaign maps, {len(TEST_MAPS)} test maps")
+
+
+def _hand_and_learned_profiles(stem: str, summary: dict):
+    """The speed plan with hand-set corner rules, and the one the logged run actually drove (learned models)."""
+    from trackmania_rl.grip_model import load_grip_model
+    from trackmania_rl.hybrid_state import build_centerline_geometry
+    from trackmania_rl.hybrid_track_profile import TrackProfileConfig, build_track_speed_profile
+    from trackmania_rl.speed_model import learned_base_speed, load_speed_model
+
+    geometry = build_centerline_geometry(np.load(ROOT / "maps" / summary["centerline"]))
+    config = TrackProfileConfig(max_speed_mps=summary["top_speed_mps"])
+    hand = build_track_speed_profile(geometry, config)
+    grip = load_grip_model(ROOT / summary["grip_model"].replace("\\", "/"))
+    base = learned_base_speed(geometry, load_speed_model(ROOT / summary["speed_model"].replace("\\", "/")),
+                              summary["speed_scale"])
+    learned = build_track_speed_profile(geometry, config, base,
+                                        lambda k: grip.speed_limit_mps(k, summary["grip_risk"]))
+    return geometry, config, hand, learned
+
+
+def build_explainer() -> None:
+    """Pure pursuit and the speed plan on one dev map, from the code's own config and a logged run."""
+    from trackmania_rl.hybrid_controller import PurePursuitControllerConfig
+
+    run_dir = LIVE / EXPLAINER_RUN
+    s = _summary(run_dir)
+    geometry, config, hand, learned = _hand_and_learned_profiles(EXPLAINER_MAP, s)
+    assert [round(j.start_m, 1) for j in learned.jumps] == [round(j["start_m"], 1) for j in s["jumps"]]
+    idx = np.arange(0, len(geometry.points), 4)        # 2 m spacing
+    tangent_yaw = np.arctan2(geometry.segment_tangents[:, 2], geometry.segment_tangents[:, 0])
+    seg_progress = geometry.cumulative_lengths[:-1]
+    run = {k: [] for k in ("t", "x", "z", "s", "v", "yaw", "target", "thr", "brk", "rec")}
+    with open(run_dir / "run01.csv", newline="", encoding="utf-8") as fh:
+        for row in csv.DictReader(fh):
+            progress = float(row["progress_m"])
+            seg = min(int(np.searchsorted(seg_progress, progress, side="right")) - 1, len(tangent_yaw) - 1)
+            yaw = float(tangent_yaw[max(seg, 0)]) + float(row["heading_error_rad"])
+            for key, value, nd in (("t", row["race_time_s"], 2), ("x", row["x"], 2), ("z", row["z"], 2),
+                                   ("s", progress, 1), ("v", row["speed_mps"], 1), ("yaw", yaw, 3),
+                                   ("target", row["target_speed_mps"], 1), ("thr", row["throttle"], 2),
+                                   ("brk", row["brake"], 2)):
+                run[key].append(round(float(value), nd))
+            run["rec"].append(1 if row["recovery"] == "True" else 0)
+    pp = PurePursuitControllerConfig()
+    _write("explainer.json", {
+        "map": EXPLAINER_MAP, **_run_meta(s, 1),
+        "line": {"s": np.round(geometry.cumulative_lengths[idx], 1).tolist(),
+                 "x": np.round(geometry.points[idx, 0], 1).tolist(),
+                 "z": np.round(geometry.points[idx, 2], 1).tolist(),
+                 "hand": np.round(hand.target_speed_mps[idx], 1).tolist(),
+                 "limit": np.round(learned.corner_limit_mps[idx], 1).tolist(),
+                 "target": np.round(learned.target_speed_mps[idx], 1).tolist(),
+                 "lock": learned.jump_locked[idx].astype(int).tolist()},
+        "jumps": s["jumps"],
+        "pp": {"lookahead_m": pp.lookahead_m, "lookahead_time_s": pp.lookahead_time_s,
+               "steering_gain": pp.steering_gain, "speed_preview_m": pp.speed_preview_m,
+               "steer_limit_start_mps": pp.steer_limit_start_mps, "steer_limit_end_mps": pp.steer_limit_end_mps,
+               "high_speed_steer_limit": pp.high_speed_steer_limit},
+        "plan": {"braking_decel_mps2": config.braking_decel_mps2, "gravity_mps2": config.gravity_mps2,
+                 "max_speed_mps": config.max_speed_mps},
+        "run": run,
+        "source": f"eval_results/hybrid_live/{EXPLAINER_RUN}/run01.csv; profile rebuilt with the run's own config"})
 
 
 def build_paired() -> None:
@@ -197,6 +281,8 @@ def build_models() -> None:
 def main() -> None:
     build_campaign()
     build_replays()
+    build_explorer()
+    build_explainer()
     build_paired()
     build_td3()
     build_era1()
