@@ -26,7 +26,7 @@
       <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 24 C 11 6, 21 26, 28 8"/></svg>Linesight
     </a>
     <nav aria-label="Sections">
-      <a href="#era1">Deep RL</a><a href="#stack">Robotics</a><a href="#models">Learned models</a>
+      <a href="#era1">Deep RL</a><a href="#stack">Robotics</a><a href="#drive">How it drives</a><a href="#models">Learned models</a>
       <a href="#rl">Residual RL</a><a href="#results">Results</a>
     </nav>
     <a class="gh" href="https://github.com/Stormy-1/linesight-trackmania-rl">Code on GitHub</a>
@@ -136,7 +136,74 @@
       </figure>
     </div>
     <div class="campaign" id="campaign" aria-label="All 63 campaign maps; finished maps are highlighted"></div>
-    <p class="legend"><i class="sw ok"></i>finished <i class="sw no"></i>did not finish · hover a map for its result</p>
+    <p class="legend"><i class="sw ok"></i>finished <i class="sw no"></i>did not finish · click any map to replay its run</p>
+
+    <div class="duel explorer" id="explorer">
+      <div class="ex-head">
+        <h3 id="ex-title">A05-Race</h3>
+        <b id="ex-sub" class="mono"></b>
+      </div>
+      <canvas id="ex-canvas" aria-label="Top-down replay of the selected campaign map's run, coloured by speed"></canvas>
+      <div class="duel-bar">
+        <button id="ex-play" class="play" aria-label="Pause replay">❚❚</button>
+        <input id="ex-scrub" type="range" min="0" max="1000" value="0" aria-label="Replay time">
+        <span id="ex-time" class="mono">0.0 s</span>
+      </div>
+      <p class="legend ex-legend"><span>slow</span><i id="ex-ramp" class="ramp"></i><span id="ex-ramp-max"></span>
+        <span class="nw"><i class="sw imp"></i>suspected impact</span> <span class="nw"><i class="sw x"></i>stopped</span></p>
+      <p class="duel-note" id="ex-note"></p>
+    </div>
+  </div>
+</section>
+
+<!-- 3b. HOW IT DRIVES ------------------------------------------------------- -->
+<section id="drive" class="ruled">
+  <div class="wrap">
+    <p class="kicker">How it drives · A05-Race, a dev map</p>
+    <h2>Steer at a point ahead. Plan the speed for what's coming.</h2>
+    <p class="intro">A logged run of the base stack on A05 (learned speed and grip models on, no RL), finished in
+      20.32 s. The steering geometry is recomputed here from the logged pose with the controller's own constants; the
+      speed plan was rebuilt by the project's Python code and matches the logged targets.</p>
+    <div class="drive">
+      <div class="drive-view">
+        <canvas id="drive-canvas" aria-label="Heading-up view of the car on A05-Race with its pure-pursuit lookahead point"></canvas>
+        <div class="duel-bar">
+          <button id="drive-play" class="play" aria-label="Pause">❚❚</button>
+          <input id="drive-scrub" type="range" min="0" max="1000" value="0" aria-label="Run time">
+          <span id="drive-time" class="mono">0.0 s</span>
+        </div>
+      </div>
+      <div class="drive-side">
+        <h3>1 · Pure pursuit steers</h3>
+        <p>Every 50 ms the controller takes the point on the racing line <b>L</b> metres ahead, with
+          <b>L = 10 m + 0.45 s × speed</b>, so it looks further when fast. <b class="rl">α</b> is the angle from the
+          car's heading to that point, and <b>steering = 2.2 × α</b>. Above 126 km/h the cap shrinks, to half lock
+          at 216 km/h: full lock at speed started slides.</p>
+        <dl class="readout">
+          <div><dt>Speed</dt><dd id="dr-v">0</dd></div>
+          <div><dt>Lookahead L</dt><dd id="dr-L">0</dd></div>
+          <div><dt>Angle <span class="nc">α</span></dt><dd id="dr-a">0</dd></div>
+          <div><dt>Steering cap</dt><dd id="dr-cap">0</dd></div>
+          <div class="wide"><dt>Steering = 2.2 × <span class="nc">α</span>, capped</dt><dd id="dr-steer">0</dd>
+            <span class="steer-meter" aria-hidden="true"><i id="dr-steer-bar"></i></span></div>
+          <div><dt>Target speed</dt><dd id="dr-target">0</dd></div>
+          <div><dt>Pedal (logged)</dt><dd id="dr-pedal">0</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-head">
+        <h3>2 · The speed plan</h3>
+        <p><span class="key k-target">target</span> <span class="key k-limit">corner limit</span>
+          <span class="key k-hand">hand-set rule</span> <span class="key k-speed">car's speed</span> · click to jump there</p>
+      </div>
+      <svg id="drive-plan" class="chart" role="img" aria-label="Target speed, corner limit and the car's logged speed along A05-Race"></svg>
+      <p class="fine plan-note">The learned speed model gives each point a corner limit, capped by the grip model. A backward
+        pass then lowers any point the car could not brake down from in time (15 m/s²). Jumps are physics: the line's
+        flight arc gives the take-off speed (gravity 24.9 m/s²), held as a floor and a ceiling over the run-up (shaded).
+        The dashed line is the same plan with the old hand-set curvature rule.</p>
+    </div>
   </div>
 </section>
 
@@ -241,9 +308,13 @@
       noise with and without RL, so every run has a twin. These are ghosts of the same run pair from the logs.</p>
 
     <div class="duel" id="duel">
-      <div class="duel-tabs" role="tablist" aria-label="Choose a map">
-        <button role="tab" aria-selected="true" data-duel="b07">B07-Race: RL fixes it</button>
-        <button role="tab" aria-selected="false" data-duel="c02">C02-Race: RL breaks it</button>
+      <div class="duel-tabs" role="group" aria-label="Story pairs">
+        <button aria-pressed="true" data-story="b07">B07-Race: RL fixes it</button>
+        <button aria-pressed="false" data-story="c02">C02-Race: RL breaks it</button>
+      </div>
+      <div class="duel-pick">
+        <label>Map <select id="duel-map"></select></label>
+        <div class="runs" id="duel-runs" role="group" aria-label="Noisy run"></div>
       </div>
       <canvas id="duel-canvas" aria-label="Top-down replay of the base stack and the residual RL policy on the same noisy run"></canvas>
       <div class="duel-bar">
@@ -261,7 +332,7 @@
     <div class="chart-card">
       <div class="chart-head">
         <h3>All 100 run pairs</h3>
-        <p>Each square is one (map, run) pair, base stack vs + residual TD3 (td3_v3)</p>
+        <p>Each square is one (map, run) pair, base stack vs + residual TD3 (td3_v3) · click one to replay it</p>
       </div>
       <div id="paired" class="paired"></div>
       <p class="legend">
@@ -313,6 +384,14 @@
 
 <footer class="foot">
   <div class="wrap">
+    <div class="author">
+      <p class="by">Built by <a href="https://github.com/Stormy-1">Stormy-1</a></p>
+      <ul class="built" aria-label="What this project covers">
+        <li>Pure pursuit and speed planning</li><li>Map matching and block-map parsing</li>
+        <li>PyTorch speed model</li><li>Logistic grip model</li><li>Distributional deep RL (IQN)</li>
+        <li>Residual TD3, trained live</li><li>Paired held-out evaluation</li>
+      </ul>
+    </div>
     <p>Built on <a href="https://github.com/Linesight-RL/linesight">Linesight</a>, an open-source RL framework for TrackMania
       Nations Forever: its game interface and IQN agent. The hybrid stack, learned models, residual RL and evaluation are
       this project's work. Replays and charts are drawn from the logged runs in <code>eval_results/</code>; videos are phone

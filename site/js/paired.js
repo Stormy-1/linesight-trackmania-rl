@@ -1,4 +1,6 @@
-// 10 test maps x 10 noisy runs: each cell is one run pair, base stack vs + td3_v3.
+// 10 test maps x 10 noisy runs: each cell is one run pair, base stack vs + td3_v3. Click a cell to replay it.
+import { pairState } from "./duel.js";
+
 const STATE_LABEL = { both: "both finished", onlyb: "only the base finished", onlyr: "only with RL finished", none: "neither finished" };
 
 export function mountPaired(data) {
@@ -17,10 +19,14 @@ export function mountPaired(data) {
     row.appendChild(name);
     m.base.forEach((b, i) => {
       const r = m.td3_v3[i];
-      const state = b.f && r.f ? "both" : b.f ? "onlyb" : r.f ? "onlyr" : "none";
-      const cell = document.createElement("span");
+      const state = pairState(b, r);
+      const cell = document.createElement("button");
       cell.className = `cell ${state}`;
-      cell.title = `${m.map}, run ${i + 1}: ${STATE_LABEL[state]} (base ${b.c}%, RL ${r.c}%)`;
+      const label = `${m.map}, run ${i + 1}: ${STATE_LABEL[state]} (base ${b.c}%, RL ${r.c}%). Replay it`;
+      cell.title = label;
+      cell.setAttribute("aria-label", label);
+      cell.addEventListener("click", () =>
+        document.dispatchEvent(new CustomEvent("duel:select", { detail: { map: m.map, pair: i + 1 } })));
       row.appendChild(cell);
     });
     const fb = m.base.filter((r) => r.f).length, fr = m.td3_v3.filter((r) => r.f).length;
@@ -28,7 +34,6 @@ export function mountPaired(data) {
     tot.className = "tot";
     tot.innerHTML = `${fb} → <b>${fr}</b>`;
     row.appendChild(tot);
-    row.setAttribute("aria-label", `${m.map}: base finished ${fb} of 10, with RL ${fr} of 10`);
     root.appendChild(row);
   }
 }
