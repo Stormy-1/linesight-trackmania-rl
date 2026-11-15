@@ -4,6 +4,9 @@ This project started as a **deep reinforcement learning** agent and grew into a 
 drives the car, learned models replace its hand-set numbers, and a **residual RL policy (TD3)** learns corrections on
 top. Everything is judged on a **held-out set of 10 maps** that no part of the system was tuned on.
 
+**[See the project website](https://stormy-1.github.io/linesight-trackmania-rl/)**: the story with videos of the runs,
+a 3D replay, and ghost replays of held-out runs drawn from the logs.
+
 Built on [Linesight](https://github.com/Linesight-RL/linesight), an open-source RL framework for
 TrackMania Nations Forever (see [ATTRIBUTION.md](ATTRIBUTION.md)).
 
