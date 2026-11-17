@@ -1,0 +1,12 @@
+\begin{tabular}{@{}llll@{}}
+\toprule
+Model & Validation & Result & Reference \\
+\midrule
+Speed MLP & CV by map & $r$ 0.81, MAE 11.7 & hand rule $r$ 0.33, MAE 34.1 \\
+Speed MLP & test, once & $r$ 0.84, MAE 10.3 & hand rule $r$ 0.21, MAE 31.1 \\
+Grip logistic & LOMO, 54 maps & AUC 0.754 & $v^2|\kappa|$ alone 0.755 \\
+Grip logistic & test, once & AUC 0.84 &  \\
+Virtual lidar & LOMO, 43 hits & contact at 56\% of hits & 10\% of other steps \\
+Gravity & 2{,}328 samples & 24.87 m/s$^2$ & IQR 24.55--25.25 \\
+\bottomrule
+\end{tabular}

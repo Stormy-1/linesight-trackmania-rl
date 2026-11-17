@@ -9,7 +9,8 @@ profile, pure pursuit, safety layers) whose hand-set numbers are replaced by lea
   them. The end-to-end IQN agent finished 0 of 50 runs on five other maps (8 of 50 at its last checkpoint, all on A03).
 - **On 10 held-out maps**, driven 10 times each with seeded steering noise, the stack finishes 25 of 100 runs.
 - **Residual RL is a null result.** td3_v3 finishes 27 of 100 (paired sign test p = 0.82; with the map as the unit,
-  p = 1.0). It fixes B07 (9/10 vs 2/10) and breaks C02 (1/10 vs 8/10); the other eight maps don't change.
+  p = 1.0). It fixes B07 (9/10 vs 2/10) and breaks C02 (1/10 vs 8/10). A09 moves from 5/10 to 7/10, within the
+  noise, and the other seven maps don't change.
 - **The evaluation is the strongest part.** A fixed map split, paired seeded runs, a selection rule fixed before any
   dev result, and a reanalysis of what this design can and can't detect ([review/stats.md](review/stats.md)).
 
@@ -85,7 +86,8 @@ The design choices that made it train:
 - **Held-out test maps (10 runs per map, paired): no significant gain.**
   - Runs finished: 27/100 against the base's 25/100 (exact sign test p = 0.82; map-level sign-flip test p = 1.0).
   - It fixes B07 (9/10 vs 2/10) and breaks C02 (1/10 vs 8/10), 7 pairs to 0 each way (p = 0.016 each uncorrected,
-    about 0.16 after correcting for 10 maps). The other eight maps don't change.
+    about 0.16 after correcting for 10 maps). A09 moves from 5/10 to 7/10 (2 pairs to 4, p = 0.69), and the other
+    seven maps finish exactly as often as without RL.
   - Mean completion 54.7% against 48.0% (95% interval of the change −1.5 to +20.0 points, so it includes zero),
     23% fewer recovery steps, and 32 wall hits against 41.
 - **Dev maps it never trained on:** 60/70 runs finished against the base's 59/70 (p = 1) and mean completion 97.4%
