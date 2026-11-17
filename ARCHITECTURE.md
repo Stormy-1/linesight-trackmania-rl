@@ -130,9 +130,11 @@ motivated §7.
   `logit P(wide) = −12.0 + 0.132·v²|k| + 0.108·v`.
 - **Speed limit.** For a chosen risk p, the corner speed limit is the positive root of
   `0.132·|k|·v² + 0.108·v − 12.0 − logit(p) = 0`. At p = 0.2, the allowed lateral acceleration falls from 56 m/s² at
-  30 m/s to 23 m/s² at 70 m/s. The speed term captures the controller's steering cap shrinking at high speed.
-- **Validation.** Leave-one-map-out AUC 0.754, against 0.708 for speed alone. Test maps were scored once afterwards,
-  with nothing chosen on them: AUC 0.84.
+  30 m/s to 23 m/s² at 70 m/s. The positive speed term fits the controller's steering cap shrinking at high speed,
+  but it adds no ranking power (see below), so that reading is a hypothesis.
+- **Validation.** Leave-one-map-out AUC 0.754, against 0.708 for speed alone and 0.754 for the demand v²·|k| alone.
+  The speed term changes the shape of the limit, not how well the model ranks risky corners. Test maps were scored
+  once afterwards, with nothing chosen on them: AUC 0.84.
 - **Use.** The corner limit = min(learned pro speed, grip limit). The risk level, 0.2, was chosen on dev maps only.
 
 ## 8. Virtual lidar (learned perception)
@@ -196,13 +198,15 @@ Design choices that made it work:
 | td3_v2 | 0.09, 0.11 | −0.13 | 8 of 13 | about +0.4 m/s everywhere |
 | td3_v3 | 0.13, 0.13 | −0.22 | 11 of 13 | about 0 on average |
 
-Both steer against the heading error, adding damping on top of pure pursuit. td3_v3 does it more consistently,
-which fits its training on more maps with noise. Its corrections stay small and almost never saturate (0.2% of states).
+Both lean against the heading error, a weak damping tendency on top of pure pursuit (pooled r −0.13 and −0.22).
+td3_v3 does it on more maps. That coincided with training on more maps with noise, though td3_v3 also had more
+episodes and started from td3_v2. Its corrections stay small and almost never saturate (0.2% of states).
 Sources: `eval_results/residual_rl/td3_v2_behaviour.json`, `td3_v3_behaviour.json`.
 
-On held-out maps (RESULTS.md §0), td3_v3 finishes 27/100 runs against the base's 25/100. It cuts recovery steps by 23%
-and raises completion by 6.7 points, but the finish-rate difference isn't significant. It reliably fixes one map (B07)
-and reliably breaks another (C02).
+On held-out maps (RESULTS.md §0), td3_v3 shows no significant gain: 27/100 runs finished against the base's 25/100
+(p = 0.82; map level p = 1.0). Completion changes by +6.7 points (95% interval −1.5 to +20.0) and recovery steps by
+−23%, both within the noise. It fixes one map (B07, 9/10 vs 2/10) and breaks another (C02, 1/10 vs 8/10), p = 0.016
+each before correcting for 10 maps.
 
 The final policy is `eval_results/residual_rl/td3_v3/final.pt`.
 
@@ -214,4 +218,4 @@ The final policy is `eval_results/residual_rl/td3_v3/final.pt`.
   broke two others: a jump's "required speed" is the pro's speed, not a true minimum. It is kept as an option, off by default.
 - **An LLM in the control loop.** An LLM takes 0.3–3 s per call against a 50 ms step, isn't deterministic, and adds no
   driving skill.
-- **A transformer policy.** It would be oversized for 39 inputs and 155k transitions. An MLP is enough.
+- **A transformer policy.** It would be oversized for 39 inputs and at most 330k transitions. An MLP is enough.

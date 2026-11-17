@@ -1,11 +1,30 @@
-# Linesight hybrid: from deep RL to a robotics + RL self-driving car for TrackMania
+# Linesight hybrid: a robotics stack for TrackMania, and an honest test of residual RL
 
-This project started as a **deep reinforcement learning** agent and grew into a **hybrid**. A classical robotics stack
-drives the car, learned models replace its hand-set numbers, and a **residual RL policy (TD3)** learns corrections on
-top. Everything is judged on a **held-out set of 10 maps** that no part of the system was tuned on.
+A classical robotics stack generalised where end-to-end deep RL didn't. The project started as a deep RL agent that
+learned one track from pixels and failed on others. The working system is a classical stack (map matching, a speed
+profile, pure pursuit, safety layers) whose hand-set numbers are replaced by learned models. A residual RL policy
+(TD3) adds bounded corrections on top. On held-out maps, the residual mostly reshuffles which maps finish.
+
+- **The stack generalises.** It finished 27 of 63 Nations campaign maps, one run each, after being developed on 5 of
+  them. The end-to-end IQN agent finished 0 of 50 runs on five other maps (8 of 50 at its last checkpoint, all on A03).
+- **On 10 held-out maps**, driven 10 times each with seeded steering noise, the stack finishes 25 of 100 runs.
+- **Residual RL is a null result.** td3_v3 finishes 27 of 100 (paired sign test p = 0.82; with the map as the unit,
+  p = 1.0). It fixes B07 (9/10 vs 2/10) and breaks C02 (1/10 vs 8/10); the other eight maps don't change.
+- **The evaluation is the strongest part.** A fixed map split, paired seeded runs, a selection rule fixed before any
+  dev result, and a reanalysis of what this design can and can't detect ([review/stats.md](review/stats.md)).
+
+**Read the numbers with these limits:**
+- The test set was looked at seven times (v4, v5, v6, v7, v8_rl, a robustness re-run of v7 and v8_rl, and v9_rl).
+  After v6, the failure logs of two test maps prompted the gravity measurement, a mild form of test-set leakage.
+- Ten maps can't show a small residual effect. Three maps carry every discordant pair, and the design detects a
+  gain only if it is about +17 to +20 points of finish rate. More runs per map wouldn't change that.
+- The 27/63 campaign result is a single run per map, and the stack had been developed on 5 of those maps.
+- There is no collision telemetry. Contacts are inferred from speed drops (over 4 m/s in 50 ms).
+- The car is slow: finished maps take about 1.4–1.6× the pro's time.
 
 **[See the project website](https://stormy-1.github.io/linesight-trackmania-rl/)**: the story with videos of the runs,
-a 3D replay, and ghost replays of held-out runs drawn from the logs.
+a 3D replay, and ghost replays of held-out runs drawn from the logs. Every claim in this repo is checked against its
+source file in [review/claims.md](review/claims.md).
 
 Built on [Linesight](https://github.com/Linesight-RL/linesight), an open-source RL framework for
 TrackMania Nations Forever (see [ATTRIBUTION.md](ATTRIBUTION.md)).
@@ -20,9 +39,11 @@ TrackMania Nations Forever (see [ATTRIBUTION.md](ATTRIBUTION.md)).
    own driving logs, gravity measured from ghost free fall, and obstacle shapes learned from pro ghosts.
 4. **Residual RL on top (era 2).** A TD3 policy adds bounded steering and target-speed corrections to the stack's
    command. It starts at exactly zero, so it can only learn from the stack's behaviour, never from scratch. Three
-   training generations (td3_v1–v3) fixed a stuck actor, weak exploration and narrow training data.
-5. **Rigorous evaluation.** Each map was driven 10 times with seeded noise and the versions were compared in pairs.
-   This showed which differences are real and which are luck.
+   training generations (td3_v1–v3) addressed a stuck actor, weak exploration and narrow training data. The held-out
+   result is a null: it trades B07 for C02.
+5. **Paired evaluation.** Each map was driven 10 times with seeded noise and the versions were compared in pairs.
+   This showed that the single-run RL gain (4/10 vs 2/10) was luck. It is too small a design to show whether a
+   residual effect of a few points is real.
 
 ## Deep reinforcement learning in this project
 
@@ -60,20 +81,21 @@ The design choices that made it train:
 | White exploration noise averages out through the key adapter | Held noise: one draw per 0.5 s | `eval_results/residual_rl/td3_v2/train_log.jsonl` |
 | td3_v2 saw only 6 maps and noise-free physics | td3_v3: 20 training maps (6 + 14 drawn by a fixed rule, never dev or test), seeded steering noise during training, 200 episodes | `eval_results/residual_rl/td3_v3/train_config.json` |
 
-**What it achieved** (the final policy is td3_v3):
-- **Held-out test maps (10 runs per map, paired):**
-  - finished 27/100 runs against the base's 25/100;
-  - mean completion 54.7% against 48.0%;
-  - 23% fewer recovery steps and 32 wall hits against 41.
-  - It reliably fixes B07 (9/10 vs 2/10, p = 0.016) but reliably breaks C02 (1/10 vs 8/10, p = 0.016).
-  - The net finish rate is not significantly better (p = 0.82). The completion gain's 95% interval
-    (−1.6 to +20.0 points) still includes zero.
-- **Dev maps it never trained on:** 60/70 runs finished against the base's 59/70, and mean completion 97.4% against 95.0%.
+**What it did** (the final policy is td3_v3):
+- **Held-out test maps (10 runs per map, paired): no significant gain.**
+  - Runs finished: 27/100 against the base's 25/100 (exact sign test p = 0.82; map-level sign-flip test p = 1.0).
+  - It fixes B07 (9/10 vs 2/10) and breaks C02 (1/10 vs 8/10), 7 pairs to 0 each way (p = 0.016 each uncorrected,
+    about 0.16 after correcting for 10 maps). The other eight maps don't change.
+  - Mean completion 54.7% against 48.0% (95% interval of the change −1.5 to +20.0 points, so it includes zero),
+    23% fewer recovery steps, and 32 wall hits against 41.
+- **Dev maps it never trained on:** 60/70 runs finished against the base's 59/70 (p = 1) and mean completion 97.4%
+  against 95.0%, but wall hits rose from 6 to 20 and recovery steps from 1,395 to 1,704.
 - **Training maps:** td3_v2 already finished C05, where the base stack stalls at 9%. td3_v3 finished it in all of its
   last 6 training episodes.
 - **Behaviour** (`scripts/analyze_residual_policy.py`, 11,608 dev and training states): it learned to steer against
-  the heading error, on 11 of 13 maps (pooled r −0.22; td3_v2: −0.13, 8 of 13). Its corrections are small
-  (mean |a| 0.13) and almost never saturate. Training on more maps with noise made the behaviour more consistent
+  the heading error, on 11 of 13 maps (pooled r −0.22, a weak relation; td3_v2: −0.13, 8 of 13). Its corrections are
+  small (mean |a| 0.13) and almost never saturate. The more consistent behaviour coincided with training on more maps
+  with noise, but td3_v3 also had more episodes and started from td3_v2, so the cause isn't isolated
   (`eval_results/residual_rl/td3_v3_behaviour.json`).
 
 ## Results
@@ -91,11 +113,15 @@ steering (σ 0.05). Run k gets the same noise in both versions, so the runs can 
 
 - **Pairs, v9_rl vs v7:** 16 runs finished in both, 9 only without RL, 11 only with RL, and 64 in neither
   (exact sign test p = 0.82).
-- **Per map:** RL is consistently and significantly better on B07 (td3_v2 8/10, td3_v3 9/10, base 2/10) and worse on
-  C02 (3/10 and 1/10 vs 8/10). Both policies show the same trade, so it is learned behaviour, not luck. With 10 maps
-  tested, neither per-map p = 0.016 survives a multiple-comparison correction.
-- **Completion and recovery:** td3_v3 improves mean completion by 6.7 points (bootstrap 95% interval −1.6 to +20.0)
-  and cuts recovery steps by 23%.
+- **With the map as the unit:** only A09, B07 and C02 have any discordant pair. A sign-flip test over maps gives
+  p = 1.0, and the cluster-bootstrap interval for the finish-rate change is −19 to +23 points
+  (`scripts/reanalyze_clustered.py`, [review/stats.md](review/stats.md)).
+- **Per map:** RL is better on B07 (td3_v2 8/10, td3_v3 9/10, base 2/10) and worse on C02 (3/10 and 1/10 vs 8/10),
+  p = 0.016 each, about 0.16 after correcting for 10 maps. The two policies agree, but td3_v3 was initialised from
+  td3_v2 and trained on a buffer holding its episodes, so this is consistency within one policy lineage, not an
+  independent replication.
+- **Completion and recovery:** td3_v3 changes mean completion by +6.7 points (bootstrap over maps, 95% interval
+  −1.5 to +20.0) and cuts recovery steps by 23%. Neither is significant.
 - **Selection:** td3_v3 was chosen for this test look by a rule fixed before any dev result: more dev finishes than
   both v7a and td3_v2, ties broken by completion.
 
@@ -113,7 +139,8 @@ one run per map isn't enough:
 | v8_rl | + residual TD3 policy | 4/10 | 58.1% | 1.50× | 1 | 431 |
 
 In single runs, v8_rl looked like a clear gain: 4/10 against 2/10, and 42% fewer recovery steps. The robustness
-evaluation shows that gain was run-to-run luck at knife-edge jumps. The same luck explains the churn from v4 to v7.
+evaluation shows that gain was run-to-run luck at knife-edge jumps. The churn from v4 to v7 is consistent with the
+same sensitivity.
 
 Sources: `eval_results/test_set_v4_baseline.json` … `eval_results/test_set_v8_rl_td3v2.json`.
 Per-map tables, the dev and training-map results, and the model validations are in [RESULTS.md](RESULTS.md).
@@ -160,7 +187,7 @@ The loop runs every 50 ms of game time. Every component and its design decision 
 | Grip limit: logistic model of "runs wide" | ML / system identification | a fixed corner speed limit | `eval_results/grip_model/grip_model_v1.json` |
 | Gravity measured from pro-ghost free fall | Measurement | a wrong guess (15.4 m/s²) | `eval_results/gravity_measurement.json` |
 | Virtual lidar, obstacle shapes learned from ghosts | Learned perception | nothing (new) | `eval_results/range_sensor/validation_v1.json` |
-| Residual TD3 policy | Deep RL | nothing (corrections on top) | `eval_results/residual_rl/td3_v2/` |
+| Residual TD3 policy | Deep RL | nothing (corrections on top) | `eval_results/residual_rl/td3_v3/` |
 
 ## Evaluation protocol
 
@@ -174,16 +201,19 @@ The loop runs every 50 ms of game time. Every component and its design decision 
 - **Metrics.** Finish rate is the headline. Also reported: mean completion, time ratio against the official
   replay (median over finished maps), recovery steps, and contacts (landings, bumps, wall hits, scrapes).
   Contacts are a quality measure, not a failure, because light wall touches and hard landings are normal in the game.
-- **Test-set looks:** v4, v5, v6, v7, v8_rl. Each one came only after a substantively new component was added.
+- **Test-set looks (seven):** v4, v5, v6, v7, v8_rl. Each one came only after a substantively new component was added.
   Then came one robustness re-measurement of the fixed v7 and v8_rl. Its settings (σ 0.05, seed 0, 10 runs) were
   fixed before any results were seen, and checked only on a dev map; it changed no design choice. The last look,
   v9_rl (td3_v3), happened only because td3_v3 passed a dev-map rule fixed in advance.
 
 ## Limitations
 
-- **Residual RL's net gain is not yet significant.** With 10 perturbed runs per map, the base finishes 25% of
-  held-out runs and td3_v3 27%. Completion and recovery improve, but within the noise. The policy trades maps: it
-  fixes B07 and breaks C02, consistently. Finding out why C02 breaks would mean studying test-map logs, so it was left alone.
+- **Residual RL shows no net gain.** With 10 perturbed runs per map, the base finishes 25% of held-out runs and
+  td3_v3 27% (p = 0.82; map level p = 1.0). Completion and recovery improve, but within the noise. The policy trades
+  maps: it fixes B07 and breaks C02. Finding out why C02 breaks would mean studying test-map logs, so it was left alone.
+- **The design can't detect a small effect.** Seven of the ten maps give identical outcomes in every version, so
+  three maps carry all the information. Only a gain of about +17 to +20 points of finish rate would be detected 80%
+  of the time ([review/stats.md](review/stats.md)). More maps would help; more runs per map would not.
 - **The base stack finishes about a quarter of held-out runs.** Four of the 10 test maps finish at least sometimes.
   The other six never finish, in any version.
 - **The test set was not perfectly blind.** Nothing was tuned on it, but after v6 two test maps' failure logs
@@ -230,7 +260,8 @@ You need TrackMania Nations Forever, [TMInterface](https://donadigo.com/tminterf
 Set up the environment as in [Linesight's installation guide](https://linesight-rl.github.io/linesight/build/html/installation.html),
 then `pip install -r requirements_pip.txt`.
 
-The racing lines are built from the game's own official replays, which are not in this repo:
+The racing lines are built from the game's own official replays, which are not in this repo. If the game isn't
+installed in the default Steam folder, set `TMNF_GAME_DIR` to its install folder first:
 
 ```bash
 python scripts/build_official_centerlines.py --install
@@ -239,13 +270,17 @@ python scripts/build_official_centerlines.py --install
 Drive one map with the v7 base stack plus the residual policy:
 
 ```bash
-python scripts/run_hybrid_controller_live.py --map A02-Race --runs 1 --speed 10 --stuck-cutoff-s 6 --speed-model eval_results/speed_model/speed_model_v1.pt --top-speed 70 --grip-model eval_results/grip_model/grip_model_v1.json --grip-risk 0.2 --range-sensor eval_results/range_sensor/footprints_v1.npz --residual eval_results/residual_rl/td3_v2/final.pt --name A02_demo
+python scripts/run_hybrid_controller_live.py --map A02-Race --runs 1 --speed 10 --stuck-cutoff-s 6 --speed-model eval_results/speed_model/speed_model_v1.pt --top-speed 70 --grip-model eval_results/grip_model/grip_model_v1.json --grip-risk 0.2 --range-sensor eval_results/range_sensor/footprints_v1.npz --residual eval_results/residual_rl/td3_v3/final.pt --name A02_demo
 ```
 
-Reproduce the headline table from the logged runs (no game needed):
+Reproduce the headline table and the map-level reanalysis from the logged runs (no game needed):
 
 ```bash
-python scripts/report_test_set.py --tag v8_rl
+python scripts/report_robustness.py --tag v9_rl_rob --compare v7_rob
+```
+
+```bash
+python scripts/reanalyze_clustered.py
 ```
 
 Run the tests:
