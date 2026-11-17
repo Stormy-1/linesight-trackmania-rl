@@ -1,0 +1,253 @@
+{
+ "base": "v7_rob",
+ "seed": 20261117,
+ "clustering_v7": {
+  "icc_finish": 0.686,
+  "design_effect": 7.18,
+  "runs": 100,
+  "effective_sample_size": 13.9
+ },
+ "v8_rl_rob_vs_v7_rob": {
+  "maps": 10,
+  "per_map": {
+   "A09-Race": {
+    "base_finished": 5,
+    "other_finished": 5,
+    "only_base": 3,
+    "only_other": 3,
+    "completion_diff_pts": 2.54
+   },
+   "A15-Speed": {
+    "base_finished": 10,
+    "other_finished": 10,
+    "only_base": 0,
+    "only_other": 0,
+    "completion_diff_pts": 0.0
+   },
+   "B04-Acrobatic": {
+    "base_finished": 0,
+    "other_finished": 0,
+    "only_base": 0,
+    "only_other": 0,
+    "completion_diff_pts": -0.12
+   },
+   "B07-Race": {
+    "base_finished": 2,
+    "other_finished": 8,
+    "only_base": 1,
+    "only_other": 7,
+    "completion_diff_pts": 52.86
+   },
+   "B13-Obstacle": {
+    "base_finished": 0,
+    "other_finished": 0,
+    "only_base": 0,
+    "only_other": 0,
+    "completion_diff_pts": -0.08
+   },
+   "C02-Race": {
+    "base_finished": 8,
+    "other_finished": 3,
+    "only_base": 5,
+    "only_other": 0,
+    "completion_diff_pts": -14.98
+   },
+   "C10-Acrobatic": {
+    "base_finished": 0,
+    "other_finished": 0,
+    "only_base": 0,
+    "only_other": 0,
+    "completion_diff_pts": 1.07
+   },
+   "C13-Race": {
+    "base_finished": 0,
+    "other_finished": 0,
+    "only_base": 0,
+    "only_other": 0,
+    "completion_diff_pts": 0.0
+   },
+   "D04-Race": {
+    "base_finished": 0,
+    "other_finished": 0,
+    "only_base": 0,
+    "only_other": 0,
+    "completion_diff_pts": 0.05
+   },
+   "D07-Race": {
+    "base_finished": 0,
+    "other_finished": 0,
+    "only_base": 0,
+    "only_other": 0,
+    "completion_diff_pts": 7.4
+   }
+  },
+  "maps_with_discordant_pairs": [
+   "A09-Race",
+   "B07-Race",
+   "C02-Race"
+  ],
+  "map_sign_flip_p_finishes": 1.0,
+  "map_sign_flip_p_completion": 0.5546875,
+  "min_attainable_p_finishes": 0.5,
+  "bootstrap_finish_rate_diff_pts": [
+   1.0,
+   -15.0,
+   18.0
+  ],
+  "bootstrap_completion_diff_pts": [
+   4.9,
+   -3.0,
+   16.7
+  ]
+ },
+ "v9_rl_rob_vs_v7_rob": {
+  "maps": 10,
+  "per_map": {
+   "A09-Race": {
+    "base_finished": 5,
+    "other_finished": 7,
+    "only_base": 2,
+    "only_other": 4,
+    "completion_diff_pts": 8.67
+   },
+   "A15-Speed": {
+    "base_finished": 10,
+    "other_finished": 10,
+    "only_base": 0,
+    "only_other": 0,
+    "completion_diff_pts": 0.0
+   },
+   "B04-Acrobatic": {
+    "base_finished": 0,
+    "other_finished": 0,
+    "only_base": 0,
+    "only_other": 0,
+    "completion_diff_pts": -0.05
+   },
+   "B07-Race": {
+    "base_finished": 2,
+    "other_finished": 9,
+    "only_base": 0,
+    "only_other": 7,
+    "completion_diff_pts": 61.01
+   },
+   "B13-Obstacle": {
+    "base_finished": 0,
+    "other_finished": 0,
+    "only_base": 0,
+    "only_other": 0,
+    "completion_diff_pts": -0.0
+   },
+   "C02-Race": {
+    "base_finished": 8,
+    "other_finished": 1,
+    "only_base": 7,
+    "only_other": 0,
+    "completion_diff_pts": -10.66
+   },
+   "C10-Acrobatic": {
+    "base_finished": 0,
+    "other_finished": 0,
+    "only_base": 0,
+    "only_other": 0,
+    "completion_diff_pts": 0.04
+   },
+   "C13-Race": {
+    "base_finished": 0,
+    "other_finished": 0,
+    "only_base": 0,
+    "only_other": 0,
+    "completion_diff_pts": 0.0
+   },
+   "D04-Race": {
+    "base_finished": 0,
+    "other_finished": 0,
+    "only_base": 0,
+    "only_other": 0,
+    "completion_diff_pts": -0.07
+   },
+   "D07-Race": {
+    "base_finished": 0,
+    "other_finished": 0,
+    "only_base": 0,
+    "only_other": 0,
+    "completion_diff_pts": 8.21
+   }
+  },
+  "maps_with_discordant_pairs": [
+   "A09-Race",
+   "B07-Race",
+   "C02-Race"
+  ],
+  "map_sign_flip_p_finishes": 1.0,
+  "map_sign_flip_p_completion": 0.484375,
+  "min_attainable_p_finishes": 0.25,
+  "bootstrap_finish_rate_diff_pts": [
+   2.0,
+   -19.0,
+   23.0
+  ],
+  "bootstrap_completion_diff_pts": [
+   6.7,
+   -1.5,
+   20.0
+  ]
+ },
+ "power_map_level": {
+  "base_rates_smoothed": [
+   0.5,
+   0.955,
+   0.045,
+   0.227,
+   0.045,
+   0.773,
+   0.045,
+   0.045,
+   0.045,
+   0.045
+  ],
+  "curve": {
+   "1.5": {
+    "power": 0.051,
+    "expected_finish_rate_gain_pts": 3.8
+   },
+   "2.0": {
+    "power": 0.14,
+    "expected_finish_rate_gain_pts": 6.8
+   },
+   "3.0": {
+    "power": 0.425,
+    "expected_finish_rate_gain_pts": 11.4
+   },
+   "4.0": {
+    "power": 0.644,
+    "expected_finish_rate_gain_pts": 14.9
+   },
+   "6.0": {
+    "power": 0.901,
+    "expected_finish_rate_gain_pts": 20.5
+   },
+   "8.0": {
+    "power": 0.975,
+    "expected_finish_rate_gain_pts": 24.8
+   },
+   "12.0": {
+    "power": 0.999,
+    "expected_finish_rate_gain_pts": 31.3
+   },
+   "16.0": {
+    "power": 1.0,
+    "expected_finish_rate_gain_pts": 36.1
+   },
+   "32.0": {
+    "power": 1.0,
+    "expected_finish_rate_gain_pts": 47.6
+   },
+   "64.0": {
+    "power": 1.0,
+    "expected_finish_rate_gain_pts": 57.2
+   }
+  },
+  "smallest_odds_ratio_with_80pct_power": 6.0
+ }
+}
