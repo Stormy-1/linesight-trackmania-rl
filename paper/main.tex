@@ -45,8 +45,8 @@ out. More runs per track would not change that; more tracks would.
 
 \section{Introduction}
 
-Racing games are a common testbed for deep reinforcement learning (RL) because they offer fast, cheap and
-exactly repeatable driving \cite{TODO-gt-sophy}. They are also a place where a classical robotics pipeline is
+Racing games are a testbed for deep reinforcement learning (RL): they offer fast, cheap and repeatable
+driving, and an agent trained at scale has beaten champion players of a racing simulator \cite{wurman2022gtsophy}. They are also a place where a classical robotics pipeline is
 easy to build: the simulator reports the exact pose, and every track ships with a reference lap. This paper
 compares the two on one game, TrackMania Nations Forever, and then asks whether RL helps when it is restricted
 to correcting the classical pipeline rather than replacing it.
@@ -74,14 +74,14 @@ contributions are:
 \section{Related Work}
 
 \textbf{End-to-end RL for driving games.} Deep RL agents have reached expert level in racing simulators when
-trained at scale \cite{TODO-gt-sophy}. Distributional value methods such as IQN \cite{dabney2018iqn} are the
+trained at scale \cite{wurman2022gtsophy}. Distributional value methods such as IQN \cite{dabney2018iqn} are the
 basis of Linesight \cite{linesight}, an open-source agent for TrackMania that learns from screen pixels.
-Overfitting to training environments is a known failure of deep RL \cite{TODO-rl-generalisation}; our era-1
+Overfitting to training environments is a known failure of deep RL \cite{cobbe2019quantifying}; our era-1
 agent is one more instance of it.
 
 \textbf{Classical vehicle control.} Pure pursuit \cite{coulter1992purepursuit} steers toward a point on a
 reference path a fixed distance ahead. Autonomous racing more often uses optimisation-based planning and
-model predictive control \cite{TODO-racing-survey,TODO-mpc-racing}. We use pure pursuit because it has few
+model predictive control \cite{betz2022racingsurvey,liniger2015racing}. We use pure pursuit because it has few
 parameters and none of them is specific to a track.
 
 \textbf{Residual RL.} Residual policy learning \cite{silver2018residual} and residual RL for robot control
@@ -90,8 +90,8 @@ working policy. We use TD3 \cite{fujimoto2018td3} as the learner and the behavio
 \cite{fujimoto2021td3bc}, applied here toward the zero correction rather than toward logged actions.
 
 \textbf{Evaluation.} Reported gains in deep RL are often within run-to-run variance
-\cite{TODO-rl-statistics}. When outcomes are clustered, the effective sample size falls by the design effect
-\cite{TODO-design-effect}. Our map-level analysis applies that correction to a driving benchmark.
+\cite{henderson2018matters,agarwal2021precipice}. When outcomes are clustered, the effective sample size falls by the design effect
+\cite{kish1965survey}. Our map-level analysis applies that correction to a driving benchmark.
 
 \section{Method}
 \label{sec:method}
@@ -99,7 +99,7 @@ working policy. We use TD3 \cite{fujimoto2018td3} as the learner and the behavio
 \subsection{Classical stack}
 
 The game runs at \GameSpeed{}$\times$ real time and the controller acts every \StepMs\,ms of game time through
-TMInterface \cite{TODO-tminterface}, which reports the exact pose. Localisation is therefore free; the hard
+TMInterface \cite{tminterface}, which reports the exact pose. Localisation is therefore free; the hard
 parts are the reference line, the speed plan and control through digital keys.
 
 \textbf{Line and map matching.} Each campaign track ships an official replay of the author's lap. Its ghost is
@@ -362,7 +362,8 @@ multi-track training and the same information would fail.
 
 \textbf{Results are simulator-only.} TrackMania has deterministic physics, exact pose and a reference lap for
 every track. None of the results says anything about a physical car, where localisation and the vehicle model
-are the hard parts \cite{TODO-sim2real}. Re-driving any run needs the game, and the learned models can only
+are the hard parts, and transferring a policy learned in simulation to a real system needs methods of its
+own \cite{tobin2017domain}. Re-driving any run needs the game, and the learned models can only
 be refitted from the game's own replay files, which are not redistributable.
 
 \textbf{Ten test tracks are too few.} Only \InformativeMaps of the \NTest tracks change between versions, so

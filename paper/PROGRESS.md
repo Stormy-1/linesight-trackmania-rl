@@ -5,7 +5,7 @@
 | Item | State |
 |---|---|
 | `main.tex` (IEEEtran conference, sections as specified) | drafted, self-reviewed, revised |
-| `refs.bib` | 7 entries, only the references named in PROMPT.md |
+| `refs.bib` | 16 entries: the 7 named in PROMPT.md and 9 that replaced the TODO keys, all checked |
 | `make_tables.py` → `generated/` | 5 tables, 1 figure, 176 number macros; reruns `scripts/reanalyze_clustered.py` and checks it matches `review/clustered_reanalysis.json` (it does) |
 | `self_review.md` | five reasons to reject; fixes applied to the text |
 | `overleaf.zip` | built: main.tex, refs.bib, generated/ (IEEEtran.cls left out, Overleaf ships it) |
@@ -38,21 +38,28 @@ Rounding differs slightly from README/RESULTS in two places, because the macros 
 - td3_v2's heading correlation is −0.135, printed −0.14 (README says −0.13);
 - the grip model's demand-only AUC is 0.7545, printed 0.755 (README says 0.754).
 
-## TODO citations
+## Citations
 
-The paper cites these keys, and none of them has an entry in `refs.bib`. Each needs a real, checked reference
-before submission. Until then, BibTeX will print warnings and "[?]" for each.
+`refs.bib` has 16 entries, and every `\cite` key in `main.tex` has one (checked by script: no missing or unused
+keys). The seven named in PROMPT.md were there from the start. The eight `TODO-...` keys were filled on
+2026-11-17, each checked against the publisher, proceedings or project page:
 
-| Key | Where | What it should support |
+| Was | Now | Checked against |
 |---|---|---|
-| `TODO-gt-sophy` | Intro, Related work | deep RL reaching expert level in a racing simulator at scale |
-| `TODO-rl-generalisation` | Related work | deep RL overfitting to its training environments |
-| `TODO-racing-survey` | Related work | survey of autonomous racing (planning and control) |
-| `TODO-mpc-racing` | Related work | optimisation-based / MPC control for racing |
-| `TODO-rl-statistics` | Related work | reported deep-RL gains within run-to-run variance; statistical practice in RL evaluation |
-| `TODO-design-effect` | Related work | design effect / effective sample size for clustered samples |
-| `TODO-tminterface` | Method | TMInterface, the TrackMania scripting interface (software citation) |
-| `TODO-sim2real` | Limitations | sim-to-real gap for learned driving / robot policies |
+| `TODO-gt-sophy` | Wurman et al., Nature 602:223--228, 2022 (GT Sophy) | nature.com DOI 10.1038/s41586-021-04357-7; Peter Stone's publication page for the author order |
+| `TODO-rl-generalisation` | Cobbe et al., ICML 2019, PMLR 97:1282--1289 | proceedings.mlr.press/v97/cobbe19a |
+| `TODO-racing-survey` | Betz et al., IEEE OJ-ITS 3:458--488, 2022 | DOI 10.1109/OJITS.2022.3181510; arXiv 2202.07008 |
+| `TODO-mpc-racing` | Liniger, Domahidi, Morari, Optim. Control Appl. Methods 36(5):628--647, 2015 | arXiv 1711.07300 and journal record |
+| `TODO-rl-statistics` | Henderson et al., AAAI 2018; Agarwal et al., NeurIPS 2021 | ojs.aaai.org article 11694; NeurIPS 2021 proceedings |
+| `TODO-design-effect` | Kish, *Survey Sampling*, Wiley, 1965 | the standard reference that introduced the term "design effect" |
+| `TODO-tminterface` | donadigo, TMInterface (software) | the project page the README already links |
+| `TODO-sim2real` | Tobin et al., IROS 2017 (domain randomization) | arXiv 1703.06907; IEEE Xplore 8202133 |
+
+The text was adjusted where needed, so each citation supports exactly the sentence it's attached to:
+- The intro now says that an agent trained at scale beat champion players of a racing simulator. It no longer
+  calls racing games "a common testbed" on GT Sophy's authority.
+- The simulator-only limitation now cites Tobin et al. for the narrower point that sim-to-real transfer needs
+  methods of its own.
 
 ## Open items
 
@@ -60,12 +67,11 @@ before submission. Until then, BibTeX will print warnings and "[?]" for each.
    - the page count;
    - overfull boxes in the three `\resizebox` tables;
    - `xspace` spacing after macros before `\,` and `\%` (exceptions are added in the preamble).
-2. Fill the TODO citations above, then delete this list's entries.
-3. Author block: it names the GitHub account and repository. Remove both for a double-blind venue, and replace
+2. Author block: it names the GitHub account and repository. Remove both for a double-blind venue, and replace
    the handle with the author's name for a single-blind one.
-4. The README says "The other eight maps don't change" for td3_v3. A09 also moves (5 → 7 finishes), so seven don't
+3. The README says "The other eight maps don't change" for td3_v3. A09 also moves (5 → 7 finishes), so seven don't
    change. The paper is correct; README.md and the site still need the fix (outside this branch's scope).
-5. Optional: a second figure with per-tier campaign finishes, if a venue allows 6 pages.
+4. Optional: a second figure with per-tier campaign finishes, if a venue allows 6 pages.
 
 ## Overleaf
 
