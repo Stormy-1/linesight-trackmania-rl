@@ -69,9 +69,7 @@ The text was adjusted where needed, so each citation supports exactly the senten
    - `xspace` spacing after macros before `\,` and `\%` (exceptions are added in the preamble).
 2. Author block: it names the GitHub account and repository. Remove both for a double-blind venue, and replace
    the handle with the author's name for a single-blind one.
-3. The README says "The other eight maps don't change" for td3_v3. A09 also moves (5 → 7 finishes), so seven don't
-   change. The paper is correct; README.md and the site still need the fix (outside this branch's scope).
-4. Optional: a second figure with per-tier campaign finishes, if a venue allows 6 pages.
+3. Optional: a second figure with per-tier campaign finishes, if a venue allows 6 pages.
 
 ## Overleaf
 

@@ -79,8 +79,8 @@ The results now say that the wall and recovery reductions were never tested at t
 ## Smaller points, also fixed
 
 - The abstract said "the other eight do not change". A09 also moves (5 to 7 finishes), so the abstract now says
-  seven tracks don't change. The README has the same slip ("The other eight maps don't change"). It is listed in
-  `PROGRESS.md` as a follow-up, not fixed here.
+  seven tracks don't change. The README had the same slip in two places ("The other eight maps don't change"). Both
+  are now fixed on this branch.
 - The figure caption and the tables give their sources and settings, so each number can be traced to
   `make_tables.py`.
 - The author block names the GitHub account and repository. A double-blind venue needs it removed (see
