@@ -7,7 +7,12 @@ Each run is one live drive of TrackMania Nations Forever at 10× game speed. Wit
 deterministic. A run ends at the finish, after being stuck for 6 s, or at the time limit.
 
 The test maps are 10 campaign maps drawn once from the White, Green, Blue and Red tiers (`maps/map_split.json`).
-Nothing was tuned on them, and every map gets identical arguments.
+No parameter was tuned on them, and every map gets identical arguments. They are not perfectly blind: the test set
+was looked at seven times, and after v6 two test maps' failure logs prompted the gravity measurement (§1).
+
+**Summary.** The classical stack finishes 25 of 100 held-out runs. Residual RL (td3_v3) finishes 27 of 100, which
+is not a significant change (p = 0.82 over runs, p = 1.0 over maps). It fixes B07 and breaks C02. This design cannot
+detect a residual effect smaller than about +17 to +20 points of finish rate (`review/stats.md`).
 
 ## 0. Robustness evaluation on the test set (the headline)
 
@@ -42,18 +47,25 @@ Walls 41 / 39 / 32 and recovery steps 6,543 / 6,516 / 5,043 (v7 / v8_rl / v9_rl)
 **Result**
 - **Finish rate: no significant difference.** v9_rl vs v7: 16 pairs finished in both, 9 only in v7, 11 only in v9_rl,
   and 64 in neither (exact sign test p = 0.82). v8_rl vs v7: 9 / 10 (p = 1).
-- **A consistent, learned map trade.** Both RL policies are better on B07 and worse on C02, and td3_v3 more strongly
+- **With the map as the unit, there is nothing to detect.** Seven maps give no discordant pair (six never finish,
+  A15 always does). Over maps, a sign-flip test on the change in finishes gives p = 1.0 for both RL versions, and
+  the cluster-bootstrap interval for v9_rl's finish-rate change is −19 to +23 points. The finishing outcome has an
+  intraclass correlation of 0.69 within maps, so the 100 runs carry about as much information as 14 independent ones
+  (`scripts/reanalyze_clustered.py`, `review/stats.md`).
+- **A consistent map trade.** Both RL policies are better on B07 and worse on C02, and td3_v3 more strongly
   so: 7 pairs to 0 on each, p = 0.016 each. With 10 maps tested, a multiple-comparison correction (×10) would take
-  both to p ≈ 0.16. The same direction in two separately trained policies makes chance an unlikely explanation.
+  both to p ≈ 0.16. The two policies are not independent replications: td3_v3 was initialised from td3_v2 and its
+  buffer held td3_v2's episodes, and both were evaluated on the same noise seed. Their agreement shows the trade is
+  stable within one policy lineage, not that it would reappear in an independently trained policy.
   The cause on C02 wasn't investigated: that would mean studying test-map logs.
 - **Completion and recovery improve, but within the noise.** v9_rl's mean completion is +6.7 points over v7 (bootstrap
-  over maps, 95% interval −1.6 to +20.0). Its recovery steps are 23% lower and its wall hits 22% lower.
-- **Lap times barely change.** On runs where both versions finished, times are similar: A15's median difference is
-  −0.07 s for td3_v2.
+  over maps, 95% interval −1.5 to +20.0). Its recovery steps are 23% lower and its wall hits 22% lower.
+- **Lap times change little, and td3_v3 is slower on A15.** On runs where both versions finished, A15's median paired
+  difference is −0.07 s for td3_v2 and +0.68 s for td3_v3 (10 pairs each).
 
 **What this changes.** The single-run result below (v8_rl 4/10 vs v7 2/10) did not hold up. Run-to-run sensitivity at
-knife-edge jumps is large: under σ 0.05 noise, A09 finishes 5/10 and C02 8/10. That sensitivity explains both the
-single-run "gain" and the churn of the finished set from v4 to v7. The base stack's robust finish rate on held-out maps
+knife-edge jumps is large: under σ 0.05 noise, A09 finishes 5/10 and C02 8/10. That sensitivity accounts for the
+single-run "gain", and the churn of the finished set from v4 to v7 is consistent with it. The base stack's robust finish rate on held-out maps
 is about 25% of runs. Four maps (A09, A15, B07, C02) finish at least sometimes; the other six never do, in any version.
 
 Source: `eval_results/test_set_robustness_v7_v8rl.json` and `test_set_robustness_v7_v9rl.json`
@@ -95,7 +107,8 @@ Source: `eval_results/test_set_v4_baseline.json`, `test_set_v5_speed_model.json`
 - **v5.** The speed model predicts pro speed far better than the hand rule, but on its own it made the car run
   wide: 11 wall hits. Pros drift through corners at speeds this car can't hold.
 - **v6.** The grip cap fixed that: walls fell from 11 to 2, scrapes from 4 to 0, and the finished maps got faster.
-  The two finishes it lost were airborne and landing events, which the grip model excludes by design.
+  Against v5 it lost one finish, C02 (a hard landing at 2635 m), and A09, lost since v5, still failed (airborne over a
+  drop at 1250 m). Both are airborne and landing events, which the grip model excludes by design.
 - **v7.** Measured gravity made every surviving run faster (best A15 and C02), but the finish count didn't move.
 - **The finished set churns from v4 to v7.** Each change flips one or two maps through landing events, where the car
   comes down a few metres off the line. The bottleneck became tracking precision around jumps and landings.
@@ -106,8 +119,9 @@ Source: `eval_results/test_set_v4_baseline.json`, `test_set_v5_speed_model.json`
   of two test maps (A09 at 1250 m, C02 at 2635 m) were studied, and that study led to the gravity measurement in v7.
   The fix is a general physics measurement (from 53 non-test pro ghosts), not a per-map adjustment. Still, looking at
   the test set five times, and letting what it showed steer the next step, is a mild form of test-set leakage.
-  The robustness evaluation (§0) was a sixth look. It re-measured fixed versions with settings chosen beforehand,
-  and it changed no design choice.
+  The robustness evaluation of v7 and v8_rl (§0) was a sixth look, and v9_rl a seventh. Both used settings chosen
+  beforehand, and neither changed a design choice, but seven looks is enough that a fresh held-out set would be
+  needed for any new claim.
 - **Untouched failures.** B13, C13 and D04 stall in the first 10% in every version, and B04, C10 and D07 stall at the
   same spot every time. They look like line or geometry problems for the classical layer, not small-correction problems.
 
@@ -216,7 +230,7 @@ The details are in ARCHITECTURE.md §6–8. Every split is by map.
 |---|---|---|---|---|
 | Speed model (MLP) | 5-fold CV by map | r 0.81, MAE 11.7 m/s | hand rule r 0.33, MAE 34.1 | `speed_model/validation_v1.json` |
 | Speed model | test maps, scored once | r 0.84, MAE 10.3 m/s | hand rule r 0.21, MAE 31.1 | same |
-| Grip limit (logistic) | leave-one-map-out, 54 maps | AUC 0.754 | speed alone 0.708 | `grip_model/grip_model_v1.json` |
+| Grip limit (logistic) | leave-one-map-out, 54 maps | AUC 0.754 | speed alone 0.708; demand v²·\|k\| alone 0.754 | `grip_model/grip_model_v1.json` |
 | Grip limit | test maps, scored once | AUC 0.84 | | same |
 | Virtual lidar | leave-one-map-out, 43 wall hits | contact read at 56% of hits vs 10% of ordinary steps | | `range_sensor/validation_v1.json` |
 | Gravity | 2,328 free-fall samples, 53 maps | 24.87 m/s² (IQR 24.55–25.25) | old guess 15.4 | `gravity_measurement.json` |
@@ -226,6 +240,7 @@ The details are in ARCHITECTURE.md §6–8. Every split is by map.
 
 ```bash
 python scripts/report_robustness.py --tag v8_rl_rob --compare v7_rob   # §0, robustness (also --tag v9_rl_rob)
+python scripts/reanalyze_clustered.py    # §0, map-level tests, cluster bootstrap, power (seed 20261117)
 python scripts/report_robustness.py --set dev --tag td3v3_rob --compare v7a_rob   # §2b
 python scripts/analyze_residual_policy.py --checkpoint eval_results/residual_rl/td3_v3/final.pt --runs "*_dev_td3v2" "*_rl_train_td3v2"
 python scripts/report_test_set.py --tag v8_rl            # test set; also v4, v5, v6, v7

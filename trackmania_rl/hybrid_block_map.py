@@ -26,7 +26,10 @@ import numpy as np
 
 CELL_XZ_M = 32.0
 CELL_Y_M = 8.0
-DEFAULT_GAME_DIR = Path(r"C:\Program Files (x86)\Steam\steamapps\common\TrackMania Nations Forever")
+# The game install; set TMNF_GAME_DIR when it isn't the default Steam location.
+DEFAULT_GAME_DIR = Path(
+    os.environ.get("TMNF_GAME_DIR", r"C:\Program Files (x86)\Steam\steamapps\common\TrackMania Nations Forever")
+)
 CAMPAIGN_SUBDIR = Path("GameData") / "Tracks" / "Campaigns"
 
 # A car can hit these. Checked in order, before the drivable keywords, so a
